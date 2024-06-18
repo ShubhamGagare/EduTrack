@@ -1,0 +1,32 @@
+{
+  "name": "SchoolManagementSystem",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^2.4.3",
+    "prettier": "^3.2.5",
+    "turbo": "latest"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@10.2.4",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "@material-tailwind/react": "^2.1.9",
+    "axios": "^1.7.2",
+    "next-auth": "^4.24.7",
+    "recoil": "^0.7.7"
+  }
+}

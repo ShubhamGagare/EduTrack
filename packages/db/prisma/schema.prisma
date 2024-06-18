@@ -1,0 +1,101 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// schema.prisma
+
+// Define the User model to represent both teachers and students
+model User {
+  id       Int      @id @default(autoincrement())
+  username String
+  email    String   @unique
+  password String
+  role     Role     @relation(fields: [roleId], references: [id])
+  roleId   Int
+  // You can add more fields such as name, address, etc. as needed
+  Teacher  Teacher?
+  Student  Student?
+}
+
+// Define the Role model to manage user roles like teacher, student, admin, etc.
+model Role {
+  id   Int    @id @default(autoincrement())
+  name String @unique @default("User")
+  // You can add more fields such as description, permissions, etc. as needed
+  User User[]
+}
+
+// Define the Teacher model to store information about teachers
+model Teacher {
+  id       Int        @id @default(autoincrement())
+  user     User       @relation(fields: [userId], references: [id])
+  userId   Int        @unique
+  classes  Cls[]
+  // You can add more fields such as qualifications, experience, etc. as needed
+  Register Register[]
+}
+
+// Define the Student model to store information about students
+model Student {
+  id         Int          @id @default(autoincrement())
+  user       User         @relation(fields: [userId], references: [id])
+  userId     Int          @unique
+  cls        Cls          @relation(fields: [classId], references: [id])
+  classId    Int
+  // You can add more fields such as guardian information, admission date, etc. as needed
+  Attendance Attendance[]
+}
+
+// Define the Cls model to represent classes/groups of students
+model Cls {
+  id        Int         @id @default(autoincrement())
+  name      String
+  teacher   Teacher?    @relation(fields: [teacherId], references: [id])
+  teacherId Int?
+  students  Student[]
+  timetable Timetable[]
+  register  Register[]
+  // You can add more fields such as cls start date, end date, etc. as needed
+}
+
+// Define the Timetable model to manage cls schedules
+model Timetable {
+  id        Int      @id @default(autoincrement())
+  cls       Cls      @relation(fields: [classId], references: [id])
+  classId   Int
+  day       String
+  startTime DateTime
+  endTime   DateTime
+  // You can add more fields such as subject, room, etc. as needed
+}
+
+// Define the Attendance model to manage attendance records
+model Register {
+  id         Int          @id @default(autoincrement())
+  cls        Cls          @relation(fields: [classId], references: [id])
+  classId    Int
+  teacher    Teacher      @relation(fields: [teacherId], references: [id])
+  teacherId  Int
+  date       DateTime
+  Attendance Attendance[]
+}
+
+model Attendance {
+  id         Int      @id @default(autoincrement())
+  student    Student  @relation(fields: [studentId], references: [id])
+  studentId  Int
+  register   Register @relation(fields: [registerId], references: [id])
+  registerId Int
+  status     String // 'present', 'absent', 'late', etc.
+}
