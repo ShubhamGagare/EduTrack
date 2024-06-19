@@ -3,13 +3,15 @@
 import { Button } from "@repo/ui/button"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { updateRegister } from "../app/(dashboard)/take-register/register/[...registerIds]/page"
+import { regType, updateRegister } from "../app/(dashboard)/take-register/register/[...registerIds]/page"
 import { StudentCard } from "@repo/ui/StudentCard"
+import { useRouter } from "next/navigation"
+import { registerType } from "./ListRegisterClient"
 
 //import { useSearchParams } from "next/navigation";
 const RegisterClient = ({ register }: { register: any }) => {
     const buttons = [{ name: "Late" }, { name: "Present" }, { name: "Absent" }]
-
+    const router = useRouter();
     async function handleAttendance() {
         register.Attendance = attendance;
         // Call updateRegister function
@@ -23,7 +25,7 @@ const RegisterClient = ({ register }: { register: any }) => {
 
             // Call updateRegister function with updated register object
             await updateRegister(updatedRegister);
-
+            router.back()
 
         } catch (e) {
             console.log(e)
@@ -38,13 +40,14 @@ const RegisterClient = ({ register }: { register: any }) => {
         const updatedAttendance = [...attendance];  // Create a copy of attendance array
         updatedAttendance[index].status = newStatus;  // Update the status of the specific item
         setAttendance(updatedAttendance);  // Update the state with the new array
+        setIndex(i === register.Attendance.length - 1 ? i : i + 1)
     };
 
     return (
         <div className="space-y-8">
             <div className="text-2xl">{register.cls.name}</div>
             <div className="space-y-2">
-                {attendance.map((s: { name: string }, index: number) => <Link href=""  > <a  onClick={() => { setIndex(index) }}><StudentCard style={`${index === i?"border border-4 border-blue-500 ":""}`} title={s.student.user.username} status={s.status}>
+                {attendance.map((s: { status: string ,student: {user:{username:string}}}, index: number) => <Link href=""  > <a onClick={() => { setIndex(index) }}><StudentCard style={`${index === i ? "border border-4 border-blue-500 " : ""}`} title={s.student.user.username} status={s.status}>
                     <div></div>
                 </StudentCard></a> </Link>)}
             </div>

@@ -6,15 +6,15 @@ import { Appbar } from "@repo/ui/appbar"
 
 export default function AppbarClient() {
 
-    const session = useSession();
-    const router = useRouter();
+  const session = useSession();
+  const router = useRouter();
 
   return (
-    <div>
-        <Appbar onSignin={signIn} onSignout={async () => {
-            await signOut()
-            router.push("api/auth/signin")
-        }} user={session.data?.user } ></Appbar >
-    </div>
+    <>
+      <Appbar onSignin={signIn} onSignout={async () => {
+        await signOut()
+        router.push("api/auth/signin")
+      }} user={session.data?.user} ></Appbar >
+    </>
   )
 }

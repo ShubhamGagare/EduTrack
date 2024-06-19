@@ -3,23 +3,37 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import RegisterClient from "../../../../../components/RegisterClient"
 import { PrismaClient } from "@prisma/client"
+import { registerType } from "../../../../../components/ListRegisterClient";
+import { NextRequest } from "next/server";
 
 const client = new PrismaClient()
 
 //export const dynamic = "auto";
+export interface regType extends NextApiRequest  {
+  id : number 
+  classId: number,
+  teacherId: number,
+  date: Date,
+  Attendance: [
+    { id: 1, student: Object, status: string },
+    { id: 2, student: Object, status: string }
+  ],
+  cls: { name: string }
 
-export async function updateRegister(req: NextApiRequest) {
-  const register = req; // Assuming 'register' object is passed in request body
+}
+export async function updateRegister(req: regType) {
+  const register = req ; // Assuming 'register' object is passed in request body
 
   try {
-    console.log("Updating register:", register);
-
+    console.log("Updating register:", req);
+    const st = register.Attendance;
     // Update register in the database
+    console.log(JSON.stringify(st))
     const updatedRegister = await client.register.update({
       where: { id: register.id }, // Adjust according to your schema
       data: {
         Attendance: {
-          updateMany: register.Attendance.map((student: any) => ({
+          update: register.Attendance.map((student: any) => ({
             where: { id: student.id },
             data: { status: student.status }
           }))
@@ -28,7 +42,7 @@ export async function updateRegister(req: NextApiRequest) {
       }
     });
 
-    console.log("Register updated:", updatedRegister);
+    //console.log("Register updated:", updatedRegister);
     // res.status(200).json(updatedRegister);
   } catch (error) {
     console.error('Error updating register:', error);
@@ -46,6 +60,7 @@ export default async function getRegister({ params }: { params: { registerIds: n
       include: {
         Attendance: {
           select: {
+            id: true,
             student: {
               select: {
                 user: {
@@ -68,12 +83,12 @@ export default async function getRegister({ params }: { params: { registerIds: n
 
       }
     })
-    console.log(response)
+    //  console.log(response)
     //return response;
     return (
       <div>
         <RegisterClient register={response} />
-      </div>
+        </div>
     )
 
   } catch (error) {

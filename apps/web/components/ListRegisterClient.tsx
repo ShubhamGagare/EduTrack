@@ -5,12 +5,11 @@ import Link from "next/link"
 
 
 
-interface registerType {
+export interface registerType {
 
   "id": number,
   "classId": number,
   "teacherId": number,
-  "studentId": number,
   "date": string,
   "status": string,
   "cls": {
@@ -24,15 +23,16 @@ interface registerType {
     "user": {
       "id": number,
       "username": string,
-      "email": string,
-      "roleId": 2
     }
   },
   "student": {
     "id": number,
-    "userId": number,
-    "classId": number
+  },
+  "Attendance":{
+    "studentId":number,
+    "status":string
   }
+
 
 }
 
@@ -48,11 +48,13 @@ const ListRegisterClient = ({ regData }: { regData: registerType[] }) => {
         pathname: `./take-register/register/${r.id}`,
 
       }}><div className="w-full pb-4"><Card title={r.cls.name}  >
-        <div>
-          {r.teacher.name}
-        </div>
-        <div>
+        <div className="flex w-full justify-between ">
+          <div>
           {r.teacher.user.username}
+          </div>
+          <div className="">
+            Completed
+          </div>
         </div>
       </Card></div></Link>)) : (
         <div>No register data available.</div>
