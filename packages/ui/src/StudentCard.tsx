@@ -35,14 +35,17 @@ function setStatus(status: string) {
 export function StudentCard({
   title,
   status,
+  style
 }: {
   title: string;
-  status?: string
+  status?: string,
+  style?:string
+  
   children?: React.ReactNode;
 }): JSX.Element {
 
   return (
-    <div className="w-full ">
+    <div className={`w-full ${style} `}>
       <div className="border space-x-4 w-full flex " >
         <div >
           {setStatus(status || "")}

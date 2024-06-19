@@ -11,14 +11,7 @@ const RegisterClient = ({ register }: { register: any }) => {
     const buttons = [{ name: "Late" }, { name: "Present" }, { name: "Absent" }]
 
     async function handleAttendance() {
-        console.log("handle attendace " + JSON.stringify(attendance));
-        console.log("Before--->" + JSON.stringify(register));
-
         register.Attendance = attendance;
-        console.log("Attendance--->" + JSON.stringify(register));
-
-        console.log("Updated Register:", updateRegister);
-
         // Call updateRegister function
         try {
             const updatedRegister = {
@@ -30,6 +23,8 @@ const RegisterClient = ({ register }: { register: any }) => {
 
             // Call updateRegister function with updated register object
             await updateRegister(updatedRegister);
+
+
         } catch (e) {
             console.log(e)
         }
@@ -49,7 +44,7 @@ const RegisterClient = ({ register }: { register: any }) => {
         <div className="space-y-8">
             <div className="text-2xl">{register.cls.name}</div>
             <div className="space-y-2">
-                {attendance.map((s: { name: string }, index: number) => <Link href=""> <a onClick={() => { setIndex(index) }}><StudentCard title={s.student.user.username} status={s.status}>
+                {attendance.map((s: { name: string }, index: number) => <Link href=""  > <a  onClick={() => { setIndex(index) }}><StudentCard style={`${index === i?"border border-4 border-blue-500 ":""}`} title={s.student.user.username} status={s.status}>
                     <div></div>
                 </StudentCard></a> </Link>)}
             </div>
@@ -61,9 +56,8 @@ const RegisterClient = ({ register }: { register: any }) => {
 
                         updateStatus(i, btn.name)
 
-                    }}>{btn.name + i}</Button>)}
+                    }}>{btn.name}</Button>)}
                 </div>
-                {/* <Button onClick={() => { updateRegister}}>{"Submit the register"}</Button> */}
                 <Button style="bg-blue-600" onClick={handleAttendance}>{"Submit the register"}</Button>
 
             </div>

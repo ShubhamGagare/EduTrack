@@ -13,7 +13,7 @@ interface registerType {
   "studentId": number,
   "date": string,
   "status": string,
-  "class": {
+  "cls": {
     "id": number,
     "name": string,
     "teacherId": number
@@ -38,7 +38,7 @@ interface registerType {
 
 
 
-const ListRegisterClient = ({ regData }: { regData: any[] }) => {
+const ListRegisterClient = ({ regData }: { regData: registerType[] }) => {
 
 
   console.log(regData)
