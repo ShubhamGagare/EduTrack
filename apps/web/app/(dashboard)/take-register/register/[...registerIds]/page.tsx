@@ -25,10 +25,7 @@ export async function updateRegister(req: regType) {
   const register = req ; // Assuming 'register' object is passed in request body
 
   try {
-    console.log("Updating register:", req);
-    const st = register.Attendance;
     // Update register in the database
-    console.log(JSON.stringify(st))
     const updatedRegister = await client.register.update({
       where: { id: register.id }, // Adjust according to your schema
       data: {
@@ -37,7 +34,10 @@ export async function updateRegister(req: regType) {
             where: { id: student.id },
             data: { status: student.status }
           }))
-        } // Update the Attendance field
+        },
+        status:"Completed"
+        
+        // Update the Attendance field
         // Add other fields as needed
       }
     });

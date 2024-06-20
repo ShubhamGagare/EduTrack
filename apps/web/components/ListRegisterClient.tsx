@@ -1,6 +1,8 @@
 "use client"
 
 import { Card } from "@repo/ui/card"
+import  Tag  from "@repo/ui/Tag"
+
 import Link from "next/link"
 
 
@@ -53,7 +55,7 @@ const ListRegisterClient = ({ regData }: { regData: registerType[] }) => {
           {r.teacher.user.username}
           </div>
           <div className="">
-            Completed
+            <Tag tagname={r.status} style={r.status==="Completed"?"bg-green-300 text-green-800":"bg-gray-200 text-gray-800"} />
           </div>
         </div>
       </Card></div></Link>)) : (

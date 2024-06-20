@@ -89,6 +89,7 @@ model Register {
   teacherId  Int
   date       DateTime
   Attendance Attendance[]
+  status     String       @default("")
 }
 
 model Attendance {
