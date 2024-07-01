@@ -1,6 +1,6 @@
 "use client"
-import { Button } from '@repo/ui/button'
-import { Card } from '@repo/ui/card'
+import { Button } from '@repo/ui'
+import { Card } from '@repo/ui'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 

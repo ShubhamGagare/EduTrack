@@ -1,9 +1,9 @@
 
 "use server"
 import { NextApiRequest, NextApiResponse } from "next";
-import RegisterClient from "../../../../../components/RegisterClient"
+import RegisterClient from "../../../../../components/clients/RegisterClient"
 import { PrismaClient } from "@prisma/client"
-import { registerType } from "../../../../../components/ListRegisterClient";
+import { registerType } from "../../../../../components/clients/ListRegisterClient";
 import { NextRequest } from "next/server";
 
 const client = new PrismaClient()

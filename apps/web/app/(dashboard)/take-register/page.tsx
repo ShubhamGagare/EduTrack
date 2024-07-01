@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client"
-import ListRegisterClient from "../../../components/ListRegisterClient"
+import ListRegisterClient from "../../../components/clients/ListRegisterClient"
 
 
 

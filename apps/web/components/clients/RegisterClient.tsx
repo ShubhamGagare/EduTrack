@@ -1,10 +1,10 @@
 "use client"
 
-import { Button } from "@repo/ui/button"
+import { Button } from "@repo/ui"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { regType, updateRegister } from "../app/(dashboard)/take-register/register/[...registerIds]/page"
-import { StudentCard } from "@repo/ui/StudentCard"
+import { regType, updateRegister } from "../../app/(dashboard)/take-register/register/[...registerIds]/page"
+import { StudentCard } from "@repo/ui"
 import { useRouter } from "next/navigation"
 import { registerType } from "./ListRegisterClient"
 
@@ -26,7 +26,6 @@ const RegisterClient = ({ register }: { register: any }) => {
 
     const getMarkedStudentNo = () => {
         attendance.map((s: { status: string }) => {
-            console.log("Status-->"+s.status + s.status.length)
             if (s.status && s.status.length>0) {
                 console.log("Status from inside-->"+s.status + s.status.length)
 
@@ -79,15 +78,21 @@ const RegisterClient = ({ register }: { register: any }) => {
             </div>
             <div className="w-full flex justify-between ">
                 <div className="space-x-4">
-                    {buttons.map(btn => <Button style={
+                    {/* {buttons.map(btn => <Button style={
                         btn.name === "Late" ? "bg-yellow-500" : btn.name === "Present" ? "bg-green-500" : "bg-red-500"
                     } onClick={() => {
 
                         updateStatus(i, btn.name)
 
                     }}>{btn.name}</Button>)}
+                     */}
+                    {buttons.map(btn => <Button onClick={() => {
+
+                        updateStatus(i, btn.name)
+
+                    }}>{btn.name}</Button>)}
                 </div>
-                <Button style="bg-blue-600" onClick={handleAttendance}>{"Submit the register"}</Button>
+                <Button  onClick={handleAttendance}>{"Submit the register"}</Button>
 
             </div>
 

@@ -1,6 +1,6 @@
 "use client"
 import React from 'react'
-import { Button } from './button'
+import { Button } from '@repo/ui'
 
 interface AppBarProps {
     user?: {
@@ -20,8 +20,8 @@ export const Appbar = ({
         <div className="text-lg flex flex-col justify-center">
             Edusys
         </div>
-        <div className="flex flex-col justify-center py-2">
-            <Button onClick={user ? onSignout : onSignin}>{user ? "Logout" : "Login"}</Button>
+        <div className="flex flex-col justify-center py-2 p-30">
+            <Button variant={'default'} size={'lg'} onClick={user ? onSignout : onSignin}>{user ? "Logout" : "Login"}</Button>
         </div>
     </div>
     </>

@@ -1,7 +1,7 @@
 "use client"
 
-import { Card } from "@repo/ui/card"
-import  Tag  from "@repo/ui/Tag"
+import { Card } from "@repo/ui/"
+import  { Tag }  from "@repo/ui/"
 
 import Link from "next/link"
 
