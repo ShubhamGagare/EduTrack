@@ -6,7 +6,7 @@ import React, { useState } from "react";
 export const SidebarItem = ({ href, title }: { href: string; title: string; }) => {
     const router = useRouter();
     const pathname = usePathname()
-    const selected = pathname === href
+    const selected = pathname.includes(href)    
 
 
     return <>

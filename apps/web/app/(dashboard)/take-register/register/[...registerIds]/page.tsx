@@ -107,7 +107,7 @@ export default async function getRegister({ params }: { params: { registerIds: n
 
       }
     })
-    //  console.log(response)
+    //console.log("Attendance-------"+JSON.stringify(response))
     return (
       <div className="space-y-4">
         <Breadcrumb>
