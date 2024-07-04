@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client"
 import ListRegisterClient from "../../../components/clients/ListRegisterClient"
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 
 
 
@@ -34,7 +35,7 @@ async function getListOfRegisters() {
 
       }
     })
-    if(response.length===0){
+    if (response.length === 0) {
       console.log("resonse is empty")
     }
     return response;
@@ -50,8 +51,21 @@ const page = async () => {
   const regData: any = await getListOfRegisters();
 
   return (
-    <div className='space-y-8'>
-      <div className='text-4xl '>Take Register</div>
+
+
+    <div className='space-y-4'>
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>Take Register</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+      <div className='text-2xl font-bold tracking-tight '>Take Register</div>
       <div className='flex space-x-4'>
 
         <ListRegisterClient regData={regData} />

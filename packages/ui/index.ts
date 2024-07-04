@@ -4,6 +4,7 @@ export * from "./components/ui/badge";
 export * from "./components/ui/table";
 export * from "./components/ui/checkbox";
 export * from "./components/ui/dialog";
+export * from "./components/ui/breadcrumb";
 export * from "./src/code";
 export * from "./src/StudentCard";
 export * from "./src/Tag";

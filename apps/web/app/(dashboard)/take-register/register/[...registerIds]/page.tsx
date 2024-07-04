@@ -6,11 +6,12 @@ import { PrismaClient } from "@prisma/client"
 import { registerType } from "../../../../../components/clients/ListRegisterClient";
 import { NextRequest } from "next/server";
 import { ColumnDef } from "@tanstack/react-table"
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 const client = new PrismaClient()
 
 //export const dynamic = "auto";
-export interface regType extends NextApiRequest  {
-  id : number 
+export interface regType extends NextApiRequest {
+  id: number
   classId: number,
   teacherId: number,
   date: Date,
@@ -22,7 +23,7 @@ export interface regType extends NextApiRequest  {
 
 }
 export async function updateRegister(req: regType) {
-  const register = req ; // Assuming 'register' object is passed in request body
+  const register = req; // Assuming 'register' object is passed in request body
 
   try {
     // Update register in the database
@@ -35,8 +36,8 @@ export async function updateRegister(req: regType) {
             data: { status: student.status }
           }))
         },
-        status:"Completed"
-        
+        status: "Completed"
+
         // Update the Attendance field
         // Add other fields as needed
       }
@@ -49,17 +50,17 @@ export async function updateRegister(req: regType) {
     //  res.status(500).json({ error: 'Failed to update register' });
   }
 }
- type Register = {
-        "id": number,
-        "student": {
-            "user": {
-                "username": string
-            }
-        },
-        "status": string
+type Register = {
+  "id": number,
+  "student": {
+    "user": {
+      "username": string
+    }
+  },
+  "status": string
 
 }
- const columns: ColumnDef<Register>[] = [
+const columns: ColumnDef<Register>[] = [
   {
     accessorKey: "status",
     header: "Status",
@@ -68,12 +69,12 @@ export async function updateRegister(req: regType) {
     accessorKey: "student.user.username",
     header: "Name",
   },
-  
+
 ]
 
- 
 
- 
+
+
 export default async function getRegister({ params }: { params: { registerIds: number[] } }) {
   try {
     const response = await client.register.findFirst({
@@ -106,12 +107,27 @@ export default async function getRegister({ params }: { params: { registerIds: n
 
       }
     })
-      //  console.log(response)
+    //  console.log(response)
     return (
-      <div>
+      <div className="space-y-4">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/take-register">Take Register</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>{response?.cls.name}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
         <RegisterClient register={response} />
 
-        </div>
+      </div>
     )
 
   } catch (error) {

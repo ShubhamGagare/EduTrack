@@ -3,6 +3,7 @@ import { Button } from '@repo/ui'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@repo/ui'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 
 export default function page() {
 
@@ -19,7 +20,7 @@ export default function page() {
       description: "To take daily attendance of the students",
       buttonName: "Take me there",
       href: "/take-register"
-    },    {
+    }, {
       title: "Class view",
       description: "To create , modify seating plan to class",
       buttonName: "Take me there",
@@ -29,12 +30,22 @@ export default function page() {
 
   return (
     <>
-      <div className="flex items-center justify-between space-y-2">
-        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
-        <div className="flex items-center space-x-2">
+      <div className='space-y-4'>
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbPage>Dashboard</BreadcrumbPage>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+          </BreadcrumbList>
+        </Breadcrumb>
+
+        <div className="flex items-center justify-between space-y-2">
+          <h2 className="text-2xl font-bold tracking-tight">Dashboard</h2>
+          <div className="flex items-center space-x-2">
+          </div>
         </div>
       </div>
-
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8 py-6">
         {modules.map(mod => <Card className="col-span-4">
           <CardHeader>
