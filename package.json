@@ -29,6 +29,7 @@
   "dependencies": {
     "@material-tailwind/react": "^2.1.9",
     "axios": "^1.7.2",
+    "lucide-react": "^0.400.0",
     "next-auth": "^4.24.7",
     "recoil": "^0.7.7"
   }

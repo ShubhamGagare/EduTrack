@@ -5,7 +5,7 @@ import RegisterClient from "../../../../../components/clients/RegisterClient"
 import { PrismaClient } from "@prisma/client"
 import { registerType } from "../../../../../components/clients/ListRegisterClient";
 import { NextRequest } from "next/server";
-
+import { ColumnDef } from "@tanstack/react-table"
 const client = new PrismaClient()
 
 //export const dynamic = "auto";
@@ -49,8 +49,31 @@ export async function updateRegister(req: regType) {
     //  res.status(500).json({ error: 'Failed to update register' });
   }
 }
+ type Register = {
+        "id": number,
+        "student": {
+            "user": {
+                "username": string
+            }
+        },
+        "status": string
 
+}
+ const columns: ColumnDef<Register>[] = [
+  {
+    accessorKey: "status",
+    header: "Status",
+  },
+  {
+    accessorKey: "student.user.username",
+    header: "Name",
+  },
+  
+]
 
+ 
+
+ 
 export default async function getRegister({ params }: { params: { registerIds: number[] } }) {
   try {
     const response = await client.register.findFirst({
@@ -83,11 +106,11 @@ export default async function getRegister({ params }: { params: { registerIds: n
 
       }
     })
-    //  console.log(response)
-    //return response;
+      //  console.log(response)
     return (
       <div>
         <RegisterClient register={response} />
+
         </div>
     )
 

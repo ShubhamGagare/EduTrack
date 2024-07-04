@@ -1,6 +1,6 @@
 "use client"
 import { Button } from '@repo/ui'
-import { Card } from '@repo/ui'
+import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@repo/ui'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -12,26 +12,44 @@ export default function page() {
     router.push("/take-register")
   }
 
-  return (
-    <div className='space-y-8'>
-      <div className='text-4xl '>Homepage</div>
-      <div className='flex space-x-4 w-full'>
-        <Card title="Take Reigster" >
-          <div className='space-y-4'>
-            <p>To take daily attendance of the students</p>
-            <Button onClick={navTakeRegister}>Take Register</Button>
-          </div>
-        </Card>
-        <Card title="Class View">
-          <div className='space-y-4'>
 
-            <p>To take daily attendance of the students</p>
-            <Button onClick={navTakeRegister}>Take Register</Button>
-          </div>
-        </Card>
+  const modules = [
+    {
+      title: "Registers",
+      description: "To take daily attendance of the students",
+      buttonName: "Take me there",
+      href: "/take-register"
+    },    {
+      title: "Class view",
+      description: "To create , modify seating plan to class",
+      buttonName: "Take me there",
+      href: "/class-view"
+    }
+  ]
+
+  return (
+    <>
+      <div className="flex items-center justify-between space-y-2">
+        <h2 className="text-3xl font-bold tracking-tight">Dashboard</h2>
+        <div className="flex items-center space-x-2">
+        </div>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8 py-6">
+        {modules.map(mod => <Card className="col-span-4">
+          <CardHeader>
+            <CardTitle>{mod.title}</CardTitle>
+            <CardDescription>{mod.description}</CardDescription>
+          </CardHeader>
+          <CardContent >
+            <Button onClick={() => {
+              router.push(mod.href)
+            }}>{mod.buttonName}</Button>
+          </CardContent>
+        </Card>)}
 
       </div>
 
-    </div>
+    </>
   )
 }
