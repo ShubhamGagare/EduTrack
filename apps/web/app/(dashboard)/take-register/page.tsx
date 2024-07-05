@@ -1,6 +1,9 @@
 import { PrismaClient } from "@prisma/client"
 import ListRegisterClient from "../../../components/clients/ListRegisterClient"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
+import { getSession } from "next-auth/react";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../lib/auth";
 
 
 
@@ -8,13 +11,20 @@ const client = new PrismaClient()
 const today = new Date();
 
 async function getListOfRegisters() {
+  const session = await getServerSession(authOptions)
+  
+  console.log("session---"+JSON.stringify(session))
   try {
     const response = await client.register.findMany({
       where: {
         date: {
           gte: new Date(today.getFullYear(), today.getMonth(), today.getDate()), // Greater than or equal to today
           lt: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1) // Less than tomorrow
+        }, 
+        teacher:{
+          userId:Number(session.user.id)
         }
+       
       },
       include: {
         cls: {

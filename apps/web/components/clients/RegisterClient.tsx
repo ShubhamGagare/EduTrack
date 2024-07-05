@@ -17,7 +17,7 @@ import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 
 const RegisterClient = ({ register }: { register: any }) => {
 
-    const buttons = [{ name: "Late" }, { name: "Present" }, { name: "Absent" }]
+    const buttons = [{ name: "late" }, { name: "present" }, { name: "absent" }]
     const router = useRouter();
     const [attendance, setAttendance] = useState(register.Attendance);
     const [i, setIndex] = useState(0);
@@ -136,15 +136,17 @@ const RegisterClient = ({ register }: { register: any }) => {
 
                         </TableRow>
                     </TableHeader>
-                    <TableBody>
+                    <TableBody className="h-72 overflow-auto scroll-m-1">
                         {attendance.map((s: { status: string, student: { user: { username: string } } }, index: number) =>
-                            <TableRow onClick={() => { setIndex(index) }} className={`${index === i ? "border border-4 border-blue-500 " : ""} `}>
+                            <TableRow onClick={() => { setIndex(index) }} className={`${index === i ? "border border-4 border-blue-500 " : ""}  `}>
                                 <TableCell className="px-4 pr-4 w-4 ">
                                     <Checkbox onClick={(e) => { e.stopPropagation(); handleSelect(index) }} checked={isChecked[index]}></Checkbox>
                                 </TableCell>
-                                <TableCell className={`${s.status === "late" ? "bg-yellow-300 " : s.status === "present" ? "bg-green-300" : "bg-red-300"} flex justify-center h-full`}>{s.status === "late" ? <Clock /> : s.status === "present" ? <Check /> : <X />}</TableCell>
+                                <TableCell className=""> <div className={`${s.status === "late" ? "bg-yellow-300 " : s.status === "present" ? "bg-green-300" : "bg-red-300"} p-2 m-[-5]`}>{s.status === "late" ? <Clock className="text-yellow-900 " size={20}/> : s.status === "present" ? <Check className="text-green-900" size={20}/> : <X className="text-red-900" size={20} />}</div></TableCell>
+
                                 <TableCell>{s.student.user.username}</TableCell>
                             </TableRow>
+                            
 
                         )}
                     </TableBody>
@@ -164,7 +166,7 @@ const RegisterClient = ({ register }: { register: any }) => {
 
                     }}>{btn.name}</Button>)}
                      */}
-                    {buttons.map(btn => <Button className={`${btn.name === "Late" ? "bg-yellow-400 hover:bg-yellow-500" : btn.name === "Present" ? "bg-green-400 hover:bg-green-500" : "bg-red-400 hover:bg-red-500"} text-gray-800`} onClick={() => {
+                    {buttons.map(btn => <Button className={`${btn.name === "late" ? "bg-yellow-400 hover:bg-yellow-500" : btn.name === "present" ? "bg-green-400 hover:bg-green-500" : "bg-red-400 hover:bg-red-500"} text-gray-800`} onClick={() => {
 
                         updateStatus(i, btn.name)
 
