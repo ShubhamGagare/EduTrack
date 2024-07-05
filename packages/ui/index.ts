@@ -9,6 +9,9 @@ export * from "./components/ui/command";
 export * from "./components/ui/popover";
 export * from "./components/ui/calendar";
 export * from "./components/ui/separator";
+export * from "./components/ui/form";
+export * from "./components/ui/use-toast";
+export * from "./components/ui/label"
 export * from "./src/code";
 export * from "./src/StudentCard";
 export * from "./src/Tag";

@@ -136,13 +136,13 @@ const RegisterClient = ({ register }: { register: any }) => {
 
                         </TableRow>
                     </TableHeader>
-                    <TableBody className="h-72 overflow-auto scroll-m-1">
+                    <TableBody className="h-72 overflow-auto scroll-m-1 bg-slate-200">
                         {attendance.map((s: { status: string, student: { user: { username: string } } }, index: number) =>
-                            <TableRow onClick={() => { setIndex(index) }} className={`${index === i ? "border border-4 border-blue-500 " : ""}  `}>
+                            <TableRow onClick={() => { setIndex(index) }} className={`${index === i ? "border border-4 border-blue-500 " : ""} bg-white `}>
                                 <TableCell className="px-4 pr-4 w-4 ">
                                     <Checkbox onClick={(e) => { e.stopPropagation(); handleSelect(index) }} checked={isChecked[index]}></Checkbox>
                                 </TableCell>
-                                <TableCell className=""> <div className={`${s.status === "late" ? "bg-yellow-300 " : s.status === "present" ? "bg-green-300" :  s.status === "absent"? "bg-red-300":"bg-gray-300"} p-2 m-[-5]`}>{s.status === "late" ? <Clock className="text-yellow-900 " size={20}/> : s.status === "present" ? <Check className="text-green-900" size={20}/> : s.status === "absent"? <X className="text-red-900" size={20} />:<div className="w-4 h-4"></div>}</div></TableCell>
+                                <TableCell  className={`${s.status === "late" ? "bg-yellow-300 " : s.status === "present" ? "bg-green-300" :  s.status === "absent"? "bg-red-300":"bg-gray-300"} `}>{s.status === "late" ? <Clock className="text-yellow-900 " size={20}/> : s.status === "present" ? <Check className="text-green-900" size={20}/> : s.status === "absent"? <X className="text-red-900" size={20} />:<div className="hidden"></div>}</TableCell>
 
                                 <TableCell>{s.student.user.username}</TableCell>
                             </TableRow>

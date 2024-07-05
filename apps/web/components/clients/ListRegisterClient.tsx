@@ -1,13 +1,19 @@
 "use client"
 
 import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, Separator } from "@repo/ui/"
-import { Badge } from "@repo/ui/"
-import { CalendarIcon } from "lucide-react"
+import { Badge, Calendar } from "@repo/ui/"
+//import { CalendarIcon } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@repo/ui/"
 import Link from "next/link"
 import { useState } from "react"
-
-
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, } from "@repo/ui/"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { CalendarIcon } from "@radix-ui/react-icons"
+import { format } from "date-fns"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { toast } from "@repo/ui/"
+import { cn } from "@repo/ui/utils"
 
 export interface registerType {
 
@@ -46,6 +52,27 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
 
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState("")
+  const [selectedDate,setDate] = useState(new Date())
+  const FormSchema = z.object({
+    dob: z.date({
+      required_error: "A date of birth is required.",
+    }),
+  })
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+  })
+  function onSubmit(data: z.infer<typeof FormSchema>) {
+    console.log("---------toast-----------")
+    toast({
+      
+      title: "You submitted the following values:",
+      description: (
+        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
+          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
+        </pre>
+      ),
+    })
+  }
   console.log(regData)
   return (
     <div className="flex flex-col w-full space-y-8">
@@ -84,8 +111,54 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
 
         </div>
         <div>
-                    <Button></Button>
-        </div>           
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+              <FormField
+                control={form.control}
+                name="dob"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col">
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <FormControl>
+                          <Button
+                            variant={"outline"}
+                            className={cn(
+                              "w-[240px] pl-3 text-left font-normal",
+                             
+                            )}
+                          >
+                            {field.value ? (
+                              format(field.value, "PPP")
+                            ) : (
+                              format(new Date(),"PPP")
+                            )
+                            }
+                            <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                          </Button>
+                        </FormControl>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={field.value}
+                          onSelect={field.onChange}
+                          disabled={(date) =>
+                            date > new Date() || date < new Date("1900-01-01")
+                          }
+                          initialFocus
+                        />
+                      </PopoverContent>
+                    </Popover>
+
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {/* <Button type="submit">Submit</Button> */}
+            </form>
+          </Form>
+        </div>
       </div>
 
       <div className="w-full space-y-4">
