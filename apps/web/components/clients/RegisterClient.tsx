@@ -142,13 +142,13 @@ const RegisterClient = ({ register }: { register: any }) => {
                                 <TableCell className="px-4 pr-4 w-4 ">
                                     <Checkbox onClick={(e) => { e.stopPropagation(); handleSelect(index) }} checked={isChecked[index]}></Checkbox>
                                 </TableCell>
-                                <TableCell className=""> <div className={`${s.status === "late" ? "bg-yellow-300 " : s.status === "present" ? "bg-green-300" : "bg-red-300"} p-2 m-[-5]`}>{s.status === "late" ? <Clock className="text-yellow-900 " size={20}/> : s.status === "present" ? <Check className="text-green-900" size={20}/> : <X className="text-red-900" size={20} />}</div></TableCell>
+                                <TableCell className=""> <div className={`${s.status === "late" ? "bg-yellow-300 " : s.status === "present" ? "bg-green-300" :  s.status === "absent"? "bg-red-300":"bg-gray-300"} p-2 m-[-5]`}>{s.status === "late" ? <Clock className="text-yellow-900 " size={20}/> : s.status === "present" ? <Check className="text-green-900" size={20}/> : s.status === "absent"? <X className="text-red-900" size={20} />:<div className="w-4 h-4"></div>}</div></TableCell>
 
                                 <TableCell>{s.student.user.username}</TableCell>
                             </TableRow>
                             
 
-                        )}
+                        )} 
                     </TableBody>
 
 

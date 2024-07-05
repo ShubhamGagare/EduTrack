@@ -52,11 +52,11 @@ const ListRegisterClient = ({ regData }: { regData: registerType[] }) => {
 
       }}><div className="w-full pb-4"><Card className="flex items-center justify-between">
         <CardHeader>
-          <CardTitle>{r.cls.name}</CardTitle>
+          <CardTitle>{r.cls.name} {r.id}</CardTitle>
           <CardDescription>{r.teacher.user.username}</CardDescription>
         </CardHeader>
         <CardContent className="flex flex-col items-center">
-          <Badge className={`${r.status === "Completed" ? "bg-green-300 text-green-800" : "bg-gray-200 text-gray-800"} p-1 px-2 rounded-2xl `}>{r.status}</Badge>
+          <Badge className={`${r.status === "Completed" ? "bg-green-300 text-green-800" : "bg-gray-200 text-gray-800"} p-1 px-2 rounded-2xl `}>{r.status !==""?r.status:"Ready"}</Badge>
         </CardContent>
 
       </Card></div></Link>)) : (
