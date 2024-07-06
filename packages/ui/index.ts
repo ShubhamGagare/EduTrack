@@ -12,6 +12,8 @@ export * from "./components/ui/separator";
 export * from "./components/ui/form";
 export * from "./components/ui/use-toast";
 export * from "./components/ui/label"
+export * from "./components/ui/accordion"
+export * from "./components/ui/textarea"
 export * from "./src/code";
 export * from "./src/StudentCard";
 export * from "./src/Tag";

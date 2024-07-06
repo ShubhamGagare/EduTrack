@@ -93,10 +93,12 @@ model Register {
 }
 
 model Attendance {
-  id         Int      @id @default(autoincrement())
-  student    Student  @relation(fields: [studentId], references: [id])
-  studentId  Int
-  register   Register @relation(fields: [registerId], references: [id])
-  registerId Int
-  status     String // 'present', 'absent', 'late', etc.
+  id          Int      @id @default(autoincrement())
+  student     Student  @relation(fields: [studentId], references: [id])
+  studentId   Int
+  register    Register @relation(fields: [registerId], references: [id])
+  registerId  Int
+  status      String // 'present', 'absent', 'late', etc.
+  comment     String?
+  lateMinutes Int?
 }

@@ -1,13 +1,13 @@
 "use client"
 
-import { Button, Card, CardContent, CardHeader, CardTitle, Checkbox, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@repo/ui"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Button, Card, CardContent, CardHeader, CardTitle, Checkbox, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, Label, Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, Textarea } from "@repo/ui"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { regType, updateRegister } from "../../app/(dashboard)/take-register/register/[...registerIds]/page"
 import { StudentCard } from "@repo/ui"
 import { useRouter } from "next/navigation"
 import { registerType } from "./ListRegisterClient"
-import { Check, Clock, User2, X } from "lucide-react"
+import { Check, Clock, Edit, User2, X } from "lucide-react"
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 
 
@@ -38,7 +38,7 @@ const RegisterClient = ({ register }: { register: any }) => {
             if (s.status && s.status.length > 0) {
                 mark = mark + 1
                 setMarked(mark)
-                console.log("Status from inside-->" + mark+"------"+ s.status.length)
+                console.log("Status from inside-->" + mark + "------" + s.status.length)
 
             }
         })
@@ -48,6 +48,7 @@ const RegisterClient = ({ register }: { register: any }) => {
     async function handleAttendance() {
         register.Attendance = attendance;
         // Call updateRegister function
+        console.log("Submitting Attendance --->" + JSON.stringify(attendance));
         try {
             const updatedRegister = {
                 ...register,
@@ -87,7 +88,12 @@ const RegisterClient = ({ register }: { register: any }) => {
 
     const updateStatus = (index: number, newStatus: string) => {
         const updatedAttendance = [...attendance];  // Create a copy of attendance array
-        updatedAttendance[index].status = newStatus;  // Update the status of the specific item
+        if (isCheckAll) {
+            updatedAttendance.map((student) => student.status = newStatus)
+            handleSelectAll()
+        } else {
+            updatedAttendance[index].status = newStatus;  // Update the status of the specific item
+        }
         setAttendance(updatedAttendance);  // Update the state with the new array
         setIndex(i === register.Attendance.length - 1 ? i : i + 1)
 
@@ -96,7 +102,7 @@ const RegisterClient = ({ register }: { register: any }) => {
     const getNumberByStatus = (mark: string) => {
         let markCount = 0;
         attendance.map((s: { status: string }) => {
-            if(s.status === mark){
+            if (s.status === mark) {
                 markCount = markCount + 1
             }
         })
@@ -131,24 +137,48 @@ const RegisterClient = ({ register }: { register: any }) => {
                             <TableHead className="px-4 pr-4 w-4 ">
                                 <Checkbox className="mr-4" onClick={handleSelectAll} checked={isCheckAll} />
                             </TableHead>
-                            <TableHead className="w-4 h-full"></TableHead>
-                            <TableHead>Name</TableHead>
+                            <TableHead className="w-8 h-full"></TableHead>
+                            <TableHead className="">Name</TableHead>
 
                         </TableRow>
                     </TableHeader>
                     <TableBody className="h-72 overflow-auto scroll-m-1 bg-slate-200">
-                        {attendance.map((s: { status: string, student: { user: { username: string } } }, index: number) =>
+                        {attendance.map((s: { status: string, comment?: string, lateMinutes?: number, student: { user: { username: string } } }, index: number) =>
                             <TableRow onClick={() => { setIndex(index) }} className={`${index === i ? "border border-4 border-blue-500 " : ""} bg-white `}>
                                 <TableCell className="px-4 pr-4 w-4 ">
                                     <Checkbox onClick={(e) => { e.stopPropagation(); handleSelect(index) }} checked={isChecked[index]}></Checkbox>
                                 </TableCell>
-                                <TableCell  className={`${s.status === "late" ? "bg-yellow-300 " : s.status === "present" ? "bg-green-300" :  s.status === "absent"? "bg-red-300":"bg-gray-300"} `}>{s.status === "late" ? <Clock className="text-yellow-900 " size={20}/> : s.status === "present" ? <Check className="text-green-900" size={20}/> : s.status === "absent"? <X className="text-red-900" size={20} />:<div className="hidden"></div>}</TableCell>
+                                <TableCell className={`${s.status === "late" ? "bg-yellow-300 " : s.status === "present" ? "bg-green-300" : s.status === "absent" ? "bg-red-300" : "bg-gray-300"} w-4`}>{s.status === "late" ? <Clock className="text-yellow-900 " size={20} /> : s.status === "present" ? <Check className="text-green-900" size={20} /> : s.status === "absent" ? <X className="text-red-900" size={20} /> : <div className="hidden"></div>}</TableCell>
+                                {/* 
+                                <TableCell className="w-fit">{s.student.user.username}
+                                    <div className="hidden">
+                                        <Label>Comment</Label>
+                                        <Textarea></Textarea>
+                                    </div>
 
-                                <TableCell>{s.student.user.username}</TableCell>
+                                </TableCell> */}
+                                <TableCell className="px-[-2]">
+                                    <Accordion type="single" collapsible className="w-full ">
+                                        <AccordionItem value="item-1">
+                                            <AccordionTrigger className="hover:bg-blue-100 px-2">
+                                                <Label className="">{s.student.user.username}</Label>
+                                            </AccordionTrigger>
+                                            <AccordionContent className="p-2">
+                                                <div className="w-96 space-y-2">
+                                                    <Label className="font-black">Comment</Label>
+                                                    <Textarea onChange={(e) => {
+                                                        s.comment = e.target.value
+                                                    }}>{s.comment}</Textarea>
+                                                </div>
+                                            </AccordionContent>
+                                        </AccordionItem>
+                                    </Accordion>
+                                </TableCell>
+
                             </TableRow>
-                            
 
-                        )} 
+
+                        )}
                     </TableBody>
 
 
@@ -170,7 +200,7 @@ const RegisterClient = ({ register }: { register: any }) => {
 
                         updateStatus(i, btn.name)
 
-                    }}>{btn.name}</Button>)}
+                    }}>{btn.name.charAt(0).toUpperCase() + btn.name.slice(1)}</Button>)}
                 </div>
 
                 <Dialog>
@@ -194,20 +224,20 @@ const RegisterClient = ({ register }: { register: any }) => {
                                     <div className="flex flex-col items-center" >
                                         <div className="bg-yellow-400 rounded-full w-fit p-2"><Clock /></div>
                                         <div >Late </div>
-                                        <div>{getNumberByStatus("Late")}</div>
+                                        <div>{getNumberByStatus("late")}</div>
                                     </div>
 
                                     <div className="flex flex-col items-center" >
                                         <div className="bg-green-400 rounded-full w-fit p-2"><Check /></div>
                                         <div >Present </div>
-                                        <div>{getNumberByStatus("Present")}</div>
+                                        <div>{getNumberByStatus("present")}</div>
 
 
                                     </div>
                                     <div className="flex flex-col items-center" >
                                         <div className="bg-red-400 rounded-full w-fit p-2"><X /></div>
                                         <div >Absent </div>
-                                        <div>{getNumberByStatus("Absent")}</div>
+                                        <div>{getNumberByStatus("absent")}</div>
 
 
                                     </div>

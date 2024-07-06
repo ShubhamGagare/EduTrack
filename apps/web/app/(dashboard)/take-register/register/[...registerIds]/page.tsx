@@ -16,8 +16,7 @@ export interface regType extends NextApiRequest {
   teacherId: number,
   date: Date,
   Attendance: [
-    { id: 1, student: Object, status: string },
-    { id: 2, student: Object, status: string }
+    { id: number, student: Object, status: string, comment: string, lateMinutes: number },
   ],
   cls: { name: string }
 
@@ -33,7 +32,11 @@ export async function updateRegister(req: regType) {
         Attendance: {
           update: register.Attendance.map((student: any) => ({
             where: { id: student.id },
-            data: { status: student.status }
+            data: {
+              status: student.status,
+              comment: student.comment || "",
+              lateMinutes: student.lateMinutes || 0
+            }
           }))
         },
         status: "Completed"
@@ -95,7 +98,9 @@ export default async function getRegister({ params }: { params: { registerIds: n
 
               }
             },
-            status: true
+            status: true,
+            comment: true,
+            lateMinutes: true
           }
 
         },
