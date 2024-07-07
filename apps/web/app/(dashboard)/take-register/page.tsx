@@ -1,3 +1,5 @@
+'use server'
+
 import { PrismaClient } from "@prisma/client"
 import ListRegisterClient from "../../../components/clients/ListRegisterClient"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
@@ -13,15 +15,16 @@ const session = await getServerSession(authOptions)
 
 
 //get all registers for all users
-async function getListOfALLRegisters() {
+export async function getListOfALLRegisters(date: Date) {
 
-  console.log("session---" + JSON.stringify(session))
+
+  console.log("date---" + date.getDate())
   try {
     const response = await client.register.findMany({
       where: {
         date: {
-          gte: new Date(today.getFullYear(), today.getMonth(), today.getDate()), // Greater than or equal to today
-          lt: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1) // Less than tomorrow
+          gte: new Date(date.getFullYear(), date.getMonth(), date.getDate()), // Greater than or equal to today
+          lt: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1) // Less than tomorrow
         }
 
       },
@@ -58,7 +61,8 @@ async function getListOfALLRegisters() {
   }
 }
 
-async function createTodaysAllRegister() {
+export async function createTodaysAllRegister() {
+  console.log("----------------Creating All new register for today----------------")
   const classes = await client.cls.findMany()
   classes.map(async (cls) => {
 
@@ -141,15 +145,15 @@ async function createTodaysAllRegister() {
 
 
 // get todays register for user
-async function getListOfRegisters() {
+export async function getListOfRegisters(date: Date) {
 
   console.log("session---" + JSON.stringify(session))
   try {
     const response = await client.register.findMany({
       where: {
         date: {
-          gte: new Date(today.getFullYear(), today.getMonth(), today.getDate()), // Greater than or equal to today
-          lt: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1) // Less than tomorrow
+          gte: new Date(date.getFullYear(), date.getMonth(), date.getDate()), // Greater than or equal to today
+          lt: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1) // Less than tomorrow
         },
         teacher: {
           userId: Number(session.user.id)
@@ -177,7 +181,7 @@ async function getListOfRegisters() {
     })
     if (response.length === 0) {
       console.log("resonse is empty")
-      const response = await createTodaysRegister()
+      const response = await createTodaysRegister(date)
 
       return response;
     }
@@ -189,7 +193,9 @@ async function getListOfRegisters() {
 }
 
 //create todays register for user
-async function createTodaysRegister() {
+export async function createTodaysRegister(date: Date) {
+  console.log("----------------Creating  new register for today----------------")
+
   const cls = await client.cls.findFirst({
     where: {
       teacherId: Number(session.user.id)
@@ -228,8 +234,8 @@ async function createTodaysRegister() {
         const response = await client.register.findMany({
           where: {
             date: {
-              gte: new Date(today.getFullYear(), today.getMonth(), today.getDate()), // Greater than or equal to today
-              lt: new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1) // Less than tomorrow
+              gte: new Date(date.getFullYear(), date.getMonth(), date.getDate()), // Greater than or equal to today
+              lt: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1) // Less than tomorrow
             },
             teacher: {
               userId: Number(session.user.id)
@@ -270,16 +276,32 @@ async function createTodaysRegister() {
   }
 }
 
+
+export async function customDateRegisters(date: Date, id: number) {
+  console.log("-------------------------------custom date registers-----------------------------" + date);
+
+  const regData: any = await getListOfALLRegisters(date);
+  console.log("--------------filtering custom date-----------------------------" + JSON.stringify(regData));
+  const usersRegisters = regData.filter((register: any) => {
+    if (Number(register.teacherId) === Number(id)) {
+      console.log("------Register Found-------" + JSON.stringify(register))
+      return register;
+    }
+  })
+  return usersRegisters;
+  console.log("-------------------------------Not returning anything-----------------------------" + JSON.stringify(usersRegisters));
+
+}
+
+
 const page = async () => {
 
-  const regData: any = await getListOfALLRegisters();
+  const regData: any = await getListOfALLRegisters(new Date());
   console.log("Regdata----" + JSON.stringify(regData));
   const usersRegister = regData.filter((register: any) => {
     if (register.teacherId === Number(session.user.id)) {
       return register
     }
-
-
   })
 
   return (

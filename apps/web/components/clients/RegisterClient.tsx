@@ -7,8 +7,7 @@ import { regType, updateRegister } from "../../app/(dashboard)/take-register/reg
 import { StudentCard } from "@repo/ui"
 import { useRouter } from "next/navigation"
 import { registerType } from "./ListRegisterClient"
-import { Check, Clock, Edit, User2, X } from "lucide-react"
-import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
+import { Check, Clock, Edit, User2, UserCircle2, X } from "lucide-react"
 
 
 //import { useSearchParams } from "next/navigation";
@@ -160,8 +159,9 @@ const RegisterClient = ({ register }: { register: any }) => {
                                 <TableCell className="px-[-2]">
                                     <Accordion type="single" collapsible className="w-full ">
                                         <AccordionItem value="item-1">
-                                            <AccordionTrigger className="hover:bg-blue-100 px-2">
-                                                <Label className="">{s.student.user.username}</Label>
+                                            <AccordionTrigger className="hover:bg-blue-100 px-2 space-x-2">
+                                                {/* <UserCircle2 className="w-fit " size={32} color="gray" ></UserCircle2> */}
+                                                <Label className="w-full text-left">{s.student.user.username}</Label>
                                             </AccordionTrigger>
                                             <AccordionContent className="p-2">
                                                 <div className="w-96 space-y-2">

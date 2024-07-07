@@ -14,6 +14,9 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { toast } from "@repo/ui/"
 import { cn } from "@repo/ui/utils"
+//import { customDateRegisters, test } from "../../app/(dashboard)/take-register/page"
+import { customDateRegisters } from "app/(dashboard)/take-register/page"
+import { test } from "app/(dashboard)/take-register/action"
 
 export interface registerType {
 
@@ -50,21 +53,42 @@ export interface registerType {
 
 const ListRegisterClient = ({ regData, register }: { regData: registerType[], register: registerType[] }) => {
 
-  const [open, setOpen] = useState(false)
+  const [reg, setRegister] = useState(register)
   const [value, setValue] = useState("")
-  const [selectedDate,setDate] = useState(new Date())
+  const [selectedDate, setDate] = useState(new Date())
   const FormSchema = z.object({
     dob: z.date({
-      required_error: "A date of birth is required.",
+      required_error: "Enter the date.",
     }),
   })
+
+  
+
+  // Handle date selection
+  const handleSelectDate = async (date: any) => {
+    setDate(date);
+    if (register[0]?.teacherId !== undefined) {
+      console.log("binding data--"+ date)
+      try {
+        //test.bind(null)
+        const registers: any =  await customDateRegisters(date, register[0]?.teacherId)
+        console.log("binding data---" + JSON.stringify(registers));
+        setRegister(registers);
+        //regData = registers
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
+  }
+
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })
   function onSubmit(data: z.infer<typeof FormSchema>) {
     console.log("---------toast-----------")
     toast({
-      
+
       title: "You submitted the following values:",
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
@@ -73,7 +97,7 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
       ),
     })
   }
-  console.log(regData)
+  console.log("Updated data-----------"+JSON.stringify(reg))
   return (
     <div className="flex flex-col w-full space-y-8">
       <div className="flex w-full justify-between">
@@ -125,13 +149,13 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
                             variant={"outline"}
                             className={cn(
                               "w-[240px] pl-3 text-left font-normal",
-                             
+
                             )}
                           >
                             {field.value ? (
                               format(field.value, "PPP")
                             ) : (
-                              format(new Date(),"PPP")
+                              format(selectedDate, "PPP")
                             )
                             }
                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
@@ -141,18 +165,20 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
                       <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
                           mode="single"
-                          selected={field.value}
-                          onSelect={field.onChange}
+                          selected={selectedDate}
+                          onSelect={handleSelectDate}
                           disabled={(date) =>
                             date > new Date() || date < new Date("1900-01-01")
                           }
                           initialFocus
+
                         />
                       </PopoverContent>
                     </Popover>
 
                     <FormMessage />
                   </FormItem>
+
                 )}
               />
               {/* <Button type="submit">Submit</Button> */}
@@ -160,9 +186,8 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
           </Form>
         </div>
       </div>
-
       <div className="w-full space-y-4">
-        {register ? (register.map(r => <Link className="w-full" href={{
+        {reg ? (reg.map(r => <Link className="w-full" href={{
           pathname: `./take-register/register/${r.id}`,
 
         }}><div className="w-full pb-4"><Card className="flex items-center justify-between">

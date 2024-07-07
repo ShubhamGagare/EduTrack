@@ -6,6 +6,10 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
+    "paths": {
+      "@repo/web": ["./"],
+    }
 
   },
   "include": [
