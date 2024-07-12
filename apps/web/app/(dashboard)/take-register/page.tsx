@@ -3,7 +3,6 @@
 import { PrismaClient } from "@prisma/client"
 import ListRegisterClient from "../../../components/clients/ListRegisterClient"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
-import { getSession } from "next-auth/react";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
 

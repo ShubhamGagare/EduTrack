@@ -1,12 +1,12 @@
 "use client"
 
-import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, Separator } from "@repo/ui"
+import { Button, Card, CardContent, CardDescription, CardHeader, CardTitle, Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@repo/ui"
 import { Badge, Calendar } from "@repo/ui"
 //import { CalendarIcon } from "lucide-react"
 import { Popover, PopoverContent, PopoverTrigger } from "@repo/ui"
 import Link from "next/link"
 import { useState } from "react"
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, } from "@repo/ui"
+import { Form, FormControl, FormField, FormItem,  FormMessage, } from "@repo/ui"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { CalendarIcon } from "@radix-ui/react-icons"
 import { format } from "date-fns"
@@ -53,7 +53,6 @@ export interface registerType {
 const ListRegisterClient = ({ regData, register }: { regData: registerType[], register: registerType[] }) => {
 
   const [reg, setRegister] = useState(register)
-  const [value, setValue] = useState("")
   const [selectedDate, setDate] = useState(new Date())
   const FormSchema = z.object({
     dob: z.date({

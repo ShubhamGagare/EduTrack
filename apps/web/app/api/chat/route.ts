@@ -1,6 +1,5 @@
 import OpenAI from 'openai';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY // This is the default and can be omitted
 });
