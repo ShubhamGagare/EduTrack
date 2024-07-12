@@ -13,5 +13,8 @@
     "./client": "./index.ts"
   },
   "main": "index.js",
-  "build": "npx prisma db push && npx prisma generate && next build"
+  "build": "npx prisma db push && npx prisma generate && next build",
+  "scripts" {
+    "postinstall": "prisma generate"
+  }
 }
