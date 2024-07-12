@@ -14,8 +14,7 @@ import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { toast } from "@repo/ui"
 import { cn } from "@repo/ui/utils"
-//import { customDateRegisters, test } from "../../app/(dashboard)/take-register/page"
-import { customDateRegisters } from "app/(dashboard)/take-register/page"
+import { customDateRegisters } from "app/(dashboard)/take-register/action"
 
 export interface registerType {
 

@@ -1,24 +1,12 @@
-"use server";
-
 import { PrismaClient } from "@prisma/client";
-import ListRegisterClient from "../../../components/clients/ListRegisterClient";
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from "@repo/ui";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
 
 const client = new PrismaClient();
 const today = new Date();
 const session = await getServerSession(authOptions);
-
 //get all registers for all users
-async function getListOfALLRegisters(date: Date) {
+export async function getListOfALLRegisters(date: Date) {
   //console.log("date---" +session.user)
 
   console.log("date---" + date.getDate());
@@ -61,7 +49,7 @@ async function getListOfALLRegisters(date: Date) {
   }
 }
 
-async function createTodaysAllRegister() {
+export async function createTodaysAllRegister() {
   console.log(
     "----------------Creating All new register for today----------------"
   );
@@ -146,7 +134,7 @@ async function createTodaysAllRegister() {
 //creat all registers for all users
 
 // get todays register for user
-async function getListOfRegisters(date: Date) {
+export async function getListOfRegisters(date: Date) {
   console.log("session---" + JSON.stringify(session));
   try {
     const response = await client.register.findMany({
@@ -190,7 +178,7 @@ async function getListOfRegisters(date: Date) {
 }
 
 //create todays register for user
-async function createTodaysRegister(date: Date) {
+export async function createTodaysRegister(date: Date) {
   console.log(
     "----------------Creating  new register for today----------------"
   );
@@ -278,7 +266,7 @@ async function createTodaysRegister(date: Date) {
   }
 }
 
-async function customDateRegisters(date: Date, id: number) {
+export async function customDateRegisters(date: Date, id: number) {
   const regData: any = await getListOfALLRegisters(date);
   const usersRegisters = regData.filter((register: any) => {
     if (Number(register.teacherId) === Number(id)) {
@@ -286,34 +274,4 @@ async function customDateRegisters(date: Date, id: number) {
     }
   });
   return usersRegisters;
-}
-
-export default async function page() {
-  const regData: any = await getListOfALLRegisters(new Date());
-  // console.log("Regdata----" + JSON.stringify(regData));
-  const usersRegister = regData.filter((register: any) => {
-    if (register.teacherId === Number(session.user.id)) {
-      return register;
-    }
-  });
-
-  return (
-    <div className="space-y-4">
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem>
-            <BreadcrumbLink href="/dashboard">Dashboard</BreadcrumbLink>
-          </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbPage>Take Register</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
-      <div className="text-2xl font-bold tracking-tight ">Take Register</div>
-      <div className="flex space-x-4">
-        <ListRegisterClient regData={regData} register={usersRegister} />
-      </div>
-    </div>
-  );
 }
