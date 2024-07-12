@@ -87,7 +87,7 @@ const session = await getServerSession(authOptions)
 
       // Create attendance records for students in the class
       if (studentsForClass) {
-        const attendanceData = studentsForClass.map(student => ({
+        const attendanceData = studentsForClass.map((student:any) => ({
           studentId: student.id,
           registerId: register.id,
           status: ""
@@ -222,7 +222,7 @@ const session = await getServerSession(authOptions)
 
     // Create attendance records for students in the class
     if (studentsForClass) {
-      const attendanceData = studentsForClass.map(student => ({
+      const attendanceData = studentsForClass.map((student:any) => ({
         studentId: student.id,
         registerId: register.id,
         status: ""
