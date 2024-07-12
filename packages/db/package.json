@@ -5,6 +5,9 @@
     "@prisma/client": "^5.11.0",
     "bcrypt": "^5.1.1"
   },
+  "scripts" : {
+    "postinstall": "prisma generate"
+  },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
     "prisma": "5.11.0"
@@ -14,7 +17,5 @@
   },
   "main": "index.js",
   "build": "npx prisma db push && npx prisma generate && next build",
-  "scripts" {
-    "postinstall": "prisma generate"
-  }
+
 }
