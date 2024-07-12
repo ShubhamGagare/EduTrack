@@ -7,16 +7,7 @@ const openai = new OpenAI({
 
 
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '1mb',
-    },
-  },
-};
-type Data = {
-  name: string
-}
+
 
 export async function POST(req: Request){
  
