@@ -2,7 +2,7 @@
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Checkbox, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, Label, Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, Textarea } from "@repo/ui"
 import { useEffect, useState } from "react"
-import { getAttendacePattern, updateRegister } from "../../app/(dashboard)/take-register/register/[...registerIds]/page"
+import { getAttendacePattern, updateRegister } from "../../app/(dashboard)/take-register/register/[...registerIds]/action"
 import { useRouter } from "next/navigation"
 import { Check, Clock, Edit, User2,  X } from "lucide-react"
 

@@ -8,7 +8,7 @@ import axios from "axios"
 const client = new PrismaClient()
 
 //export const dynamic = "auto";
-export interface regType extends NextApiRequest {
+ interface regType extends NextApiRequest {
   id: number
   classId: number,
   teacherId: number,
@@ -19,7 +19,7 @@ export interface regType extends NextApiRequest {
   cls: { name: string }
 
 }
-export async function updateRegister(req: regType) {
+ async function updateRegister(req: regType) {
   const register = req; // Assuming 'register' object is passed in request body
 
   try {
@@ -94,7 +94,7 @@ const getMonthlyMark = async (id: number) => {
 }
 
 
-export const getAttendacePattern = async (id:number) => {
+ const getAttendacePattern = async (id:number) => {
   //const message = [{ role: "user", content: "You are a helpful assistant." }]
   const allAttendance = await getMonthlyMark(id)
   const expectedOutputFormat= {
