@@ -32,6 +32,8 @@
     "faker": "^6.6.6",
     "lucide-react": "^0.400.0",
     "next-auth": "^4.24.7",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "recoil": "^0.7.7"
   }
 }
