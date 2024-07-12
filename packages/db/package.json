@@ -6,6 +6,7 @@
     "bcrypt": "^5.1.1"
   },
   "scripts": {
+    "postinstall": "prisma generate",
     "build": "npx prisma db push && npx prisma generate && next build"
   },
   "devDependencies": {
