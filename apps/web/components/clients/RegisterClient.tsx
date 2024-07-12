@@ -1,13 +1,10 @@
 "use client"
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Card, CardContent, CardHeader, CardTitle, Checkbox, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, Label, Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, Textarea } from "@repo/ui"
-import Link from "next/link"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Checkbox, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, Label, Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, Textarea } from "@repo/ui"
 import { useEffect, useState } from "react"
-import { getAttendacePattern, regType, updateRegister } from "../../app/(dashboard)/take-register/register/[...registerIds]/page"
-import { StudentCard } from "@repo/ui"
+import { getAttendacePattern, updateRegister } from "../../app/(dashboard)/take-register/register/[...registerIds]/page"
 import { useRouter } from "next/navigation"
-import { registerType } from "./ListRegisterClient"
-import { Check, Clock, Edit, User2, UserCircle2, X } from "lucide-react"
+import { Check, Clock, Edit, User2,  X } from "lucide-react"
 
 
 //import { useSearchParams } from "next/navigation";

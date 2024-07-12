@@ -293,7 +293,7 @@ export async function customDateRegisters(date: Date, id: number) {
 }
 
 
-const page = async () => {
+export const page = async () => {
 
   const regData: any = await getListOfALLRegisters(new Date());
   console.log("Regdata----" + JSON.stringify(regData));

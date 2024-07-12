@@ -1,7 +1,6 @@
 "use client"
 import { Card, CardTitle } from "@repo/ui";
 import { usePathname, useRouter } from "next/navigation";
-import React, { useState } from "react";
 
 export const SidebarItem = ({ href, title }: { href: string; title: string; }) => {
     const router = useRouter();

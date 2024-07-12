@@ -4,6 +4,7 @@ import { NextApiRequest } from "next";
 import RegisterClient from "../../../../../components/clients/RegisterClient"
 import { PrismaClient } from "@prisma/client"
 
+import { ColumnDef } from "@tanstack/react-table"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 import axios from "axios"
 const client = new PrismaClient()
@@ -20,38 +21,38 @@ export interface regType extends NextApiRequest {
   cls: { name: string }
 
 }
-// export async function updateRegister(req: regType) {
-// //  const register = req; // Assuming 'register' object is passed in request body
+export async function updateRegister(req: regType) {
+  const register = req; // Assuming 'register' object is passed in request body
 
-//   try {
-//     // Update register in the database
-//     // const updatedRegister = await client.register.update({
-//     //   where: { id: register.id }, // Adjust according to your schema
-//     //   data: {
-//     //     Attendance: {
-//     //       update: register.Attendance.map((student: any) => ({
-//     //         where: { id: student.id },
-//     //         data: {
-//     //           status: student.status,
-//     //           comment: student.comment || "",
-//     //           lateMinutes: student.lateMinutes || 0
-//     //         }
-//     //       }))
-//     //     },
-//     //     status: "Completed"
+  try {
+    // Update register in the database
+    // const updatedRegister = await client.register.update({
+    //   where: { id: register.id }, // Adjust according to your schema
+    //   data: {
+    //     Attendance: {
+    //       update: register.Attendance.map((student: any) => ({
+    //         where: { id: student.id },
+    //         data: {
+    //           status: student.status,
+    //           comment: student.comment || "",
+    //           lateMinutes: student.lateMinutes || 0
+    //         }
+    //       }))
+    //     },
+    //     status: "Completed"
 
-//     //     // Update the Attendance field
-//     //     // Add other fields as needed
-//     //   }
-//     // });
+    //     // Update the Attendance field
+    //     // Add other fields as needed
+    //   }
+    // });
 
-//     //console.log("Register updated:", updatedRegister);
-//     // res.status(200).json(updatedRegister);
-//   } catch (error) {
-//     console.error('Error updating register:', error);
-//     //  res.status(500).json({ error: 'Failed to update register' });
-//   }
-// }
+    //console.log("Register updated:", updatedRegister);
+    // res.status(200).json(updatedRegister);
+  } catch (error) {
+    console.error('Error updating register:', error);
+    //  res.status(500).json({ error: 'Failed to update register' });
+  }
+}
 // type Register = {
 //   "id": number,
 //   "student": {
