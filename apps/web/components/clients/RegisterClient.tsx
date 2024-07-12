@@ -1,9 +1,9 @@
 "use client"
 
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Button, Card, CardContent, CardHeader, CardTitle, Checkbox, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, Label, Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, Textarea } from "@repo/ui"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Card, CardContent, CardHeader, CardTitle, Checkbox, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, Label, Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, Textarea } from "@repo/ui"
 import Link from "next/link"
 import { useEffect, useState } from "react"
-import { regType, updateRegister } from "../../app/(dashboard)/take-register/register/[...registerIds]/page"
+import { getAttendacePattern, regType, updateRegister } from "../../app/(dashboard)/take-register/register/[...registerIds]/page"
 import { StudentCard } from "@repo/ui"
 import { useRouter } from "next/navigation"
 import { registerType } from "./ListRegisterClient"
@@ -23,6 +23,10 @@ const RegisterClient = ({ register }: { register: any }) => {
     const [marked, setMarked] = useState(0)
     const [isCheckAll, setCheckAll] = useState(false)
     const [isChecked, setIsChecked] = useState(new Array(register.Attendance.length).fill(false))
+    const [insight, setInsight] = useState(new Array(register.Attendance.length).fill({
+        insight: "",
+        tags: ["", ""]
+    }))
 
 
     useEffect(() => {
@@ -107,6 +111,26 @@ const RegisterClient = ({ register }: { register: any }) => {
         })
         return markCount
     }
+    const callAI = async (id: number) => {
+        const data = await getAttendacePattern(id + 1)
+
+        console.log("data-------" + data)
+        const insight = JSON.parse(data)
+        console.log("insight-------" + insight.results[0])
+        updateInsight(id, insight.results[0])
+
+    }
+
+    function updateInsight(index: number, newInsight: any) {
+        // Clone the current state array to avoid mutating it directly
+        const updatedInsights = [...insight];
+
+        // Update the insight for studentId (assuming studentId is 1-based index)
+        updatedInsights[index] = newInsight;
+
+        // Set the updated state
+        setInsight(updatedInsights);
+    }
 
     return (
         <div className="space-y-8">
@@ -114,7 +138,7 @@ const RegisterClient = ({ register }: { register: any }) => {
                 <div className="text-2xl font-bold tracking-tight">{register.cls.name}</div>
                 <div>{marked}/{attendance.length}</div>
             </div>
-            <div className="space-y-2">
+            <div className="space-y-2 h-[calc(540px)]">
                 {/* {attendance.map((s: { status: string, student: { user: { username: string } } }, index: number) => <Link href=""  > <a onClick={() => { setIndex(index) }}><StudentCard style={`${index === i ? "border border-4 border-blue-500 " : ""}`} title={s.student.user.username} status={s.status}>
                     <div></div>
                 </StudentCard></a> </Link>)}
@@ -129,7 +153,7 @@ const RegisterClient = ({ register }: { register: any }) => {
                         </CardContent>
                     </Card></a> </Link>)} */}
 
-                <Table className="border  rounded-4xl">
+                <Table className="border  rounded-4xl ">
                     <TableCaption></TableCaption>
                     <TableHeader >
                         <TableRow>
@@ -141,7 +165,7 @@ const RegisterClient = ({ register }: { register: any }) => {
 
                         </TableRow>
                     </TableHeader>
-                    <TableBody className="h-72 overflow-auto scroll-m-1 bg-slate-200">
+                    <TableBody className="overflow-auto scroll-m-1 bg-slate-200">
                         {attendance.map((s: { status: string, comment?: string, lateMinutes?: number, student: { user: { username: string } } }, index: number) =>
                             <TableRow onClick={() => { setIndex(index) }} className={`${index === i ? "border border-4 border-blue-500 " : ""} bg-white `}>
                                 <TableCell className="px-4 pr-4 w-4 ">
@@ -159,16 +183,28 @@ const RegisterClient = ({ register }: { register: any }) => {
                                 <TableCell className="px-[-2]">
                                     <Accordion type="single" collapsible className="w-full ">
                                         <AccordionItem value="item-1">
-                                            <AccordionTrigger className="hover:bg-blue-100 px-2 space-x-2">
+                                            <AccordionTrigger className="hover:bg-blue-100 px-2 space-x-2" onClick={() => { callAI(index) }}>
                                                 {/* <UserCircle2 className="w-fit " size={32} color="gray" ></UserCircle2> */}
                                                 <Label className="w-full text-left">{s.student.user.username}</Label>
                                             </AccordionTrigger>
                                             <AccordionContent className="p-2">
-                                                <div className="w-96 space-y-2">
-                                                    <Label className="font-black">Comment</Label>
-                                                    <Textarea onChange={(e) => {
-                                                        s.comment = e.target.value
-                                                    }}>{s.comment}</Textarea>
+                                                <div className="space-y-2">
+                                                    <div className="w-96 space-y-2">
+                                                        <Label className="font-black">Comment</Label>
+                                                        <Textarea onChange={(e) => {
+                                                            s.comment = e.target.value
+                                                        }}>{s.comment}</Textarea>
+                                                    </div>
+
+                                                    <div className="space-y-2">
+                                                        <Label className="font-black">Recent Observations</Label>
+                                                        <div>{insight[index].insight}</div>
+                                                        <div className="flex space-x-2">
+                                                            <div><Badge className="bg-teal-200 text-gray-800 rounded-full p-1 px-4 text-sm">{insight[index].tags[0]}</Badge></div>
+
+                                                            <div><Badge className="bg-teal-200 text-gray-800 rounded-full p-1 px-4 text-sm">{insight[index].tags[1]}</Badge></div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </AccordionContent>
                                         </AccordionItem>

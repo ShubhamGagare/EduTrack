@@ -17,6 +17,7 @@ const session = await getServerSession(authOptions)
 //get all registers for all users
 export async function getListOfALLRegisters(date: Date) {
 
+  //console.log("date---" +session.user)
 
   console.log("date---" + date.getDate())
   try {
@@ -289,7 +290,6 @@ export async function customDateRegisters(date: Date, id: number) {
     }
   })
   return usersRegisters;
-  console.log("-------------------------------Not returning anything-----------------------------" + JSON.stringify(usersRegisters));
 
 }
 

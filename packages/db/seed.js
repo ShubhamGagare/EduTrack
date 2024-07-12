@@ -90,32 +90,62 @@ async function main() {
 
     const createdStudents = await prisma.student.findMany();
 
-    // Create registers and attendance records
+    // Define realistic reasons for absences and lateness
+    const absenceReasons = [
+      "Absent due to health issues",
+      "Family emergency",
+      "Travel",
+      "Religious observance",
+      "Personal reasons"
+    ];
+
+    const lateReasons = [
+      "School bus got late",
+      "Traffic jam",
+      "Missed the bus",
+      "Overslept",
+      "Unexpected delay at home"
+    ];
+
+    // Create registers and attendance records for the last 30 days
     for (const cls of classes) {
-      // Create register for the class
-      const register = await prisma.register.create({
-        data: {
-          classId: cls.id,
-          teacherId: cls.teacherId,
-          date: new Date()
-        }
-      });
+      for (let i = 0; i < 30; i++) {
+        const date = new Date();
+        date.setDate(date.getDate() - i);
 
-      // Get students for the class
-      const studentsForClass = createdStudents.filter(student => student.classId === cls.id);
+        // Create register for the class
+        const register = await prisma.register.create({
+          data: {
+            classId: cls.id,
+            teacherId: cls.teacherId,
+            date: date
+          }
+        });
 
-      // Log the students and register details for debugging
-      console.log(`Register ID: ${register.id}, Class ID: ${cls.id}`);
-      console.log('Students for class:', studentsForClass);
+        // Get students for the class
+        const studentsForClass = createdStudents.filter(student => student.classId === cls.id);
 
-      // Create attendance records for students in the class
-      const attendanceData = studentsForClass.map(student => ({
-        studentId: student.id,
-        registerId: register.id,
-        status: faker.helpers.arrayElement(["present", "absent", "late"])
-      }));
+        // Create attendance records for students in the class
+        const attendanceData = studentsForClass.map(student => {
+          const status = faker.helpers.arrayElement(["present", "absent", "late"]);
+          const attendanceRecord = {
+            studentId: student.id,
+            registerId: register.id,
+            status: status,
+            date: date
+          };
+          if (status === "absent") {
+            attendanceRecord.comment = faker.helpers.arrayElement(absenceReasons);
+          }
+          if (status === "late") {
+            attendanceRecord.comment = faker.helpers.arrayElement(lateReasons);
+            attendanceRecord.lateMinutes = faker.datatype.number({ min: 1, max: 60 });
+          }
+          return attendanceRecord;
+        });
 
-      await prisma.attendance.createMany({ data: attendanceData });
+        await prisma.attendance.createMany({ data: attendanceData });
+      }
     }
 
     console.log("Sample seed data created successfully.");
