@@ -12,5 +12,6 @@
   "exports": {
     "./client": "./index.ts"
   },
-  "main": "index.js"
+  "main": "index.js",
+  "build": "npx prisma db push && npx prisma generate && next build"
 }
