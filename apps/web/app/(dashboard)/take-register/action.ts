@@ -54,7 +54,7 @@ export async function createTodaysAllRegister() {
     "----------------Creating All new register for today----------------"
   );
   const classes = await client.cls.findMany();
-  classes.map(async (cls) => {
+  classes.map(async (cls:any) => {
     if (cls) {
       const register = await client.register.create({
         data: {
