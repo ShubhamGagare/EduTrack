@@ -40,5 +40,6 @@
     "postcss": "^8.4.39",
     "tailwindcss": "^3.4.4",
     "typescript": "^5"
-  }
+  },
+  "build": "npx prisma db push && npx prisma generate && next build"
 }
