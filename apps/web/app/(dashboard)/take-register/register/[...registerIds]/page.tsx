@@ -3,8 +3,6 @@
 import { NextApiRequest } from "next";
 import RegisterClient from "../../../../../components/clients/RegisterClient"
 import { PrismaClient } from "@prisma/client"
-
-import { ColumnDef } from "@tanstack/react-table"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 import axios from "axios"
 const client = new PrismaClient()

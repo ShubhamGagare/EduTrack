@@ -293,7 +293,7 @@ export async function customDateRegisters(date: Date, id: number) {
 }
 
 
-export const page = async () => {
+export default async function page() {
 
   const regData: any = await getListOfALLRegisters(new Date());
   console.log("Regdata----" + JSON.stringify(regData));
@@ -329,4 +329,3 @@ export const page = async () => {
   )
 }
 
-export default page

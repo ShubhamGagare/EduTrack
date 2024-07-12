@@ -3,7 +3,7 @@ import { Button } from '@repo/ui'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@repo/ui'
 import { useRouter } from 'next/navigation'
 import React from 'react'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
+import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 
 export default function page() {
 
