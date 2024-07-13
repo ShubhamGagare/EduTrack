@@ -1,3 +1,5 @@
+"use server"
+
 import { getServerSession } from "next-auth"
 import { NextResponse } from "next/server";
 import { authOptions } from "../../lib/auth";
