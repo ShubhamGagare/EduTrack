@@ -4,7 +4,7 @@ import { Inter } from "next/font/google";
 import { Providers } from "../providers";
 import AppbarClient from "../components/clients/AppbarClient";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({  subsets: ['latin'], display: 'swap', adjustFontFallback: false });
 
 export const metadata: Metadata = {
   title: "Edusys",
