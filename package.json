@@ -6,8 +6,8 @@
     "dev": "turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build",
-    "prisma:generate": "prisma generate"
+    "vercel-build": "prisma generate --schema=packages/db/prisma/schema.prisma && prisma migrate deploy && next build",
+    "prisma:generate": "prisma generate --schema=packages/db/prisma/schema.prisma"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
