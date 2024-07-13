@@ -6,8 +6,8 @@
     "bcrypt": "^5.1.1"
   },
   "scripts": {
-    "postinstall": "prisma generate",
-    "build": "npx prisma db push && npx prisma generate && next build"
+    "vercel-build": "prisma generate && prisma migrate deploy && next build",
+    "prisma:generate": "prisma generate"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
