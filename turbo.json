@@ -1,7 +1,10 @@
 {
   "$schema": "https://turbo.build/schema.json",
+  "globalEnv": [
+    "OPENAI_API_KEY"
+  ],
   "globalDependencies": [
-    "**/.env.*"
+   "**/.env.*local", "**/.env", ".env", ".env.local", "tsconfig.json"
   ],
   "tasks": {
     "build": {
