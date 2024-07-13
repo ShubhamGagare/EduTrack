@@ -9,7 +9,7 @@
     "lint": "next lint",
     "vercel-build": "prisma generate --schema=../../packages/db/prisma/schema.prisma && prisma migrate deploy --schema=../../packages/db/prisma/schema.prisma && next build",
     "prisma:generate": "prisma generate --schema=../../packages/db/prisma/schema.prisma",
-    "postinstall": "prisma generate --schema=../../packages/db/prisma/schema.prisma"
+    "postinstall": "npx prisma generate --schema=../../packages/db/prisma/schema.prisma"
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.34",

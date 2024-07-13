@@ -7,7 +7,7 @@
   },
   "scripts": {
     "vercel-build": "prisma generate && prisma migrate deploy && next build",
-    "prisma:generate": "prisma generate"
+    "prisma:generate": "npx prisma generate"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",

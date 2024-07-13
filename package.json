@@ -8,7 +8,7 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "vercel-build": "prisma generate --schema=packages/db/prisma/schema.prisma && next build",
     "prisma:generate": "prisma generate --schema=packages/db/prisma/schema.prisma",
-    "postinstall": "prisma generate --schema=packages/db/prisma/schema.prisma"
+    "postinstall": "npx prisma generate --schema=packages/db/prisma/schema.prisma"
 
   },
   "devDependencies": {
@@ -34,6 +34,7 @@
     "@material-tailwind/react": "^2.1.9",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
+    "@prisma/client": "^5.16.2",
     "faker": "^6.6.6",
     "lucide-react": "^0.400.0",
     "next-auth": "^4.24.7",
