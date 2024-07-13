@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "vercel-build": "prisma generate --schema=../../package/db/prsima/schema.prisma && prisma migrate deploy && next build",
-    "prisma:generate": "prisma generate --schema=../../package/db/prsima/schema.prisma"
+    "vercel-build": "prisma generate --schema=../../packages/db/prsima/schema.prisma && prisma migrate deploy && next build",
+    "prisma:generate": "prisma generate --schema=../../packages/db/prsima/schema.prisma"
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.34",
