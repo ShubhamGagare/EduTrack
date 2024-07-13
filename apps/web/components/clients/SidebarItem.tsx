@@ -2,7 +2,7 @@
 import { Card, CardTitle } from "@repo/ui";
 import { usePathname, useRouter } from "next/navigation";
 
-export const SidebarItem = ({ href, title }: { href: string; title: string; }) => {
+export  const  SidebarItem = ({ href, title }: { href: string; title: string; }) => {
     const router = useRouter();
     const pathname = usePathname()
     const selected = pathname.includes(href)    
@@ -19,14 +19,6 @@ export const SidebarItem = ({ href, title }: { href: string; title: string; }) =
 
     </>
 
-    // <div className={`flex ${selected ? "bg-gray-200" : ""} cursor-pointer  p-2 pl-8`} onClick={() => {
-    //     router.push(href);
-    // }}>
-    //     {/* <div className="pr-2">
-    //         {icon}
-    //     </div> */}
-    //     <div className={`font-bold ${selected ? "" : ""}`}>
-    //         {title}
-    //     </div>
-    // </div>
+
 }
+export default SidebarItem;

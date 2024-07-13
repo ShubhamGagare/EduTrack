@@ -2,9 +2,9 @@
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger, Badge, Button, Checkbox, Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger, Label, Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, Textarea } from "@repo/ui"
 import { useEffect, useState } from "react"
-import { getAttendacePattern, updateRegister } from "../../app/(dashboard)/take-register/register/[...registerIds]/action"
+import { getAttendacePattern, updateRegister } from "../../app/utils/utils"
 import { useRouter } from "next/navigation"
-import { Check, Clock, Edit, User2,  X } from "lucide-react"
+import { Check, Clock, User2,  X } from "lucide-react"
 
 
 //import { useSearchParams } from "next/navigation";
@@ -164,7 +164,7 @@ const RegisterClient = ({ register }: { register: any }) => {
                     </TableHeader>
                     <TableBody className="overflow-auto scroll-m-1 bg-slate-200">
                         {attendance.map((s: { status: string, comment?: string, lateMinutes?: number, student: { user: { username: string } } }, index: number) =>
-                            <TableRow onClick={() => { setIndex(index) }} className={`${index === i ? "border border-4 border-blue-500 " : ""} bg-white `}>
+                            <TableRow onClick={() => { setIndex(index) }} className={`${index === i ? " border-4 border-blue-500 " : ""} bg-white `}>
                                 <TableCell className="px-4 pr-4 w-4 ">
                                     <Checkbox onClick={(e) => { e.stopPropagation(); handleSelect(index) }} checked={isChecked[index]}></Checkbox>
                                 </TableCell>
