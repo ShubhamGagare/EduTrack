@@ -28,7 +28,9 @@
     "react-dom": "19.0.0-rc-f994737d14-20240522",
     "shadcn-ui": "^0.8.0",
     "tailwind-merge": "^2.3.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "next-auth": "^4.24.7",
+    "faker": "^6.6.6"
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
