@@ -1,7 +1,7 @@
 
 "use server"
 import RegisterClient from "../../../../../components/clients/RegisterClient"
-import { PrismaClient } from "@prisma/client"
+import { PrismaClient } from "../../../../../../../packages/db/prisma/generated/client"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 const client = new PrismaClient()
 
