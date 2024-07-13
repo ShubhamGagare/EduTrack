@@ -3,13 +3,6 @@
   "main": "index.js",
   "types": "index.d.ts",
   "browser": "index-browser.js",
-  "scripts": {
-   
-    "build": "prisma generate --schema=../../packages/db/prisma/schema.prisma && next build",
-    "vercel-build": "prisma generate --schema=../../packages/db/prisma/schema.prisma && prisma migrate deploy --schema=../../packages/db/prisma/schema.prisma && next build",
-    "prisma:generate": "prisma generate --schema=../../packages/db/prisma/schema.prisma",
-    "postinstall": "npx prisma generate --schema=../../packages/db/prisma/schema.prisma"
-  },
   "exports": {
     "./package.json": "./package.json",
     ".": {
