@@ -8,12 +8,6 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbS
 export default function page() {
 
   const router = useRouter();
-
-  function navTakeRegister() {
-    router.push("/take-register")
-  }
-
-
   const modules = [
     {
       title: "Registers",

@@ -1,7 +1,8 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "globalEnv": [
-    "OPENAI_API_KEY"
+    "OPENAI_API_KEY",
+    "JWT_SECRET"
   ],
   "globalDependencies": [
    "**/.env.*local", "**/.env", ".env", ".env.local", "tsconfig.json"
