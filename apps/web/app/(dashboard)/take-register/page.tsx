@@ -1,5 +1,3 @@
-'use server'
-
 import ListRegisterClient from "../../../components/clients/ListRegisterClient"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 import { getServerSession } from "next-auth";
