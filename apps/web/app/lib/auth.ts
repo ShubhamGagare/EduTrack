@@ -1,4 +1,3 @@
-"use server"
 import  db  from "../../../../packages/db";
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcryptjs";
