@@ -7,7 +7,7 @@
     "build": "npx prisma generate --no-engine --schema=../../packages/db/prisma/schema.prisma && set NODE_ENV=production && next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate --no-engine && node ../../packages/db/seed.ts"
+    "postinstall": "prisma generate --no-engine --schema=../../packages/db/prisma/schema.prisma && node ../../packages/db/seed.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^0.0.34",
