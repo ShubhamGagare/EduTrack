@@ -12,6 +12,12 @@
     "lint": "next lint",
     "postinstall": "prisma generate --no-engine"
     
+<<<<<<< HEAD
+=======
+  },
+  "prisma": {
+    "seed": "node ../../packages/db/seed.js"
+>>>>>>> 91d52de75e51abaa972614435bda77f9673ebe0e
   },
   
 },
