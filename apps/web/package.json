@@ -2,14 +2,20 @@
   "name": "@repo/web",
   "version": "0.1.0",
   "private": true,
+  "prisma": {
+    "seed": "node ../../packages/db/seed.js"
+  },
   "scripts": {
     "dev": "next dev --turbo",
     "build": "npx prisma generate --no-engine --schema=../../packages/db/prisma/schema.prisma && set NODE_ENV=production && next build",
     "start": "next start",
     "lint": "next lint",
-    "postinstall": "prisma generate --no-engine --schema=../../packages/db/prisma/schema.prisma && node ../../packages/db/seed.ts"
+    "postinstall": "prisma generate --no-engine"
+    
   },
-  "dependencies": {
+  
+},
+: {
     "@ai-sdk/openai": "^0.0.34",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.1.0",
