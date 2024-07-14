@@ -7,21 +7,14 @@
   },
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "npx prisma generate --no-engine --schema=../../packages/db/prisma/schema.prisma && set NODE_ENV=production && next build",
+    "build": "npx prisma generate --no-engine --schema=../../packages/db/prisma/schema.prisma && npx prisma db seed && set NODE_ENV=production && next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate --no-engine"
     
-<<<<<<< HEAD
-=======
-  },
-  "prisma": {
-    "seed": "node ../../packages/db/seed.js"
->>>>>>> 91d52de75e51abaa972614435bda77f9673ebe0e
   },
   
-},
-: {
+  "dependencies": {
     "@ai-sdk/openai": "^0.0.34",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.1.0",
