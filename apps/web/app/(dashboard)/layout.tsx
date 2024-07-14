@@ -1,4 +1,3 @@
-"use client"
 import { SidebarItem } from "../../components/clients/SidebarItem";
 import React from "react";
 export default function Layout({

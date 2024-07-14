@@ -21,7 +21,7 @@ export const Appbar = ({
         <div className='flex space-x-2 items-center'>
             <School />
             <div className="text-2xl font-bold tracking-tight  justify-center">
-                Edusys
+                EduTrack
             </div>
 
         </div>

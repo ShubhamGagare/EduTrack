@@ -7,7 +7,7 @@ import AppbarClient from "../components/clients/AppbarClient";
 //const inter = Inter({  subsets: ['latin'], display: 'swap', adjustFontFallback: false });
 
 export const metadata: Metadata = {
-  title: "Edusys",
+  title: "EduTrack",
   description: "School information system",
 };
 

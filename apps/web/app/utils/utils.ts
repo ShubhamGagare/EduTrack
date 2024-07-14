@@ -1,16 +1,15 @@
-'use server'
 import { PrismaClient } from "../../../../packages/db/prisma/generated/client/edge";
-import { getServerSession } from "next-auth";
 import { authOptions } from "../lib/auth";
+import { getServerSession } from "next-auth";
 import axios from "axios";
 import { NextApiRequest } from "next";
 
 const client = new PrismaClient();
 const today = new Date();
-const session = await getServerSession(authOptions);
 //get all registers for all users
-export default async function getListOfALLRegisters(date: Date) {
+export async function getListOfALLRegisters(date: Date) {
   //console.log("date---" +session.user)
+  const session = await getServerSession(authOptions);
 
   console.log("date---" + date.getDate());
   try {
@@ -138,6 +137,8 @@ export async function createTodaysAllRegister() {
 
 // get todays register for user
 export async function getListOfRegisters(date: Date) {
+  const session = await getServerSession(authOptions);
+
   console.log("session---" + JSON.stringify(session));
   try {
     const response = await client.register.findMany({
@@ -182,6 +183,8 @@ export async function getListOfRegisters(date: Date) {
 
 //create todays register for user
 export async function createTodaysRegister(date: Date) {
+  const session = await getServerSession(authOptions);
+
   console.log(
     "----------------Creating  new register for today----------------"
   );
