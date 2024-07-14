@@ -226,8 +226,8 @@ const fs = require('fs')
 config.dirname = __dirname
 if (!fs.existsSync(path.join(__dirname, 'schema.prisma'))) {
   const alternativePaths = [
-    "../../packages/db/prisma/generated/client",
-    "../packages/db/prisma/generated/client",
+    "packages/db/prisma/generated/client",
+    "db/prisma/generated/client",
   ]
   
   const alternativePath = alternativePaths.find((altPath) => {
