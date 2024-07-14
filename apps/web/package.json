@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "build": "npx prisma generate --no-engine --schema=../../packages/db/prisma/schema.prisma && set NODE_ENV=production && next build",
+    "build": "npx prisma generate --no-engine --schema=../../packages/db/prisma/schema.prisma && node ../../packages/db/seed.js && set NODE_ENV=production && next build",
     "start": "next start",
     "lint": "next lint",
     "postinstall": "prisma generate --no-engine"
