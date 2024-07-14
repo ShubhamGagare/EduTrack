@@ -47,5 +47,9 @@
     "eslint-config-next": "15.0.0-rc.0",
     "postcss-import": "^16.1.0",
     "typescript": "^5"
+  },"peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
   }
+
 }
