@@ -8,7 +8,7 @@ generator client {
   provider = "prisma-client-js"
   output   = "./generated/client"
   engineType = "library"
-
+  seed ="node seed.js"
 
 }
 datasource db {
