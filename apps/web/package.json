@@ -24,12 +24,13 @@
     "clsx": "^2.1.1",
     "faker": "^6.6.6",
     "lucide-react": "^0.400.0",
-    "next": "15.0.0-rc.0",
+    "next": "^14.2.5",
     "next-auth": "^4.24.7",
+    "next-routes": "^1.4.2",
     "openai": "^4.52.3",
     "postcss": "^8.4.39",
-    "react": "19.0.0-rc-f994737d14-20240522",
-    "react-dom": "19.0.0-rc-f994737d14-20240522",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "shadcn-ui": "^0.8.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.4",
@@ -41,15 +42,9 @@
     "@types/bcrypt": "^5.0.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
     "eslint": "^9.7.0",
-    "eslint-config-next": "15.0.0-rc.0",
+    "eslint-config-next": "^14.2.5",
     "postcss-import": "^16.1.0",
     "typescript": "^5"
-  },"peerDependencies": {
-    "react": "*",
-    "react-dom": "*"
   }
-
 }
