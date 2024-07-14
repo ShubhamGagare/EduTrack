@@ -18,7 +18,7 @@ export const Appbar = ({
     onSignout
 }: AppBarProps) => {
     return <>    <div className="flex justify-between border-b px-4">
-        <div className='flex space-x-2 flex items-center'>
+        <div className='flex space-x-2 items-center'>
             <School />
             <div className="text-2xl font-bold tracking-tight  justify-center">
                 Edusys
