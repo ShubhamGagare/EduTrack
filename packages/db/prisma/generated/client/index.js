@@ -185,8 +185,8 @@ const config = {
       "fromEnvVar": null
     },
     "config": {
-      "engineType": "library",
-      "seed": "node seed.js"
+      "seed": "node seed.js",
+      "engineType": "library"
     },
     "binaryTargets": [
       {
@@ -219,9 +219,9 @@ const config = {
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider   = \"prisma-client-js\"\n  output     = \"./generated/client\"\n  engineType = \"library\"\n  seed       = \"node seed.js\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"POSTGRES_PRISMA_URL\")\n  directUrl = env(\"POSTGRES_URL_NON_POOLING\")\n}\n\nmodel User {\n  id       Int      @id @default(autoincrement())\n  username String\n  email    String   @unique\n  password String\n  roleId   Int\n  Student  Student?\n  Teacher  Teacher?\n  role     Role     @relation(fields: [roleId], references: [id])\n}\n\nmodel Role {\n  id   Int    @id @default(autoincrement())\n  name String @unique @default(\"User\")\n  User User[]\n}\n\nmodel Teacher {\n  id       Int        @id @default(autoincrement())\n  userId   Int        @unique\n  classes  Cls[]\n  Register Register[]\n  user     User       @relation(fields: [userId], references: [id])\n}\n\nmodel Student {\n  id         Int          @id @default(autoincrement())\n  userId     Int          @unique\n  classId    Int\n  Attendance Attendance[]\n  cls        Cls          @relation(fields: [classId], references: [id])\n  user       User         @relation(fields: [userId], references: [id])\n}\n\nmodel Cls {\n  id        Int         @id @default(autoincrement())\n  name      String\n  teacherId Int?\n  teacher   Teacher?    @relation(fields: [teacherId], references: [id])\n  register  Register[]\n  students  Student[]\n  timetable Timetable[]\n}\n\nmodel Timetable {\n  id        Int      @id @default(autoincrement())\n  classId   Int\n  day       String\n  startTime DateTime\n  endTime   DateTime\n  cls       Cls      @relation(fields: [classId], references: [id])\n}\n\nmodel Register {\n  id         Int          @id @default(autoincrement())\n  classId    Int\n  teacherId  Int\n  date       DateTime\n  status     String       @default(\"\")\n  Attendance Attendance[]\n  cls        Cls          @relation(fields: [classId], references: [id])\n  teacher    Teacher      @relation(fields: [teacherId], references: [id])\n}\n\nmodel Attendance {\n  id          Int      @id @default(autoincrement())\n  studentId   Int\n  registerId  Int\n  status      String\n  comment     String?\n  lateMinutes Int?\n  date        DateTime @default(now())\n  register    Register @relation(fields: [registerId], references: [id])\n  student     Student  @relation(fields: [studentId], references: [id])\n}\n",
-  "inlineSchemaHash": "8e8c34106de6c9de0a27bfb23e7283374cd4ec4a065831193e4253898c20a1a1",
-  "copyEngine": false
+  "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"./generated/client\"\n  seed     = \"node seed.js\"\n}\n\ndatasource db {\n  provider  = \"postgresql\"\n  url       = env(\"POSTGRES_PRISMA_URL\")\n  directUrl = env(\"POSTGRES_URL_NON_POOLING\")\n}\n\nmodel User {\n  id       Int      @id @default(autoincrement())\n  username String\n  email    String   @unique\n  password String\n  roleId   Int\n  Student  Student?\n  Teacher  Teacher?\n  role     Role     @relation(fields: [roleId], references: [id])\n}\n\nmodel Role {\n  id   Int    @id @default(autoincrement())\n  name String @unique @default(\"User\")\n  User User[]\n}\n\nmodel Teacher {\n  id       Int        @id @default(autoincrement())\n  userId   Int        @unique\n  classes  Cls[]\n  Register Register[]\n  user     User       @relation(fields: [userId], references: [id])\n}\n\nmodel Student {\n  id         Int          @id @default(autoincrement())\n  userId     Int          @unique\n  classId    Int\n  Attendance Attendance[]\n  cls        Cls          @relation(fields: [classId], references: [id])\n  user       User         @relation(fields: [userId], references: [id])\n}\n\nmodel Cls {\n  id        Int         @id @default(autoincrement())\n  name      String\n  teacherId Int?\n  teacher   Teacher?    @relation(fields: [teacherId], references: [id])\n  register  Register[]\n  students  Student[]\n  timetable Timetable[]\n}\n\nmodel Timetable {\n  id        Int      @id @default(autoincrement())\n  classId   Int\n  day       String\n  startTime DateTime\n  endTime   DateTime\n  cls       Cls      @relation(fields: [classId], references: [id])\n}\n\nmodel Register {\n  id         Int          @id @default(autoincrement())\n  classId    Int\n  teacherId  Int\n  date       DateTime\n  status     String       @default(\"\")\n  Attendance Attendance[]\n  cls        Cls          @relation(fields: [classId], references: [id])\n  teacher    Teacher      @relation(fields: [teacherId], references: [id])\n}\n\nmodel Attendance {\n  id          Int      @id @default(autoincrement())\n  studentId   Int\n  registerId  Int\n  status      String\n  comment     String?\n  lateMinutes Int?\n  date        DateTime @default(now())\n  register    Register @relation(fields: [registerId], references: [id])\n  student     Student  @relation(fields: [studentId], references: [id])\n}\n",
+  "inlineSchemaHash": "3f890783aa30ab3bf8cbd7232fb5e304cafee1e8f32587d40fe53a905a0176e6",
+  "copyEngine": true
 }
 
 const fs = require('fs')
@@ -257,3 +257,9 @@ const PrismaClient = getPrismaClient(config)
 exports.PrismaClient = PrismaClient
 Object.assign(exports, Prisma)
 
+// file annotations for bundling tools to include these files
+path.join(__dirname, "query_engine-windows.dll.node");
+path.join(process.cwd(), "../../packages/db/prisma/generated/client/query_engine-windows.dll.node")
+// file annotations for bundling tools to include these files
+path.join(__dirname, "schema.prisma");
+path.join(process.cwd(), "../../packages/db/prisma/generated/client/schema.prisma")

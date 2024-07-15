@@ -11,8 +11,8 @@
     "schema":"../../packages/db/prisma/schema.prisma"
   },
   "scripts": {
-    "vercel-build": "prisma generate --no-engine && prisma migrate deploy && next build",
-    "prisma:generate": "npx prisma generate --no-engine"
+    "vercel-build": "prisma generate  && prisma migrate deploy && next build",
+    "prisma:generate": "npx prisma generate "
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",

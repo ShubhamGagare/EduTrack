@@ -6,9 +6,9 @@
     "seed": "node ../../packages/db/seed.js"
   },
   "scripts": {
-    "dev": "next dev --turbo",
-    "build": "npx prisma generate --no-engine --schema=../../packages/db/prisma/schema.prisma && set NODE_ENV=production && next build",
-    "start": "prisma generate --no-engine --schema=../../packages/db/prisma/schema.prisma && next start",
+    "dev": "npx prisma generate  --schema=../../packages/db/prisma/schema.prisma && next dev --turbo",
+    "build": "npx prisma generate  --schema=../../packages/db/prisma/schema.prisma && set NODE_ENV=production && next build",
+    "start": "prisma generate  --schema=../../packages/db/prisma/schema.prisma && next start",
     "lint": "next lint"    
   },
   
