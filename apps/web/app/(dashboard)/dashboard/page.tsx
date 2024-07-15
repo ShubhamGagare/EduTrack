@@ -16,7 +16,7 @@ export default function page() {
       href: "/take-register"
     }, {
       title: "Class view",
-      description: "To create , modify seating plan to class",
+      description: "Feature coming soon!!!",
       buttonName: "Take me there",
       href: "/class-view"
     }
