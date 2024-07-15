@@ -97,8 +97,8 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
   console.log("Updated data-----------"+JSON.stringify(reg))
   return (
     <div className="flex flex-col w-full space-y-8">
-      <div className="flex w-full justify-between">
-        <div className="">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-14 py-6">
+        <div className="w-full ">
           <Popover  >
             <PopoverTrigger className="w-72">
               <Command className="rounded-lg border  w-72">
@@ -131,21 +131,21 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
           </Popover>
 
         </div>
-        <div>
+        <div  className="w-full  ">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
               <FormField
                 control={form.control}
                 name="dob"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col">
+                  <FormItem className="flex flex-col w-full">
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
                             variant={"outline"}
                             className={cn(
-                              "w-[240px] pl-3 text-left font-normal",
+                              "w-[240px] pl-3 text-left font-normal w-full",
 
                             )}
                           >
@@ -187,7 +187,7 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
         {reg ? (reg.map(r => <Link className="w-full" href={{
           pathname: `./take-register/register/${r.id}`,
 
-        }}><div className="w-full pb-4"><Card className="flex items-center justify-between">
+        }}><div className="w-full pb-4"><Card className="flex items-center justify-between w-full">
           <CardHeader>
             <CardTitle>{r.cls.name}</CardTitle>
             <CardDescription>{r.teacher.user.username}</CardDescription>

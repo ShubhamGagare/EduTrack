@@ -165,7 +165,7 @@ const RegisterClient = ({ register }: { register: any }) => {
                     </TableHeader>
                     <TableBody className="overflow-auto scroll-m-1 bg-slate-200">
                         {attendance.map((s: { status: string, comment?: string, lateMinutes?: number, student: { user: { username: string } } }, index: number) =>
-                            <TableRow onClick={() => { setIndex(index) }} className={`${index === i ? " border-4 border-blue-500 " : ""} bg-white `}>
+                            <TableRow onClick={() => { setIndex(index) }} className={`${index === i ? " border-4 border-blue-500 " : ""} bg-white`}>
                                 <TableCell className="px-4 pr-4 w-4 ">
                                     <Checkbox onClick={(e) => { e.stopPropagation(); handleSelect(index) }} checked={isChecked[index]}></Checkbox>
                                 </TableCell>
