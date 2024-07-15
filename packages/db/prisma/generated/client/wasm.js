@@ -17,11 +17,11 @@ exports.$Enums = {}
 
 /**
  * Prisma Client JS version: 5.16.2
- * Query Engine version: efd2449663b3d73d637ea1fd226bafbcf45b3102
+ * Query Engine version: 34ace0eb2704183d2c05b60b52fba5c43c13f303
  */
 Prisma.prismaVersion = {
   client: "5.16.2",
-  engine: "efd2449663b3d73d637ea1fd226bafbcf45b3102"
+  engine: "34ace0eb2704183d2c05b60b52fba5c43c13f303"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -169,10 +169,10 @@ exports.Prisma.AttendanceScalarFieldEnum = {
   id: 'id',
   studentId: 'studentId',
   registerId: 'registerId',
-  date: 'date',
   status: 'status',
   comment: 'comment',
-  lateMinutes: 'lateMinutes'
+  lateMinutes: 'lateMinutes',
+  date: 'date'
 };
 
 exports.Prisma.SortOrder = {

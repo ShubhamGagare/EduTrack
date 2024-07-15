@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
-    "prisma": "5.11.0"
+    "prisma": "^5.16.2"
   },
   "exports": {
     "./client": "./index.ts"

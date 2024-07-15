@@ -1,10 +1,10 @@
   
-import { PrismaClient } from "../../../../packages/db/prisma/generated/client";
-//import  db  from "../../../../packages/db";
+//mport { PrismaClient } from "../../../../packages/db/prisma/generated/client";
+import  db  from "../../../../packages/db";
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcryptjs";
 
-const client = new PrismaClient();
+//const client = new PrismaClient();
 
 export const authOptions = {
 
@@ -19,7 +19,7 @@ export const authOptions = {
           async authorize(credentials: any) {
             //zod validation, OTP validation here
             const hashedPassword = await bcrypt.hash(credentials.password, 10);
-            const existingUser = await client.user.findFirst({
+            const existingUser = await db.user.findFirst({
                 where: {
                     email: credentials.email
                 }
@@ -42,7 +42,7 @@ export const authOptions = {
             }
 
             try {
-                const user = await client.user.create({
+                const user = await db.user.create({
                     data: {
                         username: credentials.email,
                         email: credentials.email,
