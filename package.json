@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "build": "npx prisma generate --schema=packages/db/prisma/schema.prisma && turbo build",
-    "dev": "turbo dev",
+    "dev": "npx prisma generate --schema=packages/db/prisma/schema.prisma && turbo dev",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "vercel-build": "prisma generate --no-engine --schema=packages/db/prisma/schema.prisma && next build",
