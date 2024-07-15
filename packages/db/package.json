@@ -5,6 +5,9 @@
     "@prisma/client": "^5.11.0",
     "bcrypt": "^5.1.1"
   },
+  "prisma": {
+    "seed": "node ../../packages/db/seed.js"
+  },
   "scripts": {
     "vercel-build": "prisma generate --no-engine && prisma migrate deploy && next build",
     "prisma:generate": "npx prisma generate --no-engine"

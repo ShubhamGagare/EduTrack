@@ -10,6 +10,7 @@ generator client {
   engineType = "library"
   seed ="node seed.js"
 
+
 }
 datasource db {
   provider = "postgresql"
