@@ -4,7 +4,12 @@ import { authOptions } from "../lib/auth";
 import { getServerSession } from "next-auth";
 import axios from "axios";
 import { NextApiRequest } from "next";
+import OpenAI from 'openai';
 
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY // This is the default and can be omitted
+});
 const client = new PrismaClient();
 const today = new Date();
 //get all registers for all users
@@ -355,14 +360,19 @@ interface regType extends NextApiRequest {
     }
     const query = {"query": "Analyze the following attendance data for each student, provide a one-liner insight and 2-3 word tags indicating the attendance pattern for each student in json with parent array results:",expectedOutputFormat,allAttendance}
   
-    const pattern = await axios.post("https://school-management-system-pagsae085-shubham-gagares-projects.vercel.app/api/chat", {
-      method: 'POST',
-      body: query,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const insight = pattern.data.choices[0].message.content
+    // const pattern = await axios.post("https://school-management-system-pagsae085-shubham-gagares-projects.vercel.app/api/chat", {
+    //   method: 'POST',
+    //   body: query,
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   }
+    // })
+    const chatCompletion:any = await openai.chat.completions.create({
+      messages: [{ role: 'user', content: JSON.stringify(query) }],
+      model: 'gpt-3.5-turbo',
+    });
+
+    const insight = chatCompletion.data.choices[0].message.content
     // const parsedPattern = JSON.parse(pattern.data)
     // const pattern =  axios.post("/api/attendancePattern",message)
     console.log("Pattern--------->" + JSON.stringify(insight))
