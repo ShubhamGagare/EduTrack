@@ -96,7 +96,7 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
   }
   console.log("Updated data-----------"+JSON.stringify(reg))
   return (
-    <div className="flex flex-col w-full space-y-8">
+    <div className="flex flex-col w-full space-y-2">
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-14 py-6">
         <div className="w-full ">
           <Popover  >

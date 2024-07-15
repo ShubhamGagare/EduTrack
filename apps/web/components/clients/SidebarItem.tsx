@@ -10,7 +10,7 @@ export  const  SidebarItem = ({ href, title }: { href: string; title: string; })
 
     return <>
         <div className="flex flex-col gap-2 px-3 ">
-            <Card className={`flex ${selected ? "bg-blue-6  00 text-white" : "bg-muted/40 border-none"} cursor-pointer  p-3 pl-8 border-r  shadow-none `}  onClick={() => {
+            <Card className={`flex ${selected ? "bg-blue-600 text-white" : "border-none"} cursor-pointer  p-3 pl-8 border-r  shadow-none `}  onClick={() => {
                     router.push(href);
                 }}>
                 <CardTitle>{title}</CardTitle>
