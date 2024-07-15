@@ -1,3 +1,4 @@
+"use server"
 import { PrismaClient } from "../../../../packages/db/prisma/generated/client";
 import { authOptions } from "../lib/auth";
 import { getServerSession } from "next-auth";
@@ -354,7 +355,7 @@ interface regType extends NextApiRequest {
     }
     const query = {"query": "Analyze the following attendance data for each student, provide a one-liner insight and 2-3 word tags indicating the attendance pattern for each student in json with parent array results:",expectedOutputFormat,allAttendance}
   
-    const pattern = await axios.post("/api/chat", {
+    const pattern = await axios.post("http://localhost:3000/api/chat", {
       method: 'POST',
       body: query,
       headers: {
