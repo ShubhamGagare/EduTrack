@@ -1,4 +1,4 @@
-import { PrismaClient } from "../../../../packages/db/prisma/generated/client/edge";
+import { PrismaClient } from "../../../../packages/db/prisma/generated/client";
 import { authOptions } from "../lib/auth";
 import { getServerSession } from "next-auth";
 import axios from "axios";
