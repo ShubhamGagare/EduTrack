@@ -371,8 +371,9 @@ interface regType extends NextApiRequest {
       messages: [{ role: 'user', content: JSON.stringify(query) }],
       model: 'gpt-3.5-turbo',
     });
+    console.log("Pattern--------->" + JSON.stringify(chatCompletion))
 
-    const insight = chatCompletion.data.choices[0].message.content
+    const insight = chatCompletion.choices[0].message.content
     // const parsedPattern = JSON.parse(pattern.data)
     // const pattern =  axios.post("/api/attendancePattern",message)
     console.log("Pattern--------->" + JSON.stringify(insight))
