@@ -278,7 +278,7 @@ const RegisterClient = ({ register }: { register: any }) => {
                                 </div>
                                 <div className="flex justify-between">
                                     <Button className="bg-gray-500 hover:bg-gray-600" onClick={handleAttendance}>Cancel</Button>
-                                    <Button className="bg-blue-500 hover:bg-blue-600" onClick={handleAttendance}>Submit the register</Button>
+                                    <Button className="bg-blue-700 hover:bg-blue-800" onClick={handleAttendance}>Submit the register</Button>
 
                                 </div>
 

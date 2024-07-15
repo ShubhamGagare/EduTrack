@@ -26,7 +26,7 @@ export const Appbar = ({
 
         </div>
         <div className="flex flex-col justify-center py-2 p-30">
-            <Button variant={'default'} size={'lg'} onClick={user ? onSignout : onSignin}>{user ? "Logout" : "Login"}</Button>
+            <Button variant={'outline'} size={'lg'} onClick={user ? onSignout : onSignin}>{user ? "Logout" : "Login"}</Button>
         </div>
     </div>
     </>

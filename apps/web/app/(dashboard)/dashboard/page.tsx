@@ -24,7 +24,7 @@ export default function page() {
 
   return (
     <>
-      <div className='space-y-4'>
+      <div className='space-y-4 '>
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
@@ -40,14 +40,14 @@ export default function page() {
           </div>
         </div>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-8 py-6">
-        {modules.map(mod => <Card className="col-span-4">
+      <div className="grid gap-4 md:grid-cols-4 lg:grid-cols-6 py-6">
+        {modules.map(mod => <Card className="col-span-2">
           <CardHeader>
             <CardTitle>{mod.title}</CardTitle>
             <CardDescription>{mod.description}</CardDescription>
           </CardHeader>
           <CardContent >
-            <Button onClick={() => {
+            <Button className='bg-blue-700 hover:bg-blue-800' onClick={() => {
               router.push(mod.href)
             }}>{mod.buttonName}</Button>
           </CardContent>
