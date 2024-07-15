@@ -5,6 +5,7 @@ import { getServerSession } from "next-auth";
 import axios from "axios";
 import { NextApiRequest } from "next";
 import OpenAI from 'openai';
+import { NextResponse } from "next/server";
 
 
 const openai = new OpenAI({
@@ -376,7 +377,8 @@ interface regType extends NextApiRequest {
     const insight = chatCompletion.choices[0].message.content
     // const parsedPattern = JSON.parse(pattern.data)
     // const pattern =  axios.post("/api/attendancePattern",message)
-    console.log("Pattern--------->" + JSON.stringify(insight))
+    console.log("Pattern--------->" +NextResponse.json(insight))
+    //const response = NextResponse.json(insight)
     return insight
   
   }

@@ -111,10 +111,11 @@ const RegisterClient = ({ register }: { register: any }) => {
     const callAI = async (id: number) => {
         const data = await getAttendacePattern(id + 1)
 
-        console.log("data-------" + data)
         const insight = JSON.parse(data)
-        console.log("insight-------" + insight.results[0])
+
+        if(insight.results[0]!== undefined){
         updateInsight(id, insight.results[0])
+        }
 
     }
 
