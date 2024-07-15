@@ -355,7 +355,7 @@ interface regType extends NextApiRequest {
     }
     const query = {"query": "Analyze the following attendance data for each student, provide a one-liner insight and 2-3 word tags indicating the attendance pattern for each student in json with parent array results:",expectedOutputFormat,allAttendance}
   
-    const pattern = await axios.post("http://localhost:3000/api/chat", {
+    const pattern = await axios.post("https://school-management-system-pagsae085-shubham-gagares-projects.vercel.app/api/chat", {
       method: 'POST',
       body: query,
       headers: {
