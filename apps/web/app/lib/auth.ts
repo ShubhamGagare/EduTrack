@@ -3,6 +3,8 @@
 import  db  from "../../../../packages/db";
 import CredentialsProvider from "next-auth/providers/credentials"
 import bcrypt from "bcryptjs";
+import { pages } from "next/dist/build/templates/app-page";
+import { signIn } from "next-auth/react";
 
 //const client = new PrismaClient();
 
@@ -72,6 +74,9 @@ export const authOptions = {
 
             return session
         }
+    },
+    pages:{
+        signIn:"/login"
     }
   }
  

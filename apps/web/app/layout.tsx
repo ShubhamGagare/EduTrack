@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <Providers>
         <body >
-        <AppbarClient />
+    
 
           {children}</body>
       </Providers>

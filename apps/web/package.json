@@ -9,9 +9,8 @@
     "dev": "npx prisma generate  --schema=../../packages/db/prisma/schema.prisma && next dev --turbo",
     "build": "npx prisma generate  --schema=../../packages/db/prisma/schema.prisma && set NODE_ENV=production && next build",
     "start": "prisma generate  --schema=../../packages/db/prisma/schema.prisma && next start",
-    "lint": "next lint"    
+    "lint": "next lint"
   },
-  
   "dependencies": {
     "@ai-sdk/openai": "^0.0.34",
     "@radix-ui/react-icons": "^1.3.0",
