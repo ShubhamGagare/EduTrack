@@ -102,7 +102,7 @@ export default function LoginForm() {
               <FormControl>
                 <Input
                   className=" w-full"
-                  placeholder="Hasło"
+                  placeholder="Enter the password"
                   {...field}
                   type="password"
                 />
