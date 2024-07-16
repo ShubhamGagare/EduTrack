@@ -90,6 +90,9 @@ export default function LoginForm() {
                   type="text"
                 />
               </FormControl>
+              <FormDescription>
+                Demo user:Dell.Padberg@hotmail.com
+              </FormDescription>
             </FormItem>
           )}
         />
@@ -107,6 +110,9 @@ export default function LoginForm() {
                   type="password"
                 />
               </FormControl>
+              <FormDescription>
+                Demo password:admin@123
+              </FormDescription>
             </FormItem>
           )}
         />
