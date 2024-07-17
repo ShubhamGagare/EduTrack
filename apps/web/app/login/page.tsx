@@ -18,7 +18,7 @@ export default async function LoginPage() {
     <div className="relative hidden justify-center h-full flex-col bg-blue-100 p-10 pb-10 text-blue-900 dark:border-r lg:flex items-center">
         
         <label className="text-8xl font-bold ">EduTrack</label>
-        <label className="text-2xl  ">Empowering Education with Smart AI Solutions</label>
+        <label className="text-2xl  ">Empowering Educators with Smart AI Solutions</label>
     </div>
     <section className="  p-8 bg-white h-screen flex items-center justify-center">
       <div className=" w-[500px] min-w-[300px]:">

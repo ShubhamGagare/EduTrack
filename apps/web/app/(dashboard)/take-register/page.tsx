@@ -1,4 +1,4 @@
-import ListRegisterClient from "../../../components/clients/ListRegisterClient"
+import ListRegisterClient, { registerType } from "../../../components/clients/ListRegisterClient"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 import { authOptions } from "../../lib/auth";
 import  { getListOfALLRegisters }  from "../../utils/utils";
@@ -10,8 +10,8 @@ import { getServerSession } from "next-auth";
 export default async function page() {
   const session = await getServerSession(authOptions)
 
-  const regData: any = await getListOfALLRegisters(new Date());
-  const usersRegister = regData.filter((register: any) => {
+  const regData: registerType[] = await getListOfALLRegisters(new Date());
+  const usersRegister = regData.filter((register: registerType) => {
     if (register.teacherId === Number(session.user.id)) { 
       return register
     }

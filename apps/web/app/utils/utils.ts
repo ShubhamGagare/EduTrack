@@ -6,6 +6,7 @@ import axios from "axios";
 import { NextApiRequest } from "next";
 import OpenAI from 'openai';
 import { NextResponse } from "next/server";
+import { registerType } from "components/clients/ListRegisterClient";
 
 
 const openai = new OpenAI({
@@ -14,7 +15,7 @@ const openai = new OpenAI({
 const client = new PrismaClient();
 const today = new Date();
 //get all registers for all users
-export async function getListOfALLRegisters(date: Date) {
+export async function getListOfALLRegisters(date: Date):Promise<any> {
   //console.log("date---" +session.user)
   const session = await getServerSession(authOptions);
 
