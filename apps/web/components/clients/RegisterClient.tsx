@@ -136,7 +136,7 @@ const RegisterClient = ({ register }: { register: any }) => {
                 <div className="text-2xl font-bold tracking-tight">{register.cls.name}</div>
                 <div>{marked}/{attendance.length}</div>
             </div>
-            <div className="space-y-2 h-[calc(540px)]">
+            <div className="space-y-2 h-[calc(460px)]">
                 {/* {attendance.map((s: { status: string, student: { user: { username: string } } }, index: number) => <Link href=""  > <a onClick={() => { setIndex(index) }}><StudentCard style={`${index === i ? "border border-4 border-blue-500 " : ""}`} title={s.student.user.username} status={s.status}>
                     <div></div>
                 </StudentCard></a> </Link>)}
