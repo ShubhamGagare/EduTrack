@@ -175,6 +175,43 @@ exports.Prisma.AttendanceScalarFieldEnum = {
   date: 'date'
 };
 
+exports.Prisma.ClassViewScalarFieldEnum = {
+  id: 'id',
+  classId: 'classId'
+};
+
+exports.Prisma.SeatScalarFieldEnum = {
+  id: 'id',
+  classViewId: 'classViewId',
+  studentId: 'studentId',
+  coordinates_X: 'coordinates_X',
+  coordinates_y: 'coordinates_y'
+};
+
+exports.Prisma.LayoutScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.DeskScalarFieldEnum = {
+  id: 'id',
+  layoutId: 'layoutId',
+  x: 'x',
+  y: 'y',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SeatingPlanScalarFieldEnum = {
+  id: 'id',
+  deskId: 'deskId',
+  studentId: 'studentId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -199,7 +236,12 @@ exports.Prisma.ModelName = {
   Cls: 'Cls',
   Timetable: 'Timetable',
   Register: 'Register',
-  Attendance: 'Attendance'
+  Attendance: 'Attendance',
+  ClassView: 'ClassView',
+  Seat: 'Seat',
+  Layout: 'Layout',
+  Desk: 'Desk',
+  SeatingPlan: 'SeatingPlan'
 };
 
 /**

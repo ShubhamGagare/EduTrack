@@ -53,6 +53,31 @@ export type Register = $Result.DefaultSelection<Prisma.$RegisterPayload>
  * 
  */
 export type Attendance = $Result.DefaultSelection<Prisma.$AttendancePayload>
+/**
+ * Model ClassView
+ * 
+ */
+export type ClassView = $Result.DefaultSelection<Prisma.$ClassViewPayload>
+/**
+ * Model Seat
+ * 
+ */
+export type Seat = $Result.DefaultSelection<Prisma.$SeatPayload>
+/**
+ * Model Layout
+ * 
+ */
+export type Layout = $Result.DefaultSelection<Prisma.$LayoutPayload>
+/**
+ * Model Desk
+ * 
+ */
+export type Desk = $Result.DefaultSelection<Prisma.$DeskPayload>
+/**
+ * Model SeatingPlan
+ * 
+ */
+export type SeatingPlan = $Result.DefaultSelection<Prisma.$SeatingPlanPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -255,6 +280,56 @@ export class PrismaClient<
     * ```
     */
   get attendance(): Prisma.AttendanceDelegate<ExtArgs>;
+
+  /**
+   * `prisma.classView`: Exposes CRUD operations for the **ClassView** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ClassViews
+    * const classViews = await prisma.classView.findMany()
+    * ```
+    */
+  get classView(): Prisma.ClassViewDelegate<ExtArgs>;
+
+  /**
+   * `prisma.seat`: Exposes CRUD operations for the **Seat** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Seats
+    * const seats = await prisma.seat.findMany()
+    * ```
+    */
+  get seat(): Prisma.SeatDelegate<ExtArgs>;
+
+  /**
+   * `prisma.layout`: Exposes CRUD operations for the **Layout** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Layouts
+    * const layouts = await prisma.layout.findMany()
+    * ```
+    */
+  get layout(): Prisma.LayoutDelegate<ExtArgs>;
+
+  /**
+   * `prisma.desk`: Exposes CRUD operations for the **Desk** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Desks
+    * const desks = await prisma.desk.findMany()
+    * ```
+    */
+  get desk(): Prisma.DeskDelegate<ExtArgs>;
+
+  /**
+   * `prisma.seatingPlan`: Exposes CRUD operations for the **SeatingPlan** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SeatingPlans
+    * const seatingPlans = await prisma.seatingPlan.findMany()
+    * ```
+    */
+  get seatingPlan(): Prisma.SeatingPlanDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -739,7 +814,12 @@ export namespace Prisma {
     Cls: 'Cls',
     Timetable: 'Timetable',
     Register: 'Register',
-    Attendance: 'Attendance'
+    Attendance: 'Attendance',
+    ClassView: 'ClassView',
+    Seat: 'Seat',
+    Layout: 'Layout',
+    Desk: 'Desk',
+    SeatingPlan: 'SeatingPlan'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -755,7 +835,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "role" | "teacher" | "student" | "cls" | "timetable" | "register" | "attendance"
+      modelProps: "user" | "role" | "teacher" | "student" | "cls" | "timetable" | "register" | "attendance" | "classView" | "seat" | "layout" | "desk" | "seatingPlan"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1319,6 +1399,356 @@ export namespace Prisma {
           }
         }
       }
+      ClassView: {
+        payload: Prisma.$ClassViewPayload<ExtArgs>
+        fields: Prisma.ClassViewFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ClassViewFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClassViewPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ClassViewFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClassViewPayload>
+          }
+          findFirst: {
+            args: Prisma.ClassViewFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClassViewPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ClassViewFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClassViewPayload>
+          }
+          findMany: {
+            args: Prisma.ClassViewFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClassViewPayload>[]
+          }
+          create: {
+            args: Prisma.ClassViewCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClassViewPayload>
+          }
+          createMany: {
+            args: Prisma.ClassViewCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ClassViewCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClassViewPayload>[]
+          }
+          delete: {
+            args: Prisma.ClassViewDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClassViewPayload>
+          }
+          update: {
+            args: Prisma.ClassViewUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClassViewPayload>
+          }
+          deleteMany: {
+            args: Prisma.ClassViewDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ClassViewUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ClassViewUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ClassViewPayload>
+          }
+          aggregate: {
+            args: Prisma.ClassViewAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateClassView>
+          }
+          groupBy: {
+            args: Prisma.ClassViewGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ClassViewGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ClassViewCountArgs<ExtArgs>
+            result: $Utils.Optional<ClassViewCountAggregateOutputType> | number
+          }
+        }
+      }
+      Seat: {
+        payload: Prisma.$SeatPayload<ExtArgs>
+        fields: Prisma.SeatFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SeatFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SeatFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatPayload>
+          }
+          findFirst: {
+            args: Prisma.SeatFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SeatFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatPayload>
+          }
+          findMany: {
+            args: Prisma.SeatFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatPayload>[]
+          }
+          create: {
+            args: Prisma.SeatCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatPayload>
+          }
+          createMany: {
+            args: Prisma.SeatCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SeatCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatPayload>[]
+          }
+          delete: {
+            args: Prisma.SeatDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatPayload>
+          }
+          update: {
+            args: Prisma.SeatUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatPayload>
+          }
+          deleteMany: {
+            args: Prisma.SeatDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SeatUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SeatUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatPayload>
+          }
+          aggregate: {
+            args: Prisma.SeatAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSeat>
+          }
+          groupBy: {
+            args: Prisma.SeatGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SeatGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SeatCountArgs<ExtArgs>
+            result: $Utils.Optional<SeatCountAggregateOutputType> | number
+          }
+        }
+      }
+      Layout: {
+        payload: Prisma.$LayoutPayload<ExtArgs>
+        fields: Prisma.LayoutFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.LayoutFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LayoutPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.LayoutFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LayoutPayload>
+          }
+          findFirst: {
+            args: Prisma.LayoutFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LayoutPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.LayoutFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LayoutPayload>
+          }
+          findMany: {
+            args: Prisma.LayoutFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LayoutPayload>[]
+          }
+          create: {
+            args: Prisma.LayoutCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LayoutPayload>
+          }
+          createMany: {
+            args: Prisma.LayoutCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.LayoutCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LayoutPayload>[]
+          }
+          delete: {
+            args: Prisma.LayoutDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LayoutPayload>
+          }
+          update: {
+            args: Prisma.LayoutUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LayoutPayload>
+          }
+          deleteMany: {
+            args: Prisma.LayoutDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.LayoutUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.LayoutUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LayoutPayload>
+          }
+          aggregate: {
+            args: Prisma.LayoutAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLayout>
+          }
+          groupBy: {
+            args: Prisma.LayoutGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LayoutGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.LayoutCountArgs<ExtArgs>
+            result: $Utils.Optional<LayoutCountAggregateOutputType> | number
+          }
+        }
+      }
+      Desk: {
+        payload: Prisma.$DeskPayload<ExtArgs>
+        fields: Prisma.DeskFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DeskFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DeskFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>
+          }
+          findFirst: {
+            args: Prisma.DeskFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DeskFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>
+          }
+          findMany: {
+            args: Prisma.DeskFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>[]
+          }
+          create: {
+            args: Prisma.DeskCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>
+          }
+          createMany: {
+            args: Prisma.DeskCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DeskCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>[]
+          }
+          delete: {
+            args: Prisma.DeskDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>
+          }
+          update: {
+            args: Prisma.DeskUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>
+          }
+          deleteMany: {
+            args: Prisma.DeskDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DeskUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.DeskUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DeskPayload>
+          }
+          aggregate: {
+            args: Prisma.DeskAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDesk>
+          }
+          groupBy: {
+            args: Prisma.DeskGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DeskGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DeskCountArgs<ExtArgs>
+            result: $Utils.Optional<DeskCountAggregateOutputType> | number
+          }
+        }
+      }
+      SeatingPlan: {
+        payload: Prisma.$SeatingPlanPayload<ExtArgs>
+        fields: Prisma.SeatingPlanFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SeatingPlanFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingPlanPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SeatingPlanFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingPlanPayload>
+          }
+          findFirst: {
+            args: Prisma.SeatingPlanFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingPlanPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SeatingPlanFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingPlanPayload>
+          }
+          findMany: {
+            args: Prisma.SeatingPlanFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingPlanPayload>[]
+          }
+          create: {
+            args: Prisma.SeatingPlanCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingPlanPayload>
+          }
+          createMany: {
+            args: Prisma.SeatingPlanCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SeatingPlanCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingPlanPayload>[]
+          }
+          delete: {
+            args: Prisma.SeatingPlanDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingPlanPayload>
+          }
+          update: {
+            args: Prisma.SeatingPlanUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingPlanPayload>
+          }
+          deleteMany: {
+            args: Prisma.SeatingPlanDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SeatingPlanUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SeatingPlanUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingPlanPayload>
+          }
+          aggregate: {
+            args: Prisma.SeatingPlanAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSeatingPlan>
+          }
+          groupBy: {
+            args: Prisma.SeatingPlanGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SeatingPlanGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SeatingPlanCountArgs<ExtArgs>
+            result: $Utils.Optional<SeatingPlanCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1585,12 +2015,16 @@ export namespace Prisma {
     register: number
     students: number
     timetable: number
+    ClassView: number
+    layouts: number
   }
 
   export type ClsCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     register?: boolean | ClsCountOutputTypeCountRegisterArgs
     students?: boolean | ClsCountOutputTypeCountStudentsArgs
     timetable?: boolean | ClsCountOutputTypeCountTimetableArgs
+    ClassView?: boolean | ClsCountOutputTypeCountClassViewArgs
+    layouts?: boolean | ClsCountOutputTypeCountLayoutsArgs
   }
 
   // Custom InputTypes
@@ -1625,6 +2059,20 @@ export namespace Prisma {
     where?: TimetableWhereInput
   }
 
+  /**
+   * ClsCountOutputType without action
+   */
+  export type ClsCountOutputTypeCountClassViewArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClassViewWhereInput
+  }
+
+  /**
+   * ClsCountOutputType without action
+   */
+  export type ClsCountOutputTypeCountLayoutsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LayoutWhereInput
+  }
+
 
   /**
    * Count Type RegisterCountOutputType
@@ -1654,6 +2102,77 @@ export namespace Prisma {
    */
   export type RegisterCountOutputTypeCountAttendanceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AttendanceWhereInput
+  }
+
+
+  /**
+   * Count Type ClassViewCountOutputType
+   */
+
+  export type ClassViewCountOutputType = {
+    seat: number
+  }
+
+  export type ClassViewCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    seat?: boolean | ClassViewCountOutputTypeCountSeatArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ClassViewCountOutputType without action
+   */
+  export type ClassViewCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClassViewCountOutputType
+     */
+    select?: ClassViewCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ClassViewCountOutputType without action
+   */
+  export type ClassViewCountOutputTypeCountSeatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeatWhereInput
+  }
+
+
+  /**
+   * Count Type LayoutCountOutputType
+   */
+
+  export type LayoutCountOutputType = {
+    desks: number
+    classes: number
+  }
+
+  export type LayoutCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    desks?: boolean | LayoutCountOutputTypeCountDesksArgs
+    classes?: boolean | LayoutCountOutputTypeCountClassesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * LayoutCountOutputType without action
+   */
+  export type LayoutCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the LayoutCountOutputType
+     */
+    select?: LayoutCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * LayoutCountOutputType without action
+   */
+  export type LayoutCountOutputTypeCountDesksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DeskWhereInput
+  }
+
+  /**
+   * LayoutCountOutputType without action
+   */
+  export type LayoutCountOutputTypeCountClassesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClsWhereInput
   }
 
 
@@ -4794,6 +5313,7 @@ export namespace Prisma {
     Attendance?: boolean | Student$AttendanceArgs<ExtArgs>
     cls?: boolean | ClsDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    seatingPlan?: boolean | Student$seatingPlanArgs<ExtArgs>
     _count?: boolean | StudentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["student"]>
 
@@ -4815,6 +5335,7 @@ export namespace Prisma {
     Attendance?: boolean | Student$AttendanceArgs<ExtArgs>
     cls?: boolean | ClsDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
+    seatingPlan?: boolean | Student$seatingPlanArgs<ExtArgs>
     _count?: boolean | StudentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type StudentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4828,6 +5349,7 @@ export namespace Prisma {
       Attendance: Prisma.$AttendancePayload<ExtArgs>[]
       cls: Prisma.$ClsPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
+      seatingPlan: Prisma.$SeatingPlanPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5200,6 +5722,7 @@ export namespace Prisma {
     Attendance<T extends Student$AttendanceArgs<ExtArgs> = {}>(args?: Subset<T, Student$AttendanceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany"> | Null>
     cls<T extends ClsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClsDefaultArgs<ExtArgs>>): Prisma__ClsClient<$Result.GetResult<Prisma.$ClsPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    seatingPlan<T extends Student$seatingPlanArgs<ExtArgs> = {}>(args?: Subset<T, Student$seatingPlanArgs<ExtArgs>>): Prisma__SeatingPlanClient<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5570,6 +6093,21 @@ export namespace Prisma {
   }
 
   /**
+   * Student.seatingPlan
+   */
+  export type Student$seatingPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+    where?: SeatingPlanWhereInput
+  }
+
+  /**
    * Student without action
    */
   export type StudentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5774,6 +6312,8 @@ export namespace Prisma {
     register?: boolean | Cls$registerArgs<ExtArgs>
     students?: boolean | Cls$studentsArgs<ExtArgs>
     timetable?: boolean | Cls$timetableArgs<ExtArgs>
+    ClassView?: boolean | Cls$ClassViewArgs<ExtArgs>
+    layouts?: boolean | Cls$layoutsArgs<ExtArgs>
     _count?: boolean | ClsCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["cls"]>
 
@@ -5795,6 +6335,8 @@ export namespace Prisma {
     register?: boolean | Cls$registerArgs<ExtArgs>
     students?: boolean | Cls$studentsArgs<ExtArgs>
     timetable?: boolean | Cls$timetableArgs<ExtArgs>
+    ClassView?: boolean | Cls$ClassViewArgs<ExtArgs>
+    layouts?: boolean | Cls$layoutsArgs<ExtArgs>
     _count?: boolean | ClsCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type ClsIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5808,6 +6350,8 @@ export namespace Prisma {
       register: Prisma.$RegisterPayload<ExtArgs>[]
       students: Prisma.$StudentPayload<ExtArgs>[]
       timetable: Prisma.$TimetablePayload<ExtArgs>[]
+      ClassView: Prisma.$ClassViewPayload<ExtArgs>[]
+      layouts: Prisma.$LayoutPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -6181,6 +6725,8 @@ export namespace Prisma {
     register<T extends Cls$registerArgs<ExtArgs> = {}>(args?: Subset<T, Cls$registerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RegisterPayload<ExtArgs>, T, "findMany"> | Null>
     students<T extends Cls$studentsArgs<ExtArgs> = {}>(args?: Subset<T, Cls$studentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findMany"> | Null>
     timetable<T extends Cls$timetableArgs<ExtArgs> = {}>(args?: Subset<T, Cls$timetableArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimetablePayload<ExtArgs>, T, "findMany"> | Null>
+    ClassView<T extends Cls$ClassViewArgs<ExtArgs> = {}>(args?: Subset<T, Cls$ClassViewArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClassViewPayload<ExtArgs>, T, "findMany"> | Null>
+    layouts<T extends Cls$layoutsArgs<ExtArgs> = {}>(args?: Subset<T, Cls$layoutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6603,6 +7149,46 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TimetableScalarFieldEnum | TimetableScalarFieldEnum[]
+  }
+
+  /**
+   * Cls.ClassView
+   */
+  export type Cls$ClassViewArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClassView
+     */
+    select?: ClassViewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClassViewInclude<ExtArgs> | null
+    where?: ClassViewWhereInput
+    orderBy?: ClassViewOrderByWithRelationInput | ClassViewOrderByWithRelationInput[]
+    cursor?: ClassViewWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClassViewScalarFieldEnum | ClassViewScalarFieldEnum[]
+  }
+
+  /**
+   * Cls.layouts
+   */
+  export type Cls$layoutsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Layout
+     */
+    select?: LayoutSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LayoutInclude<ExtArgs> | null
+    where?: LayoutWhereInput
+    orderBy?: LayoutOrderByWithRelationInput | LayoutOrderByWithRelationInput[]
+    cursor?: LayoutWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LayoutScalarFieldEnum | LayoutScalarFieldEnum[]
   }
 
   /**
@@ -9608,6 +10194,4935 @@ export namespace Prisma {
 
 
   /**
+   * Model ClassView
+   */
+
+  export type AggregateClassView = {
+    _count: ClassViewCountAggregateOutputType | null
+    _avg: ClassViewAvgAggregateOutputType | null
+    _sum: ClassViewSumAggregateOutputType | null
+    _min: ClassViewMinAggregateOutputType | null
+    _max: ClassViewMaxAggregateOutputType | null
+  }
+
+  export type ClassViewAvgAggregateOutputType = {
+    id: number | null
+    classId: number | null
+  }
+
+  export type ClassViewSumAggregateOutputType = {
+    id: number | null
+    classId: number | null
+  }
+
+  export type ClassViewMinAggregateOutputType = {
+    id: number | null
+    classId: number | null
+  }
+
+  export type ClassViewMaxAggregateOutputType = {
+    id: number | null
+    classId: number | null
+  }
+
+  export type ClassViewCountAggregateOutputType = {
+    id: number
+    classId: number
+    _all: number
+  }
+
+
+  export type ClassViewAvgAggregateInputType = {
+    id?: true
+    classId?: true
+  }
+
+  export type ClassViewSumAggregateInputType = {
+    id?: true
+    classId?: true
+  }
+
+  export type ClassViewMinAggregateInputType = {
+    id?: true
+    classId?: true
+  }
+
+  export type ClassViewMaxAggregateInputType = {
+    id?: true
+    classId?: true
+  }
+
+  export type ClassViewCountAggregateInputType = {
+    id?: true
+    classId?: true
+    _all?: true
+  }
+
+  export type ClassViewAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClassView to aggregate.
+     */
+    where?: ClassViewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClassViews to fetch.
+     */
+    orderBy?: ClassViewOrderByWithRelationInput | ClassViewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ClassViewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClassViews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClassViews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ClassViews
+    **/
+    _count?: true | ClassViewCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ClassViewAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ClassViewSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ClassViewMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ClassViewMaxAggregateInputType
+  }
+
+  export type GetClassViewAggregateType<T extends ClassViewAggregateArgs> = {
+        [P in keyof T & keyof AggregateClassView]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateClassView[P]>
+      : GetScalarType<T[P], AggregateClassView[P]>
+  }
+
+
+
+
+  export type ClassViewGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ClassViewWhereInput
+    orderBy?: ClassViewOrderByWithAggregationInput | ClassViewOrderByWithAggregationInput[]
+    by: ClassViewScalarFieldEnum[] | ClassViewScalarFieldEnum
+    having?: ClassViewScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ClassViewCountAggregateInputType | true
+    _avg?: ClassViewAvgAggregateInputType
+    _sum?: ClassViewSumAggregateInputType
+    _min?: ClassViewMinAggregateInputType
+    _max?: ClassViewMaxAggregateInputType
+  }
+
+  export type ClassViewGroupByOutputType = {
+    id: number
+    classId: number
+    _count: ClassViewCountAggregateOutputType | null
+    _avg: ClassViewAvgAggregateOutputType | null
+    _sum: ClassViewSumAggregateOutputType | null
+    _min: ClassViewMinAggregateOutputType | null
+    _max: ClassViewMaxAggregateOutputType | null
+  }
+
+  type GetClassViewGroupByPayload<T extends ClassViewGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ClassViewGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ClassViewGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ClassViewGroupByOutputType[P]>
+            : GetScalarType<T[P], ClassViewGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ClassViewSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    classId?: boolean
+    seat?: boolean | ClassView$seatArgs<ExtArgs>
+    cls?: boolean | ClsDefaultArgs<ExtArgs>
+    _count?: boolean | ClassViewCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["classView"]>
+
+  export type ClassViewSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    classId?: boolean
+    cls?: boolean | ClsDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["classView"]>
+
+  export type ClassViewSelectScalar = {
+    id?: boolean
+    classId?: boolean
+  }
+
+  export type ClassViewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    seat?: boolean | ClassView$seatArgs<ExtArgs>
+    cls?: boolean | ClsDefaultArgs<ExtArgs>
+    _count?: boolean | ClassViewCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ClassViewIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cls?: boolean | ClsDefaultArgs<ExtArgs>
+  }
+
+  export type $ClassViewPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ClassView"
+    objects: {
+      seat: Prisma.$SeatPayload<ExtArgs>[]
+      cls: Prisma.$ClsPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      classId: number
+    }, ExtArgs["result"]["classView"]>
+    composites: {}
+  }
+
+  type ClassViewGetPayload<S extends boolean | null | undefined | ClassViewDefaultArgs> = $Result.GetResult<Prisma.$ClassViewPayload, S>
+
+  type ClassViewCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<ClassViewFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: ClassViewCountAggregateInputType | true
+    }
+
+  export interface ClassViewDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ClassView'], meta: { name: 'ClassView' } }
+    /**
+     * Find zero or one ClassView that matches the filter.
+     * @param {ClassViewFindUniqueArgs} args - Arguments to find a ClassView
+     * @example
+     * // Get one ClassView
+     * const classView = await prisma.classView.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ClassViewFindUniqueArgs>(args: SelectSubset<T, ClassViewFindUniqueArgs<ExtArgs>>): Prisma__ClassViewClient<$Result.GetResult<Prisma.$ClassViewPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one ClassView that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {ClassViewFindUniqueOrThrowArgs} args - Arguments to find a ClassView
+     * @example
+     * // Get one ClassView
+     * const classView = await prisma.classView.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ClassViewFindUniqueOrThrowArgs>(args: SelectSubset<T, ClassViewFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ClassViewClient<$Result.GetResult<Prisma.$ClassViewPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first ClassView that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClassViewFindFirstArgs} args - Arguments to find a ClassView
+     * @example
+     * // Get one ClassView
+     * const classView = await prisma.classView.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ClassViewFindFirstArgs>(args?: SelectSubset<T, ClassViewFindFirstArgs<ExtArgs>>): Prisma__ClassViewClient<$Result.GetResult<Prisma.$ClassViewPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first ClassView that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClassViewFindFirstOrThrowArgs} args - Arguments to find a ClassView
+     * @example
+     * // Get one ClassView
+     * const classView = await prisma.classView.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ClassViewFindFirstOrThrowArgs>(args?: SelectSubset<T, ClassViewFindFirstOrThrowArgs<ExtArgs>>): Prisma__ClassViewClient<$Result.GetResult<Prisma.$ClassViewPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more ClassViews that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClassViewFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ClassViews
+     * const classViews = await prisma.classView.findMany()
+     * 
+     * // Get first 10 ClassViews
+     * const classViews = await prisma.classView.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const classViewWithIdOnly = await prisma.classView.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ClassViewFindManyArgs>(args?: SelectSubset<T, ClassViewFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClassViewPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a ClassView.
+     * @param {ClassViewCreateArgs} args - Arguments to create a ClassView.
+     * @example
+     * // Create one ClassView
+     * const ClassView = await prisma.classView.create({
+     *   data: {
+     *     // ... data to create a ClassView
+     *   }
+     * })
+     * 
+     */
+    create<T extends ClassViewCreateArgs>(args: SelectSubset<T, ClassViewCreateArgs<ExtArgs>>): Prisma__ClassViewClient<$Result.GetResult<Prisma.$ClassViewPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many ClassViews.
+     * @param {ClassViewCreateManyArgs} args - Arguments to create many ClassViews.
+     * @example
+     * // Create many ClassViews
+     * const classView = await prisma.classView.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ClassViewCreateManyArgs>(args?: SelectSubset<T, ClassViewCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ClassViews and returns the data saved in the database.
+     * @param {ClassViewCreateManyAndReturnArgs} args - Arguments to create many ClassViews.
+     * @example
+     * // Create many ClassViews
+     * const classView = await prisma.classView.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ClassViews and only return the `id`
+     * const classViewWithIdOnly = await prisma.classView.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ClassViewCreateManyAndReturnArgs>(args?: SelectSubset<T, ClassViewCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClassViewPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a ClassView.
+     * @param {ClassViewDeleteArgs} args - Arguments to delete one ClassView.
+     * @example
+     * // Delete one ClassView
+     * const ClassView = await prisma.classView.delete({
+     *   where: {
+     *     // ... filter to delete one ClassView
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ClassViewDeleteArgs>(args: SelectSubset<T, ClassViewDeleteArgs<ExtArgs>>): Prisma__ClassViewClient<$Result.GetResult<Prisma.$ClassViewPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one ClassView.
+     * @param {ClassViewUpdateArgs} args - Arguments to update one ClassView.
+     * @example
+     * // Update one ClassView
+     * const classView = await prisma.classView.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ClassViewUpdateArgs>(args: SelectSubset<T, ClassViewUpdateArgs<ExtArgs>>): Prisma__ClassViewClient<$Result.GetResult<Prisma.$ClassViewPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more ClassViews.
+     * @param {ClassViewDeleteManyArgs} args - Arguments to filter ClassViews to delete.
+     * @example
+     * // Delete a few ClassViews
+     * const { count } = await prisma.classView.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ClassViewDeleteManyArgs>(args?: SelectSubset<T, ClassViewDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ClassViews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClassViewUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ClassViews
+     * const classView = await prisma.classView.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ClassViewUpdateManyArgs>(args: SelectSubset<T, ClassViewUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ClassView.
+     * @param {ClassViewUpsertArgs} args - Arguments to update or create a ClassView.
+     * @example
+     * // Update or create a ClassView
+     * const classView = await prisma.classView.upsert({
+     *   create: {
+     *     // ... data to create a ClassView
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ClassView we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ClassViewUpsertArgs>(args: SelectSubset<T, ClassViewUpsertArgs<ExtArgs>>): Prisma__ClassViewClient<$Result.GetResult<Prisma.$ClassViewPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of ClassViews.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClassViewCountArgs} args - Arguments to filter ClassViews to count.
+     * @example
+     * // Count the number of ClassViews
+     * const count = await prisma.classView.count({
+     *   where: {
+     *     // ... the filter for the ClassViews we want to count
+     *   }
+     * })
+    **/
+    count<T extends ClassViewCountArgs>(
+      args?: Subset<T, ClassViewCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ClassViewCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ClassView.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClassViewAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ClassViewAggregateArgs>(args: Subset<T, ClassViewAggregateArgs>): Prisma.PrismaPromise<GetClassViewAggregateType<T>>
+
+    /**
+     * Group by ClassView.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ClassViewGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ClassViewGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ClassViewGroupByArgs['orderBy'] }
+        : { orderBy?: ClassViewGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ClassViewGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetClassViewGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ClassView model
+   */
+  readonly fields: ClassViewFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ClassView.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ClassViewClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    seat<T extends ClassView$seatArgs<ExtArgs> = {}>(args?: Subset<T, ClassView$seatArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeatPayload<ExtArgs>, T, "findMany"> | Null>
+    cls<T extends ClsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClsDefaultArgs<ExtArgs>>): Prisma__ClsClient<$Result.GetResult<Prisma.$ClsPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ClassView model
+   */ 
+  interface ClassViewFieldRefs {
+    readonly id: FieldRef<"ClassView", 'Int'>
+    readonly classId: FieldRef<"ClassView", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ClassView findUnique
+   */
+  export type ClassViewFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClassView
+     */
+    select?: ClassViewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClassViewInclude<ExtArgs> | null
+    /**
+     * Filter, which ClassView to fetch.
+     */
+    where: ClassViewWhereUniqueInput
+  }
+
+  /**
+   * ClassView findUniqueOrThrow
+   */
+  export type ClassViewFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClassView
+     */
+    select?: ClassViewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClassViewInclude<ExtArgs> | null
+    /**
+     * Filter, which ClassView to fetch.
+     */
+    where: ClassViewWhereUniqueInput
+  }
+
+  /**
+   * ClassView findFirst
+   */
+  export type ClassViewFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClassView
+     */
+    select?: ClassViewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClassViewInclude<ExtArgs> | null
+    /**
+     * Filter, which ClassView to fetch.
+     */
+    where?: ClassViewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClassViews to fetch.
+     */
+    orderBy?: ClassViewOrderByWithRelationInput | ClassViewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClassViews.
+     */
+    cursor?: ClassViewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClassViews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClassViews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClassViews.
+     */
+    distinct?: ClassViewScalarFieldEnum | ClassViewScalarFieldEnum[]
+  }
+
+  /**
+   * ClassView findFirstOrThrow
+   */
+  export type ClassViewFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClassView
+     */
+    select?: ClassViewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClassViewInclude<ExtArgs> | null
+    /**
+     * Filter, which ClassView to fetch.
+     */
+    where?: ClassViewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClassViews to fetch.
+     */
+    orderBy?: ClassViewOrderByWithRelationInput | ClassViewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ClassViews.
+     */
+    cursor?: ClassViewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClassViews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClassViews.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ClassViews.
+     */
+    distinct?: ClassViewScalarFieldEnum | ClassViewScalarFieldEnum[]
+  }
+
+  /**
+   * ClassView findMany
+   */
+  export type ClassViewFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClassView
+     */
+    select?: ClassViewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClassViewInclude<ExtArgs> | null
+    /**
+     * Filter, which ClassViews to fetch.
+     */
+    where?: ClassViewWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ClassViews to fetch.
+     */
+    orderBy?: ClassViewOrderByWithRelationInput | ClassViewOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ClassViews.
+     */
+    cursor?: ClassViewWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ClassViews from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ClassViews.
+     */
+    skip?: number
+    distinct?: ClassViewScalarFieldEnum | ClassViewScalarFieldEnum[]
+  }
+
+  /**
+   * ClassView create
+   */
+  export type ClassViewCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClassView
+     */
+    select?: ClassViewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClassViewInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ClassView.
+     */
+    data: XOR<ClassViewCreateInput, ClassViewUncheckedCreateInput>
+  }
+
+  /**
+   * ClassView createMany
+   */
+  export type ClassViewCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ClassViews.
+     */
+    data: ClassViewCreateManyInput | ClassViewCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ClassView createManyAndReturn
+   */
+  export type ClassViewCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClassView
+     */
+    select?: ClassViewSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many ClassViews.
+     */
+    data: ClassViewCreateManyInput | ClassViewCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClassViewIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ClassView update
+   */
+  export type ClassViewUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClassView
+     */
+    select?: ClassViewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClassViewInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ClassView.
+     */
+    data: XOR<ClassViewUpdateInput, ClassViewUncheckedUpdateInput>
+    /**
+     * Choose, which ClassView to update.
+     */
+    where: ClassViewWhereUniqueInput
+  }
+
+  /**
+   * ClassView updateMany
+   */
+  export type ClassViewUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ClassViews.
+     */
+    data: XOR<ClassViewUpdateManyMutationInput, ClassViewUncheckedUpdateManyInput>
+    /**
+     * Filter which ClassViews to update
+     */
+    where?: ClassViewWhereInput
+  }
+
+  /**
+   * ClassView upsert
+   */
+  export type ClassViewUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClassView
+     */
+    select?: ClassViewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClassViewInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ClassView to update in case it exists.
+     */
+    where: ClassViewWhereUniqueInput
+    /**
+     * In case the ClassView found by the `where` argument doesn't exist, create a new ClassView with this data.
+     */
+    create: XOR<ClassViewCreateInput, ClassViewUncheckedCreateInput>
+    /**
+     * In case the ClassView was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ClassViewUpdateInput, ClassViewUncheckedUpdateInput>
+  }
+
+  /**
+   * ClassView delete
+   */
+  export type ClassViewDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClassView
+     */
+    select?: ClassViewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClassViewInclude<ExtArgs> | null
+    /**
+     * Filter which ClassView to delete.
+     */
+    where: ClassViewWhereUniqueInput
+  }
+
+  /**
+   * ClassView deleteMany
+   */
+  export type ClassViewDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ClassViews to delete
+     */
+    where?: ClassViewWhereInput
+  }
+
+  /**
+   * ClassView.seat
+   */
+  export type ClassView$seatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seat
+     */
+    select?: SeatSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatInclude<ExtArgs> | null
+    where?: SeatWhereInput
+    orderBy?: SeatOrderByWithRelationInput | SeatOrderByWithRelationInput[]
+    cursor?: SeatWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SeatScalarFieldEnum | SeatScalarFieldEnum[]
+  }
+
+  /**
+   * ClassView without action
+   */
+  export type ClassViewDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ClassView
+     */
+    select?: ClassViewSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClassViewInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Seat
+   */
+
+  export type AggregateSeat = {
+    _count: SeatCountAggregateOutputType | null
+    _avg: SeatAvgAggregateOutputType | null
+    _sum: SeatSumAggregateOutputType | null
+    _min: SeatMinAggregateOutputType | null
+    _max: SeatMaxAggregateOutputType | null
+  }
+
+  export type SeatAvgAggregateOutputType = {
+    id: number | null
+    classViewId: number | null
+    studentId: number | null
+    coordinates_X: number | null
+    coordinates_y: number | null
+  }
+
+  export type SeatSumAggregateOutputType = {
+    id: number | null
+    classViewId: number | null
+    studentId: number | null
+    coordinates_X: number | null
+    coordinates_y: number | null
+  }
+
+  export type SeatMinAggregateOutputType = {
+    id: number | null
+    classViewId: number | null
+    studentId: number | null
+    coordinates_X: number | null
+    coordinates_y: number | null
+  }
+
+  export type SeatMaxAggregateOutputType = {
+    id: number | null
+    classViewId: number | null
+    studentId: number | null
+    coordinates_X: number | null
+    coordinates_y: number | null
+  }
+
+  export type SeatCountAggregateOutputType = {
+    id: number
+    classViewId: number
+    studentId: number
+    coordinates_X: number
+    coordinates_y: number
+    _all: number
+  }
+
+
+  export type SeatAvgAggregateInputType = {
+    id?: true
+    classViewId?: true
+    studentId?: true
+    coordinates_X?: true
+    coordinates_y?: true
+  }
+
+  export type SeatSumAggregateInputType = {
+    id?: true
+    classViewId?: true
+    studentId?: true
+    coordinates_X?: true
+    coordinates_y?: true
+  }
+
+  export type SeatMinAggregateInputType = {
+    id?: true
+    classViewId?: true
+    studentId?: true
+    coordinates_X?: true
+    coordinates_y?: true
+  }
+
+  export type SeatMaxAggregateInputType = {
+    id?: true
+    classViewId?: true
+    studentId?: true
+    coordinates_X?: true
+    coordinates_y?: true
+  }
+
+  export type SeatCountAggregateInputType = {
+    id?: true
+    classViewId?: true
+    studentId?: true
+    coordinates_X?: true
+    coordinates_y?: true
+    _all?: true
+  }
+
+  export type SeatAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Seat to aggregate.
+     */
+    where?: SeatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Seats to fetch.
+     */
+    orderBy?: SeatOrderByWithRelationInput | SeatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SeatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Seats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Seats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Seats
+    **/
+    _count?: true | SeatCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SeatAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SeatSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SeatMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SeatMaxAggregateInputType
+  }
+
+  export type GetSeatAggregateType<T extends SeatAggregateArgs> = {
+        [P in keyof T & keyof AggregateSeat]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSeat[P]>
+      : GetScalarType<T[P], AggregateSeat[P]>
+  }
+
+
+
+
+  export type SeatGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeatWhereInput
+    orderBy?: SeatOrderByWithAggregationInput | SeatOrderByWithAggregationInput[]
+    by: SeatScalarFieldEnum[] | SeatScalarFieldEnum
+    having?: SeatScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SeatCountAggregateInputType | true
+    _avg?: SeatAvgAggregateInputType
+    _sum?: SeatSumAggregateInputType
+    _min?: SeatMinAggregateInputType
+    _max?: SeatMaxAggregateInputType
+  }
+
+  export type SeatGroupByOutputType = {
+    id: number
+    classViewId: number
+    studentId: number
+    coordinates_X: number
+    coordinates_y: number
+    _count: SeatCountAggregateOutputType | null
+    _avg: SeatAvgAggregateOutputType | null
+    _sum: SeatSumAggregateOutputType | null
+    _min: SeatMinAggregateOutputType | null
+    _max: SeatMaxAggregateOutputType | null
+  }
+
+  type GetSeatGroupByPayload<T extends SeatGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SeatGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SeatGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SeatGroupByOutputType[P]>
+            : GetScalarType<T[P], SeatGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SeatSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    classViewId?: boolean
+    studentId?: boolean
+    coordinates_X?: boolean
+    coordinates_y?: boolean
+    ClassView?: boolean | ClassViewDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["seat"]>
+
+  export type SeatSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    classViewId?: boolean
+    studentId?: boolean
+    coordinates_X?: boolean
+    coordinates_y?: boolean
+    ClassView?: boolean | ClassViewDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["seat"]>
+
+  export type SeatSelectScalar = {
+    id?: boolean
+    classViewId?: boolean
+    studentId?: boolean
+    coordinates_X?: boolean
+    coordinates_y?: boolean
+  }
+
+  export type SeatInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ClassView?: boolean | ClassViewDefaultArgs<ExtArgs>
+  }
+  export type SeatIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ClassView?: boolean | ClassViewDefaultArgs<ExtArgs>
+  }
+
+  export type $SeatPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Seat"
+    objects: {
+      ClassView: Prisma.$ClassViewPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      classViewId: number
+      studentId: number
+      coordinates_X: number
+      coordinates_y: number
+    }, ExtArgs["result"]["seat"]>
+    composites: {}
+  }
+
+  type SeatGetPayload<S extends boolean | null | undefined | SeatDefaultArgs> = $Result.GetResult<Prisma.$SeatPayload, S>
+
+  type SeatCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SeatFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SeatCountAggregateInputType | true
+    }
+
+  export interface SeatDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Seat'], meta: { name: 'Seat' } }
+    /**
+     * Find zero or one Seat that matches the filter.
+     * @param {SeatFindUniqueArgs} args - Arguments to find a Seat
+     * @example
+     * // Get one Seat
+     * const seat = await prisma.seat.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SeatFindUniqueArgs>(args: SelectSubset<T, SeatFindUniqueArgs<ExtArgs>>): Prisma__SeatClient<$Result.GetResult<Prisma.$SeatPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Seat that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SeatFindUniqueOrThrowArgs} args - Arguments to find a Seat
+     * @example
+     * // Get one Seat
+     * const seat = await prisma.seat.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SeatFindUniqueOrThrowArgs>(args: SelectSubset<T, SeatFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SeatClient<$Result.GetResult<Prisma.$SeatPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Seat that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatFindFirstArgs} args - Arguments to find a Seat
+     * @example
+     * // Get one Seat
+     * const seat = await prisma.seat.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SeatFindFirstArgs>(args?: SelectSubset<T, SeatFindFirstArgs<ExtArgs>>): Prisma__SeatClient<$Result.GetResult<Prisma.$SeatPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Seat that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatFindFirstOrThrowArgs} args - Arguments to find a Seat
+     * @example
+     * // Get one Seat
+     * const seat = await prisma.seat.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SeatFindFirstOrThrowArgs>(args?: SelectSubset<T, SeatFindFirstOrThrowArgs<ExtArgs>>): Prisma__SeatClient<$Result.GetResult<Prisma.$SeatPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Seats that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Seats
+     * const seats = await prisma.seat.findMany()
+     * 
+     * // Get first 10 Seats
+     * const seats = await prisma.seat.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const seatWithIdOnly = await prisma.seat.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SeatFindManyArgs>(args?: SelectSubset<T, SeatFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeatPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Seat.
+     * @param {SeatCreateArgs} args - Arguments to create a Seat.
+     * @example
+     * // Create one Seat
+     * const Seat = await prisma.seat.create({
+     *   data: {
+     *     // ... data to create a Seat
+     *   }
+     * })
+     * 
+     */
+    create<T extends SeatCreateArgs>(args: SelectSubset<T, SeatCreateArgs<ExtArgs>>): Prisma__SeatClient<$Result.GetResult<Prisma.$SeatPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Seats.
+     * @param {SeatCreateManyArgs} args - Arguments to create many Seats.
+     * @example
+     * // Create many Seats
+     * const seat = await prisma.seat.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SeatCreateManyArgs>(args?: SelectSubset<T, SeatCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Seats and returns the data saved in the database.
+     * @param {SeatCreateManyAndReturnArgs} args - Arguments to create many Seats.
+     * @example
+     * // Create many Seats
+     * const seat = await prisma.seat.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Seats and only return the `id`
+     * const seatWithIdOnly = await prisma.seat.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SeatCreateManyAndReturnArgs>(args?: SelectSubset<T, SeatCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeatPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Seat.
+     * @param {SeatDeleteArgs} args - Arguments to delete one Seat.
+     * @example
+     * // Delete one Seat
+     * const Seat = await prisma.seat.delete({
+     *   where: {
+     *     // ... filter to delete one Seat
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SeatDeleteArgs>(args: SelectSubset<T, SeatDeleteArgs<ExtArgs>>): Prisma__SeatClient<$Result.GetResult<Prisma.$SeatPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Seat.
+     * @param {SeatUpdateArgs} args - Arguments to update one Seat.
+     * @example
+     * // Update one Seat
+     * const seat = await prisma.seat.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SeatUpdateArgs>(args: SelectSubset<T, SeatUpdateArgs<ExtArgs>>): Prisma__SeatClient<$Result.GetResult<Prisma.$SeatPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Seats.
+     * @param {SeatDeleteManyArgs} args - Arguments to filter Seats to delete.
+     * @example
+     * // Delete a few Seats
+     * const { count } = await prisma.seat.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SeatDeleteManyArgs>(args?: SelectSubset<T, SeatDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Seats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Seats
+     * const seat = await prisma.seat.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SeatUpdateManyArgs>(args: SelectSubset<T, SeatUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Seat.
+     * @param {SeatUpsertArgs} args - Arguments to update or create a Seat.
+     * @example
+     * // Update or create a Seat
+     * const seat = await prisma.seat.upsert({
+     *   create: {
+     *     // ... data to create a Seat
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Seat we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SeatUpsertArgs>(args: SelectSubset<T, SeatUpsertArgs<ExtArgs>>): Prisma__SeatClient<$Result.GetResult<Prisma.$SeatPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Seats.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatCountArgs} args - Arguments to filter Seats to count.
+     * @example
+     * // Count the number of Seats
+     * const count = await prisma.seat.count({
+     *   where: {
+     *     // ... the filter for the Seats we want to count
+     *   }
+     * })
+    **/
+    count<T extends SeatCountArgs>(
+      args?: Subset<T, SeatCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SeatCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Seat.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SeatAggregateArgs>(args: Subset<T, SeatAggregateArgs>): Prisma.PrismaPromise<GetSeatAggregateType<T>>
+
+    /**
+     * Group by Seat.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SeatGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SeatGroupByArgs['orderBy'] }
+        : { orderBy?: SeatGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SeatGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSeatGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Seat model
+   */
+  readonly fields: SeatFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Seat.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SeatClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    ClassView<T extends ClassViewDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClassViewDefaultArgs<ExtArgs>>): Prisma__ClassViewClient<$Result.GetResult<Prisma.$ClassViewPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Seat model
+   */ 
+  interface SeatFieldRefs {
+    readonly id: FieldRef<"Seat", 'Int'>
+    readonly classViewId: FieldRef<"Seat", 'Int'>
+    readonly studentId: FieldRef<"Seat", 'Int'>
+    readonly coordinates_X: FieldRef<"Seat", 'Float'>
+    readonly coordinates_y: FieldRef<"Seat", 'Float'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Seat findUnique
+   */
+  export type SeatFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seat
+     */
+    select?: SeatSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatInclude<ExtArgs> | null
+    /**
+     * Filter, which Seat to fetch.
+     */
+    where: SeatWhereUniqueInput
+  }
+
+  /**
+   * Seat findUniqueOrThrow
+   */
+  export type SeatFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seat
+     */
+    select?: SeatSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatInclude<ExtArgs> | null
+    /**
+     * Filter, which Seat to fetch.
+     */
+    where: SeatWhereUniqueInput
+  }
+
+  /**
+   * Seat findFirst
+   */
+  export type SeatFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seat
+     */
+    select?: SeatSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatInclude<ExtArgs> | null
+    /**
+     * Filter, which Seat to fetch.
+     */
+    where?: SeatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Seats to fetch.
+     */
+    orderBy?: SeatOrderByWithRelationInput | SeatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Seats.
+     */
+    cursor?: SeatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Seats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Seats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Seats.
+     */
+    distinct?: SeatScalarFieldEnum | SeatScalarFieldEnum[]
+  }
+
+  /**
+   * Seat findFirstOrThrow
+   */
+  export type SeatFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seat
+     */
+    select?: SeatSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatInclude<ExtArgs> | null
+    /**
+     * Filter, which Seat to fetch.
+     */
+    where?: SeatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Seats to fetch.
+     */
+    orderBy?: SeatOrderByWithRelationInput | SeatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Seats.
+     */
+    cursor?: SeatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Seats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Seats.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Seats.
+     */
+    distinct?: SeatScalarFieldEnum | SeatScalarFieldEnum[]
+  }
+
+  /**
+   * Seat findMany
+   */
+  export type SeatFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seat
+     */
+    select?: SeatSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatInclude<ExtArgs> | null
+    /**
+     * Filter, which Seats to fetch.
+     */
+    where?: SeatWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Seats to fetch.
+     */
+    orderBy?: SeatOrderByWithRelationInput | SeatOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Seats.
+     */
+    cursor?: SeatWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Seats from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Seats.
+     */
+    skip?: number
+    distinct?: SeatScalarFieldEnum | SeatScalarFieldEnum[]
+  }
+
+  /**
+   * Seat create
+   */
+  export type SeatCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seat
+     */
+    select?: SeatSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Seat.
+     */
+    data: XOR<SeatCreateInput, SeatUncheckedCreateInput>
+  }
+
+  /**
+   * Seat createMany
+   */
+  export type SeatCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Seats.
+     */
+    data: SeatCreateManyInput | SeatCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Seat createManyAndReturn
+   */
+  export type SeatCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seat
+     */
+    select?: SeatSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Seats.
+     */
+    data: SeatCreateManyInput | SeatCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Seat update
+   */
+  export type SeatUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seat
+     */
+    select?: SeatSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Seat.
+     */
+    data: XOR<SeatUpdateInput, SeatUncheckedUpdateInput>
+    /**
+     * Choose, which Seat to update.
+     */
+    where: SeatWhereUniqueInput
+  }
+
+  /**
+   * Seat updateMany
+   */
+  export type SeatUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Seats.
+     */
+    data: XOR<SeatUpdateManyMutationInput, SeatUncheckedUpdateManyInput>
+    /**
+     * Filter which Seats to update
+     */
+    where?: SeatWhereInput
+  }
+
+  /**
+   * Seat upsert
+   */
+  export type SeatUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seat
+     */
+    select?: SeatSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Seat to update in case it exists.
+     */
+    where: SeatWhereUniqueInput
+    /**
+     * In case the Seat found by the `where` argument doesn't exist, create a new Seat with this data.
+     */
+    create: XOR<SeatCreateInput, SeatUncheckedCreateInput>
+    /**
+     * In case the Seat was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SeatUpdateInput, SeatUncheckedUpdateInput>
+  }
+
+  /**
+   * Seat delete
+   */
+  export type SeatDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seat
+     */
+    select?: SeatSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatInclude<ExtArgs> | null
+    /**
+     * Filter which Seat to delete.
+     */
+    where: SeatWhereUniqueInput
+  }
+
+  /**
+   * Seat deleteMany
+   */
+  export type SeatDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Seats to delete
+     */
+    where?: SeatWhereInput
+  }
+
+  /**
+   * Seat without action
+   */
+  export type SeatDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Seat
+     */
+    select?: SeatSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Layout
+   */
+
+  export type AggregateLayout = {
+    _count: LayoutCountAggregateOutputType | null
+    _avg: LayoutAvgAggregateOutputType | null
+    _sum: LayoutSumAggregateOutputType | null
+    _min: LayoutMinAggregateOutputType | null
+    _max: LayoutMaxAggregateOutputType | null
+  }
+
+  export type LayoutAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type LayoutSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type LayoutMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LayoutMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type LayoutCountAggregateOutputType = {
+    id: number
+    name: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type LayoutAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type LayoutSumAggregateInputType = {
+    id?: true
+  }
+
+  export type LayoutMinAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LayoutMaxAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type LayoutCountAggregateInputType = {
+    id?: true
+    name?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type LayoutAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Layout to aggregate.
+     */
+    where?: LayoutWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Layouts to fetch.
+     */
+    orderBy?: LayoutOrderByWithRelationInput | LayoutOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LayoutWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Layouts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Layouts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Layouts
+    **/
+    _count?: true | LayoutCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LayoutAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LayoutSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LayoutMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LayoutMaxAggregateInputType
+  }
+
+  export type GetLayoutAggregateType<T extends LayoutAggregateArgs> = {
+        [P in keyof T & keyof AggregateLayout]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLayout[P]>
+      : GetScalarType<T[P], AggregateLayout[P]>
+  }
+
+
+
+
+  export type LayoutGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LayoutWhereInput
+    orderBy?: LayoutOrderByWithAggregationInput | LayoutOrderByWithAggregationInput[]
+    by: LayoutScalarFieldEnum[] | LayoutScalarFieldEnum
+    having?: LayoutScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LayoutCountAggregateInputType | true
+    _avg?: LayoutAvgAggregateInputType
+    _sum?: LayoutSumAggregateInputType
+    _min?: LayoutMinAggregateInputType
+    _max?: LayoutMaxAggregateInputType
+  }
+
+  export type LayoutGroupByOutputType = {
+    id: number
+    name: string
+    createdAt: Date
+    updatedAt: Date
+    _count: LayoutCountAggregateOutputType | null
+    _avg: LayoutAvgAggregateOutputType | null
+    _sum: LayoutSumAggregateOutputType | null
+    _min: LayoutMinAggregateOutputType | null
+    _max: LayoutMaxAggregateOutputType | null
+  }
+
+  type GetLayoutGroupByPayload<T extends LayoutGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LayoutGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LayoutGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LayoutGroupByOutputType[P]>
+            : GetScalarType<T[P], LayoutGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LayoutSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    desks?: boolean | Layout$desksArgs<ExtArgs>
+    classes?: boolean | Layout$classesArgs<ExtArgs>
+    _count?: boolean | LayoutCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["layout"]>
+
+  export type LayoutSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["layout"]>
+
+  export type LayoutSelectScalar = {
+    id?: boolean
+    name?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type LayoutInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    desks?: boolean | Layout$desksArgs<ExtArgs>
+    classes?: boolean | Layout$classesArgs<ExtArgs>
+    _count?: boolean | LayoutCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type LayoutIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $LayoutPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Layout"
+    objects: {
+      desks: Prisma.$DeskPayload<ExtArgs>[]
+      classes: Prisma.$ClsPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["layout"]>
+    composites: {}
+  }
+
+  type LayoutGetPayload<S extends boolean | null | undefined | LayoutDefaultArgs> = $Result.GetResult<Prisma.$LayoutPayload, S>
+
+  type LayoutCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<LayoutFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: LayoutCountAggregateInputType | true
+    }
+
+  export interface LayoutDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Layout'], meta: { name: 'Layout' } }
+    /**
+     * Find zero or one Layout that matches the filter.
+     * @param {LayoutFindUniqueArgs} args - Arguments to find a Layout
+     * @example
+     * // Get one Layout
+     * const layout = await prisma.layout.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LayoutFindUniqueArgs>(args: SelectSubset<T, LayoutFindUniqueArgs<ExtArgs>>): Prisma__LayoutClient<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Layout that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {LayoutFindUniqueOrThrowArgs} args - Arguments to find a Layout
+     * @example
+     * // Get one Layout
+     * const layout = await prisma.layout.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LayoutFindUniqueOrThrowArgs>(args: SelectSubset<T, LayoutFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LayoutClient<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Layout that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LayoutFindFirstArgs} args - Arguments to find a Layout
+     * @example
+     * // Get one Layout
+     * const layout = await prisma.layout.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LayoutFindFirstArgs>(args?: SelectSubset<T, LayoutFindFirstArgs<ExtArgs>>): Prisma__LayoutClient<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Layout that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LayoutFindFirstOrThrowArgs} args - Arguments to find a Layout
+     * @example
+     * // Get one Layout
+     * const layout = await prisma.layout.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LayoutFindFirstOrThrowArgs>(args?: SelectSubset<T, LayoutFindFirstOrThrowArgs<ExtArgs>>): Prisma__LayoutClient<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Layouts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LayoutFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Layouts
+     * const layouts = await prisma.layout.findMany()
+     * 
+     * // Get first 10 Layouts
+     * const layouts = await prisma.layout.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const layoutWithIdOnly = await prisma.layout.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LayoutFindManyArgs>(args?: SelectSubset<T, LayoutFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Layout.
+     * @param {LayoutCreateArgs} args - Arguments to create a Layout.
+     * @example
+     * // Create one Layout
+     * const Layout = await prisma.layout.create({
+     *   data: {
+     *     // ... data to create a Layout
+     *   }
+     * })
+     * 
+     */
+    create<T extends LayoutCreateArgs>(args: SelectSubset<T, LayoutCreateArgs<ExtArgs>>): Prisma__LayoutClient<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Layouts.
+     * @param {LayoutCreateManyArgs} args - Arguments to create many Layouts.
+     * @example
+     * // Create many Layouts
+     * const layout = await prisma.layout.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LayoutCreateManyArgs>(args?: SelectSubset<T, LayoutCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Layouts and returns the data saved in the database.
+     * @param {LayoutCreateManyAndReturnArgs} args - Arguments to create many Layouts.
+     * @example
+     * // Create many Layouts
+     * const layout = await prisma.layout.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Layouts and only return the `id`
+     * const layoutWithIdOnly = await prisma.layout.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LayoutCreateManyAndReturnArgs>(args?: SelectSubset<T, LayoutCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Layout.
+     * @param {LayoutDeleteArgs} args - Arguments to delete one Layout.
+     * @example
+     * // Delete one Layout
+     * const Layout = await prisma.layout.delete({
+     *   where: {
+     *     // ... filter to delete one Layout
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LayoutDeleteArgs>(args: SelectSubset<T, LayoutDeleteArgs<ExtArgs>>): Prisma__LayoutClient<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Layout.
+     * @param {LayoutUpdateArgs} args - Arguments to update one Layout.
+     * @example
+     * // Update one Layout
+     * const layout = await prisma.layout.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LayoutUpdateArgs>(args: SelectSubset<T, LayoutUpdateArgs<ExtArgs>>): Prisma__LayoutClient<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Layouts.
+     * @param {LayoutDeleteManyArgs} args - Arguments to filter Layouts to delete.
+     * @example
+     * // Delete a few Layouts
+     * const { count } = await prisma.layout.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LayoutDeleteManyArgs>(args?: SelectSubset<T, LayoutDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Layouts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LayoutUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Layouts
+     * const layout = await prisma.layout.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LayoutUpdateManyArgs>(args: SelectSubset<T, LayoutUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Layout.
+     * @param {LayoutUpsertArgs} args - Arguments to update or create a Layout.
+     * @example
+     * // Update or create a Layout
+     * const layout = await prisma.layout.upsert({
+     *   create: {
+     *     // ... data to create a Layout
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Layout we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LayoutUpsertArgs>(args: SelectSubset<T, LayoutUpsertArgs<ExtArgs>>): Prisma__LayoutClient<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Layouts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LayoutCountArgs} args - Arguments to filter Layouts to count.
+     * @example
+     * // Count the number of Layouts
+     * const count = await prisma.layout.count({
+     *   where: {
+     *     // ... the filter for the Layouts we want to count
+     *   }
+     * })
+    **/
+    count<T extends LayoutCountArgs>(
+      args?: Subset<T, LayoutCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LayoutCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Layout.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LayoutAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LayoutAggregateArgs>(args: Subset<T, LayoutAggregateArgs>): Prisma.PrismaPromise<GetLayoutAggregateType<T>>
+
+    /**
+     * Group by Layout.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LayoutGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LayoutGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LayoutGroupByArgs['orderBy'] }
+        : { orderBy?: LayoutGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LayoutGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLayoutGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Layout model
+   */
+  readonly fields: LayoutFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Layout.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LayoutClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    desks<T extends Layout$desksArgs<ExtArgs> = {}>(args?: Subset<T, Layout$desksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findMany"> | Null>
+    classes<T extends Layout$classesArgs<ExtArgs> = {}>(args?: Subset<T, Layout$classesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClsPayload<ExtArgs>, T, "findMany"> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Layout model
+   */ 
+  interface LayoutFieldRefs {
+    readonly id: FieldRef<"Layout", 'Int'>
+    readonly name: FieldRef<"Layout", 'String'>
+    readonly createdAt: FieldRef<"Layout", 'DateTime'>
+    readonly updatedAt: FieldRef<"Layout", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Layout findUnique
+   */
+  export type LayoutFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Layout
+     */
+    select?: LayoutSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LayoutInclude<ExtArgs> | null
+    /**
+     * Filter, which Layout to fetch.
+     */
+    where: LayoutWhereUniqueInput
+  }
+
+  /**
+   * Layout findUniqueOrThrow
+   */
+  export type LayoutFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Layout
+     */
+    select?: LayoutSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LayoutInclude<ExtArgs> | null
+    /**
+     * Filter, which Layout to fetch.
+     */
+    where: LayoutWhereUniqueInput
+  }
+
+  /**
+   * Layout findFirst
+   */
+  export type LayoutFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Layout
+     */
+    select?: LayoutSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LayoutInclude<ExtArgs> | null
+    /**
+     * Filter, which Layout to fetch.
+     */
+    where?: LayoutWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Layouts to fetch.
+     */
+    orderBy?: LayoutOrderByWithRelationInput | LayoutOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Layouts.
+     */
+    cursor?: LayoutWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Layouts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Layouts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Layouts.
+     */
+    distinct?: LayoutScalarFieldEnum | LayoutScalarFieldEnum[]
+  }
+
+  /**
+   * Layout findFirstOrThrow
+   */
+  export type LayoutFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Layout
+     */
+    select?: LayoutSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LayoutInclude<ExtArgs> | null
+    /**
+     * Filter, which Layout to fetch.
+     */
+    where?: LayoutWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Layouts to fetch.
+     */
+    orderBy?: LayoutOrderByWithRelationInput | LayoutOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Layouts.
+     */
+    cursor?: LayoutWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Layouts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Layouts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Layouts.
+     */
+    distinct?: LayoutScalarFieldEnum | LayoutScalarFieldEnum[]
+  }
+
+  /**
+   * Layout findMany
+   */
+  export type LayoutFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Layout
+     */
+    select?: LayoutSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LayoutInclude<ExtArgs> | null
+    /**
+     * Filter, which Layouts to fetch.
+     */
+    where?: LayoutWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Layouts to fetch.
+     */
+    orderBy?: LayoutOrderByWithRelationInput | LayoutOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Layouts.
+     */
+    cursor?: LayoutWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Layouts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Layouts.
+     */
+    skip?: number
+    distinct?: LayoutScalarFieldEnum | LayoutScalarFieldEnum[]
+  }
+
+  /**
+   * Layout create
+   */
+  export type LayoutCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Layout
+     */
+    select?: LayoutSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LayoutInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Layout.
+     */
+    data: XOR<LayoutCreateInput, LayoutUncheckedCreateInput>
+  }
+
+  /**
+   * Layout createMany
+   */
+  export type LayoutCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Layouts.
+     */
+    data: LayoutCreateManyInput | LayoutCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Layout createManyAndReturn
+   */
+  export type LayoutCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Layout
+     */
+    select?: LayoutSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Layouts.
+     */
+    data: LayoutCreateManyInput | LayoutCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Layout update
+   */
+  export type LayoutUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Layout
+     */
+    select?: LayoutSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LayoutInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Layout.
+     */
+    data: XOR<LayoutUpdateInput, LayoutUncheckedUpdateInput>
+    /**
+     * Choose, which Layout to update.
+     */
+    where: LayoutWhereUniqueInput
+  }
+
+  /**
+   * Layout updateMany
+   */
+  export type LayoutUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Layouts.
+     */
+    data: XOR<LayoutUpdateManyMutationInput, LayoutUncheckedUpdateManyInput>
+    /**
+     * Filter which Layouts to update
+     */
+    where?: LayoutWhereInput
+  }
+
+  /**
+   * Layout upsert
+   */
+  export type LayoutUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Layout
+     */
+    select?: LayoutSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LayoutInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Layout to update in case it exists.
+     */
+    where: LayoutWhereUniqueInput
+    /**
+     * In case the Layout found by the `where` argument doesn't exist, create a new Layout with this data.
+     */
+    create: XOR<LayoutCreateInput, LayoutUncheckedCreateInput>
+    /**
+     * In case the Layout was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LayoutUpdateInput, LayoutUncheckedUpdateInput>
+  }
+
+  /**
+   * Layout delete
+   */
+  export type LayoutDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Layout
+     */
+    select?: LayoutSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LayoutInclude<ExtArgs> | null
+    /**
+     * Filter which Layout to delete.
+     */
+    where: LayoutWhereUniqueInput
+  }
+
+  /**
+   * Layout deleteMany
+   */
+  export type LayoutDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Layouts to delete
+     */
+    where?: LayoutWhereInput
+  }
+
+  /**
+   * Layout.desks
+   */
+  export type Layout$desksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    where?: DeskWhereInput
+    orderBy?: DeskOrderByWithRelationInput | DeskOrderByWithRelationInput[]
+    cursor?: DeskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: DeskScalarFieldEnum | DeskScalarFieldEnum[]
+  }
+
+  /**
+   * Layout.classes
+   */
+  export type Layout$classesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Cls
+     */
+    select?: ClsSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClsInclude<ExtArgs> | null
+    where?: ClsWhereInput
+    orderBy?: ClsOrderByWithRelationInput | ClsOrderByWithRelationInput[]
+    cursor?: ClsWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClsScalarFieldEnum | ClsScalarFieldEnum[]
+  }
+
+  /**
+   * Layout without action
+   */
+  export type LayoutDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Layout
+     */
+    select?: LayoutSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LayoutInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Desk
+   */
+
+  export type AggregateDesk = {
+    _count: DeskCountAggregateOutputType | null
+    _avg: DeskAvgAggregateOutputType | null
+    _sum: DeskSumAggregateOutputType | null
+    _min: DeskMinAggregateOutputType | null
+    _max: DeskMaxAggregateOutputType | null
+  }
+
+  export type DeskAvgAggregateOutputType = {
+    id: number | null
+    layoutId: number | null
+    x: number | null
+    y: number | null
+  }
+
+  export type DeskSumAggregateOutputType = {
+    id: number | null
+    layoutId: number | null
+    x: number | null
+    y: number | null
+  }
+
+  export type DeskMinAggregateOutputType = {
+    id: number | null
+    layoutId: number | null
+    x: number | null
+    y: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DeskMaxAggregateOutputType = {
+    id: number | null
+    layoutId: number | null
+    x: number | null
+    y: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type DeskCountAggregateOutputType = {
+    id: number
+    layoutId: number
+    x: number
+    y: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type DeskAvgAggregateInputType = {
+    id?: true
+    layoutId?: true
+    x?: true
+    y?: true
+  }
+
+  export type DeskSumAggregateInputType = {
+    id?: true
+    layoutId?: true
+    x?: true
+    y?: true
+  }
+
+  export type DeskMinAggregateInputType = {
+    id?: true
+    layoutId?: true
+    x?: true
+    y?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DeskMaxAggregateInputType = {
+    id?: true
+    layoutId?: true
+    x?: true
+    y?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type DeskCountAggregateInputType = {
+    id?: true
+    layoutId?: true
+    x?: true
+    y?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type DeskAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Desk to aggregate.
+     */
+    where?: DeskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Desks to fetch.
+     */
+    orderBy?: DeskOrderByWithRelationInput | DeskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: DeskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Desks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Desks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Desks
+    **/
+    _count?: true | DeskCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: DeskAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: DeskSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: DeskMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: DeskMaxAggregateInputType
+  }
+
+  export type GetDeskAggregateType<T extends DeskAggregateArgs> = {
+        [P in keyof T & keyof AggregateDesk]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateDesk[P]>
+      : GetScalarType<T[P], AggregateDesk[P]>
+  }
+
+
+
+
+  export type DeskGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: DeskWhereInput
+    orderBy?: DeskOrderByWithAggregationInput | DeskOrderByWithAggregationInput[]
+    by: DeskScalarFieldEnum[] | DeskScalarFieldEnum
+    having?: DeskScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: DeskCountAggregateInputType | true
+    _avg?: DeskAvgAggregateInputType
+    _sum?: DeskSumAggregateInputType
+    _min?: DeskMinAggregateInputType
+    _max?: DeskMaxAggregateInputType
+  }
+
+  export type DeskGroupByOutputType = {
+    id: number
+    layoutId: number
+    x: number
+    y: number
+    createdAt: Date
+    updatedAt: Date
+    _count: DeskCountAggregateOutputType | null
+    _avg: DeskAvgAggregateOutputType | null
+    _sum: DeskSumAggregateOutputType | null
+    _min: DeskMinAggregateOutputType | null
+    _max: DeskMaxAggregateOutputType | null
+  }
+
+  type GetDeskGroupByPayload<T extends DeskGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<DeskGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof DeskGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], DeskGroupByOutputType[P]>
+            : GetScalarType<T[P], DeskGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type DeskSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    layoutId?: boolean
+    x?: boolean
+    y?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    layout?: boolean | LayoutDefaultArgs<ExtArgs>
+    seatingPlan?: boolean | Desk$seatingPlanArgs<ExtArgs>
+  }, ExtArgs["result"]["desk"]>
+
+  export type DeskSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    layoutId?: boolean
+    x?: boolean
+    y?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    layout?: boolean | LayoutDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["desk"]>
+
+  export type DeskSelectScalar = {
+    id?: boolean
+    layoutId?: boolean
+    x?: boolean
+    y?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type DeskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    layout?: boolean | LayoutDefaultArgs<ExtArgs>
+    seatingPlan?: boolean | Desk$seatingPlanArgs<ExtArgs>
+  }
+  export type DeskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    layout?: boolean | LayoutDefaultArgs<ExtArgs>
+  }
+
+  export type $DeskPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Desk"
+    objects: {
+      layout: Prisma.$LayoutPayload<ExtArgs>
+      seatingPlan: Prisma.$SeatingPlanPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      layoutId: number
+      x: number
+      y: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["desk"]>
+    composites: {}
+  }
+
+  type DeskGetPayload<S extends boolean | null | undefined | DeskDefaultArgs> = $Result.GetResult<Prisma.$DeskPayload, S>
+
+  type DeskCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<DeskFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: DeskCountAggregateInputType | true
+    }
+
+  export interface DeskDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Desk'], meta: { name: 'Desk' } }
+    /**
+     * Find zero or one Desk that matches the filter.
+     * @param {DeskFindUniqueArgs} args - Arguments to find a Desk
+     * @example
+     * // Get one Desk
+     * const desk = await prisma.desk.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends DeskFindUniqueArgs>(args: SelectSubset<T, DeskFindUniqueArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one Desk that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {DeskFindUniqueOrThrowArgs} args - Arguments to find a Desk
+     * @example
+     * // Get one Desk
+     * const desk = await prisma.desk.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends DeskFindUniqueOrThrowArgs>(args: SelectSubset<T, DeskFindUniqueOrThrowArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first Desk that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskFindFirstArgs} args - Arguments to find a Desk
+     * @example
+     * // Get one Desk
+     * const desk = await prisma.desk.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends DeskFindFirstArgs>(args?: SelectSubset<T, DeskFindFirstArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first Desk that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskFindFirstOrThrowArgs} args - Arguments to find a Desk
+     * @example
+     * // Get one Desk
+     * const desk = await prisma.desk.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends DeskFindFirstOrThrowArgs>(args?: SelectSubset<T, DeskFindFirstOrThrowArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more Desks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Desks
+     * const desks = await prisma.desk.findMany()
+     * 
+     * // Get first 10 Desks
+     * const desks = await prisma.desk.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const deskWithIdOnly = await prisma.desk.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends DeskFindManyArgs>(args?: SelectSubset<T, DeskFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a Desk.
+     * @param {DeskCreateArgs} args - Arguments to create a Desk.
+     * @example
+     * // Create one Desk
+     * const Desk = await prisma.desk.create({
+     *   data: {
+     *     // ... data to create a Desk
+     *   }
+     * })
+     * 
+     */
+    create<T extends DeskCreateArgs>(args: SelectSubset<T, DeskCreateArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many Desks.
+     * @param {DeskCreateManyArgs} args - Arguments to create many Desks.
+     * @example
+     * // Create many Desks
+     * const desk = await prisma.desk.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends DeskCreateManyArgs>(args?: SelectSubset<T, DeskCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Desks and returns the data saved in the database.
+     * @param {DeskCreateManyAndReturnArgs} args - Arguments to create many Desks.
+     * @example
+     * // Create many Desks
+     * const desk = await prisma.desk.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Desks and only return the `id`
+     * const deskWithIdOnly = await prisma.desk.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends DeskCreateManyAndReturnArgs>(args?: SelectSubset<T, DeskCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a Desk.
+     * @param {DeskDeleteArgs} args - Arguments to delete one Desk.
+     * @example
+     * // Delete one Desk
+     * const Desk = await prisma.desk.delete({
+     *   where: {
+     *     // ... filter to delete one Desk
+     *   }
+     * })
+     * 
+     */
+    delete<T extends DeskDeleteArgs>(args: SelectSubset<T, DeskDeleteArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one Desk.
+     * @param {DeskUpdateArgs} args - Arguments to update one Desk.
+     * @example
+     * // Update one Desk
+     * const desk = await prisma.desk.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends DeskUpdateArgs>(args: SelectSubset<T, DeskUpdateArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more Desks.
+     * @param {DeskDeleteManyArgs} args - Arguments to filter Desks to delete.
+     * @example
+     * // Delete a few Desks
+     * const { count } = await prisma.desk.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends DeskDeleteManyArgs>(args?: SelectSubset<T, DeskDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Desks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Desks
+     * const desk = await prisma.desk.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends DeskUpdateManyArgs>(args: SelectSubset<T, DeskUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Desk.
+     * @param {DeskUpsertArgs} args - Arguments to update or create a Desk.
+     * @example
+     * // Update or create a Desk
+     * const desk = await prisma.desk.upsert({
+     *   create: {
+     *     // ... data to create a Desk
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Desk we want to update
+     *   }
+     * })
+     */
+    upsert<T extends DeskUpsertArgs>(args: SelectSubset<T, DeskUpsertArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of Desks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskCountArgs} args - Arguments to filter Desks to count.
+     * @example
+     * // Count the number of Desks
+     * const count = await prisma.desk.count({
+     *   where: {
+     *     // ... the filter for the Desks we want to count
+     *   }
+     * })
+    **/
+    count<T extends DeskCountArgs>(
+      args?: Subset<T, DeskCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], DeskCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Desk.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends DeskAggregateArgs>(args: Subset<T, DeskAggregateArgs>): Prisma.PrismaPromise<GetDeskAggregateType<T>>
+
+    /**
+     * Group by Desk.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {DeskGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends DeskGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: DeskGroupByArgs['orderBy'] }
+        : { orderBy?: DeskGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, DeskGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetDeskGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Desk model
+   */
+  readonly fields: DeskFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Desk.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__DeskClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    layout<T extends LayoutDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LayoutDefaultArgs<ExtArgs>>): Prisma__LayoutClient<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    seatingPlan<T extends Desk$seatingPlanArgs<ExtArgs> = {}>(args?: Subset<T, Desk$seatingPlanArgs<ExtArgs>>): Prisma__SeatingPlanClient<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Desk model
+   */ 
+  interface DeskFieldRefs {
+    readonly id: FieldRef<"Desk", 'Int'>
+    readonly layoutId: FieldRef<"Desk", 'Int'>
+    readonly x: FieldRef<"Desk", 'Float'>
+    readonly y: FieldRef<"Desk", 'Float'>
+    readonly createdAt: FieldRef<"Desk", 'DateTime'>
+    readonly updatedAt: FieldRef<"Desk", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Desk findUnique
+   */
+  export type DeskFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * Filter, which Desk to fetch.
+     */
+    where: DeskWhereUniqueInput
+  }
+
+  /**
+   * Desk findUniqueOrThrow
+   */
+  export type DeskFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * Filter, which Desk to fetch.
+     */
+    where: DeskWhereUniqueInput
+  }
+
+  /**
+   * Desk findFirst
+   */
+  export type DeskFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * Filter, which Desk to fetch.
+     */
+    where?: DeskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Desks to fetch.
+     */
+    orderBy?: DeskOrderByWithRelationInput | DeskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Desks.
+     */
+    cursor?: DeskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Desks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Desks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Desks.
+     */
+    distinct?: DeskScalarFieldEnum | DeskScalarFieldEnum[]
+  }
+
+  /**
+   * Desk findFirstOrThrow
+   */
+  export type DeskFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * Filter, which Desk to fetch.
+     */
+    where?: DeskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Desks to fetch.
+     */
+    orderBy?: DeskOrderByWithRelationInput | DeskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Desks.
+     */
+    cursor?: DeskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Desks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Desks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Desks.
+     */
+    distinct?: DeskScalarFieldEnum | DeskScalarFieldEnum[]
+  }
+
+  /**
+   * Desk findMany
+   */
+  export type DeskFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * Filter, which Desks to fetch.
+     */
+    where?: DeskWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Desks to fetch.
+     */
+    orderBy?: DeskOrderByWithRelationInput | DeskOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Desks.
+     */
+    cursor?: DeskWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Desks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Desks.
+     */
+    skip?: number
+    distinct?: DeskScalarFieldEnum | DeskScalarFieldEnum[]
+  }
+
+  /**
+   * Desk create
+   */
+  export type DeskCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Desk.
+     */
+    data: XOR<DeskCreateInput, DeskUncheckedCreateInput>
+  }
+
+  /**
+   * Desk createMany
+   */
+  export type DeskCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Desks.
+     */
+    data: DeskCreateManyInput | DeskCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Desk createManyAndReturn
+   */
+  export type DeskCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many Desks.
+     */
+    data: DeskCreateManyInput | DeskCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Desk update
+   */
+  export type DeskUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Desk.
+     */
+    data: XOR<DeskUpdateInput, DeskUncheckedUpdateInput>
+    /**
+     * Choose, which Desk to update.
+     */
+    where: DeskWhereUniqueInput
+  }
+
+  /**
+   * Desk updateMany
+   */
+  export type DeskUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Desks.
+     */
+    data: XOR<DeskUpdateManyMutationInput, DeskUncheckedUpdateManyInput>
+    /**
+     * Filter which Desks to update
+     */
+    where?: DeskWhereInput
+  }
+
+  /**
+   * Desk upsert
+   */
+  export type DeskUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Desk to update in case it exists.
+     */
+    where: DeskWhereUniqueInput
+    /**
+     * In case the Desk found by the `where` argument doesn't exist, create a new Desk with this data.
+     */
+    create: XOR<DeskCreateInput, DeskUncheckedCreateInput>
+    /**
+     * In case the Desk was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<DeskUpdateInput, DeskUncheckedUpdateInput>
+  }
+
+  /**
+   * Desk delete
+   */
+  export type DeskDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+    /**
+     * Filter which Desk to delete.
+     */
+    where: DeskWhereUniqueInput
+  }
+
+  /**
+   * Desk deleteMany
+   */
+  export type DeskDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Desks to delete
+     */
+    where?: DeskWhereInput
+  }
+
+  /**
+   * Desk.seatingPlan
+   */
+  export type Desk$seatingPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+    where?: SeatingPlanWhereInput
+  }
+
+  /**
+   * Desk without action
+   */
+  export type DeskDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Desk
+     */
+    select?: DeskSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: DeskInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SeatingPlan
+   */
+
+  export type AggregateSeatingPlan = {
+    _count: SeatingPlanCountAggregateOutputType | null
+    _avg: SeatingPlanAvgAggregateOutputType | null
+    _sum: SeatingPlanSumAggregateOutputType | null
+    _min: SeatingPlanMinAggregateOutputType | null
+    _max: SeatingPlanMaxAggregateOutputType | null
+  }
+
+  export type SeatingPlanAvgAggregateOutputType = {
+    id: number | null
+    deskId: number | null
+    studentId: number | null
+  }
+
+  export type SeatingPlanSumAggregateOutputType = {
+    id: number | null
+    deskId: number | null
+    studentId: number | null
+  }
+
+  export type SeatingPlanMinAggregateOutputType = {
+    id: number | null
+    deskId: number | null
+    studentId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SeatingPlanMaxAggregateOutputType = {
+    id: number | null
+    deskId: number | null
+    studentId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SeatingPlanCountAggregateOutputType = {
+    id: number
+    deskId: number
+    studentId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SeatingPlanAvgAggregateInputType = {
+    id?: true
+    deskId?: true
+    studentId?: true
+  }
+
+  export type SeatingPlanSumAggregateInputType = {
+    id?: true
+    deskId?: true
+    studentId?: true
+  }
+
+  export type SeatingPlanMinAggregateInputType = {
+    id?: true
+    deskId?: true
+    studentId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SeatingPlanMaxAggregateInputType = {
+    id?: true
+    deskId?: true
+    studentId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SeatingPlanCountAggregateInputType = {
+    id?: true
+    deskId?: true
+    studentId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SeatingPlanAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SeatingPlan to aggregate.
+     */
+    where?: SeatingPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeatingPlans to fetch.
+     */
+    orderBy?: SeatingPlanOrderByWithRelationInput | SeatingPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SeatingPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeatingPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeatingPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SeatingPlans
+    **/
+    _count?: true | SeatingPlanCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SeatingPlanAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SeatingPlanSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SeatingPlanMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SeatingPlanMaxAggregateInputType
+  }
+
+  export type GetSeatingPlanAggregateType<T extends SeatingPlanAggregateArgs> = {
+        [P in keyof T & keyof AggregateSeatingPlan]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSeatingPlan[P]>
+      : GetScalarType<T[P], AggregateSeatingPlan[P]>
+  }
+
+
+
+
+  export type SeatingPlanGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeatingPlanWhereInput
+    orderBy?: SeatingPlanOrderByWithAggregationInput | SeatingPlanOrderByWithAggregationInput[]
+    by: SeatingPlanScalarFieldEnum[] | SeatingPlanScalarFieldEnum
+    having?: SeatingPlanScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SeatingPlanCountAggregateInputType | true
+    _avg?: SeatingPlanAvgAggregateInputType
+    _sum?: SeatingPlanSumAggregateInputType
+    _min?: SeatingPlanMinAggregateInputType
+    _max?: SeatingPlanMaxAggregateInputType
+  }
+
+  export type SeatingPlanGroupByOutputType = {
+    id: number
+    deskId: number
+    studentId: number
+    createdAt: Date
+    updatedAt: Date
+    _count: SeatingPlanCountAggregateOutputType | null
+    _avg: SeatingPlanAvgAggregateOutputType | null
+    _sum: SeatingPlanSumAggregateOutputType | null
+    _min: SeatingPlanMinAggregateOutputType | null
+    _max: SeatingPlanMaxAggregateOutputType | null
+  }
+
+  type GetSeatingPlanGroupByPayload<T extends SeatingPlanGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SeatingPlanGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SeatingPlanGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SeatingPlanGroupByOutputType[P]>
+            : GetScalarType<T[P], SeatingPlanGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SeatingPlanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    deskId?: boolean
+    studentId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["seatingPlan"]>
+
+  export type SeatingPlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    deskId?: boolean
+    studentId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["seatingPlan"]>
+
+  export type SeatingPlanSelectScalar = {
+    id?: boolean
+    deskId?: boolean
+    studentId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SeatingPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }
+  export type SeatingPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }
+
+  export type $SeatingPlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SeatingPlan"
+    objects: {
+      desk: Prisma.$DeskPayload<ExtArgs>
+      student: Prisma.$StudentPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      deskId: number
+      studentId: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["seatingPlan"]>
+    composites: {}
+  }
+
+  type SeatingPlanGetPayload<S extends boolean | null | undefined | SeatingPlanDefaultArgs> = $Result.GetResult<Prisma.$SeatingPlanPayload, S>
+
+  type SeatingPlanCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SeatingPlanFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SeatingPlanCountAggregateInputType | true
+    }
+
+  export interface SeatingPlanDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SeatingPlan'], meta: { name: 'SeatingPlan' } }
+    /**
+     * Find zero or one SeatingPlan that matches the filter.
+     * @param {SeatingPlanFindUniqueArgs} args - Arguments to find a SeatingPlan
+     * @example
+     * // Get one SeatingPlan
+     * const seatingPlan = await prisma.seatingPlan.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SeatingPlanFindUniqueArgs>(args: SelectSubset<T, SeatingPlanFindUniqueArgs<ExtArgs>>): Prisma__SeatingPlanClient<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SeatingPlan that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SeatingPlanFindUniqueOrThrowArgs} args - Arguments to find a SeatingPlan
+     * @example
+     * // Get one SeatingPlan
+     * const seatingPlan = await prisma.seatingPlan.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SeatingPlanFindUniqueOrThrowArgs>(args: SelectSubset<T, SeatingPlanFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SeatingPlanClient<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SeatingPlan that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingPlanFindFirstArgs} args - Arguments to find a SeatingPlan
+     * @example
+     * // Get one SeatingPlan
+     * const seatingPlan = await prisma.seatingPlan.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SeatingPlanFindFirstArgs>(args?: SelectSubset<T, SeatingPlanFindFirstArgs<ExtArgs>>): Prisma__SeatingPlanClient<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SeatingPlan that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingPlanFindFirstOrThrowArgs} args - Arguments to find a SeatingPlan
+     * @example
+     * // Get one SeatingPlan
+     * const seatingPlan = await prisma.seatingPlan.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SeatingPlanFindFirstOrThrowArgs>(args?: SelectSubset<T, SeatingPlanFindFirstOrThrowArgs<ExtArgs>>): Prisma__SeatingPlanClient<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SeatingPlans that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingPlanFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SeatingPlans
+     * const seatingPlans = await prisma.seatingPlan.findMany()
+     * 
+     * // Get first 10 SeatingPlans
+     * const seatingPlans = await prisma.seatingPlan.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const seatingPlanWithIdOnly = await prisma.seatingPlan.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SeatingPlanFindManyArgs>(args?: SelectSubset<T, SeatingPlanFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SeatingPlan.
+     * @param {SeatingPlanCreateArgs} args - Arguments to create a SeatingPlan.
+     * @example
+     * // Create one SeatingPlan
+     * const SeatingPlan = await prisma.seatingPlan.create({
+     *   data: {
+     *     // ... data to create a SeatingPlan
+     *   }
+     * })
+     * 
+     */
+    create<T extends SeatingPlanCreateArgs>(args: SelectSubset<T, SeatingPlanCreateArgs<ExtArgs>>): Prisma__SeatingPlanClient<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SeatingPlans.
+     * @param {SeatingPlanCreateManyArgs} args - Arguments to create many SeatingPlans.
+     * @example
+     * // Create many SeatingPlans
+     * const seatingPlan = await prisma.seatingPlan.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SeatingPlanCreateManyArgs>(args?: SelectSubset<T, SeatingPlanCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SeatingPlans and returns the data saved in the database.
+     * @param {SeatingPlanCreateManyAndReturnArgs} args - Arguments to create many SeatingPlans.
+     * @example
+     * // Create many SeatingPlans
+     * const seatingPlan = await prisma.seatingPlan.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SeatingPlans and only return the `id`
+     * const seatingPlanWithIdOnly = await prisma.seatingPlan.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SeatingPlanCreateManyAndReturnArgs>(args?: SelectSubset<T, SeatingPlanCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SeatingPlan.
+     * @param {SeatingPlanDeleteArgs} args - Arguments to delete one SeatingPlan.
+     * @example
+     * // Delete one SeatingPlan
+     * const SeatingPlan = await prisma.seatingPlan.delete({
+     *   where: {
+     *     // ... filter to delete one SeatingPlan
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SeatingPlanDeleteArgs>(args: SelectSubset<T, SeatingPlanDeleteArgs<ExtArgs>>): Prisma__SeatingPlanClient<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SeatingPlan.
+     * @param {SeatingPlanUpdateArgs} args - Arguments to update one SeatingPlan.
+     * @example
+     * // Update one SeatingPlan
+     * const seatingPlan = await prisma.seatingPlan.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SeatingPlanUpdateArgs>(args: SelectSubset<T, SeatingPlanUpdateArgs<ExtArgs>>): Prisma__SeatingPlanClient<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SeatingPlans.
+     * @param {SeatingPlanDeleteManyArgs} args - Arguments to filter SeatingPlans to delete.
+     * @example
+     * // Delete a few SeatingPlans
+     * const { count } = await prisma.seatingPlan.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SeatingPlanDeleteManyArgs>(args?: SelectSubset<T, SeatingPlanDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SeatingPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingPlanUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SeatingPlans
+     * const seatingPlan = await prisma.seatingPlan.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SeatingPlanUpdateManyArgs>(args: SelectSubset<T, SeatingPlanUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SeatingPlan.
+     * @param {SeatingPlanUpsertArgs} args - Arguments to update or create a SeatingPlan.
+     * @example
+     * // Update or create a SeatingPlan
+     * const seatingPlan = await prisma.seatingPlan.upsert({
+     *   create: {
+     *     // ... data to create a SeatingPlan
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SeatingPlan we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SeatingPlanUpsertArgs>(args: SelectSubset<T, SeatingPlanUpsertArgs<ExtArgs>>): Prisma__SeatingPlanClient<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SeatingPlans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingPlanCountArgs} args - Arguments to filter SeatingPlans to count.
+     * @example
+     * // Count the number of SeatingPlans
+     * const count = await prisma.seatingPlan.count({
+     *   where: {
+     *     // ... the filter for the SeatingPlans we want to count
+     *   }
+     * })
+    **/
+    count<T extends SeatingPlanCountArgs>(
+      args?: Subset<T, SeatingPlanCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SeatingPlanCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SeatingPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingPlanAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SeatingPlanAggregateArgs>(args: Subset<T, SeatingPlanAggregateArgs>): Prisma.PrismaPromise<GetSeatingPlanAggregateType<T>>
+
+    /**
+     * Group by SeatingPlan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingPlanGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SeatingPlanGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SeatingPlanGroupByArgs['orderBy'] }
+        : { orderBy?: SeatingPlanGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SeatingPlanGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSeatingPlanGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SeatingPlan model
+   */
+  readonly fields: SeatingPlanFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SeatingPlan.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SeatingPlanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    desk<T extends DeskDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DeskDefaultArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    student<T extends StudentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudentDefaultArgs<ExtArgs>>): Prisma__StudentClient<$Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SeatingPlan model
+   */ 
+  interface SeatingPlanFieldRefs {
+    readonly id: FieldRef<"SeatingPlan", 'Int'>
+    readonly deskId: FieldRef<"SeatingPlan", 'Int'>
+    readonly studentId: FieldRef<"SeatingPlan", 'Int'>
+    readonly createdAt: FieldRef<"SeatingPlan", 'DateTime'>
+    readonly updatedAt: FieldRef<"SeatingPlan", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SeatingPlan findUnique
+   */
+  export type SeatingPlanFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which SeatingPlan to fetch.
+     */
+    where: SeatingPlanWhereUniqueInput
+  }
+
+  /**
+   * SeatingPlan findUniqueOrThrow
+   */
+  export type SeatingPlanFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which SeatingPlan to fetch.
+     */
+    where: SeatingPlanWhereUniqueInput
+  }
+
+  /**
+   * SeatingPlan findFirst
+   */
+  export type SeatingPlanFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which SeatingPlan to fetch.
+     */
+    where?: SeatingPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeatingPlans to fetch.
+     */
+    orderBy?: SeatingPlanOrderByWithRelationInput | SeatingPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SeatingPlans.
+     */
+    cursor?: SeatingPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeatingPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeatingPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SeatingPlans.
+     */
+    distinct?: SeatingPlanScalarFieldEnum | SeatingPlanScalarFieldEnum[]
+  }
+
+  /**
+   * SeatingPlan findFirstOrThrow
+   */
+  export type SeatingPlanFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which SeatingPlan to fetch.
+     */
+    where?: SeatingPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeatingPlans to fetch.
+     */
+    orderBy?: SeatingPlanOrderByWithRelationInput | SeatingPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SeatingPlans.
+     */
+    cursor?: SeatingPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeatingPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeatingPlans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SeatingPlans.
+     */
+    distinct?: SeatingPlanScalarFieldEnum | SeatingPlanScalarFieldEnum[]
+  }
+
+  /**
+   * SeatingPlan findMany
+   */
+  export type SeatingPlanFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+    /**
+     * Filter, which SeatingPlans to fetch.
+     */
+    where?: SeatingPlanWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeatingPlans to fetch.
+     */
+    orderBy?: SeatingPlanOrderByWithRelationInput | SeatingPlanOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SeatingPlans.
+     */
+    cursor?: SeatingPlanWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeatingPlans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeatingPlans.
+     */
+    skip?: number
+    distinct?: SeatingPlanScalarFieldEnum | SeatingPlanScalarFieldEnum[]
+  }
+
+  /**
+   * SeatingPlan create
+   */
+  export type SeatingPlanCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SeatingPlan.
+     */
+    data: XOR<SeatingPlanCreateInput, SeatingPlanUncheckedCreateInput>
+  }
+
+  /**
+   * SeatingPlan createMany
+   */
+  export type SeatingPlanCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SeatingPlans.
+     */
+    data: SeatingPlanCreateManyInput | SeatingPlanCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SeatingPlan createManyAndReturn
+   */
+  export type SeatingPlanCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SeatingPlans.
+     */
+    data: SeatingPlanCreateManyInput | SeatingPlanCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SeatingPlan update
+   */
+  export type SeatingPlanUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SeatingPlan.
+     */
+    data: XOR<SeatingPlanUpdateInput, SeatingPlanUncheckedUpdateInput>
+    /**
+     * Choose, which SeatingPlan to update.
+     */
+    where: SeatingPlanWhereUniqueInput
+  }
+
+  /**
+   * SeatingPlan updateMany
+   */
+  export type SeatingPlanUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SeatingPlans.
+     */
+    data: XOR<SeatingPlanUpdateManyMutationInput, SeatingPlanUncheckedUpdateManyInput>
+    /**
+     * Filter which SeatingPlans to update
+     */
+    where?: SeatingPlanWhereInput
+  }
+
+  /**
+   * SeatingPlan upsert
+   */
+  export type SeatingPlanUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SeatingPlan to update in case it exists.
+     */
+    where: SeatingPlanWhereUniqueInput
+    /**
+     * In case the SeatingPlan found by the `where` argument doesn't exist, create a new SeatingPlan with this data.
+     */
+    create: XOR<SeatingPlanCreateInput, SeatingPlanUncheckedCreateInput>
+    /**
+     * In case the SeatingPlan was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SeatingPlanUpdateInput, SeatingPlanUncheckedUpdateInput>
+  }
+
+  /**
+   * SeatingPlan delete
+   */
+  export type SeatingPlanDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+    /**
+     * Filter which SeatingPlan to delete.
+     */
+    where: SeatingPlanWhereUniqueInput
+  }
+
+  /**
+   * SeatingPlan deleteMany
+   */
+  export type SeatingPlanDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SeatingPlans to delete
+     */
+    where?: SeatingPlanWhereInput
+  }
+
+  /**
+   * SeatingPlan without action
+   */
+  export type SeatingPlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9699,6 +15214,58 @@ export namespace Prisma {
   };
 
   export type AttendanceScalarFieldEnum = (typeof AttendanceScalarFieldEnum)[keyof typeof AttendanceScalarFieldEnum]
+
+
+  export const ClassViewScalarFieldEnum: {
+    id: 'id',
+    classId: 'classId'
+  };
+
+  export type ClassViewScalarFieldEnum = (typeof ClassViewScalarFieldEnum)[keyof typeof ClassViewScalarFieldEnum]
+
+
+  export const SeatScalarFieldEnum: {
+    id: 'id',
+    classViewId: 'classViewId',
+    studentId: 'studentId',
+    coordinates_X: 'coordinates_X',
+    coordinates_y: 'coordinates_y'
+  };
+
+  export type SeatScalarFieldEnum = (typeof SeatScalarFieldEnum)[keyof typeof SeatScalarFieldEnum]
+
+
+  export const LayoutScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type LayoutScalarFieldEnum = (typeof LayoutScalarFieldEnum)[keyof typeof LayoutScalarFieldEnum]
+
+
+  export const DeskScalarFieldEnum: {
+    id: 'id',
+    layoutId: 'layoutId',
+    x: 'x',
+    y: 'y',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type DeskScalarFieldEnum = (typeof DeskScalarFieldEnum)[keyof typeof DeskScalarFieldEnum]
+
+
+  export const SeatingPlanScalarFieldEnum: {
+    id: 'id',
+    deskId: 'deskId',
+    studentId: 'studentId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SeatingPlanScalarFieldEnum = (typeof SeatingPlanScalarFieldEnum)[keyof typeof SeatingPlanScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -9952,6 +15519,7 @@ export namespace Prisma {
     Attendance?: AttendanceListRelationFilter
     cls?: XOR<ClsRelationFilter, ClsWhereInput>
     user?: XOR<UserRelationFilter, UserWhereInput>
+    seatingPlan?: XOR<SeatingPlanNullableRelationFilter, SeatingPlanWhereInput> | null
   }
 
   export type StudentOrderByWithRelationInput = {
@@ -9961,6 +15529,7 @@ export namespace Prisma {
     Attendance?: AttendanceOrderByRelationAggregateInput
     cls?: ClsOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
+    seatingPlan?: SeatingPlanOrderByWithRelationInput
   }
 
   export type StudentWhereUniqueInput = Prisma.AtLeast<{
@@ -9973,6 +15542,7 @@ export namespace Prisma {
     Attendance?: AttendanceListRelationFilter
     cls?: XOR<ClsRelationFilter, ClsWhereInput>
     user?: XOR<UserRelationFilter, UserWhereInput>
+    seatingPlan?: XOR<SeatingPlanNullableRelationFilter, SeatingPlanWhereInput> | null
   }, "id" | "userId">
 
   export type StudentOrderByWithAggregationInput = {
@@ -10006,6 +15576,8 @@ export namespace Prisma {
     register?: RegisterListRelationFilter
     students?: StudentListRelationFilter
     timetable?: TimetableListRelationFilter
+    ClassView?: ClassViewListRelationFilter
+    layouts?: LayoutListRelationFilter
   }
 
   export type ClsOrderByWithRelationInput = {
@@ -10016,6 +15588,8 @@ export namespace Prisma {
     register?: RegisterOrderByRelationAggregateInput
     students?: StudentOrderByRelationAggregateInput
     timetable?: TimetableOrderByRelationAggregateInput
+    ClassView?: ClassViewOrderByRelationAggregateInput
+    layouts?: LayoutOrderByRelationAggregateInput
   }
 
   export type ClsWhereUniqueInput = Prisma.AtLeast<{
@@ -10029,6 +15603,8 @@ export namespace Prisma {
     register?: RegisterListRelationFilter
     students?: StudentListRelationFilter
     timetable?: TimetableListRelationFilter
+    ClassView?: ClassViewListRelationFilter
+    layouts?: LayoutListRelationFilter
   }, "id">
 
   export type ClsOrderByWithAggregationInput = {
@@ -10241,6 +15817,288 @@ export namespace Prisma {
     date?: DateTimeWithAggregatesFilter<"Attendance"> | Date | string
   }
 
+  export type ClassViewWhereInput = {
+    AND?: ClassViewWhereInput | ClassViewWhereInput[]
+    OR?: ClassViewWhereInput[]
+    NOT?: ClassViewWhereInput | ClassViewWhereInput[]
+    id?: IntFilter<"ClassView"> | number
+    classId?: IntFilter<"ClassView"> | number
+    seat?: SeatListRelationFilter
+    cls?: XOR<ClsRelationFilter, ClsWhereInput>
+  }
+
+  export type ClassViewOrderByWithRelationInput = {
+    id?: SortOrder
+    classId?: SortOrder
+    seat?: SeatOrderByRelationAggregateInput
+    cls?: ClsOrderByWithRelationInput
+  }
+
+  export type ClassViewWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ClassViewWhereInput | ClassViewWhereInput[]
+    OR?: ClassViewWhereInput[]
+    NOT?: ClassViewWhereInput | ClassViewWhereInput[]
+    classId?: IntFilter<"ClassView"> | number
+    seat?: SeatListRelationFilter
+    cls?: XOR<ClsRelationFilter, ClsWhereInput>
+  }, "id">
+
+  export type ClassViewOrderByWithAggregationInput = {
+    id?: SortOrder
+    classId?: SortOrder
+    _count?: ClassViewCountOrderByAggregateInput
+    _avg?: ClassViewAvgOrderByAggregateInput
+    _max?: ClassViewMaxOrderByAggregateInput
+    _min?: ClassViewMinOrderByAggregateInput
+    _sum?: ClassViewSumOrderByAggregateInput
+  }
+
+  export type ClassViewScalarWhereWithAggregatesInput = {
+    AND?: ClassViewScalarWhereWithAggregatesInput | ClassViewScalarWhereWithAggregatesInput[]
+    OR?: ClassViewScalarWhereWithAggregatesInput[]
+    NOT?: ClassViewScalarWhereWithAggregatesInput | ClassViewScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"ClassView"> | number
+    classId?: IntWithAggregatesFilter<"ClassView"> | number
+  }
+
+  export type SeatWhereInput = {
+    AND?: SeatWhereInput | SeatWhereInput[]
+    OR?: SeatWhereInput[]
+    NOT?: SeatWhereInput | SeatWhereInput[]
+    id?: IntFilter<"Seat"> | number
+    classViewId?: IntFilter<"Seat"> | number
+    studentId?: IntFilter<"Seat"> | number
+    coordinates_X?: FloatFilter<"Seat"> | number
+    coordinates_y?: FloatFilter<"Seat"> | number
+    ClassView?: XOR<ClassViewRelationFilter, ClassViewWhereInput>
+  }
+
+  export type SeatOrderByWithRelationInput = {
+    id?: SortOrder
+    classViewId?: SortOrder
+    studentId?: SortOrder
+    coordinates_X?: SortOrder
+    coordinates_y?: SortOrder
+    ClassView?: ClassViewOrderByWithRelationInput
+  }
+
+  export type SeatWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: SeatWhereInput | SeatWhereInput[]
+    OR?: SeatWhereInput[]
+    NOT?: SeatWhereInput | SeatWhereInput[]
+    classViewId?: IntFilter<"Seat"> | number
+    studentId?: IntFilter<"Seat"> | number
+    coordinates_X?: FloatFilter<"Seat"> | number
+    coordinates_y?: FloatFilter<"Seat"> | number
+    ClassView?: XOR<ClassViewRelationFilter, ClassViewWhereInput>
+  }, "id">
+
+  export type SeatOrderByWithAggregationInput = {
+    id?: SortOrder
+    classViewId?: SortOrder
+    studentId?: SortOrder
+    coordinates_X?: SortOrder
+    coordinates_y?: SortOrder
+    _count?: SeatCountOrderByAggregateInput
+    _avg?: SeatAvgOrderByAggregateInput
+    _max?: SeatMaxOrderByAggregateInput
+    _min?: SeatMinOrderByAggregateInput
+    _sum?: SeatSumOrderByAggregateInput
+  }
+
+  export type SeatScalarWhereWithAggregatesInput = {
+    AND?: SeatScalarWhereWithAggregatesInput | SeatScalarWhereWithAggregatesInput[]
+    OR?: SeatScalarWhereWithAggregatesInput[]
+    NOT?: SeatScalarWhereWithAggregatesInput | SeatScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Seat"> | number
+    classViewId?: IntWithAggregatesFilter<"Seat"> | number
+    studentId?: IntWithAggregatesFilter<"Seat"> | number
+    coordinates_X?: FloatWithAggregatesFilter<"Seat"> | number
+    coordinates_y?: FloatWithAggregatesFilter<"Seat"> | number
+  }
+
+  export type LayoutWhereInput = {
+    AND?: LayoutWhereInput | LayoutWhereInput[]
+    OR?: LayoutWhereInput[]
+    NOT?: LayoutWhereInput | LayoutWhereInput[]
+    id?: IntFilter<"Layout"> | number
+    name?: StringFilter<"Layout"> | string
+    createdAt?: DateTimeFilter<"Layout"> | Date | string
+    updatedAt?: DateTimeFilter<"Layout"> | Date | string
+    desks?: DeskListRelationFilter
+    classes?: ClsListRelationFilter
+  }
+
+  export type LayoutOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    desks?: DeskOrderByRelationAggregateInput
+    classes?: ClsOrderByRelationAggregateInput
+  }
+
+  export type LayoutWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: LayoutWhereInput | LayoutWhereInput[]
+    OR?: LayoutWhereInput[]
+    NOT?: LayoutWhereInput | LayoutWhereInput[]
+    name?: StringFilter<"Layout"> | string
+    createdAt?: DateTimeFilter<"Layout"> | Date | string
+    updatedAt?: DateTimeFilter<"Layout"> | Date | string
+    desks?: DeskListRelationFilter
+    classes?: ClsListRelationFilter
+  }, "id">
+
+  export type LayoutOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: LayoutCountOrderByAggregateInput
+    _avg?: LayoutAvgOrderByAggregateInput
+    _max?: LayoutMaxOrderByAggregateInput
+    _min?: LayoutMinOrderByAggregateInput
+    _sum?: LayoutSumOrderByAggregateInput
+  }
+
+  export type LayoutScalarWhereWithAggregatesInput = {
+    AND?: LayoutScalarWhereWithAggregatesInput | LayoutScalarWhereWithAggregatesInput[]
+    OR?: LayoutScalarWhereWithAggregatesInput[]
+    NOT?: LayoutScalarWhereWithAggregatesInput | LayoutScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Layout"> | number
+    name?: StringWithAggregatesFilter<"Layout"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Layout"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Layout"> | Date | string
+  }
+
+  export type DeskWhereInput = {
+    AND?: DeskWhereInput | DeskWhereInput[]
+    OR?: DeskWhereInput[]
+    NOT?: DeskWhereInput | DeskWhereInput[]
+    id?: IntFilter<"Desk"> | number
+    layoutId?: IntFilter<"Desk"> | number
+    x?: FloatFilter<"Desk"> | number
+    y?: FloatFilter<"Desk"> | number
+    createdAt?: DateTimeFilter<"Desk"> | Date | string
+    updatedAt?: DateTimeFilter<"Desk"> | Date | string
+    layout?: XOR<LayoutRelationFilter, LayoutWhereInput>
+    seatingPlan?: XOR<SeatingPlanNullableRelationFilter, SeatingPlanWhereInput> | null
+  }
+
+  export type DeskOrderByWithRelationInput = {
+    id?: SortOrder
+    layoutId?: SortOrder
+    x?: SortOrder
+    y?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    layout?: LayoutOrderByWithRelationInput
+    seatingPlan?: SeatingPlanOrderByWithRelationInput
+  }
+
+  export type DeskWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: DeskWhereInput | DeskWhereInput[]
+    OR?: DeskWhereInput[]
+    NOT?: DeskWhereInput | DeskWhereInput[]
+    layoutId?: IntFilter<"Desk"> | number
+    x?: FloatFilter<"Desk"> | number
+    y?: FloatFilter<"Desk"> | number
+    createdAt?: DateTimeFilter<"Desk"> | Date | string
+    updatedAt?: DateTimeFilter<"Desk"> | Date | string
+    layout?: XOR<LayoutRelationFilter, LayoutWhereInput>
+    seatingPlan?: XOR<SeatingPlanNullableRelationFilter, SeatingPlanWhereInput> | null
+  }, "id">
+
+  export type DeskOrderByWithAggregationInput = {
+    id?: SortOrder
+    layoutId?: SortOrder
+    x?: SortOrder
+    y?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: DeskCountOrderByAggregateInput
+    _avg?: DeskAvgOrderByAggregateInput
+    _max?: DeskMaxOrderByAggregateInput
+    _min?: DeskMinOrderByAggregateInput
+    _sum?: DeskSumOrderByAggregateInput
+  }
+
+  export type DeskScalarWhereWithAggregatesInput = {
+    AND?: DeskScalarWhereWithAggregatesInput | DeskScalarWhereWithAggregatesInput[]
+    OR?: DeskScalarWhereWithAggregatesInput[]
+    NOT?: DeskScalarWhereWithAggregatesInput | DeskScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Desk"> | number
+    layoutId?: IntWithAggregatesFilter<"Desk"> | number
+    x?: FloatWithAggregatesFilter<"Desk"> | number
+    y?: FloatWithAggregatesFilter<"Desk"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Desk"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Desk"> | Date | string
+  }
+
+  export type SeatingPlanWhereInput = {
+    AND?: SeatingPlanWhereInput | SeatingPlanWhereInput[]
+    OR?: SeatingPlanWhereInput[]
+    NOT?: SeatingPlanWhereInput | SeatingPlanWhereInput[]
+    id?: IntFilter<"SeatingPlan"> | number
+    deskId?: IntFilter<"SeatingPlan"> | number
+    studentId?: IntFilter<"SeatingPlan"> | number
+    createdAt?: DateTimeFilter<"SeatingPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"SeatingPlan"> | Date | string
+    desk?: XOR<DeskRelationFilter, DeskWhereInput>
+    student?: XOR<StudentRelationFilter, StudentWhereInput>
+  }
+
+  export type SeatingPlanOrderByWithRelationInput = {
+    id?: SortOrder
+    deskId?: SortOrder
+    studentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    desk?: DeskOrderByWithRelationInput
+    student?: StudentOrderByWithRelationInput
+  }
+
+  export type SeatingPlanWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    deskId?: number
+    studentId?: number
+    AND?: SeatingPlanWhereInput | SeatingPlanWhereInput[]
+    OR?: SeatingPlanWhereInput[]
+    NOT?: SeatingPlanWhereInput | SeatingPlanWhereInput[]
+    createdAt?: DateTimeFilter<"SeatingPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"SeatingPlan"> | Date | string
+    desk?: XOR<DeskRelationFilter, DeskWhereInput>
+    student?: XOR<StudentRelationFilter, StudentWhereInput>
+  }, "id" | "deskId" | "studentId">
+
+  export type SeatingPlanOrderByWithAggregationInput = {
+    id?: SortOrder
+    deskId?: SortOrder
+    studentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SeatingPlanCountOrderByAggregateInput
+    _avg?: SeatingPlanAvgOrderByAggregateInput
+    _max?: SeatingPlanMaxOrderByAggregateInput
+    _min?: SeatingPlanMinOrderByAggregateInput
+    _sum?: SeatingPlanSumOrderByAggregateInput
+  }
+
+  export type SeatingPlanScalarWhereWithAggregatesInput = {
+    AND?: SeatingPlanScalarWhereWithAggregatesInput | SeatingPlanScalarWhereWithAggregatesInput[]
+    OR?: SeatingPlanScalarWhereWithAggregatesInput[]
+    NOT?: SeatingPlanScalarWhereWithAggregatesInput | SeatingPlanScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"SeatingPlan"> | number
+    deskId?: IntWithAggregatesFilter<"SeatingPlan"> | number
+    studentId?: IntWithAggregatesFilter<"SeatingPlan"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"SeatingPlan"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SeatingPlan"> | Date | string
+  }
+
   export type UserCreateInput = {
     username: string
     email: string
@@ -10381,6 +16239,7 @@ export namespace Prisma {
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
     cls: ClsCreateNestedOneWithoutStudentsInput
     user: UserCreateNestedOneWithoutStudentInput
+    seatingPlan?: SeatingPlanCreateNestedOneWithoutStudentInput
   }
 
   export type StudentUncheckedCreateInput = {
@@ -10388,12 +16247,14 @@ export namespace Prisma {
     userId: number
     classId: number
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    seatingPlan?: SeatingPlanUncheckedCreateNestedOneWithoutStudentInput
   }
 
   export type StudentUpdateInput = {
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
     cls?: ClsUpdateOneRequiredWithoutStudentsNestedInput
     user?: UserUpdateOneRequiredWithoutStudentNestedInput
+    seatingPlan?: SeatingPlanUpdateOneWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateInput = {
@@ -10401,6 +16262,7 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     classId?: IntFieldUpdateOperationsInput | number
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    seatingPlan?: SeatingPlanUncheckedUpdateOneWithoutStudentNestedInput
   }
 
   export type StudentCreateManyInput = {
@@ -10425,6 +16287,8 @@ export namespace Prisma {
     register?: RegisterCreateNestedManyWithoutClsInput
     students?: StudentCreateNestedManyWithoutClsInput
     timetable?: TimetableCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewCreateNestedManyWithoutClsInput
+    layouts?: LayoutCreateNestedManyWithoutClassesInput
   }
 
   export type ClsUncheckedCreateInput = {
@@ -10434,6 +16298,8 @@ export namespace Prisma {
     register?: RegisterUncheckedCreateNestedManyWithoutClsInput
     students?: StudentUncheckedCreateNestedManyWithoutClsInput
     timetable?: TimetableUncheckedCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewUncheckedCreateNestedManyWithoutClsInput
+    layouts?: LayoutUncheckedCreateNestedManyWithoutClassesInput
   }
 
   export type ClsUpdateInput = {
@@ -10442,6 +16308,8 @@ export namespace Prisma {
     register?: RegisterUpdateManyWithoutClsNestedInput
     students?: StudentUpdateManyWithoutClsNestedInput
     timetable?: TimetableUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUpdateManyWithoutClassesNestedInput
   }
 
   export type ClsUncheckedUpdateInput = {
@@ -10451,6 +16319,8 @@ export namespace Prisma {
     register?: RegisterUncheckedUpdateManyWithoutClsNestedInput
     students?: StudentUncheckedUpdateManyWithoutClsNestedInput
     timetable?: TimetableUncheckedUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUncheckedUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUncheckedUpdateManyWithoutClassesNestedInput
   }
 
   export type ClsCreateManyInput = {
@@ -10639,6 +16509,262 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     lateMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClassViewCreateInput = {
+    seat?: SeatCreateNestedManyWithoutClassViewInput
+    cls: ClsCreateNestedOneWithoutClassViewInput
+  }
+
+  export type ClassViewUncheckedCreateInput = {
+    id?: number
+    classId: number
+    seat?: SeatUncheckedCreateNestedManyWithoutClassViewInput
+  }
+
+  export type ClassViewUpdateInput = {
+    seat?: SeatUpdateManyWithoutClassViewNestedInput
+    cls?: ClsUpdateOneRequiredWithoutClassViewNestedInput
+  }
+
+  export type ClassViewUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    classId?: IntFieldUpdateOperationsInput | number
+    seat?: SeatUncheckedUpdateManyWithoutClassViewNestedInput
+  }
+
+  export type ClassViewCreateManyInput = {
+    id?: number
+    classId: number
+  }
+
+  export type ClassViewUpdateManyMutationInput = {
+
+  }
+
+  export type ClassViewUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    classId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type SeatCreateInput = {
+    studentId: number
+    coordinates_X: number
+    coordinates_y: number
+    ClassView: ClassViewCreateNestedOneWithoutSeatInput
+  }
+
+  export type SeatUncheckedCreateInput = {
+    id?: number
+    classViewId: number
+    studentId: number
+    coordinates_X: number
+    coordinates_y: number
+  }
+
+  export type SeatUpdateInput = {
+    studentId?: IntFieldUpdateOperationsInput | number
+    coordinates_X?: FloatFieldUpdateOperationsInput | number
+    coordinates_y?: FloatFieldUpdateOperationsInput | number
+    ClassView?: ClassViewUpdateOneRequiredWithoutSeatNestedInput
+  }
+
+  export type SeatUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    classViewId?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    coordinates_X?: FloatFieldUpdateOperationsInput | number
+    coordinates_y?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type SeatCreateManyInput = {
+    id?: number
+    classViewId: number
+    studentId: number
+    coordinates_X: number
+    coordinates_y: number
+  }
+
+  export type SeatUpdateManyMutationInput = {
+    studentId?: IntFieldUpdateOperationsInput | number
+    coordinates_X?: FloatFieldUpdateOperationsInput | number
+    coordinates_y?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type SeatUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    classViewId?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    coordinates_X?: FloatFieldUpdateOperationsInput | number
+    coordinates_y?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type LayoutCreateInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    desks?: DeskCreateNestedManyWithoutLayoutInput
+    classes?: ClsCreateNestedManyWithoutLayoutsInput
+  }
+
+  export type LayoutUncheckedCreateInput = {
+    id?: number
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    desks?: DeskUncheckedCreateNestedManyWithoutLayoutInput
+    classes?: ClsUncheckedCreateNestedManyWithoutLayoutsInput
+  }
+
+  export type LayoutUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    desks?: DeskUpdateManyWithoutLayoutNestedInput
+    classes?: ClsUpdateManyWithoutLayoutsNestedInput
+  }
+
+  export type LayoutUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    desks?: DeskUncheckedUpdateManyWithoutLayoutNestedInput
+    classes?: ClsUncheckedUpdateManyWithoutLayoutsNestedInput
+  }
+
+  export type LayoutCreateManyInput = {
+    id?: number
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LayoutUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LayoutUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeskCreateInput = {
+    x: number
+    y: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    layout: LayoutCreateNestedOneWithoutDesksInput
+    seatingPlan?: SeatingPlanCreateNestedOneWithoutDeskInput
+  }
+
+  export type DeskUncheckedCreateInput = {
+    id?: number
+    layoutId: number
+    x: number
+    y: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seatingPlan?: SeatingPlanUncheckedCreateNestedOneWithoutDeskInput
+  }
+
+  export type DeskUpdateInput = {
+    x?: FloatFieldUpdateOperationsInput | number
+    y?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    layout?: LayoutUpdateOneRequiredWithoutDesksNestedInput
+    seatingPlan?: SeatingPlanUpdateOneWithoutDeskNestedInput
+  }
+
+  export type DeskUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    layoutId?: IntFieldUpdateOperationsInput | number
+    x?: FloatFieldUpdateOperationsInput | number
+    y?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seatingPlan?: SeatingPlanUncheckedUpdateOneWithoutDeskNestedInput
+  }
+
+  export type DeskCreateManyInput = {
+    id?: number
+    layoutId: number
+    x: number
+    y: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DeskUpdateManyMutationInput = {
+    x?: FloatFieldUpdateOperationsInput | number
+    y?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeskUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    layoutId?: IntFieldUpdateOperationsInput | number
+    x?: FloatFieldUpdateOperationsInput | number
+    y?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeatingPlanCreateInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    desk: DeskCreateNestedOneWithoutSeatingPlanInput
+    student: StudentCreateNestedOneWithoutSeatingPlanInput
+  }
+
+  export type SeatingPlanUncheckedCreateInput = {
+    id?: number
+    deskId: number
+    studentId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SeatingPlanUpdateInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    desk?: DeskUpdateOneRequiredWithoutSeatingPlanNestedInput
+    student?: StudentUpdateOneRequiredWithoutSeatingPlanNestedInput
+  }
+
+  export type SeatingPlanUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    deskId?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeatingPlanCreateManyInput = {
+    id?: number
+    deskId: number
+    studentId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SeatingPlanUpdateManyMutationInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeatingPlanUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    deskId?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -10844,6 +16970,11 @@ export namespace Prisma {
     isNot?: ClsWhereInput
   }
 
+  export type SeatingPlanNullableRelationFilter = {
+    is?: SeatingPlanWhereInput | null
+    isNot?: SeatingPlanWhereInput | null
+  }
+
   export type AttendanceOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -10901,6 +17032,18 @@ export namespace Prisma {
     none?: TimetableWhereInput
   }
 
+  export type ClassViewListRelationFilter = {
+    every?: ClassViewWhereInput
+    some?: ClassViewWhereInput
+    none?: ClassViewWhereInput
+  }
+
+  export type LayoutListRelationFilter = {
+    every?: LayoutWhereInput
+    some?: LayoutWhereInput
+    none?: LayoutWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
@@ -10911,6 +17054,14 @@ export namespace Prisma {
   }
 
   export type TimetableOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ClassViewOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LayoutOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11143,6 +17294,239 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type SeatListRelationFilter = {
+    every?: SeatWhereInput
+    some?: SeatWhereInput
+    none?: SeatWhereInput
+  }
+
+  export type SeatOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ClassViewCountOrderByAggregateInput = {
+    id?: SortOrder
+    classId?: SortOrder
+  }
+
+  export type ClassViewAvgOrderByAggregateInput = {
+    id?: SortOrder
+    classId?: SortOrder
+  }
+
+  export type ClassViewMaxOrderByAggregateInput = {
+    id?: SortOrder
+    classId?: SortOrder
+  }
+
+  export type ClassViewMinOrderByAggregateInput = {
+    id?: SortOrder
+    classId?: SortOrder
+  }
+
+  export type ClassViewSumOrderByAggregateInput = {
+    id?: SortOrder
+    classId?: SortOrder
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type ClassViewRelationFilter = {
+    is?: ClassViewWhereInput
+    isNot?: ClassViewWhereInput
+  }
+
+  export type SeatCountOrderByAggregateInput = {
+    id?: SortOrder
+    classViewId?: SortOrder
+    studentId?: SortOrder
+    coordinates_X?: SortOrder
+    coordinates_y?: SortOrder
+  }
+
+  export type SeatAvgOrderByAggregateInput = {
+    id?: SortOrder
+    classViewId?: SortOrder
+    studentId?: SortOrder
+    coordinates_X?: SortOrder
+    coordinates_y?: SortOrder
+  }
+
+  export type SeatMaxOrderByAggregateInput = {
+    id?: SortOrder
+    classViewId?: SortOrder
+    studentId?: SortOrder
+    coordinates_X?: SortOrder
+    coordinates_y?: SortOrder
+  }
+
+  export type SeatMinOrderByAggregateInput = {
+    id?: SortOrder
+    classViewId?: SortOrder
+    studentId?: SortOrder
+    coordinates_X?: SortOrder
+    coordinates_y?: SortOrder
+  }
+
+  export type SeatSumOrderByAggregateInput = {
+    id?: SortOrder
+    classViewId?: SortOrder
+    studentId?: SortOrder
+    coordinates_X?: SortOrder
+    coordinates_y?: SortOrder
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type DeskListRelationFilter = {
+    every?: DeskWhereInput
+    some?: DeskWhereInput
+    none?: DeskWhereInput
+  }
+
+  export type DeskOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type LayoutCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LayoutAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type LayoutMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LayoutMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LayoutSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type LayoutRelationFilter = {
+    is?: LayoutWhereInput
+    isNot?: LayoutWhereInput
+  }
+
+  export type DeskCountOrderByAggregateInput = {
+    id?: SortOrder
+    layoutId?: SortOrder
+    x?: SortOrder
+    y?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DeskAvgOrderByAggregateInput = {
+    id?: SortOrder
+    layoutId?: SortOrder
+    x?: SortOrder
+    y?: SortOrder
+  }
+
+  export type DeskMaxOrderByAggregateInput = {
+    id?: SortOrder
+    layoutId?: SortOrder
+    x?: SortOrder
+    y?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DeskMinOrderByAggregateInput = {
+    id?: SortOrder
+    layoutId?: SortOrder
+    x?: SortOrder
+    y?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type DeskSumOrderByAggregateInput = {
+    id?: SortOrder
+    layoutId?: SortOrder
+    x?: SortOrder
+    y?: SortOrder
+  }
+
+  export type DeskRelationFilter = {
+    is?: DeskWhereInput
+    isNot?: DeskWhereInput
+  }
+
+  export type SeatingPlanCountOrderByAggregateInput = {
+    id?: SortOrder
+    deskId?: SortOrder
+    studentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SeatingPlanAvgOrderByAggregateInput = {
+    id?: SortOrder
+    deskId?: SortOrder
+    studentId?: SortOrder
+  }
+
+  export type SeatingPlanMaxOrderByAggregateInput = {
+    id?: SortOrder
+    deskId?: SortOrder
+    studentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SeatingPlanMinOrderByAggregateInput = {
+    id?: SortOrder
+    deskId?: SortOrder
+    studentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SeatingPlanSumOrderByAggregateInput = {
+    id?: SortOrder
+    deskId?: SortOrder
+    studentId?: SortOrder
   }
 
   export type StudentCreateNestedOneWithoutUserInput = {
@@ -11394,11 +17778,23 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type SeatingPlanCreateNestedOneWithoutStudentInput = {
+    create?: XOR<SeatingPlanCreateWithoutStudentInput, SeatingPlanUncheckedCreateWithoutStudentInput>
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutStudentInput
+    connect?: SeatingPlanWhereUniqueInput
+  }
+
   export type AttendanceUncheckedCreateNestedManyWithoutStudentInput = {
     create?: XOR<AttendanceCreateWithoutStudentInput, AttendanceUncheckedCreateWithoutStudentInput> | AttendanceCreateWithoutStudentInput[] | AttendanceUncheckedCreateWithoutStudentInput[]
     connectOrCreate?: AttendanceCreateOrConnectWithoutStudentInput | AttendanceCreateOrConnectWithoutStudentInput[]
     createMany?: AttendanceCreateManyStudentInputEnvelope
     connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
+  }
+
+  export type SeatingPlanUncheckedCreateNestedOneWithoutStudentInput = {
+    create?: XOR<SeatingPlanCreateWithoutStudentInput, SeatingPlanUncheckedCreateWithoutStudentInput>
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutStudentInput
+    connect?: SeatingPlanWhereUniqueInput
   }
 
   export type AttendanceUpdateManyWithoutStudentNestedInput = {
@@ -11431,6 +17827,16 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStudentInput, UserUpdateWithoutStudentInput>, UserUncheckedUpdateWithoutStudentInput>
   }
 
+  export type SeatingPlanUpdateOneWithoutStudentNestedInput = {
+    create?: XOR<SeatingPlanCreateWithoutStudentInput, SeatingPlanUncheckedCreateWithoutStudentInput>
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutStudentInput
+    upsert?: SeatingPlanUpsertWithoutStudentInput
+    disconnect?: SeatingPlanWhereInput | boolean
+    delete?: SeatingPlanWhereInput | boolean
+    connect?: SeatingPlanWhereUniqueInput
+    update?: XOR<XOR<SeatingPlanUpdateToOneWithWhereWithoutStudentInput, SeatingPlanUpdateWithoutStudentInput>, SeatingPlanUncheckedUpdateWithoutStudentInput>
+  }
+
   export type AttendanceUncheckedUpdateManyWithoutStudentNestedInput = {
     create?: XOR<AttendanceCreateWithoutStudentInput, AttendanceUncheckedCreateWithoutStudentInput> | AttendanceCreateWithoutStudentInput[] | AttendanceUncheckedCreateWithoutStudentInput[]
     connectOrCreate?: AttendanceCreateOrConnectWithoutStudentInput | AttendanceCreateOrConnectWithoutStudentInput[]
@@ -11443,6 +17849,16 @@ export namespace Prisma {
     update?: AttendanceUpdateWithWhereUniqueWithoutStudentInput | AttendanceUpdateWithWhereUniqueWithoutStudentInput[]
     updateMany?: AttendanceUpdateManyWithWhereWithoutStudentInput | AttendanceUpdateManyWithWhereWithoutStudentInput[]
     deleteMany?: AttendanceScalarWhereInput | AttendanceScalarWhereInput[]
+  }
+
+  export type SeatingPlanUncheckedUpdateOneWithoutStudentNestedInput = {
+    create?: XOR<SeatingPlanCreateWithoutStudentInput, SeatingPlanUncheckedCreateWithoutStudentInput>
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutStudentInput
+    upsert?: SeatingPlanUpsertWithoutStudentInput
+    disconnect?: SeatingPlanWhereInput | boolean
+    delete?: SeatingPlanWhereInput | boolean
+    connect?: SeatingPlanWhereUniqueInput
+    update?: XOR<XOR<SeatingPlanUpdateToOneWithWhereWithoutStudentInput, SeatingPlanUpdateWithoutStudentInput>, SeatingPlanUncheckedUpdateWithoutStudentInput>
   }
 
   export type TeacherCreateNestedOneWithoutClassesInput = {
@@ -11472,6 +17888,19 @@ export namespace Prisma {
     connect?: TimetableWhereUniqueInput | TimetableWhereUniqueInput[]
   }
 
+  export type ClassViewCreateNestedManyWithoutClsInput = {
+    create?: XOR<ClassViewCreateWithoutClsInput, ClassViewUncheckedCreateWithoutClsInput> | ClassViewCreateWithoutClsInput[] | ClassViewUncheckedCreateWithoutClsInput[]
+    connectOrCreate?: ClassViewCreateOrConnectWithoutClsInput | ClassViewCreateOrConnectWithoutClsInput[]
+    createMany?: ClassViewCreateManyClsInputEnvelope
+    connect?: ClassViewWhereUniqueInput | ClassViewWhereUniqueInput[]
+  }
+
+  export type LayoutCreateNestedManyWithoutClassesInput = {
+    create?: XOR<LayoutCreateWithoutClassesInput, LayoutUncheckedCreateWithoutClassesInput> | LayoutCreateWithoutClassesInput[] | LayoutUncheckedCreateWithoutClassesInput[]
+    connectOrCreate?: LayoutCreateOrConnectWithoutClassesInput | LayoutCreateOrConnectWithoutClassesInput[]
+    connect?: LayoutWhereUniqueInput | LayoutWhereUniqueInput[]
+  }
+
   export type RegisterUncheckedCreateNestedManyWithoutClsInput = {
     create?: XOR<RegisterCreateWithoutClsInput, RegisterUncheckedCreateWithoutClsInput> | RegisterCreateWithoutClsInput[] | RegisterUncheckedCreateWithoutClsInput[]
     connectOrCreate?: RegisterCreateOrConnectWithoutClsInput | RegisterCreateOrConnectWithoutClsInput[]
@@ -11491,6 +17920,19 @@ export namespace Prisma {
     connectOrCreate?: TimetableCreateOrConnectWithoutClsInput | TimetableCreateOrConnectWithoutClsInput[]
     createMany?: TimetableCreateManyClsInputEnvelope
     connect?: TimetableWhereUniqueInput | TimetableWhereUniqueInput[]
+  }
+
+  export type ClassViewUncheckedCreateNestedManyWithoutClsInput = {
+    create?: XOR<ClassViewCreateWithoutClsInput, ClassViewUncheckedCreateWithoutClsInput> | ClassViewCreateWithoutClsInput[] | ClassViewUncheckedCreateWithoutClsInput[]
+    connectOrCreate?: ClassViewCreateOrConnectWithoutClsInput | ClassViewCreateOrConnectWithoutClsInput[]
+    createMany?: ClassViewCreateManyClsInputEnvelope
+    connect?: ClassViewWhereUniqueInput | ClassViewWhereUniqueInput[]
+  }
+
+  export type LayoutUncheckedCreateNestedManyWithoutClassesInput = {
+    create?: XOR<LayoutCreateWithoutClassesInput, LayoutUncheckedCreateWithoutClassesInput> | LayoutCreateWithoutClassesInput[] | LayoutUncheckedCreateWithoutClassesInput[]
+    connectOrCreate?: LayoutCreateOrConnectWithoutClassesInput | LayoutCreateOrConnectWithoutClassesInput[]
+    connect?: LayoutWhereUniqueInput | LayoutWhereUniqueInput[]
   }
 
   export type TeacherUpdateOneWithoutClassesNestedInput = {
@@ -11545,6 +17987,33 @@ export namespace Prisma {
     deleteMany?: TimetableScalarWhereInput | TimetableScalarWhereInput[]
   }
 
+  export type ClassViewUpdateManyWithoutClsNestedInput = {
+    create?: XOR<ClassViewCreateWithoutClsInput, ClassViewUncheckedCreateWithoutClsInput> | ClassViewCreateWithoutClsInput[] | ClassViewUncheckedCreateWithoutClsInput[]
+    connectOrCreate?: ClassViewCreateOrConnectWithoutClsInput | ClassViewCreateOrConnectWithoutClsInput[]
+    upsert?: ClassViewUpsertWithWhereUniqueWithoutClsInput | ClassViewUpsertWithWhereUniqueWithoutClsInput[]
+    createMany?: ClassViewCreateManyClsInputEnvelope
+    set?: ClassViewWhereUniqueInput | ClassViewWhereUniqueInput[]
+    disconnect?: ClassViewWhereUniqueInput | ClassViewWhereUniqueInput[]
+    delete?: ClassViewWhereUniqueInput | ClassViewWhereUniqueInput[]
+    connect?: ClassViewWhereUniqueInput | ClassViewWhereUniqueInput[]
+    update?: ClassViewUpdateWithWhereUniqueWithoutClsInput | ClassViewUpdateWithWhereUniqueWithoutClsInput[]
+    updateMany?: ClassViewUpdateManyWithWhereWithoutClsInput | ClassViewUpdateManyWithWhereWithoutClsInput[]
+    deleteMany?: ClassViewScalarWhereInput | ClassViewScalarWhereInput[]
+  }
+
+  export type LayoutUpdateManyWithoutClassesNestedInput = {
+    create?: XOR<LayoutCreateWithoutClassesInput, LayoutUncheckedCreateWithoutClassesInput> | LayoutCreateWithoutClassesInput[] | LayoutUncheckedCreateWithoutClassesInput[]
+    connectOrCreate?: LayoutCreateOrConnectWithoutClassesInput | LayoutCreateOrConnectWithoutClassesInput[]
+    upsert?: LayoutUpsertWithWhereUniqueWithoutClassesInput | LayoutUpsertWithWhereUniqueWithoutClassesInput[]
+    set?: LayoutWhereUniqueInput | LayoutWhereUniqueInput[]
+    disconnect?: LayoutWhereUniqueInput | LayoutWhereUniqueInput[]
+    delete?: LayoutWhereUniqueInput | LayoutWhereUniqueInput[]
+    connect?: LayoutWhereUniqueInput | LayoutWhereUniqueInput[]
+    update?: LayoutUpdateWithWhereUniqueWithoutClassesInput | LayoutUpdateWithWhereUniqueWithoutClassesInput[]
+    updateMany?: LayoutUpdateManyWithWhereWithoutClassesInput | LayoutUpdateManyWithWhereWithoutClassesInput[]
+    deleteMany?: LayoutScalarWhereInput | LayoutScalarWhereInput[]
+  }
+
   export type NullableIntFieldUpdateOperationsInput = {
     set?: number | null
     increment?: number
@@ -11593,6 +18062,33 @@ export namespace Prisma {
     update?: TimetableUpdateWithWhereUniqueWithoutClsInput | TimetableUpdateWithWhereUniqueWithoutClsInput[]
     updateMany?: TimetableUpdateManyWithWhereWithoutClsInput | TimetableUpdateManyWithWhereWithoutClsInput[]
     deleteMany?: TimetableScalarWhereInput | TimetableScalarWhereInput[]
+  }
+
+  export type ClassViewUncheckedUpdateManyWithoutClsNestedInput = {
+    create?: XOR<ClassViewCreateWithoutClsInput, ClassViewUncheckedCreateWithoutClsInput> | ClassViewCreateWithoutClsInput[] | ClassViewUncheckedCreateWithoutClsInput[]
+    connectOrCreate?: ClassViewCreateOrConnectWithoutClsInput | ClassViewCreateOrConnectWithoutClsInput[]
+    upsert?: ClassViewUpsertWithWhereUniqueWithoutClsInput | ClassViewUpsertWithWhereUniqueWithoutClsInput[]
+    createMany?: ClassViewCreateManyClsInputEnvelope
+    set?: ClassViewWhereUniqueInput | ClassViewWhereUniqueInput[]
+    disconnect?: ClassViewWhereUniqueInput | ClassViewWhereUniqueInput[]
+    delete?: ClassViewWhereUniqueInput | ClassViewWhereUniqueInput[]
+    connect?: ClassViewWhereUniqueInput | ClassViewWhereUniqueInput[]
+    update?: ClassViewUpdateWithWhereUniqueWithoutClsInput | ClassViewUpdateWithWhereUniqueWithoutClsInput[]
+    updateMany?: ClassViewUpdateManyWithWhereWithoutClsInput | ClassViewUpdateManyWithWhereWithoutClsInput[]
+    deleteMany?: ClassViewScalarWhereInput | ClassViewScalarWhereInput[]
+  }
+
+  export type LayoutUncheckedUpdateManyWithoutClassesNestedInput = {
+    create?: XOR<LayoutCreateWithoutClassesInput, LayoutUncheckedCreateWithoutClassesInput> | LayoutCreateWithoutClassesInput[] | LayoutUncheckedCreateWithoutClassesInput[]
+    connectOrCreate?: LayoutCreateOrConnectWithoutClassesInput | LayoutCreateOrConnectWithoutClassesInput[]
+    upsert?: LayoutUpsertWithWhereUniqueWithoutClassesInput | LayoutUpsertWithWhereUniqueWithoutClassesInput[]
+    set?: LayoutWhereUniqueInput | LayoutWhereUniqueInput[]
+    disconnect?: LayoutWhereUniqueInput | LayoutWhereUniqueInput[]
+    delete?: LayoutWhereUniqueInput | LayoutWhereUniqueInput[]
+    connect?: LayoutWhereUniqueInput | LayoutWhereUniqueInput[]
+    update?: LayoutUpdateWithWhereUniqueWithoutClassesInput | LayoutUpdateWithWhereUniqueWithoutClassesInput[]
+    updateMany?: LayoutUpdateManyWithWhereWithoutClassesInput | LayoutUpdateManyWithWhereWithoutClassesInput[]
+    deleteMany?: LayoutScalarWhereInput | LayoutScalarWhereInput[]
   }
 
   export type ClsCreateNestedOneWithoutTimetableInput = {
@@ -11713,6 +18209,238 @@ export namespace Prisma {
     upsert?: StudentUpsertWithoutAttendanceInput
     connect?: StudentWhereUniqueInput
     update?: XOR<XOR<StudentUpdateToOneWithWhereWithoutAttendanceInput, StudentUpdateWithoutAttendanceInput>, StudentUncheckedUpdateWithoutAttendanceInput>
+  }
+
+  export type SeatCreateNestedManyWithoutClassViewInput = {
+    create?: XOR<SeatCreateWithoutClassViewInput, SeatUncheckedCreateWithoutClassViewInput> | SeatCreateWithoutClassViewInput[] | SeatUncheckedCreateWithoutClassViewInput[]
+    connectOrCreate?: SeatCreateOrConnectWithoutClassViewInput | SeatCreateOrConnectWithoutClassViewInput[]
+    createMany?: SeatCreateManyClassViewInputEnvelope
+    connect?: SeatWhereUniqueInput | SeatWhereUniqueInput[]
+  }
+
+  export type ClsCreateNestedOneWithoutClassViewInput = {
+    create?: XOR<ClsCreateWithoutClassViewInput, ClsUncheckedCreateWithoutClassViewInput>
+    connectOrCreate?: ClsCreateOrConnectWithoutClassViewInput
+    connect?: ClsWhereUniqueInput
+  }
+
+  export type SeatUncheckedCreateNestedManyWithoutClassViewInput = {
+    create?: XOR<SeatCreateWithoutClassViewInput, SeatUncheckedCreateWithoutClassViewInput> | SeatCreateWithoutClassViewInput[] | SeatUncheckedCreateWithoutClassViewInput[]
+    connectOrCreate?: SeatCreateOrConnectWithoutClassViewInput | SeatCreateOrConnectWithoutClassViewInput[]
+    createMany?: SeatCreateManyClassViewInputEnvelope
+    connect?: SeatWhereUniqueInput | SeatWhereUniqueInput[]
+  }
+
+  export type SeatUpdateManyWithoutClassViewNestedInput = {
+    create?: XOR<SeatCreateWithoutClassViewInput, SeatUncheckedCreateWithoutClassViewInput> | SeatCreateWithoutClassViewInput[] | SeatUncheckedCreateWithoutClassViewInput[]
+    connectOrCreate?: SeatCreateOrConnectWithoutClassViewInput | SeatCreateOrConnectWithoutClassViewInput[]
+    upsert?: SeatUpsertWithWhereUniqueWithoutClassViewInput | SeatUpsertWithWhereUniqueWithoutClassViewInput[]
+    createMany?: SeatCreateManyClassViewInputEnvelope
+    set?: SeatWhereUniqueInput | SeatWhereUniqueInput[]
+    disconnect?: SeatWhereUniqueInput | SeatWhereUniqueInput[]
+    delete?: SeatWhereUniqueInput | SeatWhereUniqueInput[]
+    connect?: SeatWhereUniqueInput | SeatWhereUniqueInput[]
+    update?: SeatUpdateWithWhereUniqueWithoutClassViewInput | SeatUpdateWithWhereUniqueWithoutClassViewInput[]
+    updateMany?: SeatUpdateManyWithWhereWithoutClassViewInput | SeatUpdateManyWithWhereWithoutClassViewInput[]
+    deleteMany?: SeatScalarWhereInput | SeatScalarWhereInput[]
+  }
+
+  export type ClsUpdateOneRequiredWithoutClassViewNestedInput = {
+    create?: XOR<ClsCreateWithoutClassViewInput, ClsUncheckedCreateWithoutClassViewInput>
+    connectOrCreate?: ClsCreateOrConnectWithoutClassViewInput
+    upsert?: ClsUpsertWithoutClassViewInput
+    connect?: ClsWhereUniqueInput
+    update?: XOR<XOR<ClsUpdateToOneWithWhereWithoutClassViewInput, ClsUpdateWithoutClassViewInput>, ClsUncheckedUpdateWithoutClassViewInput>
+  }
+
+  export type SeatUncheckedUpdateManyWithoutClassViewNestedInput = {
+    create?: XOR<SeatCreateWithoutClassViewInput, SeatUncheckedCreateWithoutClassViewInput> | SeatCreateWithoutClassViewInput[] | SeatUncheckedCreateWithoutClassViewInput[]
+    connectOrCreate?: SeatCreateOrConnectWithoutClassViewInput | SeatCreateOrConnectWithoutClassViewInput[]
+    upsert?: SeatUpsertWithWhereUniqueWithoutClassViewInput | SeatUpsertWithWhereUniqueWithoutClassViewInput[]
+    createMany?: SeatCreateManyClassViewInputEnvelope
+    set?: SeatWhereUniqueInput | SeatWhereUniqueInput[]
+    disconnect?: SeatWhereUniqueInput | SeatWhereUniqueInput[]
+    delete?: SeatWhereUniqueInput | SeatWhereUniqueInput[]
+    connect?: SeatWhereUniqueInput | SeatWhereUniqueInput[]
+    update?: SeatUpdateWithWhereUniqueWithoutClassViewInput | SeatUpdateWithWhereUniqueWithoutClassViewInput[]
+    updateMany?: SeatUpdateManyWithWhereWithoutClassViewInput | SeatUpdateManyWithWhereWithoutClassViewInput[]
+    deleteMany?: SeatScalarWhereInput | SeatScalarWhereInput[]
+  }
+
+  export type ClassViewCreateNestedOneWithoutSeatInput = {
+    create?: XOR<ClassViewCreateWithoutSeatInput, ClassViewUncheckedCreateWithoutSeatInput>
+    connectOrCreate?: ClassViewCreateOrConnectWithoutSeatInput
+    connect?: ClassViewWhereUniqueInput
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type ClassViewUpdateOneRequiredWithoutSeatNestedInput = {
+    create?: XOR<ClassViewCreateWithoutSeatInput, ClassViewUncheckedCreateWithoutSeatInput>
+    connectOrCreate?: ClassViewCreateOrConnectWithoutSeatInput
+    upsert?: ClassViewUpsertWithoutSeatInput
+    connect?: ClassViewWhereUniqueInput
+    update?: XOR<XOR<ClassViewUpdateToOneWithWhereWithoutSeatInput, ClassViewUpdateWithoutSeatInput>, ClassViewUncheckedUpdateWithoutSeatInput>
+  }
+
+  export type DeskCreateNestedManyWithoutLayoutInput = {
+    create?: XOR<DeskCreateWithoutLayoutInput, DeskUncheckedCreateWithoutLayoutInput> | DeskCreateWithoutLayoutInput[] | DeskUncheckedCreateWithoutLayoutInput[]
+    connectOrCreate?: DeskCreateOrConnectWithoutLayoutInput | DeskCreateOrConnectWithoutLayoutInput[]
+    createMany?: DeskCreateManyLayoutInputEnvelope
+    connect?: DeskWhereUniqueInput | DeskWhereUniqueInput[]
+  }
+
+  export type ClsCreateNestedManyWithoutLayoutsInput = {
+    create?: XOR<ClsCreateWithoutLayoutsInput, ClsUncheckedCreateWithoutLayoutsInput> | ClsCreateWithoutLayoutsInput[] | ClsUncheckedCreateWithoutLayoutsInput[]
+    connectOrCreate?: ClsCreateOrConnectWithoutLayoutsInput | ClsCreateOrConnectWithoutLayoutsInput[]
+    connect?: ClsWhereUniqueInput | ClsWhereUniqueInput[]
+  }
+
+  export type DeskUncheckedCreateNestedManyWithoutLayoutInput = {
+    create?: XOR<DeskCreateWithoutLayoutInput, DeskUncheckedCreateWithoutLayoutInput> | DeskCreateWithoutLayoutInput[] | DeskUncheckedCreateWithoutLayoutInput[]
+    connectOrCreate?: DeskCreateOrConnectWithoutLayoutInput | DeskCreateOrConnectWithoutLayoutInput[]
+    createMany?: DeskCreateManyLayoutInputEnvelope
+    connect?: DeskWhereUniqueInput | DeskWhereUniqueInput[]
+  }
+
+  export type ClsUncheckedCreateNestedManyWithoutLayoutsInput = {
+    create?: XOR<ClsCreateWithoutLayoutsInput, ClsUncheckedCreateWithoutLayoutsInput> | ClsCreateWithoutLayoutsInput[] | ClsUncheckedCreateWithoutLayoutsInput[]
+    connectOrCreate?: ClsCreateOrConnectWithoutLayoutsInput | ClsCreateOrConnectWithoutLayoutsInput[]
+    connect?: ClsWhereUniqueInput | ClsWhereUniqueInput[]
+  }
+
+  export type DeskUpdateManyWithoutLayoutNestedInput = {
+    create?: XOR<DeskCreateWithoutLayoutInput, DeskUncheckedCreateWithoutLayoutInput> | DeskCreateWithoutLayoutInput[] | DeskUncheckedCreateWithoutLayoutInput[]
+    connectOrCreate?: DeskCreateOrConnectWithoutLayoutInput | DeskCreateOrConnectWithoutLayoutInput[]
+    upsert?: DeskUpsertWithWhereUniqueWithoutLayoutInput | DeskUpsertWithWhereUniqueWithoutLayoutInput[]
+    createMany?: DeskCreateManyLayoutInputEnvelope
+    set?: DeskWhereUniqueInput | DeskWhereUniqueInput[]
+    disconnect?: DeskWhereUniqueInput | DeskWhereUniqueInput[]
+    delete?: DeskWhereUniqueInput | DeskWhereUniqueInput[]
+    connect?: DeskWhereUniqueInput | DeskWhereUniqueInput[]
+    update?: DeskUpdateWithWhereUniqueWithoutLayoutInput | DeskUpdateWithWhereUniqueWithoutLayoutInput[]
+    updateMany?: DeskUpdateManyWithWhereWithoutLayoutInput | DeskUpdateManyWithWhereWithoutLayoutInput[]
+    deleteMany?: DeskScalarWhereInput | DeskScalarWhereInput[]
+  }
+
+  export type ClsUpdateManyWithoutLayoutsNestedInput = {
+    create?: XOR<ClsCreateWithoutLayoutsInput, ClsUncheckedCreateWithoutLayoutsInput> | ClsCreateWithoutLayoutsInput[] | ClsUncheckedCreateWithoutLayoutsInput[]
+    connectOrCreate?: ClsCreateOrConnectWithoutLayoutsInput | ClsCreateOrConnectWithoutLayoutsInput[]
+    upsert?: ClsUpsertWithWhereUniqueWithoutLayoutsInput | ClsUpsertWithWhereUniqueWithoutLayoutsInput[]
+    set?: ClsWhereUniqueInput | ClsWhereUniqueInput[]
+    disconnect?: ClsWhereUniqueInput | ClsWhereUniqueInput[]
+    delete?: ClsWhereUniqueInput | ClsWhereUniqueInput[]
+    connect?: ClsWhereUniqueInput | ClsWhereUniqueInput[]
+    update?: ClsUpdateWithWhereUniqueWithoutLayoutsInput | ClsUpdateWithWhereUniqueWithoutLayoutsInput[]
+    updateMany?: ClsUpdateManyWithWhereWithoutLayoutsInput | ClsUpdateManyWithWhereWithoutLayoutsInput[]
+    deleteMany?: ClsScalarWhereInput | ClsScalarWhereInput[]
+  }
+
+  export type DeskUncheckedUpdateManyWithoutLayoutNestedInput = {
+    create?: XOR<DeskCreateWithoutLayoutInput, DeskUncheckedCreateWithoutLayoutInput> | DeskCreateWithoutLayoutInput[] | DeskUncheckedCreateWithoutLayoutInput[]
+    connectOrCreate?: DeskCreateOrConnectWithoutLayoutInput | DeskCreateOrConnectWithoutLayoutInput[]
+    upsert?: DeskUpsertWithWhereUniqueWithoutLayoutInput | DeskUpsertWithWhereUniqueWithoutLayoutInput[]
+    createMany?: DeskCreateManyLayoutInputEnvelope
+    set?: DeskWhereUniqueInput | DeskWhereUniqueInput[]
+    disconnect?: DeskWhereUniqueInput | DeskWhereUniqueInput[]
+    delete?: DeskWhereUniqueInput | DeskWhereUniqueInput[]
+    connect?: DeskWhereUniqueInput | DeskWhereUniqueInput[]
+    update?: DeskUpdateWithWhereUniqueWithoutLayoutInput | DeskUpdateWithWhereUniqueWithoutLayoutInput[]
+    updateMany?: DeskUpdateManyWithWhereWithoutLayoutInput | DeskUpdateManyWithWhereWithoutLayoutInput[]
+    deleteMany?: DeskScalarWhereInput | DeskScalarWhereInput[]
+  }
+
+  export type ClsUncheckedUpdateManyWithoutLayoutsNestedInput = {
+    create?: XOR<ClsCreateWithoutLayoutsInput, ClsUncheckedCreateWithoutLayoutsInput> | ClsCreateWithoutLayoutsInput[] | ClsUncheckedCreateWithoutLayoutsInput[]
+    connectOrCreate?: ClsCreateOrConnectWithoutLayoutsInput | ClsCreateOrConnectWithoutLayoutsInput[]
+    upsert?: ClsUpsertWithWhereUniqueWithoutLayoutsInput | ClsUpsertWithWhereUniqueWithoutLayoutsInput[]
+    set?: ClsWhereUniqueInput | ClsWhereUniqueInput[]
+    disconnect?: ClsWhereUniqueInput | ClsWhereUniqueInput[]
+    delete?: ClsWhereUniqueInput | ClsWhereUniqueInput[]
+    connect?: ClsWhereUniqueInput | ClsWhereUniqueInput[]
+    update?: ClsUpdateWithWhereUniqueWithoutLayoutsInput | ClsUpdateWithWhereUniqueWithoutLayoutsInput[]
+    updateMany?: ClsUpdateManyWithWhereWithoutLayoutsInput | ClsUpdateManyWithWhereWithoutLayoutsInput[]
+    deleteMany?: ClsScalarWhereInput | ClsScalarWhereInput[]
+  }
+
+  export type LayoutCreateNestedOneWithoutDesksInput = {
+    create?: XOR<LayoutCreateWithoutDesksInput, LayoutUncheckedCreateWithoutDesksInput>
+    connectOrCreate?: LayoutCreateOrConnectWithoutDesksInput
+    connect?: LayoutWhereUniqueInput
+  }
+
+  export type SeatingPlanCreateNestedOneWithoutDeskInput = {
+    create?: XOR<SeatingPlanCreateWithoutDeskInput, SeatingPlanUncheckedCreateWithoutDeskInput>
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutDeskInput
+    connect?: SeatingPlanWhereUniqueInput
+  }
+
+  export type SeatingPlanUncheckedCreateNestedOneWithoutDeskInput = {
+    create?: XOR<SeatingPlanCreateWithoutDeskInput, SeatingPlanUncheckedCreateWithoutDeskInput>
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutDeskInput
+    connect?: SeatingPlanWhereUniqueInput
+  }
+
+  export type LayoutUpdateOneRequiredWithoutDesksNestedInput = {
+    create?: XOR<LayoutCreateWithoutDesksInput, LayoutUncheckedCreateWithoutDesksInput>
+    connectOrCreate?: LayoutCreateOrConnectWithoutDesksInput
+    upsert?: LayoutUpsertWithoutDesksInput
+    connect?: LayoutWhereUniqueInput
+    update?: XOR<XOR<LayoutUpdateToOneWithWhereWithoutDesksInput, LayoutUpdateWithoutDesksInput>, LayoutUncheckedUpdateWithoutDesksInput>
+  }
+
+  export type SeatingPlanUpdateOneWithoutDeskNestedInput = {
+    create?: XOR<SeatingPlanCreateWithoutDeskInput, SeatingPlanUncheckedCreateWithoutDeskInput>
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutDeskInput
+    upsert?: SeatingPlanUpsertWithoutDeskInput
+    disconnect?: SeatingPlanWhereInput | boolean
+    delete?: SeatingPlanWhereInput | boolean
+    connect?: SeatingPlanWhereUniqueInput
+    update?: XOR<XOR<SeatingPlanUpdateToOneWithWhereWithoutDeskInput, SeatingPlanUpdateWithoutDeskInput>, SeatingPlanUncheckedUpdateWithoutDeskInput>
+  }
+
+  export type SeatingPlanUncheckedUpdateOneWithoutDeskNestedInput = {
+    create?: XOR<SeatingPlanCreateWithoutDeskInput, SeatingPlanUncheckedCreateWithoutDeskInput>
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutDeskInput
+    upsert?: SeatingPlanUpsertWithoutDeskInput
+    disconnect?: SeatingPlanWhereInput | boolean
+    delete?: SeatingPlanWhereInput | boolean
+    connect?: SeatingPlanWhereUniqueInput
+    update?: XOR<XOR<SeatingPlanUpdateToOneWithWhereWithoutDeskInput, SeatingPlanUpdateWithoutDeskInput>, SeatingPlanUncheckedUpdateWithoutDeskInput>
+  }
+
+  export type DeskCreateNestedOneWithoutSeatingPlanInput = {
+    create?: XOR<DeskCreateWithoutSeatingPlanInput, DeskUncheckedCreateWithoutSeatingPlanInput>
+    connectOrCreate?: DeskCreateOrConnectWithoutSeatingPlanInput
+    connect?: DeskWhereUniqueInput
+  }
+
+  export type StudentCreateNestedOneWithoutSeatingPlanInput = {
+    create?: XOR<StudentCreateWithoutSeatingPlanInput, StudentUncheckedCreateWithoutSeatingPlanInput>
+    connectOrCreate?: StudentCreateOrConnectWithoutSeatingPlanInput
+    connect?: StudentWhereUniqueInput
+  }
+
+  export type DeskUpdateOneRequiredWithoutSeatingPlanNestedInput = {
+    create?: XOR<DeskCreateWithoutSeatingPlanInput, DeskUncheckedCreateWithoutSeatingPlanInput>
+    connectOrCreate?: DeskCreateOrConnectWithoutSeatingPlanInput
+    upsert?: DeskUpsertWithoutSeatingPlanInput
+    connect?: DeskWhereUniqueInput
+    update?: XOR<XOR<DeskUpdateToOneWithWhereWithoutSeatingPlanInput, DeskUpdateWithoutSeatingPlanInput>, DeskUncheckedUpdateWithoutSeatingPlanInput>
+  }
+
+  export type StudentUpdateOneRequiredWithoutSeatingPlanNestedInput = {
+    create?: XOR<StudentCreateWithoutSeatingPlanInput, StudentUncheckedCreateWithoutSeatingPlanInput>
+    connectOrCreate?: StudentCreateOrConnectWithoutSeatingPlanInput
+    upsert?: StudentUpsertWithoutSeatingPlanInput
+    connect?: StudentWhereUniqueInput
+    update?: XOR<XOR<StudentUpdateToOneWithWhereWithoutSeatingPlanInput, StudentUpdateWithoutSeatingPlanInput>, StudentUncheckedUpdateWithoutSeatingPlanInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -11878,15 +18606,33 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
   export type StudentCreateWithoutUserInput = {
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
     cls: ClsCreateNestedOneWithoutStudentsInput
+    seatingPlan?: SeatingPlanCreateNestedOneWithoutStudentInput
   }
 
   export type StudentUncheckedCreateWithoutUserInput = {
     id?: number
     classId: number
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    seatingPlan?: SeatingPlanUncheckedCreateNestedOneWithoutStudentInput
   }
 
   export type StudentCreateOrConnectWithoutUserInput = {
@@ -11938,12 +18684,14 @@ export namespace Prisma {
   export type StudentUpdateWithoutUserInput = {
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
     cls?: ClsUpdateOneRequiredWithoutStudentsNestedInput
+    seatingPlan?: SeatingPlanUpdateOneWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     classId?: IntFieldUpdateOperationsInput | number
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    seatingPlan?: SeatingPlanUncheckedUpdateOneWithoutStudentNestedInput
   }
 
   export type TeacherUpsertWithoutUserInput = {
@@ -12047,6 +18795,8 @@ export namespace Prisma {
     register?: RegisterCreateNestedManyWithoutClsInput
     students?: StudentCreateNestedManyWithoutClsInput
     timetable?: TimetableCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewCreateNestedManyWithoutClsInput
+    layouts?: LayoutCreateNestedManyWithoutClassesInput
   }
 
   export type ClsUncheckedCreateWithoutTeacherInput = {
@@ -12055,6 +18805,8 @@ export namespace Prisma {
     register?: RegisterUncheckedCreateNestedManyWithoutClsInput
     students?: StudentUncheckedCreateNestedManyWithoutClsInput
     timetable?: TimetableUncheckedCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewUncheckedCreateNestedManyWithoutClsInput
+    layouts?: LayoutUncheckedCreateNestedManyWithoutClassesInput
   }
 
   export type ClsCreateOrConnectWithoutTeacherInput = {
@@ -12226,6 +18978,8 @@ export namespace Prisma {
     teacher?: TeacherCreateNestedOneWithoutClassesInput
     register?: RegisterCreateNestedManyWithoutClsInput
     timetable?: TimetableCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewCreateNestedManyWithoutClsInput
+    layouts?: LayoutCreateNestedManyWithoutClassesInput
   }
 
   export type ClsUncheckedCreateWithoutStudentsInput = {
@@ -12234,6 +18988,8 @@ export namespace Prisma {
     teacherId?: number | null
     register?: RegisterUncheckedCreateNestedManyWithoutClsInput
     timetable?: TimetableUncheckedCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewUncheckedCreateNestedManyWithoutClsInput
+    layouts?: LayoutUncheckedCreateNestedManyWithoutClassesInput
   }
 
   export type ClsCreateOrConnectWithoutStudentsInput = {
@@ -12261,6 +19017,24 @@ export namespace Prisma {
   export type UserCreateOrConnectWithoutStudentInput = {
     where: UserWhereUniqueInput
     create: XOR<UserCreateWithoutStudentInput, UserUncheckedCreateWithoutStudentInput>
+  }
+
+  export type SeatingPlanCreateWithoutStudentInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    desk: DeskCreateNestedOneWithoutSeatingPlanInput
+  }
+
+  export type SeatingPlanUncheckedCreateWithoutStudentInput = {
+    id?: number
+    deskId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SeatingPlanCreateOrConnectWithoutStudentInput = {
+    where: SeatingPlanWhereUniqueInput
+    create: XOR<SeatingPlanCreateWithoutStudentInput, SeatingPlanUncheckedCreateWithoutStudentInput>
   }
 
   export type AttendanceUpsertWithWhereUniqueWithoutStudentInput = {
@@ -12308,6 +19082,8 @@ export namespace Prisma {
     teacher?: TeacherUpdateOneWithoutClassesNestedInput
     register?: RegisterUpdateManyWithoutClsNestedInput
     timetable?: TimetableUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUpdateManyWithoutClassesNestedInput
   }
 
   export type ClsUncheckedUpdateWithoutStudentsInput = {
@@ -12316,6 +19092,8 @@ export namespace Prisma {
     teacherId?: NullableIntFieldUpdateOperationsInput | number | null
     register?: RegisterUncheckedUpdateManyWithoutClsNestedInput
     timetable?: TimetableUncheckedUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUncheckedUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUncheckedUpdateManyWithoutClassesNestedInput
   }
 
   export type UserUpsertWithoutStudentInput = {
@@ -12344,6 +19122,30 @@ export namespace Prisma {
     password?: StringFieldUpdateOperationsInput | string
     roleId?: IntFieldUpdateOperationsInput | number
     Teacher?: TeacherUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type SeatingPlanUpsertWithoutStudentInput = {
+    update: XOR<SeatingPlanUpdateWithoutStudentInput, SeatingPlanUncheckedUpdateWithoutStudentInput>
+    create: XOR<SeatingPlanCreateWithoutStudentInput, SeatingPlanUncheckedCreateWithoutStudentInput>
+    where?: SeatingPlanWhereInput
+  }
+
+  export type SeatingPlanUpdateToOneWithWhereWithoutStudentInput = {
+    where?: SeatingPlanWhereInput
+    data: XOR<SeatingPlanUpdateWithoutStudentInput, SeatingPlanUncheckedUpdateWithoutStudentInput>
+  }
+
+  export type SeatingPlanUpdateWithoutStudentInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    desk?: DeskUpdateOneRequiredWithoutSeatingPlanNestedInput
+  }
+
+  export type SeatingPlanUncheckedUpdateWithoutStudentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    deskId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TeacherCreateWithoutClassesInput = {
@@ -12390,12 +19192,14 @@ export namespace Prisma {
   export type StudentCreateWithoutClsInput = {
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
     user: UserCreateNestedOneWithoutStudentInput
+    seatingPlan?: SeatingPlanCreateNestedOneWithoutStudentInput
   }
 
   export type StudentUncheckedCreateWithoutClsInput = {
     id?: number
     userId: number
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+    seatingPlan?: SeatingPlanUncheckedCreateNestedOneWithoutStudentInput
   }
 
   export type StudentCreateOrConnectWithoutClsInput = {
@@ -12429,6 +19233,45 @@ export namespace Prisma {
   export type TimetableCreateManyClsInputEnvelope = {
     data: TimetableCreateManyClsInput | TimetableCreateManyClsInput[]
     skipDuplicates?: boolean
+  }
+
+  export type ClassViewCreateWithoutClsInput = {
+    seat?: SeatCreateNestedManyWithoutClassViewInput
+  }
+
+  export type ClassViewUncheckedCreateWithoutClsInput = {
+    id?: number
+    seat?: SeatUncheckedCreateNestedManyWithoutClassViewInput
+  }
+
+  export type ClassViewCreateOrConnectWithoutClsInput = {
+    where: ClassViewWhereUniqueInput
+    create: XOR<ClassViewCreateWithoutClsInput, ClassViewUncheckedCreateWithoutClsInput>
+  }
+
+  export type ClassViewCreateManyClsInputEnvelope = {
+    data: ClassViewCreateManyClsInput | ClassViewCreateManyClsInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LayoutCreateWithoutClassesInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    desks?: DeskCreateNestedManyWithoutLayoutInput
+  }
+
+  export type LayoutUncheckedCreateWithoutClassesInput = {
+    id?: number
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    desks?: DeskUncheckedCreateNestedManyWithoutLayoutInput
+  }
+
+  export type LayoutCreateOrConnectWithoutClassesInput = {
+    where: LayoutWhereUniqueInput
+    create: XOR<LayoutCreateWithoutClassesInput, LayoutUncheckedCreateWithoutClassesInput>
   }
 
   export type TeacherUpsertWithoutClassesInput = {
@@ -12521,11 +19364,63 @@ export namespace Prisma {
     endTime?: DateTimeFilter<"Timetable"> | Date | string
   }
 
+  export type ClassViewUpsertWithWhereUniqueWithoutClsInput = {
+    where: ClassViewWhereUniqueInput
+    update: XOR<ClassViewUpdateWithoutClsInput, ClassViewUncheckedUpdateWithoutClsInput>
+    create: XOR<ClassViewCreateWithoutClsInput, ClassViewUncheckedCreateWithoutClsInput>
+  }
+
+  export type ClassViewUpdateWithWhereUniqueWithoutClsInput = {
+    where: ClassViewWhereUniqueInput
+    data: XOR<ClassViewUpdateWithoutClsInput, ClassViewUncheckedUpdateWithoutClsInput>
+  }
+
+  export type ClassViewUpdateManyWithWhereWithoutClsInput = {
+    where: ClassViewScalarWhereInput
+    data: XOR<ClassViewUpdateManyMutationInput, ClassViewUncheckedUpdateManyWithoutClsInput>
+  }
+
+  export type ClassViewScalarWhereInput = {
+    AND?: ClassViewScalarWhereInput | ClassViewScalarWhereInput[]
+    OR?: ClassViewScalarWhereInput[]
+    NOT?: ClassViewScalarWhereInput | ClassViewScalarWhereInput[]
+    id?: IntFilter<"ClassView"> | number
+    classId?: IntFilter<"ClassView"> | number
+  }
+
+  export type LayoutUpsertWithWhereUniqueWithoutClassesInput = {
+    where: LayoutWhereUniqueInput
+    update: XOR<LayoutUpdateWithoutClassesInput, LayoutUncheckedUpdateWithoutClassesInput>
+    create: XOR<LayoutCreateWithoutClassesInput, LayoutUncheckedCreateWithoutClassesInput>
+  }
+
+  export type LayoutUpdateWithWhereUniqueWithoutClassesInput = {
+    where: LayoutWhereUniqueInput
+    data: XOR<LayoutUpdateWithoutClassesInput, LayoutUncheckedUpdateWithoutClassesInput>
+  }
+
+  export type LayoutUpdateManyWithWhereWithoutClassesInput = {
+    where: LayoutScalarWhereInput
+    data: XOR<LayoutUpdateManyMutationInput, LayoutUncheckedUpdateManyWithoutClassesInput>
+  }
+
+  export type LayoutScalarWhereInput = {
+    AND?: LayoutScalarWhereInput | LayoutScalarWhereInput[]
+    OR?: LayoutScalarWhereInput[]
+    NOT?: LayoutScalarWhereInput | LayoutScalarWhereInput[]
+    id?: IntFilter<"Layout"> | number
+    name?: StringFilter<"Layout"> | string
+    createdAt?: DateTimeFilter<"Layout"> | Date | string
+    updatedAt?: DateTimeFilter<"Layout"> | Date | string
+  }
+
   export type ClsCreateWithoutTimetableInput = {
     name: string
     teacher?: TeacherCreateNestedOneWithoutClassesInput
     register?: RegisterCreateNestedManyWithoutClsInput
     students?: StudentCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewCreateNestedManyWithoutClsInput
+    layouts?: LayoutCreateNestedManyWithoutClassesInput
   }
 
   export type ClsUncheckedCreateWithoutTimetableInput = {
@@ -12534,6 +19429,8 @@ export namespace Prisma {
     teacherId?: number | null
     register?: RegisterUncheckedCreateNestedManyWithoutClsInput
     students?: StudentUncheckedCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewUncheckedCreateNestedManyWithoutClsInput
+    layouts?: LayoutUncheckedCreateNestedManyWithoutClassesInput
   }
 
   export type ClsCreateOrConnectWithoutTimetableInput = {
@@ -12557,6 +19454,8 @@ export namespace Prisma {
     teacher?: TeacherUpdateOneWithoutClassesNestedInput
     register?: RegisterUpdateManyWithoutClsNestedInput
     students?: StudentUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUpdateManyWithoutClassesNestedInput
   }
 
   export type ClsUncheckedUpdateWithoutTimetableInput = {
@@ -12565,6 +19464,8 @@ export namespace Prisma {
     teacherId?: NullableIntFieldUpdateOperationsInput | number | null
     register?: RegisterUncheckedUpdateManyWithoutClsNestedInput
     students?: StudentUncheckedUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUncheckedUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUncheckedUpdateManyWithoutClassesNestedInput
   }
 
   export type AttendanceCreateWithoutRegisterInput = {
@@ -12599,6 +19500,8 @@ export namespace Prisma {
     teacher?: TeacherCreateNestedOneWithoutClassesInput
     students?: StudentCreateNestedManyWithoutClsInput
     timetable?: TimetableCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewCreateNestedManyWithoutClsInput
+    layouts?: LayoutCreateNestedManyWithoutClassesInput
   }
 
   export type ClsUncheckedCreateWithoutRegisterInput = {
@@ -12607,6 +19510,8 @@ export namespace Prisma {
     teacherId?: number | null
     students?: StudentUncheckedCreateNestedManyWithoutClsInput
     timetable?: TimetableUncheckedCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewUncheckedCreateNestedManyWithoutClsInput
+    layouts?: LayoutUncheckedCreateNestedManyWithoutClassesInput
   }
 
   export type ClsCreateOrConnectWithoutRegisterInput = {
@@ -12662,6 +19567,8 @@ export namespace Prisma {
     teacher?: TeacherUpdateOneWithoutClassesNestedInput
     students?: StudentUpdateManyWithoutClsNestedInput
     timetable?: TimetableUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUpdateManyWithoutClassesNestedInput
   }
 
   export type ClsUncheckedUpdateWithoutRegisterInput = {
@@ -12670,6 +19577,8 @@ export namespace Prisma {
     teacherId?: NullableIntFieldUpdateOperationsInput | number | null
     students?: StudentUncheckedUpdateManyWithoutClsNestedInput
     timetable?: TimetableUncheckedUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUncheckedUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUncheckedUpdateManyWithoutClassesNestedInput
   }
 
   export type TeacherUpsertWithoutRegisterInput = {
@@ -12717,12 +19626,14 @@ export namespace Prisma {
   export type StudentCreateWithoutAttendanceInput = {
     cls: ClsCreateNestedOneWithoutStudentsInput
     user: UserCreateNestedOneWithoutStudentInput
+    seatingPlan?: SeatingPlanCreateNestedOneWithoutStudentInput
   }
 
   export type StudentUncheckedCreateWithoutAttendanceInput = {
     id?: number
     userId: number
     classId: number
+    seatingPlan?: SeatingPlanUncheckedCreateNestedOneWithoutStudentInput
   }
 
   export type StudentCreateOrConnectWithoutAttendanceInput = {
@@ -12770,12 +19681,427 @@ export namespace Prisma {
   export type StudentUpdateWithoutAttendanceInput = {
     cls?: ClsUpdateOneRequiredWithoutStudentsNestedInput
     user?: UserUpdateOneRequiredWithoutStudentNestedInput
+    seatingPlan?: SeatingPlanUpdateOneWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateWithoutAttendanceInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     classId?: IntFieldUpdateOperationsInput | number
+    seatingPlan?: SeatingPlanUncheckedUpdateOneWithoutStudentNestedInput
+  }
+
+  export type SeatCreateWithoutClassViewInput = {
+    studentId: number
+    coordinates_X: number
+    coordinates_y: number
+  }
+
+  export type SeatUncheckedCreateWithoutClassViewInput = {
+    id?: number
+    studentId: number
+    coordinates_X: number
+    coordinates_y: number
+  }
+
+  export type SeatCreateOrConnectWithoutClassViewInput = {
+    where: SeatWhereUniqueInput
+    create: XOR<SeatCreateWithoutClassViewInput, SeatUncheckedCreateWithoutClassViewInput>
+  }
+
+  export type SeatCreateManyClassViewInputEnvelope = {
+    data: SeatCreateManyClassViewInput | SeatCreateManyClassViewInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClsCreateWithoutClassViewInput = {
+    name: string
+    teacher?: TeacherCreateNestedOneWithoutClassesInput
+    register?: RegisterCreateNestedManyWithoutClsInput
+    students?: StudentCreateNestedManyWithoutClsInput
+    timetable?: TimetableCreateNestedManyWithoutClsInput
+    layouts?: LayoutCreateNestedManyWithoutClassesInput
+  }
+
+  export type ClsUncheckedCreateWithoutClassViewInput = {
+    id?: number
+    name: string
+    teacherId?: number | null
+    register?: RegisterUncheckedCreateNestedManyWithoutClsInput
+    students?: StudentUncheckedCreateNestedManyWithoutClsInput
+    timetable?: TimetableUncheckedCreateNestedManyWithoutClsInput
+    layouts?: LayoutUncheckedCreateNestedManyWithoutClassesInput
+  }
+
+  export type ClsCreateOrConnectWithoutClassViewInput = {
+    where: ClsWhereUniqueInput
+    create: XOR<ClsCreateWithoutClassViewInput, ClsUncheckedCreateWithoutClassViewInput>
+  }
+
+  export type SeatUpsertWithWhereUniqueWithoutClassViewInput = {
+    where: SeatWhereUniqueInput
+    update: XOR<SeatUpdateWithoutClassViewInput, SeatUncheckedUpdateWithoutClassViewInput>
+    create: XOR<SeatCreateWithoutClassViewInput, SeatUncheckedCreateWithoutClassViewInput>
+  }
+
+  export type SeatUpdateWithWhereUniqueWithoutClassViewInput = {
+    where: SeatWhereUniqueInput
+    data: XOR<SeatUpdateWithoutClassViewInput, SeatUncheckedUpdateWithoutClassViewInput>
+  }
+
+  export type SeatUpdateManyWithWhereWithoutClassViewInput = {
+    where: SeatScalarWhereInput
+    data: XOR<SeatUpdateManyMutationInput, SeatUncheckedUpdateManyWithoutClassViewInput>
+  }
+
+  export type SeatScalarWhereInput = {
+    AND?: SeatScalarWhereInput | SeatScalarWhereInput[]
+    OR?: SeatScalarWhereInput[]
+    NOT?: SeatScalarWhereInput | SeatScalarWhereInput[]
+    id?: IntFilter<"Seat"> | number
+    classViewId?: IntFilter<"Seat"> | number
+    studentId?: IntFilter<"Seat"> | number
+    coordinates_X?: FloatFilter<"Seat"> | number
+    coordinates_y?: FloatFilter<"Seat"> | number
+  }
+
+  export type ClsUpsertWithoutClassViewInput = {
+    update: XOR<ClsUpdateWithoutClassViewInput, ClsUncheckedUpdateWithoutClassViewInput>
+    create: XOR<ClsCreateWithoutClassViewInput, ClsUncheckedCreateWithoutClassViewInput>
+    where?: ClsWhereInput
+  }
+
+  export type ClsUpdateToOneWithWhereWithoutClassViewInput = {
+    where?: ClsWhereInput
+    data: XOR<ClsUpdateWithoutClassViewInput, ClsUncheckedUpdateWithoutClassViewInput>
+  }
+
+  export type ClsUpdateWithoutClassViewInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    teacher?: TeacherUpdateOneWithoutClassesNestedInput
+    register?: RegisterUpdateManyWithoutClsNestedInput
+    students?: StudentUpdateManyWithoutClsNestedInput
+    timetable?: TimetableUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUpdateManyWithoutClassesNestedInput
+  }
+
+  export type ClsUncheckedUpdateWithoutClassViewInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    teacherId?: NullableIntFieldUpdateOperationsInput | number | null
+    register?: RegisterUncheckedUpdateManyWithoutClsNestedInput
+    students?: StudentUncheckedUpdateManyWithoutClsNestedInput
+    timetable?: TimetableUncheckedUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUncheckedUpdateManyWithoutClassesNestedInput
+  }
+
+  export type ClassViewCreateWithoutSeatInput = {
+    cls: ClsCreateNestedOneWithoutClassViewInput
+  }
+
+  export type ClassViewUncheckedCreateWithoutSeatInput = {
+    id?: number
+    classId: number
+  }
+
+  export type ClassViewCreateOrConnectWithoutSeatInput = {
+    where: ClassViewWhereUniqueInput
+    create: XOR<ClassViewCreateWithoutSeatInput, ClassViewUncheckedCreateWithoutSeatInput>
+  }
+
+  export type ClassViewUpsertWithoutSeatInput = {
+    update: XOR<ClassViewUpdateWithoutSeatInput, ClassViewUncheckedUpdateWithoutSeatInput>
+    create: XOR<ClassViewCreateWithoutSeatInput, ClassViewUncheckedCreateWithoutSeatInput>
+    where?: ClassViewWhereInput
+  }
+
+  export type ClassViewUpdateToOneWithWhereWithoutSeatInput = {
+    where?: ClassViewWhereInput
+    data: XOR<ClassViewUpdateWithoutSeatInput, ClassViewUncheckedUpdateWithoutSeatInput>
+  }
+
+  export type ClassViewUpdateWithoutSeatInput = {
+    cls?: ClsUpdateOneRequiredWithoutClassViewNestedInput
+  }
+
+  export type ClassViewUncheckedUpdateWithoutSeatInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    classId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type DeskCreateWithoutLayoutInput = {
+    x: number
+    y: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seatingPlan?: SeatingPlanCreateNestedOneWithoutDeskInput
+  }
+
+  export type DeskUncheckedCreateWithoutLayoutInput = {
+    id?: number
+    x: number
+    y: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seatingPlan?: SeatingPlanUncheckedCreateNestedOneWithoutDeskInput
+  }
+
+  export type DeskCreateOrConnectWithoutLayoutInput = {
+    where: DeskWhereUniqueInput
+    create: XOR<DeskCreateWithoutLayoutInput, DeskUncheckedCreateWithoutLayoutInput>
+  }
+
+  export type DeskCreateManyLayoutInputEnvelope = {
+    data: DeskCreateManyLayoutInput | DeskCreateManyLayoutInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClsCreateWithoutLayoutsInput = {
+    name: string
+    teacher?: TeacherCreateNestedOneWithoutClassesInput
+    register?: RegisterCreateNestedManyWithoutClsInput
+    students?: StudentCreateNestedManyWithoutClsInput
+    timetable?: TimetableCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewCreateNestedManyWithoutClsInput
+  }
+
+  export type ClsUncheckedCreateWithoutLayoutsInput = {
+    id?: number
+    name: string
+    teacherId?: number | null
+    register?: RegisterUncheckedCreateNestedManyWithoutClsInput
+    students?: StudentUncheckedCreateNestedManyWithoutClsInput
+    timetable?: TimetableUncheckedCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewUncheckedCreateNestedManyWithoutClsInput
+  }
+
+  export type ClsCreateOrConnectWithoutLayoutsInput = {
+    where: ClsWhereUniqueInput
+    create: XOR<ClsCreateWithoutLayoutsInput, ClsUncheckedCreateWithoutLayoutsInput>
+  }
+
+  export type DeskUpsertWithWhereUniqueWithoutLayoutInput = {
+    where: DeskWhereUniqueInput
+    update: XOR<DeskUpdateWithoutLayoutInput, DeskUncheckedUpdateWithoutLayoutInput>
+    create: XOR<DeskCreateWithoutLayoutInput, DeskUncheckedCreateWithoutLayoutInput>
+  }
+
+  export type DeskUpdateWithWhereUniqueWithoutLayoutInput = {
+    where: DeskWhereUniqueInput
+    data: XOR<DeskUpdateWithoutLayoutInput, DeskUncheckedUpdateWithoutLayoutInput>
+  }
+
+  export type DeskUpdateManyWithWhereWithoutLayoutInput = {
+    where: DeskScalarWhereInput
+    data: XOR<DeskUpdateManyMutationInput, DeskUncheckedUpdateManyWithoutLayoutInput>
+  }
+
+  export type DeskScalarWhereInput = {
+    AND?: DeskScalarWhereInput | DeskScalarWhereInput[]
+    OR?: DeskScalarWhereInput[]
+    NOT?: DeskScalarWhereInput | DeskScalarWhereInput[]
+    id?: IntFilter<"Desk"> | number
+    layoutId?: IntFilter<"Desk"> | number
+    x?: FloatFilter<"Desk"> | number
+    y?: FloatFilter<"Desk"> | number
+    createdAt?: DateTimeFilter<"Desk"> | Date | string
+    updatedAt?: DateTimeFilter<"Desk"> | Date | string
+  }
+
+  export type ClsUpsertWithWhereUniqueWithoutLayoutsInput = {
+    where: ClsWhereUniqueInput
+    update: XOR<ClsUpdateWithoutLayoutsInput, ClsUncheckedUpdateWithoutLayoutsInput>
+    create: XOR<ClsCreateWithoutLayoutsInput, ClsUncheckedCreateWithoutLayoutsInput>
+  }
+
+  export type ClsUpdateWithWhereUniqueWithoutLayoutsInput = {
+    where: ClsWhereUniqueInput
+    data: XOR<ClsUpdateWithoutLayoutsInput, ClsUncheckedUpdateWithoutLayoutsInput>
+  }
+
+  export type ClsUpdateManyWithWhereWithoutLayoutsInput = {
+    where: ClsScalarWhereInput
+    data: XOR<ClsUpdateManyMutationInput, ClsUncheckedUpdateManyWithoutLayoutsInput>
+  }
+
+  export type LayoutCreateWithoutDesksInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    classes?: ClsCreateNestedManyWithoutLayoutsInput
+  }
+
+  export type LayoutUncheckedCreateWithoutDesksInput = {
+    id?: number
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    classes?: ClsUncheckedCreateNestedManyWithoutLayoutsInput
+  }
+
+  export type LayoutCreateOrConnectWithoutDesksInput = {
+    where: LayoutWhereUniqueInput
+    create: XOR<LayoutCreateWithoutDesksInput, LayoutUncheckedCreateWithoutDesksInput>
+  }
+
+  export type SeatingPlanCreateWithoutDeskInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    student: StudentCreateNestedOneWithoutSeatingPlanInput
+  }
+
+  export type SeatingPlanUncheckedCreateWithoutDeskInput = {
+    id?: number
+    studentId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SeatingPlanCreateOrConnectWithoutDeskInput = {
+    where: SeatingPlanWhereUniqueInput
+    create: XOR<SeatingPlanCreateWithoutDeskInput, SeatingPlanUncheckedCreateWithoutDeskInput>
+  }
+
+  export type LayoutUpsertWithoutDesksInput = {
+    update: XOR<LayoutUpdateWithoutDesksInput, LayoutUncheckedUpdateWithoutDesksInput>
+    create: XOR<LayoutCreateWithoutDesksInput, LayoutUncheckedCreateWithoutDesksInput>
+    where?: LayoutWhereInput
+  }
+
+  export type LayoutUpdateToOneWithWhereWithoutDesksInput = {
+    where?: LayoutWhereInput
+    data: XOR<LayoutUpdateWithoutDesksInput, LayoutUncheckedUpdateWithoutDesksInput>
+  }
+
+  export type LayoutUpdateWithoutDesksInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    classes?: ClsUpdateManyWithoutLayoutsNestedInput
+  }
+
+  export type LayoutUncheckedUpdateWithoutDesksInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    classes?: ClsUncheckedUpdateManyWithoutLayoutsNestedInput
+  }
+
+  export type SeatingPlanUpsertWithoutDeskInput = {
+    update: XOR<SeatingPlanUpdateWithoutDeskInput, SeatingPlanUncheckedUpdateWithoutDeskInput>
+    create: XOR<SeatingPlanCreateWithoutDeskInput, SeatingPlanUncheckedCreateWithoutDeskInput>
+    where?: SeatingPlanWhereInput
+  }
+
+  export type SeatingPlanUpdateToOneWithWhereWithoutDeskInput = {
+    where?: SeatingPlanWhereInput
+    data: XOR<SeatingPlanUpdateWithoutDeskInput, SeatingPlanUncheckedUpdateWithoutDeskInput>
+  }
+
+  export type SeatingPlanUpdateWithoutDeskInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    student?: StudentUpdateOneRequiredWithoutSeatingPlanNestedInput
+  }
+
+  export type SeatingPlanUncheckedUpdateWithoutDeskInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeskCreateWithoutSeatingPlanInput = {
+    x: number
+    y: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    layout: LayoutCreateNestedOneWithoutDesksInput
+  }
+
+  export type DeskUncheckedCreateWithoutSeatingPlanInput = {
+    id?: number
+    layoutId: number
+    x: number
+    y: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DeskCreateOrConnectWithoutSeatingPlanInput = {
+    where: DeskWhereUniqueInput
+    create: XOR<DeskCreateWithoutSeatingPlanInput, DeskUncheckedCreateWithoutSeatingPlanInput>
+  }
+
+  export type StudentCreateWithoutSeatingPlanInput = {
+    Attendance?: AttendanceCreateNestedManyWithoutStudentInput
+    cls: ClsCreateNestedOneWithoutStudentsInput
+    user: UserCreateNestedOneWithoutStudentInput
+  }
+
+  export type StudentUncheckedCreateWithoutSeatingPlanInput = {
+    id?: number
+    userId: number
+    classId: number
+    Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
+  }
+
+  export type StudentCreateOrConnectWithoutSeatingPlanInput = {
+    where: StudentWhereUniqueInput
+    create: XOR<StudentCreateWithoutSeatingPlanInput, StudentUncheckedCreateWithoutSeatingPlanInput>
+  }
+
+  export type DeskUpsertWithoutSeatingPlanInput = {
+    update: XOR<DeskUpdateWithoutSeatingPlanInput, DeskUncheckedUpdateWithoutSeatingPlanInput>
+    create: XOR<DeskCreateWithoutSeatingPlanInput, DeskUncheckedCreateWithoutSeatingPlanInput>
+    where?: DeskWhereInput
+  }
+
+  export type DeskUpdateToOneWithWhereWithoutSeatingPlanInput = {
+    where?: DeskWhereInput
+    data: XOR<DeskUpdateWithoutSeatingPlanInput, DeskUncheckedUpdateWithoutSeatingPlanInput>
+  }
+
+  export type DeskUpdateWithoutSeatingPlanInput = {
+    x?: FloatFieldUpdateOperationsInput | number
+    y?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    layout?: LayoutUpdateOneRequiredWithoutDesksNestedInput
+  }
+
+  export type DeskUncheckedUpdateWithoutSeatingPlanInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    layoutId?: IntFieldUpdateOperationsInput | number
+    x?: FloatFieldUpdateOperationsInput | number
+    y?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type StudentUpsertWithoutSeatingPlanInput = {
+    update: XOR<StudentUpdateWithoutSeatingPlanInput, StudentUncheckedUpdateWithoutSeatingPlanInput>
+    create: XOR<StudentCreateWithoutSeatingPlanInput, StudentUncheckedCreateWithoutSeatingPlanInput>
+    where?: StudentWhereInput
+  }
+
+  export type StudentUpdateToOneWithWhereWithoutSeatingPlanInput = {
+    where?: StudentWhereInput
+    data: XOR<StudentUpdateWithoutSeatingPlanInput, StudentUncheckedUpdateWithoutSeatingPlanInput>
+  }
+
+  export type StudentUpdateWithoutSeatingPlanInput = {
+    Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
+    cls?: ClsUpdateOneRequiredWithoutStudentsNestedInput
+    user?: UserUpdateOneRequiredWithoutStudentNestedInput
+  }
+
+  export type StudentUncheckedUpdateWithoutSeatingPlanInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    userId?: IntFieldUpdateOperationsInput | number
+    classId?: IntFieldUpdateOperationsInput | number
+    Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
   }
 
   export type UserCreateManyRoleInput = {
@@ -12826,6 +20152,8 @@ export namespace Prisma {
     register?: RegisterUpdateManyWithoutClsNestedInput
     students?: StudentUpdateManyWithoutClsNestedInput
     timetable?: TimetableUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUpdateManyWithoutClassesNestedInput
   }
 
   export type ClsUncheckedUpdateWithoutTeacherInput = {
@@ -12834,6 +20162,8 @@ export namespace Prisma {
     register?: RegisterUncheckedUpdateManyWithoutClsNestedInput
     students?: StudentUncheckedUpdateManyWithoutClsNestedInput
     timetable?: TimetableUncheckedUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUncheckedUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUncheckedUpdateManyWithoutClassesNestedInput
   }
 
   export type ClsUncheckedUpdateManyWithoutTeacherInput = {
@@ -12917,6 +20247,10 @@ export namespace Prisma {
     endTime: Date | string
   }
 
+  export type ClassViewCreateManyClsInput = {
+    id?: number
+  }
+
   export type RegisterUpdateWithoutClsInput = {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: StringFieldUpdateOperationsInput | string
@@ -12942,12 +20276,14 @@ export namespace Prisma {
   export type StudentUpdateWithoutClsInput = {
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
     user?: UserUpdateOneRequiredWithoutStudentNestedInput
+    seatingPlan?: SeatingPlanUpdateOneWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateWithoutClsInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
+    seatingPlan?: SeatingPlanUncheckedUpdateOneWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateManyWithoutClsInput = {
@@ -12973,6 +20309,41 @@ export namespace Prisma {
     day?: StringFieldUpdateOperationsInput | string
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClassViewUpdateWithoutClsInput = {
+    seat?: SeatUpdateManyWithoutClassViewNestedInput
+  }
+
+  export type ClassViewUncheckedUpdateWithoutClsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    seat?: SeatUncheckedUpdateManyWithoutClassViewNestedInput
+  }
+
+  export type ClassViewUncheckedUpdateManyWithoutClsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LayoutUpdateWithoutClassesInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    desks?: DeskUpdateManyWithoutLayoutNestedInput
+  }
+
+  export type LayoutUncheckedUpdateWithoutClassesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    desks?: DeskUncheckedUpdateManyWithoutLayoutNestedInput
+  }
+
+  export type LayoutUncheckedUpdateManyWithoutClassesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AttendanceCreateManyRegisterInput = {
@@ -13010,6 +20381,91 @@ export namespace Prisma {
     date?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type SeatCreateManyClassViewInput = {
+    id?: number
+    studentId: number
+    coordinates_X: number
+    coordinates_y: number
+  }
+
+  export type SeatUpdateWithoutClassViewInput = {
+    studentId?: IntFieldUpdateOperationsInput | number
+    coordinates_X?: FloatFieldUpdateOperationsInput | number
+    coordinates_y?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type SeatUncheckedUpdateWithoutClassViewInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    coordinates_X?: FloatFieldUpdateOperationsInput | number
+    coordinates_y?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type SeatUncheckedUpdateManyWithoutClassViewInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    coordinates_X?: FloatFieldUpdateOperationsInput | number
+    coordinates_y?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type DeskCreateManyLayoutInput = {
+    id?: number
+    x: number
+    y: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type DeskUpdateWithoutLayoutInput = {
+    x?: FloatFieldUpdateOperationsInput | number
+    y?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seatingPlan?: SeatingPlanUpdateOneWithoutDeskNestedInput
+  }
+
+  export type DeskUncheckedUpdateWithoutLayoutInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    x?: FloatFieldUpdateOperationsInput | number
+    y?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seatingPlan?: SeatingPlanUncheckedUpdateOneWithoutDeskNestedInput
+  }
+
+  export type DeskUncheckedUpdateManyWithoutLayoutInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    x?: FloatFieldUpdateOperationsInput | number
+    y?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClsUpdateWithoutLayoutsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    teacher?: TeacherUpdateOneWithoutClassesNestedInput
+    register?: RegisterUpdateManyWithoutClsNestedInput
+    students?: StudentUpdateManyWithoutClsNestedInput
+    timetable?: TimetableUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUpdateManyWithoutClsNestedInput
+  }
+
+  export type ClsUncheckedUpdateWithoutLayoutsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    teacherId?: NullableIntFieldUpdateOperationsInput | number | null
+    register?: RegisterUncheckedUpdateManyWithoutClsNestedInput
+    students?: StudentUncheckedUpdateManyWithoutClsNestedInput
+    timetable?: TimetableUncheckedUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUncheckedUpdateManyWithoutClsNestedInput
+  }
+
+  export type ClsUncheckedUpdateManyWithoutLayoutsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    teacherId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
 
 
   /**
@@ -13035,6 +20491,14 @@ export namespace Prisma {
      * @deprecated Use RegisterCountOutputTypeDefaultArgs instead
      */
     export type RegisterCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = RegisterCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ClassViewCountOutputTypeDefaultArgs instead
+     */
+    export type ClassViewCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ClassViewCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use LayoutCountOutputTypeDefaultArgs instead
+     */
+    export type LayoutCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LayoutCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */
@@ -13067,6 +20531,26 @@ export namespace Prisma {
      * @deprecated Use AttendanceDefaultArgs instead
      */
     export type AttendanceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = AttendanceDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use ClassViewDefaultArgs instead
+     */
+    export type ClassViewArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = ClassViewDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SeatDefaultArgs instead
+     */
+    export type SeatArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SeatDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use LayoutDefaultArgs instead
+     */
+    export type LayoutArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LayoutDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use DeskDefaultArgs instead
+     */
+    export type DeskArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DeskDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SeatingPlanDefaultArgs instead
+     */
+    export type SeatingPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SeatingPlanDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

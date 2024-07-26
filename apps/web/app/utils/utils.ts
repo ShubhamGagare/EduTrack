@@ -14,8 +14,74 @@ const openai = new OpenAI({
 });
 const client = new PrismaClient();
 const today = new Date();
+
+
+//crate layout 
+export async function createLayout(layoutName: string, cards: any) {
+
+  const response = await client.layout.create({
+
+    data: {
+      name: layoutName,
+      updatedAt: new Date(),
+    }
+
+  })
+
+  const cardsData = cards.map((card: any) => ({
+    layoutId: response.id,
+    x: card.coordinates_X,
+    y: card.coordinates_y,
+  }));
+
+  const desks = await client.desk.createMany({
+    data: cardsData
+  })
+}
+
+export async function getlayout( layoutId: number) {
+  const response = await client.layout.findFirst({
+    where: {
+      id: layoutId
+    },
+    include: {
+      desks: true
+
+    }
+  });
+
+  console.log("Class view------>" + JSON.stringify(response))
+
+  return response;
+
+}
+
+//get all students from the class
+export async function getClassStudents({ params }: { params: { classId: Number } }) {
+  const response = await client.cls.findFirst({
+    where: {
+      id: Number(params.classId)
+    },
+    include: {
+      students: {
+        select: {
+          user: {
+            select: {
+              username: true
+            }
+          }
+        }
+      }
+    }
+
+  })
+  //  console.log("Class student------>" + JSON.stringify(response?.students))
+  return response?.students;
+
+}
+
 //get all registers for all users
-export async function getListOfALLRegisters(date: Date):Promise<any> {
+export async function getListOfALLRegisters(date: Date): Promise<any> {
   //console.log("date---" +session.user)
   const session = await getServerSession(authOptions);
 
@@ -64,7 +130,7 @@ export async function createTodaysAllRegister() {
     "----------------Creating All new register for today----------------"
   );
   const classes = await client.cls.findMany();
-  classes.map(async (cls:any) => {
+  classes.map(async (cls: any) => {
     if (cls) {
       const register = await client.register.create({
         data: {
@@ -84,7 +150,7 @@ export async function createTodaysAllRegister() {
 
       // Create attendance records for students in the class
       if (studentsForClass) {
-        const attendanceData = studentsForClass.map((student:any) => ({
+        const attendanceData = studentsForClass.map((student: any) => ({
           studentId: student.id,
           registerId: register.id,
           status: "",
@@ -221,7 +287,7 @@ export async function createTodaysRegister(date: Date) {
 
     // Create attendance records for students in the class
     if (studentsForClass) {
-      const attendanceData = studentsForClass.map((student:any) => ({
+      const attendanceData = studentsForClass.map((student: any) => ({
         studentId: student.id,
         registerId: register.id,
         status: "",
@@ -291,95 +357,95 @@ export async function customDateRegisters(date: Date, id: number) {
 }
 ////// 
 interface regType extends NextApiRequest {
-    id: number
-    classId: number,
-    teacherId: number,
-    date: Date,
-    Attendance: [
-      { id: number, student: Object, status: string, comment: string, lateMinutes: number },
-    ],
-    cls: { name: string }
-  
-  }
- export  async function updateRegister(req: regType) {
-    const register = req; // Assuming 'register' object is passed in request body
-  
-    try {
-     // Update register in the database
-      const updatedRegister = await client.register.update({
-        where: { id: register.id }, // Adjust according to your schema
-        data: {
-          Attendance: {
-            update: register.Attendance.map((student: any) => ({
-              where: { id: student.id },
-              data: {
-                status: student.status,
-                comment: student.comment || "",
-                lateMinutes: student.lateMinutes || 0
-              }
-            }))
-          },
-          status: "Completed"
-  
-          // Update the Attendance field
-          // Add other fields as needed
-        }
-      });
-  
-      console.log("Register updated:", updatedRegister);
-      //res.status(200).json(updatedRegister);
-    } catch (error) {
-      console.error('Error updating register:', error);
-      //  res.status(500).json({ error: 'Failed to update register' });
-    }
-  }
- 
-  
-  export const getMonthlyMark = async (id: number) => {
-    const date = new Date();
-    const response = await client.attendance.findMany({
-      where: {
-        studentId: id,
-        date : {
-          gte: new Date(date.getFullYear(), date.getMonth() - 1, date.getDate()), // Greater than or equal to last moth
-          lt: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1) // Less than tomorrow
-        },
-      },
-      
-    });
-    console.log("Monthly attendance ------------->" + JSON.stringify(response))
-    return response;
-  }
-  
-  
-  export  const getAttendacePattern = async (id:number) => {
-    //const message = [{ role: "user", content: "You are a helpful assistant." }]
-    const allAttendance = await getMonthlyMark(id)
-    const expectedOutputFormat= {
-      "studentId": 12,
-      "insight": "one liner insight",
-      "tags": ["Tag1", "Tag2"]
-    }
-    const query = {"query": "Analyze the following attendance data for each student, provide a one-liner insight and 2-3 word tags indicating the attendance pattern for each student in json with parent array results:",expectedOutputFormat,allAttendance}
-  
-    // const pattern = await axios.post("https://school-management-system-pagsae085-shubham-gagares-projects.vercel.app/api/chat", {
-    //   method: 'POST',
-    //   body: query,
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   }
-    // })
-    const chatCompletion:any = await openai.chat.completions.create({
-      messages: [{ role: 'user', content: JSON.stringify(query) }],
-      model: 'gpt-3.5-turbo',
-    });
-    console.log("Pattern--------->" + JSON.stringify(chatCompletion))
+  id: number
+  classId: number,
+  teacherId: number,
+  date: Date,
+  Attendance: [
+    { id: number, student: Object, status: string, comment: string, lateMinutes: number },
+  ],
+  cls: { name: string }
 
-    const insight = chatCompletion.choices[0].message.content
-    // const parsedPattern = JSON.parse(pattern.data)
-    // const pattern =  axios.post("/api/attendancePattern",message)
-    console.log("Pattern--------->" +NextResponse.json(insight))
-    //const response = NextResponse.json(insight)
-    return insight
-  
+}
+export async function updateRegister(req: regType) {
+  const register = req; // Assuming 'register' object is passed in request body
+
+  try {
+    // Update register in the database
+    const updatedRegister = await client.register.update({
+      where: { id: register.id }, // Adjust according to your schema
+      data: {
+        Attendance: {
+          update: register.Attendance.map((student: any) => ({
+            where: { id: student.id },
+            data: {
+              status: student.status,
+              comment: student.comment || "",
+              lateMinutes: student.lateMinutes || 0
+            }
+          }))
+        },
+        status: "Completed"
+
+        // Update the Attendance field
+        // Add other fields as needed
+      }
+    });
+
+    console.log("Register updated:", updatedRegister);
+    //res.status(200).json(updatedRegister);
+  } catch (error) {
+    console.error('Error updating register:', error);
+    //  res.status(500).json({ error: 'Failed to update register' });
   }
+}
+
+
+export const getMonthlyMark = async (id: number) => {
+  const date = new Date();
+  const response = await client.attendance.findMany({
+    where: {
+      studentId: id,
+      date: {
+        gte: new Date(date.getFullYear(), date.getMonth() - 1, date.getDate()), // Greater than or equal to last moth
+        lt: new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1) // Less than tomorrow
+      },
+    },
+
+  });
+  console.log("Monthly attendance ------------->" + JSON.stringify(response))
+  return response;
+}
+
+
+export const getAttendacePattern = async (id: number) => {
+  //const message = [{ role: "user", content: "You are a helpful assistant." }]
+  const allAttendance = await getMonthlyMark(id)
+  const expectedOutputFormat = {
+    "studentId": 12,
+    "insight": "one liner insight",
+    "tags": ["Tag1", "Tag2"]
+  }
+  const query = { "query": "Analyze the following attendance data for each student, provide a one-liner insight and 2-3 word tags indicating the attendance pattern for each student in json with parent array results:", expectedOutputFormat, allAttendance }
+
+  // const pattern = await axios.post("https://school-management-system-pagsae085-shubham-gagares-projects.vercel.app/api/chat", {
+  //   method: 'POST',
+  //   body: query,
+  //   headers: {
+  //     'Content-Type': 'application/json',
+  //   }
+  // })
+  const chatCompletion: any = await openai.chat.completions.create({
+    messages: [{ role: 'user', content: JSON.stringify(query) }],
+    model: 'gpt-3.5-turbo',
+  });
+  console.log("Pattern--------->" + JSON.stringify(chatCompletion))
+
+  const insight = chatCompletion.choices[0].message.content
+  // const parsedPattern = JSON.parse(pattern.data)
+  // const pattern =  axios.post("/api/attendancePattern",message)
+  console.log("Pattern--------->" + NextResponse.json(insight))
+  //const response = NextResponse.json(insight)
+  return insight
+
+}

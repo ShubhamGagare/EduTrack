@@ -36,12 +36,13 @@ model Teacher {
 }
 
 model Student {
-  id         Int          @id @default(autoincrement())
-  userId     Int          @unique
-  classId    Int
-  Attendance Attendance[]
-  cls        Cls          @relation(fields: [classId], references: [id])
-  user       User         @relation(fields: [userId], references: [id])
+  id          Int          @id @default(autoincrement())
+  userId      Int          @unique
+  classId     Int
+  Attendance  Attendance[]
+  cls         Cls          @relation(fields: [classId], references: [id])
+  user        User         @relation(fields: [userId], references: [id])
+  seatingPlan SeatingPlan?
 }
 
 model Cls {
@@ -52,6 +53,8 @@ model Cls {
   register  Register[]
   students  Student[]
   timetable Timetable[]
+  ClassView ClassView[]
+  layouts   Layout[]    @relation("ClassLayouts")
 }
 
 model Timetable {
@@ -84,4 +87,50 @@ model Attendance {
   date        DateTime @default(now())
   register    Register @relation(fields: [registerId], references: [id])
   student     Student  @relation(fields: [studentId], references: [id])
+}
+
+model ClassView {
+  id      Int    @id @default(autoincrement())
+  classId Int
+  seat    Seat[]
+  cls     Cls    @relation(fields: [classId], references: [id])
+}
+
+model Seat {
+  id            Int       @id @default(autoincrement())
+  classViewId   Int
+  studentId     Int
+  coordinates_X Float
+  coordinates_y Float
+  ClassView     ClassView @relation(fields: [classViewId], references: [id])
+}
+
+model Layout {
+  id        Int      @id @default(autoincrement())
+  name      String
+  desks     Desk[]
+  classes   Cls[]    @relation("ClassLayouts")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Desk {
+  id          Int          @id @default(autoincrement())
+  layoutId    Int
+  layout      Layout       @relation(fields: [layoutId], references: [id])
+  x           Float
+  y           Float
+  seatingPlan SeatingPlan?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model SeatingPlan {
+  id        Int      @id @default(autoincrement())
+  deskId    Int      @unique
+  desk      Desk     @relation(fields: [deskId], references: [id])
+  studentId Int      @unique
+  student   Student  @relation(fields: [studentId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
