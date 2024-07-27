@@ -1,16 +1,9 @@
 "use client"
-import {
-  Button,
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@repo/ui"
+import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage, Input, Label, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue, Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, } from "@repo/ui"
 import { useRouter } from 'next/navigation';
-
+import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, } from "@repo/ui"
+import { useForm } from "react-hook-form"
+import { getClasses } from "app/utils/utils";
 
 const plans = [{
   name: "Plan 1",
@@ -22,12 +15,15 @@ const plans = [{
   layout: "Layout 1"
 
 },]
-const SeatingPlanClient = () => {
- 
+const SeatingPlanClient = (classes: any[]) => {
+  const form = useForm()
+  console.log("--classes-----------" + JSON.stringify(classes))
+  const clses: any = classes?.classes;
   const router = useRouter();
-  const handleAddSeatingPlan = () => {
+  const handleAddSeatingPlan = (data: any) => {
     console.log("------------opening seating plan------------------")
-      router.push(`/class-view/seating-plan/${4}`)
+    console.log(data)
+       router.push(`/class-view/seating-plan/${4}/${data.clsName}`)
   }
 
   return (
@@ -37,7 +33,80 @@ const SeatingPlanClient = () => {
         <TableHeader >
           <div className='flex p-2 justify-between'>
 
-            <Button className='bg-blue-600' onClick={handleAddSeatingPlan}>Add Seating Plan</Button>
+            <Sheet>
+              <SheetTrigger asChild>
+                <Button className='bg-blue-600'>Add Seating Plan</Button>
+              </SheetTrigger>
+              <SheetContent>
+                <SheetHeader>
+                  <SheetTitle>Add Seating Plan</SheetTitle>
+                  <SheetDescription>
+                    Add seating plan details. Click save when you're done.
+                  </SheetDescription>
+                </SheetHeader>
+                <div className="grid gap-4 py-4">
+                  <Form {...form}>
+                    <form onSubmit={form.handleSubmit(handleAddSeatingPlan)} className="flex-col">
+                      <FormField
+                        control={form.control}
+                        name="layoutName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Layout Name</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Enter the layout name" {...field} />
+                            </FormControl>
+
+                            <FormMessage />
+                          </FormItem>
+
+                        )}
+                      />
+
+                      <FormField
+                        control={form.control}
+                        name="clsName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Class name</FormLabel>
+                            <Select
+                              onValueChange={field.onChange}
+
+                              defaultValue={field.value}
+                              value={field.value}
+
+                            >
+                              <FormControl>
+
+                                <SelectTrigger className="">
+                                  <SelectValue placeholder="Select a class" />
+                                </SelectTrigger>
+                              </FormControl>
+
+                              <SelectContent>
+                                <SelectGroup>
+                                  <SelectLabel>Select a class</SelectLabel>
+                                  {clses?.map((cls: any, index: number) => <SelectItem key={index} value={cls.name}>{cls.name}</SelectItem>)}
+                                </SelectGroup>
+                              </SelectContent>
+                            </Select>
+
+                            <FormMessage />
+                          </FormItem>
+
+                        )}
+                      />
+                      <SheetFooter>
+                        <SheetClose asChild>
+                          <Button type="submit" onClick={handleAddSeatingPlan}>Save changes</Button>
+                        </SheetClose>
+                      </SheetFooter>
+                    </form>
+                  </Form>
+                </div>
+
+              </SheetContent>
+            </Sheet>
           </div>
           <TableRow>
             <TableHead >Seating Plan Name</TableHead>
@@ -47,7 +116,7 @@ const SeatingPlanClient = () => {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {plans.map((plan, index) => <TableRow className='border-gray-100 h-14'>
+          {plans.map((plan, index) => <TableRow key={index} className='border-gray-100 h-14'>
             <TableCell className="font-medium">{plan.name}</TableCell>
             <TableCell>{plan.class}</TableCell>
             <TableCell>{plan.layout}</TableCell>

@@ -1,30 +1,28 @@
+"use client"
 import { DndContext } from "@dnd-kit/core";
 import { DragEndEvent } from "@dnd-kit/core/dist/types";
 import { CanvasCard } from "./clients/classView/ClassViewClient";
 import { Draggable } from "./Draggable";
-import { Avatar, AvatarFallback, AvatarImage, Button, Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input, Popover, PopoverContent, PopoverTrigger } from "@repo/ui";
+import { Avatar, AvatarFallback, AvatarImage, Button, Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input, Label, Popover, PopoverContent, PopoverTrigger } from "@repo/ui";
 import { useState } from "react";
-import { createLayout } from "app/utils/utils";
+import { createLayout, getClasses } from "app/utils/utils";
 import Desk from "./Desk";
 import { useForm } from "react-hook-form"
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue, } from "@repo/ui"
+import axios from "axios";
 
 
 
-export const SeatingCanvas = ({
-    cards,
-    setCards,
-    students
-}: {
-    cards: CanvasCard[];
-    setCards: (cards: CanvasCard[]) => void;
-    students?: any[]
-}) => {
+export const SeatingCanvas = ({ desks, clsName }: { desks: CanvasCard[], clsName: any }) => {
+    console.log("Loading seating canvas")
+    const [cards, setCards] = useState<CanvasCard[]>(desks);
+
     const form = useForm()
-
-    const [layoutName, setLayoutName] = useState()
     const [deskCount, setDeskCount] = useState(1)
 
-    //Sabe layout
+
+
+    //Save layout
     const handleSave = (values: any) => {
 
         const CardPosition: any = [];
@@ -42,18 +40,14 @@ export const SeatingCanvas = ({
         const newCard: CanvasCard = {
             id: "id_" + deskCount, coordinates: { x: 16, y: 100 }, studentCard: <Desk>
 
-                <Avatar>
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>SN</AvatarFallback>
-                </Avatar>
+                <Label>Desk</Label>
+
             </Desk>
         };
         setCards([...cards, newCard]);
     }
 
 
-    const [showPopover, setShowPopover] = useState(false)
-    const [studentIndex, SetStudentIndex] = useState(0);
 
     const updateDraggedCardPosition = ({ delta, active }: DragEndEvent) => {
         if (!delta.x && !delta.y) return;
@@ -74,13 +68,17 @@ export const SeatingCanvas = ({
         );
     };
 
+    const getStudents = () => {
+        console.log("fetching students")
+    }
+
     return (
         <div className="space-y-4">
             <div className="flex-col space-y-4">
                 <div className="flex justify-between w-full">
 
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(handleSave)} className="space-y-8">
+                        <form onSubmit={form.handleSubmit(handleSave)} className="flex space-x-8">
                             <FormField
                                 control={form.control}
                                 name="layoutName"
@@ -93,6 +91,22 @@ export const SeatingCanvas = ({
 
                                         <FormMessage />
                                     </FormItem>
+
+                                )}
+                            />
+
+                            <FormField
+                                control={form.control}
+                                name="className"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>Class name</FormLabel>
+
+
+
+                                        <FormMessage />
+                                    </FormItem>
+
                                 )}
                             />
                             <Button className="hover:bg-blue-700 bg-blue-600" type="submit">Submit</Button>
@@ -122,7 +136,7 @@ export const SeatingCanvas = ({
                 <div className="bg-white">
                     <DndContext onDragEnd={updateDraggedCardPosition}  >
                         {cards.map((card, index) => (
-                            <Draggable card={card} key={card.id} cardStyle={index === studentIndex ? "" : ""} />
+                            <Draggable card={card} key={card.id} cardStyle={index ? "" : ""} />
                         ))}
                     </DndContext>
                 </div>

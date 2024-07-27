@@ -56,6 +56,16 @@ export async function getlayout( layoutId: number) {
 
 }
 
+export async function getClasses() {
+  const response = await client.cls.findMany();
+
+  console.log("Classes------>" + JSON.stringify(response))
+
+  return response;
+
+}
+
+
 //get all students from the class
 export async function getClassStudents({ params }: { params: { classId: Number } }) {
   const response = await client.cls.findFirst({

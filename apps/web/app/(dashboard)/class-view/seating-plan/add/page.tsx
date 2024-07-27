@@ -1,14 +1,14 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button, Label } from '@repo/ui';
 import AddSeatingPlan from 'components/clients/classView/SeatingClients/AddSeatingPlan';
-import {  getClasses, getlayout } from 'app/utils/utils';
-
+import { getlayout } from 'app/utils/utils';
 
 export default async function getSeatingPlan({ params }: { params: { seatinPlanId: number[] } }) {
 
-    const clses = await getClasses();
+    console.log("--"+JSON.stringify(params))
+
     const layout:any = await getlayout(Number(params.seatinPlanId[0]))
     const desks:any = layout.desks
-    console.log("loading....")
+    console.log(desks)
 
   return (
     <div className="space-y-4">
@@ -27,14 +27,14 @@ export default async function getSeatingPlan({ params }: { params: { seatinPlanI
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                    <BreadcrumbPage>Add Seating Plan</BreadcrumbPage>
+                    <BreadcrumbPage>Seating Plan</BreadcrumbPage>
                 </BreadcrumbItem>
             </BreadcrumbList>
         </Breadcrumb>
 
         <div className='text-2xl font-bold tracking-tight '>Seating Plan</div>
         <div className='flex space-x-4'>
-          <AddSeatingPlan desks={desks} classes={clses} />
+          <AddSeatingPlan desks={desks} />
         </div>
         
 

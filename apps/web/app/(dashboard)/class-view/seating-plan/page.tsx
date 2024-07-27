@@ -2,8 +2,11 @@
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 import SeatingPlanClient from '../../../../components/clients/classView/SeatingPlanClient';
+import { getClasses } from "app/utils/utils";
 
-function page() {
+async function page() {
+    const clses:any[] = await getClasses();
+    console.log("c------->"+JSON.stringify(clses));
     return (
         <div>
             <div className="space-y-4">
@@ -27,7 +30,7 @@ function page() {
                 <div className='flex space-x-4'>
                 </div>
 
-                <SeatingPlanClient />
+                <SeatingPlanClient classes={clses} />
             </div>
         </div>
     )
