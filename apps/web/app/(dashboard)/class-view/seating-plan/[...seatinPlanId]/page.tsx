@@ -23,7 +23,7 @@ export default async function getSeatingPlan({ params }: { params: { seatinPlanI
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>
-                    <BreadcrumbLink href="/class-view/class-layout">Seating Plan</BreadcrumbLink>
+                    <BreadcrumbLink href="/class-view/seating-plan">Seating Plan</BreadcrumbLink>
                 </BreadcrumbItem>
                 <BreadcrumbSeparator />
                 <BreadcrumbItem>

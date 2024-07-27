@@ -15,15 +15,16 @@ const plans = [{
   layout: "Layout 1"
 
 },]
-const SeatingPlanClient = (classes: any[]) => {
+const SeatingPlanClient = (data:any) => {
   const form = useForm()
-  console.log("--classes-----------" + JSON.stringify(classes))
-  const clses: any = classes?.classes;
+  console.log("--data-----------" + JSON.stringify(data))
+  const clses: any = data.data?.clses;
+  const layouts = data.data.layouts
   const router = useRouter();
   const handleAddSeatingPlan = (data: any) => {
     console.log("------------opening seating plan------------------")
     console.log(data)
-       router.push(`/class-view/seating-plan/${4}/${data.clsName}`)
+       router.push(`/class-view/seating-plan/${data.layoutName}/${data.clsName}`)
   }
 
   return (
@@ -49,12 +50,12 @@ const SeatingPlanClient = (classes: any[]) => {
                     <form onSubmit={form.handleSubmit(handleAddSeatingPlan)} className="flex-col">
                       <FormField
                         control={form.control}
-                        name="layoutName"
+                        name="seatingPlanName"
                         render={({ field }) => (
                           <FormItem>
                             <FormLabel>Layout Name</FormLabel>
                             <FormControl>
-                              <Input placeholder="Enter the layout name" {...field} />
+                              <Input placeholder="Enter the seating plan name" {...field} />
                             </FormControl>
 
                             <FormMessage />
@@ -87,6 +88,39 @@ const SeatingPlanClient = (classes: any[]) => {
                                 <SelectGroup>
                                   <SelectLabel>Select a class</SelectLabel>
                                   {clses?.map((cls: any, index: number) => <SelectItem key={index} value={cls.name}>{cls.name}</SelectItem>)}
+                                </SelectGroup>
+                              </SelectContent>
+                            </Select>
+
+                            <FormMessage />
+                          </FormItem>
+
+                        )}
+                      />
+                                            <FormField
+                        control={form.control}
+                        name="layoutName"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Class name</FormLabel>
+                            <Select
+                              onValueChange={field.onChange}
+
+                              defaultValue={field.value}
+                              value={field.value}
+
+                            >
+                              <FormControl>
+
+                                <SelectTrigger className="">
+                                  <SelectValue placeholder="Select a layout" />
+                                </SelectTrigger>
+                              </FormControl>
+
+                              <SelectContent>
+                                <SelectGroup>
+                                  <SelectLabel>Select a layout</SelectLabel>
+                                  {layouts?.map((layout: any, index: number) => <SelectItem key={index} value={layout.id}>{layout.name}</SelectItem>)}
                                 </SelectGroup>
                               </SelectContent>
                             </Select>

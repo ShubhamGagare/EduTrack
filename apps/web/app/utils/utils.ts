@@ -56,6 +56,20 @@ export async function getlayout( layoutId: number) {
 
 }
 
+export async function getlayoutsIds() {
+  const response = await client.layout.findMany({
+    select: {
+      id: true,
+      name:true
+    }
+  });
+
+  console.log("Class view------>" + JSON.stringify(response))
+
+  return response;
+
+}
+
 export async function getClasses() {
   const response = await client.cls.findMany();
 
