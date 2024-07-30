@@ -7,6 +7,7 @@ import { NextApiRequest } from "next";
 import OpenAI from 'openai';
 import { NextResponse } from "next/server";
 import { registerType } from "components/clients/ListRegisterClient";
+import { studentsType } from "components/clients/classView/SeatingClients/AddSeatingPlan";
 
 
 const openai = new OpenAI({
@@ -15,6 +16,32 @@ const openai = new OpenAI({
 const client = new PrismaClient();
 const today = new Date();
 
+//add seating layout
+export const addSeatingPlan = async (plan: any) => {
+  console.log("plan------>" + JSON.stringify(plan))
+
+  const response = await client.seatingPlan.create({
+    data: {
+      layoutId: plan.layoutId
+    }
+  })
+
+  console.log("seatingPlan---->" + JSON.stringify(response))
+  console.log("seatingArragements---->" + JSON.stringify(plan.seatingArrangements))
+
+  const seatingArragementsData = plan.seatingArrangements.map((sa: any) => ({
+    seatingPlanId: response.id,
+    deskId: Number(sa.deskId),
+    studentId:Number(sa.studentId)
+  }));
+  console.log("seatingArragementsData---->" + JSON.stringify(seatingArragementsData))
+
+  const seatingArragements = await client.seatingArrangement.createMany({
+    data: seatingArragementsData
+  })
+  console.log("seatingArragements---->" + JSON.stringify(seatingArragements))
+
+}
 
 //crate layout 
 export async function createLayout(layoutName: string, cards: any) {
@@ -39,7 +66,8 @@ export async function createLayout(layoutName: string, cards: any) {
   })
 }
 
-export async function getlayout( layoutId: number) {
+export async function getlayout(layoutId: number) {
+  console.log("layoutId-->" + layoutId)
   const response = await client.layout.findFirst({
     where: {
       id: layoutId
@@ -60,7 +88,7 @@ export async function getlayoutsIds() {
   const response = await client.layout.findMany({
     select: {
       id: true,
-      name:true
+      name: true
     }
   });
 
@@ -78,13 +106,28 @@ export async function getClasses() {
   return response;
 
 }
+//get student Data
+export const getStudentData = async (id: number) => {
+  console.log("id----->" + id)
 
+  const response = await client.student.findFirst({
+    where: {
+      id: id
+    },
+    include: {
+      Attendance: true
+    }
+  })
+  console.log("student detail--->" + JSON.stringify(response))
+  return response;
+}
 
 //get all students from the class
-export async function getClassStudents({ params }: { params: { classId: Number } }) {
+export async function getClassStudents(classId: any) {
+  console.log("Class id------>" + classId)
   const response = await client.cls.findFirst({
     where: {
-      id: Number(params.classId)
+      id: Number(classId)
     },
     include: {
       students: {
@@ -93,7 +136,8 @@ export async function getClassStudents({ params }: { params: { classId: Number }
             select: {
               username: true
             }
-          }
+          },
+          id: true
         }
       }
     }

@@ -78,6 +78,11 @@ export type Desk = $Result.DefaultSelection<Prisma.$DeskPayload>
  * 
  */
 export type SeatingPlan = $Result.DefaultSelection<Prisma.$SeatingPlanPayload>
+/**
+ * Model SeatingArrangement
+ * 
+ */
+export type SeatingArrangement = $Result.DefaultSelection<Prisma.$SeatingArrangementPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -330,6 +335,16 @@ export class PrismaClient<
     * ```
     */
   get seatingPlan(): Prisma.SeatingPlanDelegate<ExtArgs>;
+
+  /**
+   * `prisma.seatingArrangement`: Exposes CRUD operations for the **SeatingArrangement** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SeatingArrangements
+    * const seatingArrangements = await prisma.seatingArrangement.findMany()
+    * ```
+    */
+  get seatingArrangement(): Prisma.SeatingArrangementDelegate<ExtArgs>;
 }
 
 export namespace Prisma {
@@ -819,7 +834,8 @@ export namespace Prisma {
     Seat: 'Seat',
     Layout: 'Layout',
     Desk: 'Desk',
-    SeatingPlan: 'SeatingPlan'
+    SeatingPlan: 'SeatingPlan',
+    SeatingArrangement: 'SeatingArrangement'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -835,7 +851,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "role" | "teacher" | "student" | "cls" | "timetable" | "register" | "attendance" | "classView" | "seat" | "layout" | "desk" | "seatingPlan"
+      modelProps: "user" | "role" | "teacher" | "student" | "cls" | "timetable" | "register" | "attendance" | "classView" | "seat" | "layout" | "desk" | "seatingPlan" | "seatingArrangement"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1749,6 +1765,76 @@ export namespace Prisma {
           }
         }
       }
+      SeatingArrangement: {
+        payload: Prisma.$SeatingArrangementPayload<ExtArgs>
+        fields: Prisma.SeatingArrangementFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SeatingArrangementFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingArrangementPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SeatingArrangementFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingArrangementPayload>
+          }
+          findFirst: {
+            args: Prisma.SeatingArrangementFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingArrangementPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SeatingArrangementFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingArrangementPayload>
+          }
+          findMany: {
+            args: Prisma.SeatingArrangementFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingArrangementPayload>[]
+          }
+          create: {
+            args: Prisma.SeatingArrangementCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingArrangementPayload>
+          }
+          createMany: {
+            args: Prisma.SeatingArrangementCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SeatingArrangementCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingArrangementPayload>[]
+          }
+          delete: {
+            args: Prisma.SeatingArrangementDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingArrangementPayload>
+          }
+          update: {
+            args: Prisma.SeatingArrangementUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingArrangementPayload>
+          }
+          deleteMany: {
+            args: Prisma.SeatingArrangementDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SeatingArrangementUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.SeatingArrangementUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SeatingArrangementPayload>
+          }
+          aggregate: {
+            args: Prisma.SeatingArrangementAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSeatingArrangement>
+          }
+          groupBy: {
+            args: Prisma.SeatingArrangementGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SeatingArrangementGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SeatingArrangementCountArgs<ExtArgs>
+            result: $Utils.Optional<SeatingArrangementCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1982,10 +2068,12 @@ export namespace Prisma {
 
   export type StudentCountOutputType = {
     Attendance: number
+    SeatingArrangement: number
   }
 
   export type StudentCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     Attendance?: boolean | StudentCountOutputTypeCountAttendanceArgs
+    SeatingArrangement?: boolean | StudentCountOutputTypeCountSeatingArrangementArgs
   }
 
   // Custom InputTypes
@@ -2004,6 +2092,13 @@ export namespace Prisma {
    */
   export type StudentCountOutputTypeCountAttendanceArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AttendanceWhereInput
+  }
+
+  /**
+   * StudentCountOutputType without action
+   */
+  export type StudentCountOutputTypeCountSeatingArrangementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeatingArrangementWhereInput
   }
 
 
@@ -2142,11 +2237,13 @@ export namespace Prisma {
 
   export type LayoutCountOutputType = {
     desks: number
+    seatingPlans: number
     classes: number
   }
 
   export type LayoutCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     desks?: boolean | LayoutCountOutputTypeCountDesksArgs
+    seatingPlans?: boolean | LayoutCountOutputTypeCountSeatingPlansArgs
     classes?: boolean | LayoutCountOutputTypeCountClassesArgs
   }
 
@@ -2171,8 +2268,77 @@ export namespace Prisma {
   /**
    * LayoutCountOutputType without action
    */
+  export type LayoutCountOutputTypeCountSeatingPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeatingPlanWhereInput
+  }
+
+  /**
+   * LayoutCountOutputType without action
+   */
   export type LayoutCountOutputTypeCountClassesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ClsWhereInput
+  }
+
+
+  /**
+   * Count Type DeskCountOutputType
+   */
+
+  export type DeskCountOutputType = {
+    SeatingArrangement: number
+  }
+
+  export type DeskCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    SeatingArrangement?: boolean | DeskCountOutputTypeCountSeatingArrangementArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * DeskCountOutputType without action
+   */
+  export type DeskCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the DeskCountOutputType
+     */
+    select?: DeskCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * DeskCountOutputType without action
+   */
+  export type DeskCountOutputTypeCountSeatingArrangementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeatingArrangementWhereInput
+  }
+
+
+  /**
+   * Count Type SeatingPlanCountOutputType
+   */
+
+  export type SeatingPlanCountOutputType = {
+    seatingArrangement: number
+  }
+
+  export type SeatingPlanCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    seatingArrangement?: boolean | SeatingPlanCountOutputTypeCountSeatingArrangementArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SeatingPlanCountOutputType without action
+   */
+  export type SeatingPlanCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlanCountOutputType
+     */
+    select?: SeatingPlanCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SeatingPlanCountOutputType without action
+   */
+  export type SeatingPlanCountOutputTypeCountSeatingArrangementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeatingArrangementWhereInput
   }
 
 
@@ -5313,7 +5479,7 @@ export namespace Prisma {
     Attendance?: boolean | Student$AttendanceArgs<ExtArgs>
     cls?: boolean | ClsDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
-    seatingPlan?: boolean | Student$seatingPlanArgs<ExtArgs>
+    SeatingArrangement?: boolean | Student$SeatingArrangementArgs<ExtArgs>
     _count?: boolean | StudentCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["student"]>
 
@@ -5335,7 +5501,7 @@ export namespace Prisma {
     Attendance?: boolean | Student$AttendanceArgs<ExtArgs>
     cls?: boolean | ClsDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
-    seatingPlan?: boolean | Student$seatingPlanArgs<ExtArgs>
+    SeatingArrangement?: boolean | Student$SeatingArrangementArgs<ExtArgs>
     _count?: boolean | StudentCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type StudentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5349,7 +5515,7 @@ export namespace Prisma {
       Attendance: Prisma.$AttendancePayload<ExtArgs>[]
       cls: Prisma.$ClsPayload<ExtArgs>
       user: Prisma.$UserPayload<ExtArgs>
-      seatingPlan: Prisma.$SeatingPlanPayload<ExtArgs> | null
+      SeatingArrangement: Prisma.$SeatingArrangementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5722,7 +5888,7 @@ export namespace Prisma {
     Attendance<T extends Student$AttendanceArgs<ExtArgs> = {}>(args?: Subset<T, Student$AttendanceArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttendancePayload<ExtArgs>, T, "findMany"> | Null>
     cls<T extends ClsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClsDefaultArgs<ExtArgs>>): Prisma__ClsClient<$Result.GetResult<Prisma.$ClsPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    seatingPlan<T extends Student$seatingPlanArgs<ExtArgs> = {}>(args?: Subset<T, Student$seatingPlanArgs<ExtArgs>>): Prisma__SeatingPlanClient<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    SeatingArrangement<T extends Student$SeatingArrangementArgs<ExtArgs> = {}>(args?: Subset<T, Student$SeatingArrangementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6093,18 +6259,23 @@ export namespace Prisma {
   }
 
   /**
-   * Student.seatingPlan
+   * Student.SeatingArrangement
    */
-  export type Student$seatingPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Student$SeatingArrangementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SeatingPlan
+     * Select specific fields to fetch from the SeatingArrangement
      */
-    select?: SeatingPlanSelect<ExtArgs> | null
+    select?: SeatingArrangementSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SeatingPlanInclude<ExtArgs> | null
-    where?: SeatingPlanWhereInput
+    include?: SeatingArrangementInclude<ExtArgs> | null
+    where?: SeatingArrangementWhereInput
+    orderBy?: SeatingArrangementOrderByWithRelationInput | SeatingArrangementOrderByWithRelationInput[]
+    cursor?: SeatingArrangementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SeatingArrangementScalarFieldEnum | SeatingArrangementScalarFieldEnum[]
   }
 
   /**
@@ -12328,6 +12499,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     desks?: boolean | Layout$desksArgs<ExtArgs>
+    seatingPlans?: boolean | Layout$seatingPlansArgs<ExtArgs>
     classes?: boolean | Layout$classesArgs<ExtArgs>
     _count?: boolean | LayoutCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["layout"]>
@@ -12348,6 +12520,7 @@ export namespace Prisma {
 
   export type LayoutInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     desks?: boolean | Layout$desksArgs<ExtArgs>
+    seatingPlans?: boolean | Layout$seatingPlansArgs<ExtArgs>
     classes?: boolean | Layout$classesArgs<ExtArgs>
     _count?: boolean | LayoutCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -12357,6 +12530,7 @@ export namespace Prisma {
     name: "Layout"
     objects: {
       desks: Prisma.$DeskPayload<ExtArgs>[]
+      seatingPlans: Prisma.$SeatingPlanPayload<ExtArgs>[]
       classes: Prisma.$ClsPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -12729,6 +12903,7 @@ export namespace Prisma {
   export interface Prisma__LayoutClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     desks<T extends Layout$desksArgs<ExtArgs> = {}>(args?: Subset<T, Layout$desksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findMany"> | Null>
+    seatingPlans<T extends Layout$seatingPlansArgs<ExtArgs> = {}>(args?: Subset<T, Layout$seatingPlansArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "findMany"> | Null>
     classes<T extends Layout$classesArgs<ExtArgs> = {}>(args?: Subset<T, Layout$classesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClsPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -13097,6 +13272,26 @@ export namespace Prisma {
   }
 
   /**
+   * Layout.seatingPlans
+   */
+  export type Layout$seatingPlansArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+    where?: SeatingPlanWhereInput
+    orderBy?: SeatingPlanOrderByWithRelationInput | SeatingPlanOrderByWithRelationInput[]
+    cursor?: SeatingPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SeatingPlanScalarFieldEnum | SeatingPlanScalarFieldEnum[]
+  }
+
+  /**
    * Layout.classes
    */
   export type Layout$classesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13350,7 +13545,8 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     layout?: boolean | LayoutDefaultArgs<ExtArgs>
-    seatingPlan?: boolean | Desk$seatingPlanArgs<ExtArgs>
+    SeatingArrangement?: boolean | Desk$SeatingArrangementArgs<ExtArgs>
+    _count?: boolean | DeskCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["desk"]>
 
   export type DeskSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -13374,7 +13570,8 @@ export namespace Prisma {
 
   export type DeskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     layout?: boolean | LayoutDefaultArgs<ExtArgs>
-    seatingPlan?: boolean | Desk$seatingPlanArgs<ExtArgs>
+    SeatingArrangement?: boolean | Desk$SeatingArrangementArgs<ExtArgs>
+    _count?: boolean | DeskCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type DeskIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     layout?: boolean | LayoutDefaultArgs<ExtArgs>
@@ -13384,7 +13581,7 @@ export namespace Prisma {
     name: "Desk"
     objects: {
       layout: Prisma.$LayoutPayload<ExtArgs>
-      seatingPlan: Prisma.$SeatingPlanPayload<ExtArgs> | null
+      SeatingArrangement: Prisma.$SeatingArrangementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -13758,7 +13955,7 @@ export namespace Prisma {
   export interface Prisma__DeskClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     layout<T extends LayoutDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LayoutDefaultArgs<ExtArgs>>): Prisma__LayoutClient<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    seatingPlan<T extends Desk$seatingPlanArgs<ExtArgs> = {}>(args?: Subset<T, Desk$seatingPlanArgs<ExtArgs>>): Prisma__SeatingPlanClient<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "findUniqueOrThrow"> | null, null, ExtArgs>
+    SeatingArrangement<T extends Desk$SeatingArrangementArgs<ExtArgs> = {}>(args?: Subset<T, Desk$SeatingArrangementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14112,18 +14309,23 @@ export namespace Prisma {
   }
 
   /**
-   * Desk.seatingPlan
+   * Desk.SeatingArrangement
    */
-  export type Desk$seatingPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Desk$SeatingArrangementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the SeatingPlan
+     * Select specific fields to fetch from the SeatingArrangement
      */
-    select?: SeatingPlanSelect<ExtArgs> | null
+    select?: SeatingArrangementSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: SeatingPlanInclude<ExtArgs> | null
-    where?: SeatingPlanWhereInput
+    include?: SeatingArrangementInclude<ExtArgs> | null
+    where?: SeatingArrangementWhereInput
+    orderBy?: SeatingArrangementOrderByWithRelationInput | SeatingArrangementOrderByWithRelationInput[]
+    cursor?: SeatingArrangementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SeatingArrangementScalarFieldEnum | SeatingArrangementScalarFieldEnum[]
   }
 
   /**
@@ -14155,36 +14357,31 @@ export namespace Prisma {
 
   export type SeatingPlanAvgAggregateOutputType = {
     id: number | null
-    deskId: number | null
-    studentId: number | null
+    layoutId: number | null
   }
 
   export type SeatingPlanSumAggregateOutputType = {
     id: number | null
-    deskId: number | null
-    studentId: number | null
+    layoutId: number | null
   }
 
   export type SeatingPlanMinAggregateOutputType = {
     id: number | null
-    deskId: number | null
-    studentId: number | null
+    layoutId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type SeatingPlanMaxAggregateOutputType = {
     id: number | null
-    deskId: number | null
-    studentId: number | null
+    layoutId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type SeatingPlanCountAggregateOutputType = {
     id: number
-    deskId: number
-    studentId: number
+    layoutId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -14193,36 +14390,31 @@ export namespace Prisma {
 
   export type SeatingPlanAvgAggregateInputType = {
     id?: true
-    deskId?: true
-    studentId?: true
+    layoutId?: true
   }
 
   export type SeatingPlanSumAggregateInputType = {
     id?: true
-    deskId?: true
-    studentId?: true
+    layoutId?: true
   }
 
   export type SeatingPlanMinAggregateInputType = {
     id?: true
-    deskId?: true
-    studentId?: true
+    layoutId?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type SeatingPlanMaxAggregateInputType = {
     id?: true
-    deskId?: true
-    studentId?: true
+    layoutId?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type SeatingPlanCountAggregateInputType = {
     id?: true
-    deskId?: true
-    studentId?: true
+    layoutId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -14316,8 +14508,7 @@ export namespace Prisma {
 
   export type SeatingPlanGroupByOutputType = {
     id: number
-    deskId: number
-    studentId: number
+    layoutId: number
     createdAt: Date
     updatedAt: Date
     _count: SeatingPlanCountAggregateOutputType | null
@@ -14343,51 +14534,47 @@ export namespace Prisma {
 
   export type SeatingPlanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    deskId?: boolean
-    studentId?: boolean
+    layoutId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    desk?: boolean | DeskDefaultArgs<ExtArgs>
-    student?: boolean | StudentDefaultArgs<ExtArgs>
+    layout?: boolean | LayoutDefaultArgs<ExtArgs>
+    seatingArrangement?: boolean | SeatingPlan$seatingArrangementArgs<ExtArgs>
+    _count?: boolean | SeatingPlanCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["seatingPlan"]>
 
   export type SeatingPlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    deskId?: boolean
-    studentId?: boolean
+    layoutId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    desk?: boolean | DeskDefaultArgs<ExtArgs>
-    student?: boolean | StudentDefaultArgs<ExtArgs>
+    layout?: boolean | LayoutDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["seatingPlan"]>
 
   export type SeatingPlanSelectScalar = {
     id?: boolean
-    deskId?: boolean
-    studentId?: boolean
+    layoutId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
   export type SeatingPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    desk?: boolean | DeskDefaultArgs<ExtArgs>
-    student?: boolean | StudentDefaultArgs<ExtArgs>
+    layout?: boolean | LayoutDefaultArgs<ExtArgs>
+    seatingArrangement?: boolean | SeatingPlan$seatingArrangementArgs<ExtArgs>
+    _count?: boolean | SeatingPlanCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SeatingPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    desk?: boolean | DeskDefaultArgs<ExtArgs>
-    student?: boolean | StudentDefaultArgs<ExtArgs>
+    layout?: boolean | LayoutDefaultArgs<ExtArgs>
   }
 
   export type $SeatingPlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SeatingPlan"
     objects: {
-      desk: Prisma.$DeskPayload<ExtArgs>
-      student: Prisma.$StudentPayload<ExtArgs>
+      layout: Prisma.$LayoutPayload<ExtArgs>
+      seatingArrangement: Prisma.$SeatingArrangementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      deskId: number
-      studentId: number
+      layoutId: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["seatingPlan"]>
@@ -14754,8 +14941,8 @@ export namespace Prisma {
    */
   export interface Prisma__SeatingPlanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    desk<T extends DeskDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DeskDefaultArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
-    student<T extends StudentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudentDefaultArgs<ExtArgs>>): Prisma__StudentClient<$Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    layout<T extends LayoutDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LayoutDefaultArgs<ExtArgs>>): Prisma__LayoutClient<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    seatingArrangement<T extends SeatingPlan$seatingArrangementArgs<ExtArgs> = {}>(args?: Subset<T, SeatingPlan$seatingArrangementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "findMany"> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -14786,8 +14973,7 @@ export namespace Prisma {
    */ 
   interface SeatingPlanFieldRefs {
     readonly id: FieldRef<"SeatingPlan", 'Int'>
-    readonly deskId: FieldRef<"SeatingPlan", 'Int'>
-    readonly studentId: FieldRef<"SeatingPlan", 'Int'>
+    readonly layoutId: FieldRef<"SeatingPlan", 'Int'>
     readonly createdAt: FieldRef<"SeatingPlan", 'DateTime'>
     readonly updatedAt: FieldRef<"SeatingPlan", 'DateTime'>
   }
@@ -15108,6 +15294,26 @@ export namespace Prisma {
   }
 
   /**
+   * SeatingPlan.seatingArrangement
+   */
+  export type SeatingPlan$seatingArrangementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingArrangement
+     */
+    select?: SeatingArrangementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingArrangementInclude<ExtArgs> | null
+    where?: SeatingArrangementWhereInput
+    orderBy?: SeatingArrangementOrderByWithRelationInput | SeatingArrangementOrderByWithRelationInput[]
+    cursor?: SeatingArrangementWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SeatingArrangementScalarFieldEnum | SeatingArrangementScalarFieldEnum[]
+  }
+
+  /**
    * SeatingPlan without action
    */
   export type SeatingPlanDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15119,6 +15325,1009 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: SeatingPlanInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model SeatingArrangement
+   */
+
+  export type AggregateSeatingArrangement = {
+    _count: SeatingArrangementCountAggregateOutputType | null
+    _avg: SeatingArrangementAvgAggregateOutputType | null
+    _sum: SeatingArrangementSumAggregateOutputType | null
+    _min: SeatingArrangementMinAggregateOutputType | null
+    _max: SeatingArrangementMaxAggregateOutputType | null
+  }
+
+  export type SeatingArrangementAvgAggregateOutputType = {
+    id: number | null
+    seatingPlanId: number | null
+    deskId: number | null
+    studentId: number | null
+  }
+
+  export type SeatingArrangementSumAggregateOutputType = {
+    id: number | null
+    seatingPlanId: number | null
+    deskId: number | null
+    studentId: number | null
+  }
+
+  export type SeatingArrangementMinAggregateOutputType = {
+    id: number | null
+    seatingPlanId: number | null
+    deskId: number | null
+    studentId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SeatingArrangementMaxAggregateOutputType = {
+    id: number | null
+    seatingPlanId: number | null
+    deskId: number | null
+    studentId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SeatingArrangementCountAggregateOutputType = {
+    id: number
+    seatingPlanId: number
+    deskId: number
+    studentId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SeatingArrangementAvgAggregateInputType = {
+    id?: true
+    seatingPlanId?: true
+    deskId?: true
+    studentId?: true
+  }
+
+  export type SeatingArrangementSumAggregateInputType = {
+    id?: true
+    seatingPlanId?: true
+    deskId?: true
+    studentId?: true
+  }
+
+  export type SeatingArrangementMinAggregateInputType = {
+    id?: true
+    seatingPlanId?: true
+    deskId?: true
+    studentId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SeatingArrangementMaxAggregateInputType = {
+    id?: true
+    seatingPlanId?: true
+    deskId?: true
+    studentId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SeatingArrangementCountAggregateInputType = {
+    id?: true
+    seatingPlanId?: true
+    deskId?: true
+    studentId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SeatingArrangementAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SeatingArrangement to aggregate.
+     */
+    where?: SeatingArrangementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeatingArrangements to fetch.
+     */
+    orderBy?: SeatingArrangementOrderByWithRelationInput | SeatingArrangementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SeatingArrangementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeatingArrangements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeatingArrangements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SeatingArrangements
+    **/
+    _count?: true | SeatingArrangementCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: SeatingArrangementAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: SeatingArrangementSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SeatingArrangementMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SeatingArrangementMaxAggregateInputType
+  }
+
+  export type GetSeatingArrangementAggregateType<T extends SeatingArrangementAggregateArgs> = {
+        [P in keyof T & keyof AggregateSeatingArrangement]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSeatingArrangement[P]>
+      : GetScalarType<T[P], AggregateSeatingArrangement[P]>
+  }
+
+
+
+
+  export type SeatingArrangementGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeatingArrangementWhereInput
+    orderBy?: SeatingArrangementOrderByWithAggregationInput | SeatingArrangementOrderByWithAggregationInput[]
+    by: SeatingArrangementScalarFieldEnum[] | SeatingArrangementScalarFieldEnum
+    having?: SeatingArrangementScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SeatingArrangementCountAggregateInputType | true
+    _avg?: SeatingArrangementAvgAggregateInputType
+    _sum?: SeatingArrangementSumAggregateInputType
+    _min?: SeatingArrangementMinAggregateInputType
+    _max?: SeatingArrangementMaxAggregateInputType
+  }
+
+  export type SeatingArrangementGroupByOutputType = {
+    id: number
+    seatingPlanId: number
+    deskId: number
+    studentId: number
+    createdAt: Date
+    updatedAt: Date
+    _count: SeatingArrangementCountAggregateOutputType | null
+    _avg: SeatingArrangementAvgAggregateOutputType | null
+    _sum: SeatingArrangementSumAggregateOutputType | null
+    _min: SeatingArrangementMinAggregateOutputType | null
+    _max: SeatingArrangementMaxAggregateOutputType | null
+  }
+
+  type GetSeatingArrangementGroupByPayload<T extends SeatingArrangementGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SeatingArrangementGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SeatingArrangementGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SeatingArrangementGroupByOutputType[P]>
+            : GetScalarType<T[P], SeatingArrangementGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SeatingArrangementSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    seatingPlanId?: boolean
+    deskId?: boolean
+    studentId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    seatingPlan?: boolean | SeatingPlanDefaultArgs<ExtArgs>
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["seatingArrangement"]>
+
+  export type SeatingArrangementSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    seatingPlanId?: boolean
+    deskId?: boolean
+    studentId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    seatingPlan?: boolean | SeatingPlanDefaultArgs<ExtArgs>
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["seatingArrangement"]>
+
+  export type SeatingArrangementSelectScalar = {
+    id?: boolean
+    seatingPlanId?: boolean
+    deskId?: boolean
+    studentId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SeatingArrangementInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    seatingPlan?: boolean | SeatingPlanDefaultArgs<ExtArgs>
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }
+  export type SeatingArrangementIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    seatingPlan?: boolean | SeatingPlanDefaultArgs<ExtArgs>
+    desk?: boolean | DeskDefaultArgs<ExtArgs>
+    student?: boolean | StudentDefaultArgs<ExtArgs>
+  }
+
+  export type $SeatingArrangementPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SeatingArrangement"
+    objects: {
+      seatingPlan: Prisma.$SeatingPlanPayload<ExtArgs>
+      desk: Prisma.$DeskPayload<ExtArgs>
+      student: Prisma.$StudentPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      seatingPlanId: number
+      deskId: number
+      studentId: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["seatingArrangement"]>
+    composites: {}
+  }
+
+  type SeatingArrangementGetPayload<S extends boolean | null | undefined | SeatingArrangementDefaultArgs> = $Result.GetResult<Prisma.$SeatingArrangementPayload, S>
+
+  type SeatingArrangementCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = 
+    Omit<SeatingArrangementFindManyArgs, 'select' | 'include' | 'distinct'> & {
+      select?: SeatingArrangementCountAggregateInputType | true
+    }
+
+  export interface SeatingArrangementDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SeatingArrangement'], meta: { name: 'SeatingArrangement' } }
+    /**
+     * Find zero or one SeatingArrangement that matches the filter.
+     * @param {SeatingArrangementFindUniqueArgs} args - Arguments to find a SeatingArrangement
+     * @example
+     * // Get one SeatingArrangement
+     * const seatingArrangement = await prisma.seatingArrangement.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SeatingArrangementFindUniqueArgs>(args: SelectSubset<T, SeatingArrangementFindUniqueArgs<ExtArgs>>): Prisma__SeatingArrangementClient<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "findUnique"> | null, null, ExtArgs>
+
+    /**
+     * Find one SeatingArrangement that matches the filter or throw an error with `error.code='P2025'` 
+     * if no matches were found.
+     * @param {SeatingArrangementFindUniqueOrThrowArgs} args - Arguments to find a SeatingArrangement
+     * @example
+     * // Get one SeatingArrangement
+     * const seatingArrangement = await prisma.seatingArrangement.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SeatingArrangementFindUniqueOrThrowArgs>(args: SelectSubset<T, SeatingArrangementFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SeatingArrangementClient<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "findUniqueOrThrow">, never, ExtArgs>
+
+    /**
+     * Find the first SeatingArrangement that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingArrangementFindFirstArgs} args - Arguments to find a SeatingArrangement
+     * @example
+     * // Get one SeatingArrangement
+     * const seatingArrangement = await prisma.seatingArrangement.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SeatingArrangementFindFirstArgs>(args?: SelectSubset<T, SeatingArrangementFindFirstArgs<ExtArgs>>): Prisma__SeatingArrangementClient<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "findFirst"> | null, null, ExtArgs>
+
+    /**
+     * Find the first SeatingArrangement that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingArrangementFindFirstOrThrowArgs} args - Arguments to find a SeatingArrangement
+     * @example
+     * // Get one SeatingArrangement
+     * const seatingArrangement = await prisma.seatingArrangement.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SeatingArrangementFindFirstOrThrowArgs>(args?: SelectSubset<T, SeatingArrangementFindFirstOrThrowArgs<ExtArgs>>): Prisma__SeatingArrangementClient<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "findFirstOrThrow">, never, ExtArgs>
+
+    /**
+     * Find zero or more SeatingArrangements that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingArrangementFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SeatingArrangements
+     * const seatingArrangements = await prisma.seatingArrangement.findMany()
+     * 
+     * // Get first 10 SeatingArrangements
+     * const seatingArrangements = await prisma.seatingArrangement.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const seatingArrangementWithIdOnly = await prisma.seatingArrangement.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SeatingArrangementFindManyArgs>(args?: SelectSubset<T, SeatingArrangementFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "findMany">>
+
+    /**
+     * Create a SeatingArrangement.
+     * @param {SeatingArrangementCreateArgs} args - Arguments to create a SeatingArrangement.
+     * @example
+     * // Create one SeatingArrangement
+     * const SeatingArrangement = await prisma.seatingArrangement.create({
+     *   data: {
+     *     // ... data to create a SeatingArrangement
+     *   }
+     * })
+     * 
+     */
+    create<T extends SeatingArrangementCreateArgs>(args: SelectSubset<T, SeatingArrangementCreateArgs<ExtArgs>>): Prisma__SeatingArrangementClient<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "create">, never, ExtArgs>
+
+    /**
+     * Create many SeatingArrangements.
+     * @param {SeatingArrangementCreateManyArgs} args - Arguments to create many SeatingArrangements.
+     * @example
+     * // Create many SeatingArrangements
+     * const seatingArrangement = await prisma.seatingArrangement.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SeatingArrangementCreateManyArgs>(args?: SelectSubset<T, SeatingArrangementCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SeatingArrangements and returns the data saved in the database.
+     * @param {SeatingArrangementCreateManyAndReturnArgs} args - Arguments to create many SeatingArrangements.
+     * @example
+     * // Create many SeatingArrangements
+     * const seatingArrangement = await prisma.seatingArrangement.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SeatingArrangements and only return the `id`
+     * const seatingArrangementWithIdOnly = await prisma.seatingArrangement.createManyAndReturn({ 
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SeatingArrangementCreateManyAndReturnArgs>(args?: SelectSubset<T, SeatingArrangementCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "createManyAndReturn">>
+
+    /**
+     * Delete a SeatingArrangement.
+     * @param {SeatingArrangementDeleteArgs} args - Arguments to delete one SeatingArrangement.
+     * @example
+     * // Delete one SeatingArrangement
+     * const SeatingArrangement = await prisma.seatingArrangement.delete({
+     *   where: {
+     *     // ... filter to delete one SeatingArrangement
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SeatingArrangementDeleteArgs>(args: SelectSubset<T, SeatingArrangementDeleteArgs<ExtArgs>>): Prisma__SeatingArrangementClient<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "delete">, never, ExtArgs>
+
+    /**
+     * Update one SeatingArrangement.
+     * @param {SeatingArrangementUpdateArgs} args - Arguments to update one SeatingArrangement.
+     * @example
+     * // Update one SeatingArrangement
+     * const seatingArrangement = await prisma.seatingArrangement.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SeatingArrangementUpdateArgs>(args: SelectSubset<T, SeatingArrangementUpdateArgs<ExtArgs>>): Prisma__SeatingArrangementClient<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "update">, never, ExtArgs>
+
+    /**
+     * Delete zero or more SeatingArrangements.
+     * @param {SeatingArrangementDeleteManyArgs} args - Arguments to filter SeatingArrangements to delete.
+     * @example
+     * // Delete a few SeatingArrangements
+     * const { count } = await prisma.seatingArrangement.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SeatingArrangementDeleteManyArgs>(args?: SelectSubset<T, SeatingArrangementDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SeatingArrangements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingArrangementUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SeatingArrangements
+     * const seatingArrangement = await prisma.seatingArrangement.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SeatingArrangementUpdateManyArgs>(args: SelectSubset<T, SeatingArrangementUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one SeatingArrangement.
+     * @param {SeatingArrangementUpsertArgs} args - Arguments to update or create a SeatingArrangement.
+     * @example
+     * // Update or create a SeatingArrangement
+     * const seatingArrangement = await prisma.seatingArrangement.upsert({
+     *   create: {
+     *     // ... data to create a SeatingArrangement
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SeatingArrangement we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SeatingArrangementUpsertArgs>(args: SelectSubset<T, SeatingArrangementUpsertArgs<ExtArgs>>): Prisma__SeatingArrangementClient<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "upsert">, never, ExtArgs>
+
+
+    /**
+     * Count the number of SeatingArrangements.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingArrangementCountArgs} args - Arguments to filter SeatingArrangements to count.
+     * @example
+     * // Count the number of SeatingArrangements
+     * const count = await prisma.seatingArrangement.count({
+     *   where: {
+     *     // ... the filter for the SeatingArrangements we want to count
+     *   }
+     * })
+    **/
+    count<T extends SeatingArrangementCountArgs>(
+      args?: Subset<T, SeatingArrangementCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SeatingArrangementCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SeatingArrangement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingArrangementAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SeatingArrangementAggregateArgs>(args: Subset<T, SeatingArrangementAggregateArgs>): Prisma.PrismaPromise<GetSeatingArrangementAggregateType<T>>
+
+    /**
+     * Group by SeatingArrangement.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SeatingArrangementGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SeatingArrangementGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SeatingArrangementGroupByArgs['orderBy'] }
+        : { orderBy?: SeatingArrangementGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SeatingArrangementGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSeatingArrangementGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SeatingArrangement model
+   */
+  readonly fields: SeatingArrangementFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SeatingArrangement.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SeatingArrangementClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    seatingPlan<T extends SeatingPlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SeatingPlanDefaultArgs<ExtArgs>>): Prisma__SeatingPlanClient<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    desk<T extends DeskDefaultArgs<ExtArgs> = {}>(args?: Subset<T, DeskDefaultArgs<ExtArgs>>): Prisma__DeskClient<$Result.GetResult<Prisma.$DeskPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    student<T extends StudentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, StudentDefaultArgs<ExtArgs>>): Prisma__StudentClient<$Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SeatingArrangement model
+   */ 
+  interface SeatingArrangementFieldRefs {
+    readonly id: FieldRef<"SeatingArrangement", 'Int'>
+    readonly seatingPlanId: FieldRef<"SeatingArrangement", 'Int'>
+    readonly deskId: FieldRef<"SeatingArrangement", 'Int'>
+    readonly studentId: FieldRef<"SeatingArrangement", 'Int'>
+    readonly createdAt: FieldRef<"SeatingArrangement", 'DateTime'>
+    readonly updatedAt: FieldRef<"SeatingArrangement", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SeatingArrangement findUnique
+   */
+  export type SeatingArrangementFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingArrangement
+     */
+    select?: SeatingArrangementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingArrangementInclude<ExtArgs> | null
+    /**
+     * Filter, which SeatingArrangement to fetch.
+     */
+    where: SeatingArrangementWhereUniqueInput
+  }
+
+  /**
+   * SeatingArrangement findUniqueOrThrow
+   */
+  export type SeatingArrangementFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingArrangement
+     */
+    select?: SeatingArrangementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingArrangementInclude<ExtArgs> | null
+    /**
+     * Filter, which SeatingArrangement to fetch.
+     */
+    where: SeatingArrangementWhereUniqueInput
+  }
+
+  /**
+   * SeatingArrangement findFirst
+   */
+  export type SeatingArrangementFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingArrangement
+     */
+    select?: SeatingArrangementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingArrangementInclude<ExtArgs> | null
+    /**
+     * Filter, which SeatingArrangement to fetch.
+     */
+    where?: SeatingArrangementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeatingArrangements to fetch.
+     */
+    orderBy?: SeatingArrangementOrderByWithRelationInput | SeatingArrangementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SeatingArrangements.
+     */
+    cursor?: SeatingArrangementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeatingArrangements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeatingArrangements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SeatingArrangements.
+     */
+    distinct?: SeatingArrangementScalarFieldEnum | SeatingArrangementScalarFieldEnum[]
+  }
+
+  /**
+   * SeatingArrangement findFirstOrThrow
+   */
+  export type SeatingArrangementFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingArrangement
+     */
+    select?: SeatingArrangementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingArrangementInclude<ExtArgs> | null
+    /**
+     * Filter, which SeatingArrangement to fetch.
+     */
+    where?: SeatingArrangementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeatingArrangements to fetch.
+     */
+    orderBy?: SeatingArrangementOrderByWithRelationInput | SeatingArrangementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SeatingArrangements.
+     */
+    cursor?: SeatingArrangementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeatingArrangements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeatingArrangements.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SeatingArrangements.
+     */
+    distinct?: SeatingArrangementScalarFieldEnum | SeatingArrangementScalarFieldEnum[]
+  }
+
+  /**
+   * SeatingArrangement findMany
+   */
+  export type SeatingArrangementFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingArrangement
+     */
+    select?: SeatingArrangementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingArrangementInclude<ExtArgs> | null
+    /**
+     * Filter, which SeatingArrangements to fetch.
+     */
+    where?: SeatingArrangementWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SeatingArrangements to fetch.
+     */
+    orderBy?: SeatingArrangementOrderByWithRelationInput | SeatingArrangementOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SeatingArrangements.
+     */
+    cursor?: SeatingArrangementWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SeatingArrangements from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SeatingArrangements.
+     */
+    skip?: number
+    distinct?: SeatingArrangementScalarFieldEnum | SeatingArrangementScalarFieldEnum[]
+  }
+
+  /**
+   * SeatingArrangement create
+   */
+  export type SeatingArrangementCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingArrangement
+     */
+    select?: SeatingArrangementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingArrangementInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SeatingArrangement.
+     */
+    data: XOR<SeatingArrangementCreateInput, SeatingArrangementUncheckedCreateInput>
+  }
+
+  /**
+   * SeatingArrangement createMany
+   */
+  export type SeatingArrangementCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SeatingArrangements.
+     */
+    data: SeatingArrangementCreateManyInput | SeatingArrangementCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SeatingArrangement createManyAndReturn
+   */
+  export type SeatingArrangementCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingArrangement
+     */
+    select?: SeatingArrangementSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * The data used to create many SeatingArrangements.
+     */
+    data: SeatingArrangementCreateManyInput | SeatingArrangementCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingArrangementIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SeatingArrangement update
+   */
+  export type SeatingArrangementUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingArrangement
+     */
+    select?: SeatingArrangementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingArrangementInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SeatingArrangement.
+     */
+    data: XOR<SeatingArrangementUpdateInput, SeatingArrangementUncheckedUpdateInput>
+    /**
+     * Choose, which SeatingArrangement to update.
+     */
+    where: SeatingArrangementWhereUniqueInput
+  }
+
+  /**
+   * SeatingArrangement updateMany
+   */
+  export type SeatingArrangementUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SeatingArrangements.
+     */
+    data: XOR<SeatingArrangementUpdateManyMutationInput, SeatingArrangementUncheckedUpdateManyInput>
+    /**
+     * Filter which SeatingArrangements to update
+     */
+    where?: SeatingArrangementWhereInput
+  }
+
+  /**
+   * SeatingArrangement upsert
+   */
+  export type SeatingArrangementUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingArrangement
+     */
+    select?: SeatingArrangementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingArrangementInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SeatingArrangement to update in case it exists.
+     */
+    where: SeatingArrangementWhereUniqueInput
+    /**
+     * In case the SeatingArrangement found by the `where` argument doesn't exist, create a new SeatingArrangement with this data.
+     */
+    create: XOR<SeatingArrangementCreateInput, SeatingArrangementUncheckedCreateInput>
+    /**
+     * In case the SeatingArrangement was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SeatingArrangementUpdateInput, SeatingArrangementUncheckedUpdateInput>
+  }
+
+  /**
+   * SeatingArrangement delete
+   */
+  export type SeatingArrangementDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingArrangement
+     */
+    select?: SeatingArrangementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingArrangementInclude<ExtArgs> | null
+    /**
+     * Filter which SeatingArrangement to delete.
+     */
+    where: SeatingArrangementWhereUniqueInput
+  }
+
+  /**
+   * SeatingArrangement deleteMany
+   */
+  export type SeatingArrangementDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SeatingArrangements to delete
+     */
+    where?: SeatingArrangementWhereInput
+  }
+
+  /**
+   * SeatingArrangement without action
+   */
+  export type SeatingArrangementDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingArrangement
+     */
+    select?: SeatingArrangementSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingArrangementInclude<ExtArgs> | null
   }
 
 
@@ -15259,13 +16468,24 @@ export namespace Prisma {
 
   export const SeatingPlanScalarFieldEnum: {
     id: 'id',
+    layoutId: 'layoutId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SeatingPlanScalarFieldEnum = (typeof SeatingPlanScalarFieldEnum)[keyof typeof SeatingPlanScalarFieldEnum]
+
+
+  export const SeatingArrangementScalarFieldEnum: {
+    id: 'id',
+    seatingPlanId: 'seatingPlanId',
     deskId: 'deskId',
     studentId: 'studentId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
-  export type SeatingPlanScalarFieldEnum = (typeof SeatingPlanScalarFieldEnum)[keyof typeof SeatingPlanScalarFieldEnum]
+  export type SeatingArrangementScalarFieldEnum = (typeof SeatingArrangementScalarFieldEnum)[keyof typeof SeatingArrangementScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -15519,7 +16739,7 @@ export namespace Prisma {
     Attendance?: AttendanceListRelationFilter
     cls?: XOR<ClsRelationFilter, ClsWhereInput>
     user?: XOR<UserRelationFilter, UserWhereInput>
-    seatingPlan?: XOR<SeatingPlanNullableRelationFilter, SeatingPlanWhereInput> | null
+    SeatingArrangement?: SeatingArrangementListRelationFilter
   }
 
   export type StudentOrderByWithRelationInput = {
@@ -15529,7 +16749,7 @@ export namespace Prisma {
     Attendance?: AttendanceOrderByRelationAggregateInput
     cls?: ClsOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
-    seatingPlan?: SeatingPlanOrderByWithRelationInput
+    SeatingArrangement?: SeatingArrangementOrderByRelationAggregateInput
   }
 
   export type StudentWhereUniqueInput = Prisma.AtLeast<{
@@ -15542,7 +16762,7 @@ export namespace Prisma {
     Attendance?: AttendanceListRelationFilter
     cls?: XOR<ClsRelationFilter, ClsWhereInput>
     user?: XOR<UserRelationFilter, UserWhereInput>
-    seatingPlan?: XOR<SeatingPlanNullableRelationFilter, SeatingPlanWhereInput> | null
+    SeatingArrangement?: SeatingArrangementListRelationFilter
   }, "id" | "userId">
 
   export type StudentOrderByWithAggregationInput = {
@@ -15928,6 +17148,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Layout"> | Date | string
     updatedAt?: DateTimeFilter<"Layout"> | Date | string
     desks?: DeskListRelationFilter
+    seatingPlans?: SeatingPlanListRelationFilter
     classes?: ClsListRelationFilter
   }
 
@@ -15937,6 +17158,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     desks?: DeskOrderByRelationAggregateInput
+    seatingPlans?: SeatingPlanOrderByRelationAggregateInput
     classes?: ClsOrderByRelationAggregateInput
   }
 
@@ -15949,6 +17171,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Layout"> | Date | string
     updatedAt?: DateTimeFilter<"Layout"> | Date | string
     desks?: DeskListRelationFilter
+    seatingPlans?: SeatingPlanListRelationFilter
     classes?: ClsListRelationFilter
   }, "id">
 
@@ -15985,7 +17208,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Desk"> | Date | string
     updatedAt?: DateTimeFilter<"Desk"> | Date | string
     layout?: XOR<LayoutRelationFilter, LayoutWhereInput>
-    seatingPlan?: XOR<SeatingPlanNullableRelationFilter, SeatingPlanWhereInput> | null
+    SeatingArrangement?: SeatingArrangementListRelationFilter
   }
 
   export type DeskOrderByWithRelationInput = {
@@ -15996,7 +17219,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     layout?: LayoutOrderByWithRelationInput
-    seatingPlan?: SeatingPlanOrderByWithRelationInput
+    SeatingArrangement?: SeatingArrangementOrderByRelationAggregateInput
   }
 
   export type DeskWhereUniqueInput = Prisma.AtLeast<{
@@ -16010,7 +17233,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Desk"> | Date | string
     updatedAt?: DateTimeFilter<"Desk"> | Date | string
     layout?: XOR<LayoutRelationFilter, LayoutWhereInput>
-    seatingPlan?: XOR<SeatingPlanNullableRelationFilter, SeatingPlanWhereInput> | null
+    SeatingArrangement?: SeatingArrangementListRelationFilter
   }, "id">
 
   export type DeskOrderByWithAggregationInput = {
@@ -16044,41 +17267,37 @@ export namespace Prisma {
     OR?: SeatingPlanWhereInput[]
     NOT?: SeatingPlanWhereInput | SeatingPlanWhereInput[]
     id?: IntFilter<"SeatingPlan"> | number
-    deskId?: IntFilter<"SeatingPlan"> | number
-    studentId?: IntFilter<"SeatingPlan"> | number
+    layoutId?: IntFilter<"SeatingPlan"> | number
     createdAt?: DateTimeFilter<"SeatingPlan"> | Date | string
     updatedAt?: DateTimeFilter<"SeatingPlan"> | Date | string
-    desk?: XOR<DeskRelationFilter, DeskWhereInput>
-    student?: XOR<StudentRelationFilter, StudentWhereInput>
+    layout?: XOR<LayoutRelationFilter, LayoutWhereInput>
+    seatingArrangement?: SeatingArrangementListRelationFilter
   }
 
   export type SeatingPlanOrderByWithRelationInput = {
     id?: SortOrder
-    deskId?: SortOrder
-    studentId?: SortOrder
+    layoutId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    desk?: DeskOrderByWithRelationInput
-    student?: StudentOrderByWithRelationInput
+    layout?: LayoutOrderByWithRelationInput
+    seatingArrangement?: SeatingArrangementOrderByRelationAggregateInput
   }
 
   export type SeatingPlanWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    deskId?: number
-    studentId?: number
     AND?: SeatingPlanWhereInput | SeatingPlanWhereInput[]
     OR?: SeatingPlanWhereInput[]
     NOT?: SeatingPlanWhereInput | SeatingPlanWhereInput[]
+    layoutId?: IntFilter<"SeatingPlan"> | number
     createdAt?: DateTimeFilter<"SeatingPlan"> | Date | string
     updatedAt?: DateTimeFilter<"SeatingPlan"> | Date | string
-    desk?: XOR<DeskRelationFilter, DeskWhereInput>
-    student?: XOR<StudentRelationFilter, StudentWhereInput>
-  }, "id" | "deskId" | "studentId">
+    layout?: XOR<LayoutRelationFilter, LayoutWhereInput>
+    seatingArrangement?: SeatingArrangementListRelationFilter
+  }, "id">
 
   export type SeatingPlanOrderByWithAggregationInput = {
     id?: SortOrder
-    deskId?: SortOrder
-    studentId?: SortOrder
+    layoutId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SeatingPlanCountOrderByAggregateInput
@@ -16093,10 +17312,78 @@ export namespace Prisma {
     OR?: SeatingPlanScalarWhereWithAggregatesInput[]
     NOT?: SeatingPlanScalarWhereWithAggregatesInput | SeatingPlanScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"SeatingPlan"> | number
-    deskId?: IntWithAggregatesFilter<"SeatingPlan"> | number
-    studentId?: IntWithAggregatesFilter<"SeatingPlan"> | number
+    layoutId?: IntWithAggregatesFilter<"SeatingPlan"> | number
     createdAt?: DateTimeWithAggregatesFilter<"SeatingPlan"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SeatingPlan"> | Date | string
+  }
+
+  export type SeatingArrangementWhereInput = {
+    AND?: SeatingArrangementWhereInput | SeatingArrangementWhereInput[]
+    OR?: SeatingArrangementWhereInput[]
+    NOT?: SeatingArrangementWhereInput | SeatingArrangementWhereInput[]
+    id?: IntFilter<"SeatingArrangement"> | number
+    seatingPlanId?: IntFilter<"SeatingArrangement"> | number
+    deskId?: IntFilter<"SeatingArrangement"> | number
+    studentId?: IntFilter<"SeatingArrangement"> | number
+    createdAt?: DateTimeFilter<"SeatingArrangement"> | Date | string
+    updatedAt?: DateTimeFilter<"SeatingArrangement"> | Date | string
+    seatingPlan?: XOR<SeatingPlanRelationFilter, SeatingPlanWhereInput>
+    desk?: XOR<DeskRelationFilter, DeskWhereInput>
+    student?: XOR<StudentRelationFilter, StudentWhereInput>
+  }
+
+  export type SeatingArrangementOrderByWithRelationInput = {
+    id?: SortOrder
+    seatingPlanId?: SortOrder
+    deskId?: SortOrder
+    studentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    seatingPlan?: SeatingPlanOrderByWithRelationInput
+    desk?: DeskOrderByWithRelationInput
+    student?: StudentOrderByWithRelationInput
+  }
+
+  export type SeatingArrangementWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    seatingPlanId_deskId_studentId?: SeatingArrangementSeatingPlanIdDeskIdStudentIdCompoundUniqueInput
+    AND?: SeatingArrangementWhereInput | SeatingArrangementWhereInput[]
+    OR?: SeatingArrangementWhereInput[]
+    NOT?: SeatingArrangementWhereInput | SeatingArrangementWhereInput[]
+    seatingPlanId?: IntFilter<"SeatingArrangement"> | number
+    deskId?: IntFilter<"SeatingArrangement"> | number
+    studentId?: IntFilter<"SeatingArrangement"> | number
+    createdAt?: DateTimeFilter<"SeatingArrangement"> | Date | string
+    updatedAt?: DateTimeFilter<"SeatingArrangement"> | Date | string
+    seatingPlan?: XOR<SeatingPlanRelationFilter, SeatingPlanWhereInput>
+    desk?: XOR<DeskRelationFilter, DeskWhereInput>
+    student?: XOR<StudentRelationFilter, StudentWhereInput>
+  }, "id" | "seatingPlanId_deskId_studentId">
+
+  export type SeatingArrangementOrderByWithAggregationInput = {
+    id?: SortOrder
+    seatingPlanId?: SortOrder
+    deskId?: SortOrder
+    studentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SeatingArrangementCountOrderByAggregateInput
+    _avg?: SeatingArrangementAvgOrderByAggregateInput
+    _max?: SeatingArrangementMaxOrderByAggregateInput
+    _min?: SeatingArrangementMinOrderByAggregateInput
+    _sum?: SeatingArrangementSumOrderByAggregateInput
+  }
+
+  export type SeatingArrangementScalarWhereWithAggregatesInput = {
+    AND?: SeatingArrangementScalarWhereWithAggregatesInput | SeatingArrangementScalarWhereWithAggregatesInput[]
+    OR?: SeatingArrangementScalarWhereWithAggregatesInput[]
+    NOT?: SeatingArrangementScalarWhereWithAggregatesInput | SeatingArrangementScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"SeatingArrangement"> | number
+    seatingPlanId?: IntWithAggregatesFilter<"SeatingArrangement"> | number
+    deskId?: IntWithAggregatesFilter<"SeatingArrangement"> | number
+    studentId?: IntWithAggregatesFilter<"SeatingArrangement"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"SeatingArrangement"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SeatingArrangement"> | Date | string
   }
 
   export type UserCreateInput = {
@@ -16239,7 +17526,7 @@ export namespace Prisma {
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
     cls: ClsCreateNestedOneWithoutStudentsInput
     user: UserCreateNestedOneWithoutStudentInput
-    seatingPlan?: SeatingPlanCreateNestedOneWithoutStudentInput
+    SeatingArrangement?: SeatingArrangementCreateNestedManyWithoutStudentInput
   }
 
   export type StudentUncheckedCreateInput = {
@@ -16247,14 +17534,14 @@ export namespace Prisma {
     userId: number
     classId: number
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
-    seatingPlan?: SeatingPlanUncheckedCreateNestedOneWithoutStudentInput
+    SeatingArrangement?: SeatingArrangementUncheckedCreateNestedManyWithoutStudentInput
   }
 
   export type StudentUpdateInput = {
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
     cls?: ClsUpdateOneRequiredWithoutStudentsNestedInput
     user?: UserUpdateOneRequiredWithoutStudentNestedInput
-    seatingPlan?: SeatingPlanUpdateOneWithoutStudentNestedInput
+    SeatingArrangement?: SeatingArrangementUpdateManyWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateInput = {
@@ -16262,7 +17549,7 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     classId?: IntFieldUpdateOperationsInput | number
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
-    seatingPlan?: SeatingPlanUncheckedUpdateOneWithoutStudentNestedInput
+    SeatingArrangement?: SeatingArrangementUncheckedUpdateManyWithoutStudentNestedInput
   }
 
   export type StudentCreateManyInput = {
@@ -16604,6 +17891,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     desks?: DeskCreateNestedManyWithoutLayoutInput
+    seatingPlans?: SeatingPlanCreateNestedManyWithoutLayoutInput
     classes?: ClsCreateNestedManyWithoutLayoutsInput
   }
 
@@ -16613,6 +17901,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     desks?: DeskUncheckedCreateNestedManyWithoutLayoutInput
+    seatingPlans?: SeatingPlanUncheckedCreateNestedManyWithoutLayoutInput
     classes?: ClsUncheckedCreateNestedManyWithoutLayoutsInput
   }
 
@@ -16621,6 +17910,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     desks?: DeskUpdateManyWithoutLayoutNestedInput
+    seatingPlans?: SeatingPlanUpdateManyWithoutLayoutNestedInput
     classes?: ClsUpdateManyWithoutLayoutsNestedInput
   }
 
@@ -16630,6 +17920,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     desks?: DeskUncheckedUpdateManyWithoutLayoutNestedInput
+    seatingPlans?: SeatingPlanUncheckedUpdateManyWithoutLayoutNestedInput
     classes?: ClsUncheckedUpdateManyWithoutLayoutsNestedInput
   }
 
@@ -16659,7 +17950,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     layout: LayoutCreateNestedOneWithoutDesksInput
-    seatingPlan?: SeatingPlanCreateNestedOneWithoutDeskInput
+    SeatingArrangement?: SeatingArrangementCreateNestedManyWithoutDeskInput
   }
 
   export type DeskUncheckedCreateInput = {
@@ -16669,7 +17960,7 @@ export namespace Prisma {
     y: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    seatingPlan?: SeatingPlanUncheckedCreateNestedOneWithoutDeskInput
+    SeatingArrangement?: SeatingArrangementUncheckedCreateNestedManyWithoutDeskInput
   }
 
   export type DeskUpdateInput = {
@@ -16678,7 +17969,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     layout?: LayoutUpdateOneRequiredWithoutDesksNestedInput
-    seatingPlan?: SeatingPlanUpdateOneWithoutDeskNestedInput
+    SeatingArrangement?: SeatingArrangementUpdateManyWithoutDeskNestedInput
   }
 
   export type DeskUncheckedUpdateInput = {
@@ -16688,7 +17979,7 @@ export namespace Prisma {
     y?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seatingPlan?: SeatingPlanUncheckedUpdateOneWithoutDeskNestedInput
+    SeatingArrangement?: SeatingArrangementUncheckedUpdateManyWithoutDeskNestedInput
   }
 
   export type DeskCreateManyInput = {
@@ -16719,37 +18010,36 @@ export namespace Prisma {
   export type SeatingPlanCreateInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
-    desk: DeskCreateNestedOneWithoutSeatingPlanInput
-    student: StudentCreateNestedOneWithoutSeatingPlanInput
+    layout: LayoutCreateNestedOneWithoutSeatingPlansInput
+    seatingArrangement?: SeatingArrangementCreateNestedManyWithoutSeatingPlanInput
   }
 
   export type SeatingPlanUncheckedCreateInput = {
     id?: number
-    deskId: number
-    studentId: number
+    layoutId: number
     createdAt?: Date | string
     updatedAt?: Date | string
+    seatingArrangement?: SeatingArrangementUncheckedCreateNestedManyWithoutSeatingPlanInput
   }
 
   export type SeatingPlanUpdateInput = {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    desk?: DeskUpdateOneRequiredWithoutSeatingPlanNestedInput
-    student?: StudentUpdateOneRequiredWithoutSeatingPlanNestedInput
+    layout?: LayoutUpdateOneRequiredWithoutSeatingPlansNestedInput
+    seatingArrangement?: SeatingArrangementUpdateManyWithoutSeatingPlanNestedInput
   }
 
   export type SeatingPlanUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    deskId?: IntFieldUpdateOperationsInput | number
-    studentId?: IntFieldUpdateOperationsInput | number
+    layoutId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seatingArrangement?: SeatingArrangementUncheckedUpdateManyWithoutSeatingPlanNestedInput
   }
 
   export type SeatingPlanCreateManyInput = {
     id?: number
-    deskId: number
-    studentId: number
+    layoutId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16761,6 +18051,62 @@ export namespace Prisma {
 
   export type SeatingPlanUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    layoutId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeatingArrangementCreateInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seatingPlan: SeatingPlanCreateNestedOneWithoutSeatingArrangementInput
+    desk: DeskCreateNestedOneWithoutSeatingArrangementInput
+    student: StudentCreateNestedOneWithoutSeatingArrangementInput
+  }
+
+  export type SeatingArrangementUncheckedCreateInput = {
+    id?: number
+    seatingPlanId: number
+    deskId: number
+    studentId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SeatingArrangementUpdateInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seatingPlan?: SeatingPlanUpdateOneRequiredWithoutSeatingArrangementNestedInput
+    desk?: DeskUpdateOneRequiredWithoutSeatingArrangementNestedInput
+    student?: StudentUpdateOneRequiredWithoutSeatingArrangementNestedInput
+  }
+
+  export type SeatingArrangementUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    seatingPlanId?: IntFieldUpdateOperationsInput | number
+    deskId?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeatingArrangementCreateManyInput = {
+    id?: number
+    seatingPlanId: number
+    deskId: number
+    studentId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SeatingArrangementUpdateManyMutationInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeatingArrangementUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    seatingPlanId?: IntFieldUpdateOperationsInput | number
     deskId?: IntFieldUpdateOperationsInput | number
     studentId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16970,12 +18316,17 @@ export namespace Prisma {
     isNot?: ClsWhereInput
   }
 
-  export type SeatingPlanNullableRelationFilter = {
-    is?: SeatingPlanWhereInput | null
-    isNot?: SeatingPlanWhereInput | null
+  export type SeatingArrangementListRelationFilter = {
+    every?: SeatingArrangementWhereInput
+    some?: SeatingArrangementWhereInput
+    none?: SeatingArrangementWhereInput
   }
 
   export type AttendanceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SeatingArrangementOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17409,7 +18760,17 @@ export namespace Prisma {
     none?: DeskWhereInput
   }
 
+  export type SeatingPlanListRelationFilter = {
+    every?: SeatingPlanWhereInput
+    some?: SeatingPlanWhereInput
+    none?: SeatingPlanWhereInput
+  }
+
   export type DeskOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SeatingPlanOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -17488,43 +18849,90 @@ export namespace Prisma {
     y?: SortOrder
   }
 
-  export type DeskRelationFilter = {
-    is?: DeskWhereInput
-    isNot?: DeskWhereInput
-  }
-
   export type SeatingPlanCountOrderByAggregateInput = {
     id?: SortOrder
-    deskId?: SortOrder
-    studentId?: SortOrder
+    layoutId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type SeatingPlanAvgOrderByAggregateInput = {
     id?: SortOrder
-    deskId?: SortOrder
-    studentId?: SortOrder
+    layoutId?: SortOrder
   }
 
   export type SeatingPlanMaxOrderByAggregateInput = {
     id?: SortOrder
-    deskId?: SortOrder
-    studentId?: SortOrder
+    layoutId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type SeatingPlanMinOrderByAggregateInput = {
     id?: SortOrder
-    deskId?: SortOrder
-    studentId?: SortOrder
+    layoutId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type SeatingPlanSumOrderByAggregateInput = {
     id?: SortOrder
+    layoutId?: SortOrder
+  }
+
+  export type SeatingPlanRelationFilter = {
+    is?: SeatingPlanWhereInput
+    isNot?: SeatingPlanWhereInput
+  }
+
+  export type DeskRelationFilter = {
+    is?: DeskWhereInput
+    isNot?: DeskWhereInput
+  }
+
+  export type SeatingArrangementSeatingPlanIdDeskIdStudentIdCompoundUniqueInput = {
+    seatingPlanId: number
+    deskId: number
+    studentId: number
+  }
+
+  export type SeatingArrangementCountOrderByAggregateInput = {
+    id?: SortOrder
+    seatingPlanId?: SortOrder
+    deskId?: SortOrder
+    studentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SeatingArrangementAvgOrderByAggregateInput = {
+    id?: SortOrder
+    seatingPlanId?: SortOrder
+    deskId?: SortOrder
+    studentId?: SortOrder
+  }
+
+  export type SeatingArrangementMaxOrderByAggregateInput = {
+    id?: SortOrder
+    seatingPlanId?: SortOrder
+    deskId?: SortOrder
+    studentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SeatingArrangementMinOrderByAggregateInput = {
+    id?: SortOrder
+    seatingPlanId?: SortOrder
+    deskId?: SortOrder
+    studentId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SeatingArrangementSumOrderByAggregateInput = {
+    id?: SortOrder
+    seatingPlanId?: SortOrder
     deskId?: SortOrder
     studentId?: SortOrder
   }
@@ -17778,10 +19186,11 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type SeatingPlanCreateNestedOneWithoutStudentInput = {
-    create?: XOR<SeatingPlanCreateWithoutStudentInput, SeatingPlanUncheckedCreateWithoutStudentInput>
-    connectOrCreate?: SeatingPlanCreateOrConnectWithoutStudentInput
-    connect?: SeatingPlanWhereUniqueInput
+  export type SeatingArrangementCreateNestedManyWithoutStudentInput = {
+    create?: XOR<SeatingArrangementCreateWithoutStudentInput, SeatingArrangementUncheckedCreateWithoutStudentInput> | SeatingArrangementCreateWithoutStudentInput[] | SeatingArrangementUncheckedCreateWithoutStudentInput[]
+    connectOrCreate?: SeatingArrangementCreateOrConnectWithoutStudentInput | SeatingArrangementCreateOrConnectWithoutStudentInput[]
+    createMany?: SeatingArrangementCreateManyStudentInputEnvelope
+    connect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
   }
 
   export type AttendanceUncheckedCreateNestedManyWithoutStudentInput = {
@@ -17791,10 +19200,11 @@ export namespace Prisma {
     connect?: AttendanceWhereUniqueInput | AttendanceWhereUniqueInput[]
   }
 
-  export type SeatingPlanUncheckedCreateNestedOneWithoutStudentInput = {
-    create?: XOR<SeatingPlanCreateWithoutStudentInput, SeatingPlanUncheckedCreateWithoutStudentInput>
-    connectOrCreate?: SeatingPlanCreateOrConnectWithoutStudentInput
-    connect?: SeatingPlanWhereUniqueInput
+  export type SeatingArrangementUncheckedCreateNestedManyWithoutStudentInput = {
+    create?: XOR<SeatingArrangementCreateWithoutStudentInput, SeatingArrangementUncheckedCreateWithoutStudentInput> | SeatingArrangementCreateWithoutStudentInput[] | SeatingArrangementUncheckedCreateWithoutStudentInput[]
+    connectOrCreate?: SeatingArrangementCreateOrConnectWithoutStudentInput | SeatingArrangementCreateOrConnectWithoutStudentInput[]
+    createMany?: SeatingArrangementCreateManyStudentInputEnvelope
+    connect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
   }
 
   export type AttendanceUpdateManyWithoutStudentNestedInput = {
@@ -17827,14 +19237,18 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutStudentInput, UserUpdateWithoutStudentInput>, UserUncheckedUpdateWithoutStudentInput>
   }
 
-  export type SeatingPlanUpdateOneWithoutStudentNestedInput = {
-    create?: XOR<SeatingPlanCreateWithoutStudentInput, SeatingPlanUncheckedCreateWithoutStudentInput>
-    connectOrCreate?: SeatingPlanCreateOrConnectWithoutStudentInput
-    upsert?: SeatingPlanUpsertWithoutStudentInput
-    disconnect?: SeatingPlanWhereInput | boolean
-    delete?: SeatingPlanWhereInput | boolean
-    connect?: SeatingPlanWhereUniqueInput
-    update?: XOR<XOR<SeatingPlanUpdateToOneWithWhereWithoutStudentInput, SeatingPlanUpdateWithoutStudentInput>, SeatingPlanUncheckedUpdateWithoutStudentInput>
+  export type SeatingArrangementUpdateManyWithoutStudentNestedInput = {
+    create?: XOR<SeatingArrangementCreateWithoutStudentInput, SeatingArrangementUncheckedCreateWithoutStudentInput> | SeatingArrangementCreateWithoutStudentInput[] | SeatingArrangementUncheckedCreateWithoutStudentInput[]
+    connectOrCreate?: SeatingArrangementCreateOrConnectWithoutStudentInput | SeatingArrangementCreateOrConnectWithoutStudentInput[]
+    upsert?: SeatingArrangementUpsertWithWhereUniqueWithoutStudentInput | SeatingArrangementUpsertWithWhereUniqueWithoutStudentInput[]
+    createMany?: SeatingArrangementCreateManyStudentInputEnvelope
+    set?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    disconnect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    delete?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    connect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    update?: SeatingArrangementUpdateWithWhereUniqueWithoutStudentInput | SeatingArrangementUpdateWithWhereUniqueWithoutStudentInput[]
+    updateMany?: SeatingArrangementUpdateManyWithWhereWithoutStudentInput | SeatingArrangementUpdateManyWithWhereWithoutStudentInput[]
+    deleteMany?: SeatingArrangementScalarWhereInput | SeatingArrangementScalarWhereInput[]
   }
 
   export type AttendanceUncheckedUpdateManyWithoutStudentNestedInput = {
@@ -17851,14 +19265,18 @@ export namespace Prisma {
     deleteMany?: AttendanceScalarWhereInput | AttendanceScalarWhereInput[]
   }
 
-  export type SeatingPlanUncheckedUpdateOneWithoutStudentNestedInput = {
-    create?: XOR<SeatingPlanCreateWithoutStudentInput, SeatingPlanUncheckedCreateWithoutStudentInput>
-    connectOrCreate?: SeatingPlanCreateOrConnectWithoutStudentInput
-    upsert?: SeatingPlanUpsertWithoutStudentInput
-    disconnect?: SeatingPlanWhereInput | boolean
-    delete?: SeatingPlanWhereInput | boolean
-    connect?: SeatingPlanWhereUniqueInput
-    update?: XOR<XOR<SeatingPlanUpdateToOneWithWhereWithoutStudentInput, SeatingPlanUpdateWithoutStudentInput>, SeatingPlanUncheckedUpdateWithoutStudentInput>
+  export type SeatingArrangementUncheckedUpdateManyWithoutStudentNestedInput = {
+    create?: XOR<SeatingArrangementCreateWithoutStudentInput, SeatingArrangementUncheckedCreateWithoutStudentInput> | SeatingArrangementCreateWithoutStudentInput[] | SeatingArrangementUncheckedCreateWithoutStudentInput[]
+    connectOrCreate?: SeatingArrangementCreateOrConnectWithoutStudentInput | SeatingArrangementCreateOrConnectWithoutStudentInput[]
+    upsert?: SeatingArrangementUpsertWithWhereUniqueWithoutStudentInput | SeatingArrangementUpsertWithWhereUniqueWithoutStudentInput[]
+    createMany?: SeatingArrangementCreateManyStudentInputEnvelope
+    set?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    disconnect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    delete?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    connect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    update?: SeatingArrangementUpdateWithWhereUniqueWithoutStudentInput | SeatingArrangementUpdateWithWhereUniqueWithoutStudentInput[]
+    updateMany?: SeatingArrangementUpdateManyWithWhereWithoutStudentInput | SeatingArrangementUpdateManyWithWhereWithoutStudentInput[]
+    deleteMany?: SeatingArrangementScalarWhereInput | SeatingArrangementScalarWhereInput[]
   }
 
   export type TeacherCreateNestedOneWithoutClassesInput = {
@@ -18296,6 +19714,13 @@ export namespace Prisma {
     connect?: DeskWhereUniqueInput | DeskWhereUniqueInput[]
   }
 
+  export type SeatingPlanCreateNestedManyWithoutLayoutInput = {
+    create?: XOR<SeatingPlanCreateWithoutLayoutInput, SeatingPlanUncheckedCreateWithoutLayoutInput> | SeatingPlanCreateWithoutLayoutInput[] | SeatingPlanUncheckedCreateWithoutLayoutInput[]
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutLayoutInput | SeatingPlanCreateOrConnectWithoutLayoutInput[]
+    createMany?: SeatingPlanCreateManyLayoutInputEnvelope
+    connect?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+  }
+
   export type ClsCreateNestedManyWithoutLayoutsInput = {
     create?: XOR<ClsCreateWithoutLayoutsInput, ClsUncheckedCreateWithoutLayoutsInput> | ClsCreateWithoutLayoutsInput[] | ClsUncheckedCreateWithoutLayoutsInput[]
     connectOrCreate?: ClsCreateOrConnectWithoutLayoutsInput | ClsCreateOrConnectWithoutLayoutsInput[]
@@ -18307,6 +19732,13 @@ export namespace Prisma {
     connectOrCreate?: DeskCreateOrConnectWithoutLayoutInput | DeskCreateOrConnectWithoutLayoutInput[]
     createMany?: DeskCreateManyLayoutInputEnvelope
     connect?: DeskWhereUniqueInput | DeskWhereUniqueInput[]
+  }
+
+  export type SeatingPlanUncheckedCreateNestedManyWithoutLayoutInput = {
+    create?: XOR<SeatingPlanCreateWithoutLayoutInput, SeatingPlanUncheckedCreateWithoutLayoutInput> | SeatingPlanCreateWithoutLayoutInput[] | SeatingPlanUncheckedCreateWithoutLayoutInput[]
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutLayoutInput | SeatingPlanCreateOrConnectWithoutLayoutInput[]
+    createMany?: SeatingPlanCreateManyLayoutInputEnvelope
+    connect?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
   }
 
   export type ClsUncheckedCreateNestedManyWithoutLayoutsInput = {
@@ -18327,6 +19759,20 @@ export namespace Prisma {
     update?: DeskUpdateWithWhereUniqueWithoutLayoutInput | DeskUpdateWithWhereUniqueWithoutLayoutInput[]
     updateMany?: DeskUpdateManyWithWhereWithoutLayoutInput | DeskUpdateManyWithWhereWithoutLayoutInput[]
     deleteMany?: DeskScalarWhereInput | DeskScalarWhereInput[]
+  }
+
+  export type SeatingPlanUpdateManyWithoutLayoutNestedInput = {
+    create?: XOR<SeatingPlanCreateWithoutLayoutInput, SeatingPlanUncheckedCreateWithoutLayoutInput> | SeatingPlanCreateWithoutLayoutInput[] | SeatingPlanUncheckedCreateWithoutLayoutInput[]
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutLayoutInput | SeatingPlanCreateOrConnectWithoutLayoutInput[]
+    upsert?: SeatingPlanUpsertWithWhereUniqueWithoutLayoutInput | SeatingPlanUpsertWithWhereUniqueWithoutLayoutInput[]
+    createMany?: SeatingPlanCreateManyLayoutInputEnvelope
+    set?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    disconnect?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    delete?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    connect?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    update?: SeatingPlanUpdateWithWhereUniqueWithoutLayoutInput | SeatingPlanUpdateWithWhereUniqueWithoutLayoutInput[]
+    updateMany?: SeatingPlanUpdateManyWithWhereWithoutLayoutInput | SeatingPlanUpdateManyWithWhereWithoutLayoutInput[]
+    deleteMany?: SeatingPlanScalarWhereInput | SeatingPlanScalarWhereInput[]
   }
 
   export type ClsUpdateManyWithoutLayoutsNestedInput = {
@@ -18356,6 +19802,20 @@ export namespace Prisma {
     deleteMany?: DeskScalarWhereInput | DeskScalarWhereInput[]
   }
 
+  export type SeatingPlanUncheckedUpdateManyWithoutLayoutNestedInput = {
+    create?: XOR<SeatingPlanCreateWithoutLayoutInput, SeatingPlanUncheckedCreateWithoutLayoutInput> | SeatingPlanCreateWithoutLayoutInput[] | SeatingPlanUncheckedCreateWithoutLayoutInput[]
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutLayoutInput | SeatingPlanCreateOrConnectWithoutLayoutInput[]
+    upsert?: SeatingPlanUpsertWithWhereUniqueWithoutLayoutInput | SeatingPlanUpsertWithWhereUniqueWithoutLayoutInput[]
+    createMany?: SeatingPlanCreateManyLayoutInputEnvelope
+    set?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    disconnect?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    delete?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    connect?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    update?: SeatingPlanUpdateWithWhereUniqueWithoutLayoutInput | SeatingPlanUpdateWithWhereUniqueWithoutLayoutInput[]
+    updateMany?: SeatingPlanUpdateManyWithWhereWithoutLayoutInput | SeatingPlanUpdateManyWithWhereWithoutLayoutInput[]
+    deleteMany?: SeatingPlanScalarWhereInput | SeatingPlanScalarWhereInput[]
+  }
+
   export type ClsUncheckedUpdateManyWithoutLayoutsNestedInput = {
     create?: XOR<ClsCreateWithoutLayoutsInput, ClsUncheckedCreateWithoutLayoutsInput> | ClsCreateWithoutLayoutsInput[] | ClsUncheckedCreateWithoutLayoutsInput[]
     connectOrCreate?: ClsCreateOrConnectWithoutLayoutsInput | ClsCreateOrConnectWithoutLayoutsInput[]
@@ -18375,16 +19835,18 @@ export namespace Prisma {
     connect?: LayoutWhereUniqueInput
   }
 
-  export type SeatingPlanCreateNestedOneWithoutDeskInput = {
-    create?: XOR<SeatingPlanCreateWithoutDeskInput, SeatingPlanUncheckedCreateWithoutDeskInput>
-    connectOrCreate?: SeatingPlanCreateOrConnectWithoutDeskInput
-    connect?: SeatingPlanWhereUniqueInput
+  export type SeatingArrangementCreateNestedManyWithoutDeskInput = {
+    create?: XOR<SeatingArrangementCreateWithoutDeskInput, SeatingArrangementUncheckedCreateWithoutDeskInput> | SeatingArrangementCreateWithoutDeskInput[] | SeatingArrangementUncheckedCreateWithoutDeskInput[]
+    connectOrCreate?: SeatingArrangementCreateOrConnectWithoutDeskInput | SeatingArrangementCreateOrConnectWithoutDeskInput[]
+    createMany?: SeatingArrangementCreateManyDeskInputEnvelope
+    connect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
   }
 
-  export type SeatingPlanUncheckedCreateNestedOneWithoutDeskInput = {
-    create?: XOR<SeatingPlanCreateWithoutDeskInput, SeatingPlanUncheckedCreateWithoutDeskInput>
-    connectOrCreate?: SeatingPlanCreateOrConnectWithoutDeskInput
-    connect?: SeatingPlanWhereUniqueInput
+  export type SeatingArrangementUncheckedCreateNestedManyWithoutDeskInput = {
+    create?: XOR<SeatingArrangementCreateWithoutDeskInput, SeatingArrangementUncheckedCreateWithoutDeskInput> | SeatingArrangementCreateWithoutDeskInput[] | SeatingArrangementUncheckedCreateWithoutDeskInput[]
+    connectOrCreate?: SeatingArrangementCreateOrConnectWithoutDeskInput | SeatingArrangementCreateOrConnectWithoutDeskInput[]
+    createMany?: SeatingArrangementCreateManyDeskInputEnvelope
+    connect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
   }
 
   export type LayoutUpdateOneRequiredWithoutDesksNestedInput = {
@@ -18395,52 +19857,130 @@ export namespace Prisma {
     update?: XOR<XOR<LayoutUpdateToOneWithWhereWithoutDesksInput, LayoutUpdateWithoutDesksInput>, LayoutUncheckedUpdateWithoutDesksInput>
   }
 
-  export type SeatingPlanUpdateOneWithoutDeskNestedInput = {
-    create?: XOR<SeatingPlanCreateWithoutDeskInput, SeatingPlanUncheckedCreateWithoutDeskInput>
-    connectOrCreate?: SeatingPlanCreateOrConnectWithoutDeskInput
-    upsert?: SeatingPlanUpsertWithoutDeskInput
-    disconnect?: SeatingPlanWhereInput | boolean
-    delete?: SeatingPlanWhereInput | boolean
-    connect?: SeatingPlanWhereUniqueInput
-    update?: XOR<XOR<SeatingPlanUpdateToOneWithWhereWithoutDeskInput, SeatingPlanUpdateWithoutDeskInput>, SeatingPlanUncheckedUpdateWithoutDeskInput>
+  export type SeatingArrangementUpdateManyWithoutDeskNestedInput = {
+    create?: XOR<SeatingArrangementCreateWithoutDeskInput, SeatingArrangementUncheckedCreateWithoutDeskInput> | SeatingArrangementCreateWithoutDeskInput[] | SeatingArrangementUncheckedCreateWithoutDeskInput[]
+    connectOrCreate?: SeatingArrangementCreateOrConnectWithoutDeskInput | SeatingArrangementCreateOrConnectWithoutDeskInput[]
+    upsert?: SeatingArrangementUpsertWithWhereUniqueWithoutDeskInput | SeatingArrangementUpsertWithWhereUniqueWithoutDeskInput[]
+    createMany?: SeatingArrangementCreateManyDeskInputEnvelope
+    set?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    disconnect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    delete?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    connect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    update?: SeatingArrangementUpdateWithWhereUniqueWithoutDeskInput | SeatingArrangementUpdateWithWhereUniqueWithoutDeskInput[]
+    updateMany?: SeatingArrangementUpdateManyWithWhereWithoutDeskInput | SeatingArrangementUpdateManyWithWhereWithoutDeskInput[]
+    deleteMany?: SeatingArrangementScalarWhereInput | SeatingArrangementScalarWhereInput[]
   }
 
-  export type SeatingPlanUncheckedUpdateOneWithoutDeskNestedInput = {
-    create?: XOR<SeatingPlanCreateWithoutDeskInput, SeatingPlanUncheckedCreateWithoutDeskInput>
-    connectOrCreate?: SeatingPlanCreateOrConnectWithoutDeskInput
-    upsert?: SeatingPlanUpsertWithoutDeskInput
-    disconnect?: SeatingPlanWhereInput | boolean
-    delete?: SeatingPlanWhereInput | boolean
-    connect?: SeatingPlanWhereUniqueInput
-    update?: XOR<XOR<SeatingPlanUpdateToOneWithWhereWithoutDeskInput, SeatingPlanUpdateWithoutDeskInput>, SeatingPlanUncheckedUpdateWithoutDeskInput>
+  export type SeatingArrangementUncheckedUpdateManyWithoutDeskNestedInput = {
+    create?: XOR<SeatingArrangementCreateWithoutDeskInput, SeatingArrangementUncheckedCreateWithoutDeskInput> | SeatingArrangementCreateWithoutDeskInput[] | SeatingArrangementUncheckedCreateWithoutDeskInput[]
+    connectOrCreate?: SeatingArrangementCreateOrConnectWithoutDeskInput | SeatingArrangementCreateOrConnectWithoutDeskInput[]
+    upsert?: SeatingArrangementUpsertWithWhereUniqueWithoutDeskInput | SeatingArrangementUpsertWithWhereUniqueWithoutDeskInput[]
+    createMany?: SeatingArrangementCreateManyDeskInputEnvelope
+    set?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    disconnect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    delete?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    connect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    update?: SeatingArrangementUpdateWithWhereUniqueWithoutDeskInput | SeatingArrangementUpdateWithWhereUniqueWithoutDeskInput[]
+    updateMany?: SeatingArrangementUpdateManyWithWhereWithoutDeskInput | SeatingArrangementUpdateManyWithWhereWithoutDeskInput[]
+    deleteMany?: SeatingArrangementScalarWhereInput | SeatingArrangementScalarWhereInput[]
   }
 
-  export type DeskCreateNestedOneWithoutSeatingPlanInput = {
-    create?: XOR<DeskCreateWithoutSeatingPlanInput, DeskUncheckedCreateWithoutSeatingPlanInput>
-    connectOrCreate?: DeskCreateOrConnectWithoutSeatingPlanInput
+  export type LayoutCreateNestedOneWithoutSeatingPlansInput = {
+    create?: XOR<LayoutCreateWithoutSeatingPlansInput, LayoutUncheckedCreateWithoutSeatingPlansInput>
+    connectOrCreate?: LayoutCreateOrConnectWithoutSeatingPlansInput
+    connect?: LayoutWhereUniqueInput
+  }
+
+  export type SeatingArrangementCreateNestedManyWithoutSeatingPlanInput = {
+    create?: XOR<SeatingArrangementCreateWithoutSeatingPlanInput, SeatingArrangementUncheckedCreateWithoutSeatingPlanInput> | SeatingArrangementCreateWithoutSeatingPlanInput[] | SeatingArrangementUncheckedCreateWithoutSeatingPlanInput[]
+    connectOrCreate?: SeatingArrangementCreateOrConnectWithoutSeatingPlanInput | SeatingArrangementCreateOrConnectWithoutSeatingPlanInput[]
+    createMany?: SeatingArrangementCreateManySeatingPlanInputEnvelope
+    connect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+  }
+
+  export type SeatingArrangementUncheckedCreateNestedManyWithoutSeatingPlanInput = {
+    create?: XOR<SeatingArrangementCreateWithoutSeatingPlanInput, SeatingArrangementUncheckedCreateWithoutSeatingPlanInput> | SeatingArrangementCreateWithoutSeatingPlanInput[] | SeatingArrangementUncheckedCreateWithoutSeatingPlanInput[]
+    connectOrCreate?: SeatingArrangementCreateOrConnectWithoutSeatingPlanInput | SeatingArrangementCreateOrConnectWithoutSeatingPlanInput[]
+    createMany?: SeatingArrangementCreateManySeatingPlanInputEnvelope
+    connect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+  }
+
+  export type LayoutUpdateOneRequiredWithoutSeatingPlansNestedInput = {
+    create?: XOR<LayoutCreateWithoutSeatingPlansInput, LayoutUncheckedCreateWithoutSeatingPlansInput>
+    connectOrCreate?: LayoutCreateOrConnectWithoutSeatingPlansInput
+    upsert?: LayoutUpsertWithoutSeatingPlansInput
+    connect?: LayoutWhereUniqueInput
+    update?: XOR<XOR<LayoutUpdateToOneWithWhereWithoutSeatingPlansInput, LayoutUpdateWithoutSeatingPlansInput>, LayoutUncheckedUpdateWithoutSeatingPlansInput>
+  }
+
+  export type SeatingArrangementUpdateManyWithoutSeatingPlanNestedInput = {
+    create?: XOR<SeatingArrangementCreateWithoutSeatingPlanInput, SeatingArrangementUncheckedCreateWithoutSeatingPlanInput> | SeatingArrangementCreateWithoutSeatingPlanInput[] | SeatingArrangementUncheckedCreateWithoutSeatingPlanInput[]
+    connectOrCreate?: SeatingArrangementCreateOrConnectWithoutSeatingPlanInput | SeatingArrangementCreateOrConnectWithoutSeatingPlanInput[]
+    upsert?: SeatingArrangementUpsertWithWhereUniqueWithoutSeatingPlanInput | SeatingArrangementUpsertWithWhereUniqueWithoutSeatingPlanInput[]
+    createMany?: SeatingArrangementCreateManySeatingPlanInputEnvelope
+    set?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    disconnect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    delete?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    connect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    update?: SeatingArrangementUpdateWithWhereUniqueWithoutSeatingPlanInput | SeatingArrangementUpdateWithWhereUniqueWithoutSeatingPlanInput[]
+    updateMany?: SeatingArrangementUpdateManyWithWhereWithoutSeatingPlanInput | SeatingArrangementUpdateManyWithWhereWithoutSeatingPlanInput[]
+    deleteMany?: SeatingArrangementScalarWhereInput | SeatingArrangementScalarWhereInput[]
+  }
+
+  export type SeatingArrangementUncheckedUpdateManyWithoutSeatingPlanNestedInput = {
+    create?: XOR<SeatingArrangementCreateWithoutSeatingPlanInput, SeatingArrangementUncheckedCreateWithoutSeatingPlanInput> | SeatingArrangementCreateWithoutSeatingPlanInput[] | SeatingArrangementUncheckedCreateWithoutSeatingPlanInput[]
+    connectOrCreate?: SeatingArrangementCreateOrConnectWithoutSeatingPlanInput | SeatingArrangementCreateOrConnectWithoutSeatingPlanInput[]
+    upsert?: SeatingArrangementUpsertWithWhereUniqueWithoutSeatingPlanInput | SeatingArrangementUpsertWithWhereUniqueWithoutSeatingPlanInput[]
+    createMany?: SeatingArrangementCreateManySeatingPlanInputEnvelope
+    set?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    disconnect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    delete?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    connect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+    update?: SeatingArrangementUpdateWithWhereUniqueWithoutSeatingPlanInput | SeatingArrangementUpdateWithWhereUniqueWithoutSeatingPlanInput[]
+    updateMany?: SeatingArrangementUpdateManyWithWhereWithoutSeatingPlanInput | SeatingArrangementUpdateManyWithWhereWithoutSeatingPlanInput[]
+    deleteMany?: SeatingArrangementScalarWhereInput | SeatingArrangementScalarWhereInput[]
+  }
+
+  export type SeatingPlanCreateNestedOneWithoutSeatingArrangementInput = {
+    create?: XOR<SeatingPlanCreateWithoutSeatingArrangementInput, SeatingPlanUncheckedCreateWithoutSeatingArrangementInput>
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutSeatingArrangementInput
+    connect?: SeatingPlanWhereUniqueInput
+  }
+
+  export type DeskCreateNestedOneWithoutSeatingArrangementInput = {
+    create?: XOR<DeskCreateWithoutSeatingArrangementInput, DeskUncheckedCreateWithoutSeatingArrangementInput>
+    connectOrCreate?: DeskCreateOrConnectWithoutSeatingArrangementInput
     connect?: DeskWhereUniqueInput
   }
 
-  export type StudentCreateNestedOneWithoutSeatingPlanInput = {
-    create?: XOR<StudentCreateWithoutSeatingPlanInput, StudentUncheckedCreateWithoutSeatingPlanInput>
-    connectOrCreate?: StudentCreateOrConnectWithoutSeatingPlanInput
+  export type StudentCreateNestedOneWithoutSeatingArrangementInput = {
+    create?: XOR<StudentCreateWithoutSeatingArrangementInput, StudentUncheckedCreateWithoutSeatingArrangementInput>
+    connectOrCreate?: StudentCreateOrConnectWithoutSeatingArrangementInput
     connect?: StudentWhereUniqueInput
   }
 
-  export type DeskUpdateOneRequiredWithoutSeatingPlanNestedInput = {
-    create?: XOR<DeskCreateWithoutSeatingPlanInput, DeskUncheckedCreateWithoutSeatingPlanInput>
-    connectOrCreate?: DeskCreateOrConnectWithoutSeatingPlanInput
-    upsert?: DeskUpsertWithoutSeatingPlanInput
+  export type SeatingPlanUpdateOneRequiredWithoutSeatingArrangementNestedInput = {
+    create?: XOR<SeatingPlanCreateWithoutSeatingArrangementInput, SeatingPlanUncheckedCreateWithoutSeatingArrangementInput>
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutSeatingArrangementInput
+    upsert?: SeatingPlanUpsertWithoutSeatingArrangementInput
+    connect?: SeatingPlanWhereUniqueInput
+    update?: XOR<XOR<SeatingPlanUpdateToOneWithWhereWithoutSeatingArrangementInput, SeatingPlanUpdateWithoutSeatingArrangementInput>, SeatingPlanUncheckedUpdateWithoutSeatingArrangementInput>
+  }
+
+  export type DeskUpdateOneRequiredWithoutSeatingArrangementNestedInput = {
+    create?: XOR<DeskCreateWithoutSeatingArrangementInput, DeskUncheckedCreateWithoutSeatingArrangementInput>
+    connectOrCreate?: DeskCreateOrConnectWithoutSeatingArrangementInput
+    upsert?: DeskUpsertWithoutSeatingArrangementInput
     connect?: DeskWhereUniqueInput
-    update?: XOR<XOR<DeskUpdateToOneWithWhereWithoutSeatingPlanInput, DeskUpdateWithoutSeatingPlanInput>, DeskUncheckedUpdateWithoutSeatingPlanInput>
+    update?: XOR<XOR<DeskUpdateToOneWithWhereWithoutSeatingArrangementInput, DeskUpdateWithoutSeatingArrangementInput>, DeskUncheckedUpdateWithoutSeatingArrangementInput>
   }
 
-  export type StudentUpdateOneRequiredWithoutSeatingPlanNestedInput = {
-    create?: XOR<StudentCreateWithoutSeatingPlanInput, StudentUncheckedCreateWithoutSeatingPlanInput>
-    connectOrCreate?: StudentCreateOrConnectWithoutSeatingPlanInput
-    upsert?: StudentUpsertWithoutSeatingPlanInput
+  export type StudentUpdateOneRequiredWithoutSeatingArrangementNestedInput = {
+    create?: XOR<StudentCreateWithoutSeatingArrangementInput, StudentUncheckedCreateWithoutSeatingArrangementInput>
+    connectOrCreate?: StudentCreateOrConnectWithoutSeatingArrangementInput
+    upsert?: StudentUpsertWithoutSeatingArrangementInput
     connect?: StudentWhereUniqueInput
-    update?: XOR<XOR<StudentUpdateToOneWithWhereWithoutSeatingPlanInput, StudentUpdateWithoutSeatingPlanInput>, StudentUncheckedUpdateWithoutSeatingPlanInput>
+    update?: XOR<XOR<StudentUpdateToOneWithWhereWithoutSeatingArrangementInput, StudentUpdateWithoutSeatingArrangementInput>, StudentUncheckedUpdateWithoutSeatingArrangementInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -18625,14 +20165,14 @@ export namespace Prisma {
   export type StudentCreateWithoutUserInput = {
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
     cls: ClsCreateNestedOneWithoutStudentsInput
-    seatingPlan?: SeatingPlanCreateNestedOneWithoutStudentInput
+    SeatingArrangement?: SeatingArrangementCreateNestedManyWithoutStudentInput
   }
 
   export type StudentUncheckedCreateWithoutUserInput = {
     id?: number
     classId: number
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
-    seatingPlan?: SeatingPlanUncheckedCreateNestedOneWithoutStudentInput
+    SeatingArrangement?: SeatingArrangementUncheckedCreateNestedManyWithoutStudentInput
   }
 
   export type StudentCreateOrConnectWithoutUserInput = {
@@ -18684,14 +20224,14 @@ export namespace Prisma {
   export type StudentUpdateWithoutUserInput = {
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
     cls?: ClsUpdateOneRequiredWithoutStudentsNestedInput
-    seatingPlan?: SeatingPlanUpdateOneWithoutStudentNestedInput
+    SeatingArrangement?: SeatingArrangementUpdateManyWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     classId?: IntFieldUpdateOperationsInput | number
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
-    seatingPlan?: SeatingPlanUncheckedUpdateOneWithoutStudentNestedInput
+    SeatingArrangement?: SeatingArrangementUncheckedUpdateManyWithoutStudentNestedInput
   }
 
   export type TeacherUpsertWithoutUserInput = {
@@ -19019,22 +20559,29 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutStudentInput, UserUncheckedCreateWithoutStudentInput>
   }
 
-  export type SeatingPlanCreateWithoutStudentInput = {
+  export type SeatingArrangementCreateWithoutStudentInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
-    desk: DeskCreateNestedOneWithoutSeatingPlanInput
+    seatingPlan: SeatingPlanCreateNestedOneWithoutSeatingArrangementInput
+    desk: DeskCreateNestedOneWithoutSeatingArrangementInput
   }
 
-  export type SeatingPlanUncheckedCreateWithoutStudentInput = {
+  export type SeatingArrangementUncheckedCreateWithoutStudentInput = {
     id?: number
+    seatingPlanId: number
     deskId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type SeatingPlanCreateOrConnectWithoutStudentInput = {
-    where: SeatingPlanWhereUniqueInput
-    create: XOR<SeatingPlanCreateWithoutStudentInput, SeatingPlanUncheckedCreateWithoutStudentInput>
+  export type SeatingArrangementCreateOrConnectWithoutStudentInput = {
+    where: SeatingArrangementWhereUniqueInput
+    create: XOR<SeatingArrangementCreateWithoutStudentInput, SeatingArrangementUncheckedCreateWithoutStudentInput>
+  }
+
+  export type SeatingArrangementCreateManyStudentInputEnvelope = {
+    data: SeatingArrangementCreateManyStudentInput | SeatingArrangementCreateManyStudentInput[]
+    skipDuplicates?: boolean
   }
 
   export type AttendanceUpsertWithWhereUniqueWithoutStudentInput = {
@@ -19124,28 +20671,32 @@ export namespace Prisma {
     Teacher?: TeacherUncheckedUpdateOneWithoutUserNestedInput
   }
 
-  export type SeatingPlanUpsertWithoutStudentInput = {
-    update: XOR<SeatingPlanUpdateWithoutStudentInput, SeatingPlanUncheckedUpdateWithoutStudentInput>
-    create: XOR<SeatingPlanCreateWithoutStudentInput, SeatingPlanUncheckedCreateWithoutStudentInput>
-    where?: SeatingPlanWhereInput
+  export type SeatingArrangementUpsertWithWhereUniqueWithoutStudentInput = {
+    where: SeatingArrangementWhereUniqueInput
+    update: XOR<SeatingArrangementUpdateWithoutStudentInput, SeatingArrangementUncheckedUpdateWithoutStudentInput>
+    create: XOR<SeatingArrangementCreateWithoutStudentInput, SeatingArrangementUncheckedCreateWithoutStudentInput>
   }
 
-  export type SeatingPlanUpdateToOneWithWhereWithoutStudentInput = {
-    where?: SeatingPlanWhereInput
-    data: XOR<SeatingPlanUpdateWithoutStudentInput, SeatingPlanUncheckedUpdateWithoutStudentInput>
+  export type SeatingArrangementUpdateWithWhereUniqueWithoutStudentInput = {
+    where: SeatingArrangementWhereUniqueInput
+    data: XOR<SeatingArrangementUpdateWithoutStudentInput, SeatingArrangementUncheckedUpdateWithoutStudentInput>
   }
 
-  export type SeatingPlanUpdateWithoutStudentInput = {
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    desk?: DeskUpdateOneRequiredWithoutSeatingPlanNestedInput
+  export type SeatingArrangementUpdateManyWithWhereWithoutStudentInput = {
+    where: SeatingArrangementScalarWhereInput
+    data: XOR<SeatingArrangementUpdateManyMutationInput, SeatingArrangementUncheckedUpdateManyWithoutStudentInput>
   }
 
-  export type SeatingPlanUncheckedUpdateWithoutStudentInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    deskId?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  export type SeatingArrangementScalarWhereInput = {
+    AND?: SeatingArrangementScalarWhereInput | SeatingArrangementScalarWhereInput[]
+    OR?: SeatingArrangementScalarWhereInput[]
+    NOT?: SeatingArrangementScalarWhereInput | SeatingArrangementScalarWhereInput[]
+    id?: IntFilter<"SeatingArrangement"> | number
+    seatingPlanId?: IntFilter<"SeatingArrangement"> | number
+    deskId?: IntFilter<"SeatingArrangement"> | number
+    studentId?: IntFilter<"SeatingArrangement"> | number
+    createdAt?: DateTimeFilter<"SeatingArrangement"> | Date | string
+    updatedAt?: DateTimeFilter<"SeatingArrangement"> | Date | string
   }
 
   export type TeacherCreateWithoutClassesInput = {
@@ -19192,14 +20743,14 @@ export namespace Prisma {
   export type StudentCreateWithoutClsInput = {
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
     user: UserCreateNestedOneWithoutStudentInput
-    seatingPlan?: SeatingPlanCreateNestedOneWithoutStudentInput
+    SeatingArrangement?: SeatingArrangementCreateNestedManyWithoutStudentInput
   }
 
   export type StudentUncheckedCreateWithoutClsInput = {
     id?: number
     userId: number
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
-    seatingPlan?: SeatingPlanUncheckedCreateNestedOneWithoutStudentInput
+    SeatingArrangement?: SeatingArrangementUncheckedCreateNestedManyWithoutStudentInput
   }
 
   export type StudentCreateOrConnectWithoutClsInput = {
@@ -19259,6 +20810,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     desks?: DeskCreateNestedManyWithoutLayoutInput
+    seatingPlans?: SeatingPlanCreateNestedManyWithoutLayoutInput
   }
 
   export type LayoutUncheckedCreateWithoutClassesInput = {
@@ -19267,6 +20819,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     desks?: DeskUncheckedCreateNestedManyWithoutLayoutInput
+    seatingPlans?: SeatingPlanUncheckedCreateNestedManyWithoutLayoutInput
   }
 
   export type LayoutCreateOrConnectWithoutClassesInput = {
@@ -19626,14 +21179,14 @@ export namespace Prisma {
   export type StudentCreateWithoutAttendanceInput = {
     cls: ClsCreateNestedOneWithoutStudentsInput
     user: UserCreateNestedOneWithoutStudentInput
-    seatingPlan?: SeatingPlanCreateNestedOneWithoutStudentInput
+    SeatingArrangement?: SeatingArrangementCreateNestedManyWithoutStudentInput
   }
 
   export type StudentUncheckedCreateWithoutAttendanceInput = {
     id?: number
     userId: number
     classId: number
-    seatingPlan?: SeatingPlanUncheckedCreateNestedOneWithoutStudentInput
+    SeatingArrangement?: SeatingArrangementUncheckedCreateNestedManyWithoutStudentInput
   }
 
   export type StudentCreateOrConnectWithoutAttendanceInput = {
@@ -19681,14 +21234,14 @@ export namespace Prisma {
   export type StudentUpdateWithoutAttendanceInput = {
     cls?: ClsUpdateOneRequiredWithoutStudentsNestedInput
     user?: UserUpdateOneRequiredWithoutStudentNestedInput
-    seatingPlan?: SeatingPlanUpdateOneWithoutStudentNestedInput
+    SeatingArrangement?: SeatingArrangementUpdateManyWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateWithoutAttendanceInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     classId?: IntFieldUpdateOperationsInput | number
-    seatingPlan?: SeatingPlanUncheckedUpdateOneWithoutStudentNestedInput
+    SeatingArrangement?: SeatingArrangementUncheckedUpdateManyWithoutStudentNestedInput
   }
 
   export type SeatCreateWithoutClassViewInput = {
@@ -19834,7 +21387,7 @@ export namespace Prisma {
     y: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    seatingPlan?: SeatingPlanCreateNestedOneWithoutDeskInput
+    SeatingArrangement?: SeatingArrangementCreateNestedManyWithoutDeskInput
   }
 
   export type DeskUncheckedCreateWithoutLayoutInput = {
@@ -19843,7 +21396,7 @@ export namespace Prisma {
     y: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    seatingPlan?: SeatingPlanUncheckedCreateNestedOneWithoutDeskInput
+    SeatingArrangement?: SeatingArrangementUncheckedCreateNestedManyWithoutDeskInput
   }
 
   export type DeskCreateOrConnectWithoutLayoutInput = {
@@ -19853,6 +21406,29 @@ export namespace Prisma {
 
   export type DeskCreateManyLayoutInputEnvelope = {
     data: DeskCreateManyLayoutInput | DeskCreateManyLayoutInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SeatingPlanCreateWithoutLayoutInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seatingArrangement?: SeatingArrangementCreateNestedManyWithoutSeatingPlanInput
+  }
+
+  export type SeatingPlanUncheckedCreateWithoutLayoutInput = {
+    id?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seatingArrangement?: SeatingArrangementUncheckedCreateNestedManyWithoutSeatingPlanInput
+  }
+
+  export type SeatingPlanCreateOrConnectWithoutLayoutInput = {
+    where: SeatingPlanWhereUniqueInput
+    create: XOR<SeatingPlanCreateWithoutLayoutInput, SeatingPlanUncheckedCreateWithoutLayoutInput>
+  }
+
+  export type SeatingPlanCreateManyLayoutInputEnvelope = {
+    data: SeatingPlanCreateManyLayoutInput | SeatingPlanCreateManyLayoutInput[]
     skipDuplicates?: boolean
   }
 
@@ -19908,6 +21484,32 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Desk"> | Date | string
   }
 
+  export type SeatingPlanUpsertWithWhereUniqueWithoutLayoutInput = {
+    where: SeatingPlanWhereUniqueInput
+    update: XOR<SeatingPlanUpdateWithoutLayoutInput, SeatingPlanUncheckedUpdateWithoutLayoutInput>
+    create: XOR<SeatingPlanCreateWithoutLayoutInput, SeatingPlanUncheckedCreateWithoutLayoutInput>
+  }
+
+  export type SeatingPlanUpdateWithWhereUniqueWithoutLayoutInput = {
+    where: SeatingPlanWhereUniqueInput
+    data: XOR<SeatingPlanUpdateWithoutLayoutInput, SeatingPlanUncheckedUpdateWithoutLayoutInput>
+  }
+
+  export type SeatingPlanUpdateManyWithWhereWithoutLayoutInput = {
+    where: SeatingPlanScalarWhereInput
+    data: XOR<SeatingPlanUpdateManyMutationInput, SeatingPlanUncheckedUpdateManyWithoutLayoutInput>
+  }
+
+  export type SeatingPlanScalarWhereInput = {
+    AND?: SeatingPlanScalarWhereInput | SeatingPlanScalarWhereInput[]
+    OR?: SeatingPlanScalarWhereInput[]
+    NOT?: SeatingPlanScalarWhereInput | SeatingPlanScalarWhereInput[]
+    id?: IntFilter<"SeatingPlan"> | number
+    layoutId?: IntFilter<"SeatingPlan"> | number
+    createdAt?: DateTimeFilter<"SeatingPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"SeatingPlan"> | Date | string
+  }
+
   export type ClsUpsertWithWhereUniqueWithoutLayoutsInput = {
     where: ClsWhereUniqueInput
     update: XOR<ClsUpdateWithoutLayoutsInput, ClsUncheckedUpdateWithoutLayoutsInput>
@@ -19928,6 +21530,7 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    seatingPlans?: SeatingPlanCreateNestedManyWithoutLayoutInput
     classes?: ClsCreateNestedManyWithoutLayoutsInput
   }
 
@@ -19936,6 +21539,7 @@ export namespace Prisma {
     name: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    seatingPlans?: SeatingPlanUncheckedCreateNestedManyWithoutLayoutInput
     classes?: ClsUncheckedCreateNestedManyWithoutLayoutsInput
   }
 
@@ -19944,22 +21548,29 @@ export namespace Prisma {
     create: XOR<LayoutCreateWithoutDesksInput, LayoutUncheckedCreateWithoutDesksInput>
   }
 
-  export type SeatingPlanCreateWithoutDeskInput = {
+  export type SeatingArrangementCreateWithoutDeskInput = {
     createdAt?: Date | string
     updatedAt?: Date | string
-    student: StudentCreateNestedOneWithoutSeatingPlanInput
+    seatingPlan: SeatingPlanCreateNestedOneWithoutSeatingArrangementInput
+    student: StudentCreateNestedOneWithoutSeatingArrangementInput
   }
 
-  export type SeatingPlanUncheckedCreateWithoutDeskInput = {
+  export type SeatingArrangementUncheckedCreateWithoutDeskInput = {
     id?: number
+    seatingPlanId: number
     studentId: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
-  export type SeatingPlanCreateOrConnectWithoutDeskInput = {
-    where: SeatingPlanWhereUniqueInput
-    create: XOR<SeatingPlanCreateWithoutDeskInput, SeatingPlanUncheckedCreateWithoutDeskInput>
+  export type SeatingArrangementCreateOrConnectWithoutDeskInput = {
+    where: SeatingArrangementWhereUniqueInput
+    create: XOR<SeatingArrangementCreateWithoutDeskInput, SeatingArrangementUncheckedCreateWithoutDeskInput>
+  }
+
+  export type SeatingArrangementCreateManyDeskInputEnvelope = {
+    data: SeatingArrangementCreateManyDeskInput | SeatingArrangementCreateManyDeskInput[]
+    skipDuplicates?: boolean
   }
 
   export type LayoutUpsertWithoutDesksInput = {
@@ -19977,6 +21588,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seatingPlans?: SeatingPlanUpdateManyWithoutLayoutNestedInput
     classes?: ClsUpdateManyWithoutLayoutsNestedInput
   }
 
@@ -19985,34 +21597,136 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seatingPlans?: SeatingPlanUncheckedUpdateManyWithoutLayoutNestedInput
     classes?: ClsUncheckedUpdateManyWithoutLayoutsNestedInput
   }
 
-  export type SeatingPlanUpsertWithoutDeskInput = {
-    update: XOR<SeatingPlanUpdateWithoutDeskInput, SeatingPlanUncheckedUpdateWithoutDeskInput>
-    create: XOR<SeatingPlanCreateWithoutDeskInput, SeatingPlanUncheckedCreateWithoutDeskInput>
-    where?: SeatingPlanWhereInput
+  export type SeatingArrangementUpsertWithWhereUniqueWithoutDeskInput = {
+    where: SeatingArrangementWhereUniqueInput
+    update: XOR<SeatingArrangementUpdateWithoutDeskInput, SeatingArrangementUncheckedUpdateWithoutDeskInput>
+    create: XOR<SeatingArrangementCreateWithoutDeskInput, SeatingArrangementUncheckedCreateWithoutDeskInput>
   }
 
-  export type SeatingPlanUpdateToOneWithWhereWithoutDeskInput = {
-    where?: SeatingPlanWhereInput
-    data: XOR<SeatingPlanUpdateWithoutDeskInput, SeatingPlanUncheckedUpdateWithoutDeskInput>
+  export type SeatingArrangementUpdateWithWhereUniqueWithoutDeskInput = {
+    where: SeatingArrangementWhereUniqueInput
+    data: XOR<SeatingArrangementUpdateWithoutDeskInput, SeatingArrangementUncheckedUpdateWithoutDeskInput>
   }
 
-  export type SeatingPlanUpdateWithoutDeskInput = {
+  export type SeatingArrangementUpdateManyWithWhereWithoutDeskInput = {
+    where: SeatingArrangementScalarWhereInput
+    data: XOR<SeatingArrangementUpdateManyMutationInput, SeatingArrangementUncheckedUpdateManyWithoutDeskInput>
+  }
+
+  export type LayoutCreateWithoutSeatingPlansInput = {
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    desks?: DeskCreateNestedManyWithoutLayoutInput
+    classes?: ClsCreateNestedManyWithoutLayoutsInput
+  }
+
+  export type LayoutUncheckedCreateWithoutSeatingPlansInput = {
+    id?: number
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    desks?: DeskUncheckedCreateNestedManyWithoutLayoutInput
+    classes?: ClsUncheckedCreateNestedManyWithoutLayoutsInput
+  }
+
+  export type LayoutCreateOrConnectWithoutSeatingPlansInput = {
+    where: LayoutWhereUniqueInput
+    create: XOR<LayoutCreateWithoutSeatingPlansInput, LayoutUncheckedCreateWithoutSeatingPlansInput>
+  }
+
+  export type SeatingArrangementCreateWithoutSeatingPlanInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    desk: DeskCreateNestedOneWithoutSeatingArrangementInput
+    student: StudentCreateNestedOneWithoutSeatingArrangementInput
+  }
+
+  export type SeatingArrangementUncheckedCreateWithoutSeatingPlanInput = {
+    id?: number
+    deskId: number
+    studentId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SeatingArrangementCreateOrConnectWithoutSeatingPlanInput = {
+    where: SeatingArrangementWhereUniqueInput
+    create: XOR<SeatingArrangementCreateWithoutSeatingPlanInput, SeatingArrangementUncheckedCreateWithoutSeatingPlanInput>
+  }
+
+  export type SeatingArrangementCreateManySeatingPlanInputEnvelope = {
+    data: SeatingArrangementCreateManySeatingPlanInput | SeatingArrangementCreateManySeatingPlanInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LayoutUpsertWithoutSeatingPlansInput = {
+    update: XOR<LayoutUpdateWithoutSeatingPlansInput, LayoutUncheckedUpdateWithoutSeatingPlansInput>
+    create: XOR<LayoutCreateWithoutSeatingPlansInput, LayoutUncheckedCreateWithoutSeatingPlansInput>
+    where?: LayoutWhereInput
+  }
+
+  export type LayoutUpdateToOneWithWhereWithoutSeatingPlansInput = {
+    where?: LayoutWhereInput
+    data: XOR<LayoutUpdateWithoutSeatingPlansInput, LayoutUncheckedUpdateWithoutSeatingPlansInput>
+  }
+
+  export type LayoutUpdateWithoutSeatingPlansInput = {
+    name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    student?: StudentUpdateOneRequiredWithoutSeatingPlanNestedInput
+    desks?: DeskUpdateManyWithoutLayoutNestedInput
+    classes?: ClsUpdateManyWithoutLayoutsNestedInput
   }
 
-  export type SeatingPlanUncheckedUpdateWithoutDeskInput = {
+  export type LayoutUncheckedUpdateWithoutSeatingPlansInput = {
     id?: IntFieldUpdateOperationsInput | number
-    studentId?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    desks?: DeskUncheckedUpdateManyWithoutLayoutNestedInput
+    classes?: ClsUncheckedUpdateManyWithoutLayoutsNestedInput
   }
 
-  export type DeskCreateWithoutSeatingPlanInput = {
+  export type SeatingArrangementUpsertWithWhereUniqueWithoutSeatingPlanInput = {
+    where: SeatingArrangementWhereUniqueInput
+    update: XOR<SeatingArrangementUpdateWithoutSeatingPlanInput, SeatingArrangementUncheckedUpdateWithoutSeatingPlanInput>
+    create: XOR<SeatingArrangementCreateWithoutSeatingPlanInput, SeatingArrangementUncheckedCreateWithoutSeatingPlanInput>
+  }
+
+  export type SeatingArrangementUpdateWithWhereUniqueWithoutSeatingPlanInput = {
+    where: SeatingArrangementWhereUniqueInput
+    data: XOR<SeatingArrangementUpdateWithoutSeatingPlanInput, SeatingArrangementUncheckedUpdateWithoutSeatingPlanInput>
+  }
+
+  export type SeatingArrangementUpdateManyWithWhereWithoutSeatingPlanInput = {
+    where: SeatingArrangementScalarWhereInput
+    data: XOR<SeatingArrangementUpdateManyMutationInput, SeatingArrangementUncheckedUpdateManyWithoutSeatingPlanInput>
+  }
+
+  export type SeatingPlanCreateWithoutSeatingArrangementInput = {
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    layout: LayoutCreateNestedOneWithoutSeatingPlansInput
+  }
+
+  export type SeatingPlanUncheckedCreateWithoutSeatingArrangementInput = {
+    id?: number
+    layoutId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SeatingPlanCreateOrConnectWithoutSeatingArrangementInput = {
+    where: SeatingPlanWhereUniqueInput
+    create: XOR<SeatingPlanCreateWithoutSeatingArrangementInput, SeatingPlanUncheckedCreateWithoutSeatingArrangementInput>
+  }
+
+  export type DeskCreateWithoutSeatingArrangementInput = {
     x: number
     y: number
     createdAt?: Date | string
@@ -20020,7 +21734,7 @@ export namespace Prisma {
     layout: LayoutCreateNestedOneWithoutDesksInput
   }
 
-  export type DeskUncheckedCreateWithoutSeatingPlanInput = {
+  export type DeskUncheckedCreateWithoutSeatingArrangementInput = {
     id?: number
     layoutId: number
     x: number
@@ -20029,41 +21743,65 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type DeskCreateOrConnectWithoutSeatingPlanInput = {
+  export type DeskCreateOrConnectWithoutSeatingArrangementInput = {
     where: DeskWhereUniqueInput
-    create: XOR<DeskCreateWithoutSeatingPlanInput, DeskUncheckedCreateWithoutSeatingPlanInput>
+    create: XOR<DeskCreateWithoutSeatingArrangementInput, DeskUncheckedCreateWithoutSeatingArrangementInput>
   }
 
-  export type StudentCreateWithoutSeatingPlanInput = {
+  export type StudentCreateWithoutSeatingArrangementInput = {
     Attendance?: AttendanceCreateNestedManyWithoutStudentInput
     cls: ClsCreateNestedOneWithoutStudentsInput
     user: UserCreateNestedOneWithoutStudentInput
   }
 
-  export type StudentUncheckedCreateWithoutSeatingPlanInput = {
+  export type StudentUncheckedCreateWithoutSeatingArrangementInput = {
     id?: number
     userId: number
     classId: number
     Attendance?: AttendanceUncheckedCreateNestedManyWithoutStudentInput
   }
 
-  export type StudentCreateOrConnectWithoutSeatingPlanInput = {
+  export type StudentCreateOrConnectWithoutSeatingArrangementInput = {
     where: StudentWhereUniqueInput
-    create: XOR<StudentCreateWithoutSeatingPlanInput, StudentUncheckedCreateWithoutSeatingPlanInput>
+    create: XOR<StudentCreateWithoutSeatingArrangementInput, StudentUncheckedCreateWithoutSeatingArrangementInput>
   }
 
-  export type DeskUpsertWithoutSeatingPlanInput = {
-    update: XOR<DeskUpdateWithoutSeatingPlanInput, DeskUncheckedUpdateWithoutSeatingPlanInput>
-    create: XOR<DeskCreateWithoutSeatingPlanInput, DeskUncheckedCreateWithoutSeatingPlanInput>
+  export type SeatingPlanUpsertWithoutSeatingArrangementInput = {
+    update: XOR<SeatingPlanUpdateWithoutSeatingArrangementInput, SeatingPlanUncheckedUpdateWithoutSeatingArrangementInput>
+    create: XOR<SeatingPlanCreateWithoutSeatingArrangementInput, SeatingPlanUncheckedCreateWithoutSeatingArrangementInput>
+    where?: SeatingPlanWhereInput
+  }
+
+  export type SeatingPlanUpdateToOneWithWhereWithoutSeatingArrangementInput = {
+    where?: SeatingPlanWhereInput
+    data: XOR<SeatingPlanUpdateWithoutSeatingArrangementInput, SeatingPlanUncheckedUpdateWithoutSeatingArrangementInput>
+  }
+
+  export type SeatingPlanUpdateWithoutSeatingArrangementInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    layout?: LayoutUpdateOneRequiredWithoutSeatingPlansNestedInput
+  }
+
+  export type SeatingPlanUncheckedUpdateWithoutSeatingArrangementInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    layoutId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type DeskUpsertWithoutSeatingArrangementInput = {
+    update: XOR<DeskUpdateWithoutSeatingArrangementInput, DeskUncheckedUpdateWithoutSeatingArrangementInput>
+    create: XOR<DeskCreateWithoutSeatingArrangementInput, DeskUncheckedCreateWithoutSeatingArrangementInput>
     where?: DeskWhereInput
   }
 
-  export type DeskUpdateToOneWithWhereWithoutSeatingPlanInput = {
+  export type DeskUpdateToOneWithWhereWithoutSeatingArrangementInput = {
     where?: DeskWhereInput
-    data: XOR<DeskUpdateWithoutSeatingPlanInput, DeskUncheckedUpdateWithoutSeatingPlanInput>
+    data: XOR<DeskUpdateWithoutSeatingArrangementInput, DeskUncheckedUpdateWithoutSeatingArrangementInput>
   }
 
-  export type DeskUpdateWithoutSeatingPlanInput = {
+  export type DeskUpdateWithoutSeatingArrangementInput = {
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20071,7 +21809,7 @@ export namespace Prisma {
     layout?: LayoutUpdateOneRequiredWithoutDesksNestedInput
   }
 
-  export type DeskUncheckedUpdateWithoutSeatingPlanInput = {
+  export type DeskUncheckedUpdateWithoutSeatingArrangementInput = {
     id?: IntFieldUpdateOperationsInput | number
     layoutId?: IntFieldUpdateOperationsInput | number
     x?: FloatFieldUpdateOperationsInput | number
@@ -20080,24 +21818,24 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type StudentUpsertWithoutSeatingPlanInput = {
-    update: XOR<StudentUpdateWithoutSeatingPlanInput, StudentUncheckedUpdateWithoutSeatingPlanInput>
-    create: XOR<StudentCreateWithoutSeatingPlanInput, StudentUncheckedCreateWithoutSeatingPlanInput>
+  export type StudentUpsertWithoutSeatingArrangementInput = {
+    update: XOR<StudentUpdateWithoutSeatingArrangementInput, StudentUncheckedUpdateWithoutSeatingArrangementInput>
+    create: XOR<StudentCreateWithoutSeatingArrangementInput, StudentUncheckedCreateWithoutSeatingArrangementInput>
     where?: StudentWhereInput
   }
 
-  export type StudentUpdateToOneWithWhereWithoutSeatingPlanInput = {
+  export type StudentUpdateToOneWithWhereWithoutSeatingArrangementInput = {
     where?: StudentWhereInput
-    data: XOR<StudentUpdateWithoutSeatingPlanInput, StudentUncheckedUpdateWithoutSeatingPlanInput>
+    data: XOR<StudentUpdateWithoutSeatingArrangementInput, StudentUncheckedUpdateWithoutSeatingArrangementInput>
   }
 
-  export type StudentUpdateWithoutSeatingPlanInput = {
+  export type StudentUpdateWithoutSeatingArrangementInput = {
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
     cls?: ClsUpdateOneRequiredWithoutStudentsNestedInput
     user?: UserUpdateOneRequiredWithoutStudentNestedInput
   }
 
-  export type StudentUncheckedUpdateWithoutSeatingPlanInput = {
+  export type StudentUncheckedUpdateWithoutSeatingArrangementInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     classId?: IntFieldUpdateOperationsInput | number
@@ -20202,6 +21940,14 @@ export namespace Prisma {
     date?: Date | string
   }
 
+  export type SeatingArrangementCreateManyStudentInput = {
+    id?: number
+    seatingPlanId: number
+    deskId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type AttendanceUpdateWithoutStudentInput = {
     status?: StringFieldUpdateOperationsInput | string
     comment?: NullableStringFieldUpdateOperationsInput | string | null
@@ -20226,6 +21972,29 @@ export namespace Prisma {
     comment?: NullableStringFieldUpdateOperationsInput | string | null
     lateMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     date?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeatingArrangementUpdateWithoutStudentInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seatingPlan?: SeatingPlanUpdateOneRequiredWithoutSeatingArrangementNestedInput
+    desk?: DeskUpdateOneRequiredWithoutSeatingArrangementNestedInput
+  }
+
+  export type SeatingArrangementUncheckedUpdateWithoutStudentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    seatingPlanId?: IntFieldUpdateOperationsInput | number
+    deskId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeatingArrangementUncheckedUpdateManyWithoutStudentInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    seatingPlanId?: IntFieldUpdateOperationsInput | number
+    deskId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type RegisterCreateManyClsInput = {
@@ -20276,14 +22045,14 @@ export namespace Prisma {
   export type StudentUpdateWithoutClsInput = {
     Attendance?: AttendanceUpdateManyWithoutStudentNestedInput
     user?: UserUpdateOneRequiredWithoutStudentNestedInput
-    seatingPlan?: SeatingPlanUpdateOneWithoutStudentNestedInput
+    SeatingArrangement?: SeatingArrangementUpdateManyWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateWithoutClsInput = {
     id?: IntFieldUpdateOperationsInput | number
     userId?: IntFieldUpdateOperationsInput | number
     Attendance?: AttendanceUncheckedUpdateManyWithoutStudentNestedInput
-    seatingPlan?: SeatingPlanUncheckedUpdateOneWithoutStudentNestedInput
+    SeatingArrangement?: SeatingArrangementUncheckedUpdateManyWithoutStudentNestedInput
   }
 
   export type StudentUncheckedUpdateManyWithoutClsInput = {
@@ -20329,6 +22098,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     desks?: DeskUpdateManyWithoutLayoutNestedInput
+    seatingPlans?: SeatingPlanUpdateManyWithoutLayoutNestedInput
   }
 
   export type LayoutUncheckedUpdateWithoutClassesInput = {
@@ -20337,6 +22107,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     desks?: DeskUncheckedUpdateManyWithoutLayoutNestedInput
+    seatingPlans?: SeatingPlanUncheckedUpdateManyWithoutLayoutNestedInput
   }
 
   export type LayoutUncheckedUpdateManyWithoutClassesInput = {
@@ -20416,12 +22187,18 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
+  export type SeatingPlanCreateManyLayoutInput = {
+    id?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type DeskUpdateWithoutLayoutInput = {
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seatingPlan?: SeatingPlanUpdateOneWithoutDeskNestedInput
+    SeatingArrangement?: SeatingArrangementUpdateManyWithoutDeskNestedInput
   }
 
   export type DeskUncheckedUpdateWithoutLayoutInput = {
@@ -20430,13 +22207,32 @@ export namespace Prisma {
     y?: FloatFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    seatingPlan?: SeatingPlanUncheckedUpdateOneWithoutDeskNestedInput
+    SeatingArrangement?: SeatingArrangementUncheckedUpdateManyWithoutDeskNestedInput
   }
 
   export type DeskUncheckedUpdateManyWithoutLayoutInput = {
     id?: IntFieldUpdateOperationsInput | number
     x?: FloatFieldUpdateOperationsInput | number
     y?: FloatFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeatingPlanUpdateWithoutLayoutInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seatingArrangement?: SeatingArrangementUpdateManyWithoutSeatingPlanNestedInput
+  }
+
+  export type SeatingPlanUncheckedUpdateWithoutLayoutInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seatingArrangement?: SeatingArrangementUncheckedUpdateManyWithoutSeatingPlanNestedInput
+  }
+
+  export type SeatingPlanUncheckedUpdateManyWithoutLayoutInput = {
+    id?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -20464,6 +22260,68 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     teacherId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type SeatingArrangementCreateManyDeskInput = {
+    id?: number
+    seatingPlanId: number
+    studentId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SeatingArrangementUpdateWithoutDeskInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seatingPlan?: SeatingPlanUpdateOneRequiredWithoutSeatingArrangementNestedInput
+    student?: StudentUpdateOneRequiredWithoutSeatingArrangementNestedInput
+  }
+
+  export type SeatingArrangementUncheckedUpdateWithoutDeskInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    seatingPlanId?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeatingArrangementUncheckedUpdateManyWithoutDeskInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    seatingPlanId?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeatingArrangementCreateManySeatingPlanInput = {
+    id?: number
+    deskId: number
+    studentId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SeatingArrangementUpdateWithoutSeatingPlanInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    desk?: DeskUpdateOneRequiredWithoutSeatingArrangementNestedInput
+    student?: StudentUpdateOneRequiredWithoutSeatingArrangementNestedInput
+  }
+
+  export type SeatingArrangementUncheckedUpdateWithoutSeatingPlanInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    deskId?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeatingArrangementUncheckedUpdateManyWithoutSeatingPlanInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    deskId?: IntFieldUpdateOperationsInput | number
+    studentId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
@@ -20499,6 +22357,14 @@ export namespace Prisma {
      * @deprecated Use LayoutCountOutputTypeDefaultArgs instead
      */
     export type LayoutCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = LayoutCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use DeskCountOutputTypeDefaultArgs instead
+     */
+    export type DeskCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = DeskCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SeatingPlanCountOutputTypeDefaultArgs instead
+     */
+    export type SeatingPlanCountOutputTypeArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SeatingPlanCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use UserDefaultArgs instead
      */
@@ -20551,6 +22417,10 @@ export namespace Prisma {
      * @deprecated Use SeatingPlanDefaultArgs instead
      */
     export type SeatingPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SeatingPlanDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use SeatingArrangementDefaultArgs instead
+     */
+    export type SeatingArrangementArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = SeatingArrangementDefaultArgs<ExtArgs>
 
   /**
    * Batch Payload for updateMany & deleteMany & createMany

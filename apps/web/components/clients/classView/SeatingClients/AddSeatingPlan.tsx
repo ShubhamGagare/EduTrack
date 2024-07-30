@@ -7,7 +7,7 @@ import { StudentCard } from "components/StudentCard";
 import { ReactElement } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui";
 import { SeatingCanvas } from "components/SeatingCanvas";
-import { getClasses, getClassStudents } from "app/utils/utils";
+import { addSeatingPlan, getClasses, getClassStudents, getStudentData } from "app/utils/utils";
 
 export type CanvasCard = {
   id: UniqueIdentifier;
@@ -19,23 +19,44 @@ export type seatsType = {
   coordinates_X: number;
   coordinates_Y: number;
 };
+export type studentsType = [{ "user": { "username": string } }]
+export type propSeatingType = { desks: CanvasCard[], clsId: string, seatingPlanName: string, students: studentsType,layoutId:number}
 
-export default async function AddSeatingPlan(desks: any) {
+export const getStudentDetails = async (id:number) => {
+  console.log("id----->"+id)
+  const response = await getStudentData(id);
+  console.log("student d---->"+JSON.stringify(response))
 
-  console.log("Loading seating plan");
+  return response;
+}
+
+
+export const saveSeatingPlan = async(plan:any) => {
+  const response = addSeatingPlan(plan)
+}
+
+export default async function AddSeatingPlan({ data }: any) {
+
+  console.log("Loading seating plan--->" + JSON.stringify(data));
 
 
 
-  //const students = await getClassStudents();
-  //console.log("c------->"+JSON.stringify(clses))
+  const students:any = await getClassStudents(Number(data.clsId));
+  console.log("students------->" + JSON.stringify(students))
 
   const deskCards: CanvasCard[] = []
-  desks.desks.map((desk: any) => {
+  data.desks.map((desk: any) => {
     deskCards.push({ id: desk.id, coordinates: { x: desk.x, y: desk.y }, studentCard: <Desk><></></Desk> })
   })
 
-
-  return <SeatingCanvas  desks={deskCards} clsName={"clsName"} />
+  const props: propSeatingType = {
+    desks: deskCards,
+    clsId: data.clsId,
+    seatingPlanName: data.seatingPlanName,
+    students: students,
+    layoutId:data.layoutId
+  }
+  return <SeatingCanvas props={props} />
 }
 
 

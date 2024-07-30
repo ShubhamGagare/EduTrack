@@ -1,12 +1,21 @@
 import { useDraggable } from "@dnd-kit/core";
 import { CanvasCard } from "./clients/classView/ClassViewClient";
+import { Button } from "@repo/ui";
+import { useState } from "react";
 
-export const Draggable = ({ card,cardStyle }: { card: CanvasCard,cardStyle:string }) => {
+export const Draggable = ({ card,cardStyle,onClick }: { card: CanvasCard,cardStyle:string,onClick:() => void }) => {
   // hook up to DndKit
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: card.id,
   });
 
+  const [studentCard,setStudentCard] = useState(card.studentCard);
+
+  // const assignStudentCard = () => {
+  //   console.log("-----------Assigning student----------");
+  //   setStudentCard(student)
+
+  // }
   return (
     <div
       className={`card `+cardStyle}
@@ -27,6 +36,7 @@ export const Draggable = ({ card,cardStyle }: { card: CanvasCard,cardStyle:strin
       ref={setNodeRef}
       {...listeners}
       {...attributes}
+      onClick={onClick}
     >
       {card.studentCard}
     </div>

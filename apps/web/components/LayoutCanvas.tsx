@@ -120,7 +120,7 @@ export const LayoutCanvas = ({
         <div className="bg-white">
           <DndContext onDragEnd={updateDraggedCardPosition}  >
             {cards.map((card, index) => (
-              <Draggable card={card} key={card.id} cardStyle={index === studentIndex ? "" : ""} />
+              <Draggable onClick={() => {}} card={card} key={card.id}  cardStyle={index === studentIndex ? "" : ""} />
             ))}
           </DndContext>
         </div>

@@ -206,6 +206,14 @@ exports.Prisma.DeskScalarFieldEnum = {
 
 exports.Prisma.SeatingPlanScalarFieldEnum = {
   id: 'id',
+  layoutId: 'layoutId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SeatingArrangementScalarFieldEnum = {
+  id: 'id',
+  seatingPlanId: 'seatingPlanId',
   deskId: 'deskId',
   studentId: 'studentId',
   createdAt: 'createdAt',
@@ -241,7 +249,8 @@ exports.Prisma.ModelName = {
   Seat: 'Seat',
   Layout: 'Layout',
   Desk: 'Desk',
-  SeatingPlan: 'SeatingPlan'
+  SeatingPlan: 'SeatingPlan',
+  SeatingArrangement: 'SeatingArrangement'
 };
 
 /**

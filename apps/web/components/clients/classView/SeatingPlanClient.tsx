@@ -24,7 +24,7 @@ const SeatingPlanClient = (data:any) => {
   const handleAddSeatingPlan = (data: any) => {
     console.log("------------opening seating plan------------------")
     console.log(data)
-       router.push(`/class-view/seating-plan/${data.layoutName}/${data.clsName}`)
+       router.push(`/class-view/seating-plan/${data.layoutName}/${data.clsName}/${data.seatingPlanName}`)
   }
 
   return (
@@ -53,7 +53,7 @@ const SeatingPlanClient = (data:any) => {
                         name="seatingPlanName"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Layout Name</FormLabel>
+                            <FormLabel>Seating plan name</FormLabel>
                             <FormControl>
                               <Input placeholder="Enter the seating plan name" {...field} />
                             </FormControl>
@@ -87,7 +87,7 @@ const SeatingPlanClient = (data:any) => {
                               <SelectContent>
                                 <SelectGroup>
                                   <SelectLabel>Select a class</SelectLabel>
-                                  {clses?.map((cls: any, index: number) => <SelectItem key={index} value={cls.name}>{cls.name}</SelectItem>)}
+                                  {clses?.map((cls: any, index: number) => <SelectItem key={index} value={cls.id} defaultValue={cls.name}>{cls.name}</SelectItem>)}
                                 </SelectGroup>
                               </SelectContent>
                             </Select>
