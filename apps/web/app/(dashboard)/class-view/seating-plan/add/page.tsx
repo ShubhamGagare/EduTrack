@@ -4,11 +4,11 @@ import { getlayout } from 'app/utils/utils';
 
 export default async function getSeatingPlan({ params }: { params: { seatinPlanId: number[] } }) {
 
-    console.log("--"+JSON.stringify(params))
+    // console.log("--"+JSON.stringify(params))
 
-    const layout:any = await getlayout(Number(params.seatinPlanId[0]))
-    const desks:any = layout.desks
-    console.log(desks)
+    // const layout:any = await getlayout(Number(params.seatinPlanId[0]))
+    // const desks:any = layout.desks
+    // console.log(desks)
 
   return (
     <div className="space-y-4">
@@ -34,7 +34,7 @@ export default async function getSeatingPlan({ params }: { params: { seatinPlanI
 
         <div className='text-2xl font-bold tracking-tight '>Seating Plan</div>
         <div className='flex space-x-4'>
-          <AddSeatingPlan desks={desks} />
+          {/* <AddSeatingPlan desks={desks} /> */}
         </div>
         
 
