@@ -7,7 +7,7 @@ import { StudentCard } from "components/StudentCard";
 import { ReactElement } from "react";
 import { Avatar, AvatarFallback, AvatarImage, Button, Label, Separator } from "@repo/ui";
 import { SeatingCanvas } from "components/SeatingCanvas";
-import { addSeatingPlan, getClasses, getClassStudents, getStudentData } from "../../../../app/utils/utils";
+import { addSeatingPlan, getClassStudents, getStudentData } from "../../../../app/utils/utils";
 import SeatingPlanClient from "../SeatingPlanClient";
 import { Badge, MessageSquareText } from "lucide-react";
 
