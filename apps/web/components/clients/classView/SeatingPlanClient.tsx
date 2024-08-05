@@ -3,7 +3,6 @@ import { Button, Form, FormControl, FormField, FormItem, FormLabel, FormMessage,
 import { useRouter } from 'next/navigation';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, } from "@repo/ui"
 import { useForm } from "react-hook-form"
-import { getClasses } from "app/utils/utils";
 
 // const plans = [{
 //   name: "Plan 1",

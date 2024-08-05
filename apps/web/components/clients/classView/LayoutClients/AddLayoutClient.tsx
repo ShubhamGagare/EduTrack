@@ -1,7 +1,7 @@
 "use client"
 import { UniqueIdentifier } from "@dnd-kit/core";
 import { Coordinates } from "@dnd-kit/core/dist/types";
-import { getlayout } from "app/utils/utils";
+import { getlayout } from "../../../../app/utils/utils";
 import { LayoutCanvas } from "components/LayoutCanvas";
 import Desk from "components/Desk";
 import { StudentCard } from "components/StudentCard";
