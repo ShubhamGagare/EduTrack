@@ -4,16 +4,7 @@ import { useRouter } from 'next/navigation';
 import { Sheet, SheetClose, SheetContent, SheetDescription, SheetFooter, SheetHeader, SheetTitle, SheetTrigger, } from "@repo/ui"
 import { useForm } from "react-hook-form"
 
-// const plans = [{
-//   name: "Plan 1",
-//   class: "Class 1",
-//   layout: "Layout 1"
-// }, {
-//   name: "Plan 2",
-//   class: "Class 1",
-//   layout: "Layout 1"
 
-// },]
 const SeatingPlanClient = ({ data }: any) => {
   const form = useForm()
   const clses: any = data?.clses;

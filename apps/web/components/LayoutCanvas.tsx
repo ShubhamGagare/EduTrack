@@ -4,7 +4,7 @@ import { CanvasCard } from "./clients/classView/ClassViewClient";
 import { Draggable } from "./Draggable";
 import { Avatar, AvatarFallback, AvatarImage, Button, Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input, Label, Popover, PopoverContent, PopoverTrigger } from "@repo/ui";
 import { useState } from "react";
-import { createLayout, updateLayout } from "app/utils/utils";
+import { createLayout, updateLayout } from "../app/utils/utils";
 import Desk from "./Desk";
 import { useForm } from "react-hook-form"
 import { useRouter } from "next/navigation";
