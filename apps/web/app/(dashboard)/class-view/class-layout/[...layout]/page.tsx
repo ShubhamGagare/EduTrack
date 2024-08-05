@@ -1,7 +1,6 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button, Label } from '@repo/ui';
 import AddLayoutClient from '../../../../../components/clients/classView/LayoutClients/AddLayoutClient';
-import { getlayout } from 'app/utils/utils';
-import { layoutsType } from 'components/clients/classView/ClassViewLayoutClient';
+import { getlayout } from '../../../../utils/utils';
 
 const page = async ({ params }: { params: { layout: string[] } }) => {
     console.log("params--->")

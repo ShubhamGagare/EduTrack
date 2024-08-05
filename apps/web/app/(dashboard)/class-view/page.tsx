@@ -1,6 +1,5 @@
 "use client"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button } from '@repo/ui';
-//import { getClassStudents, getClassView } from 'app/utils/utils'
 import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@repo/ui'
 import { useRouter } from 'next/navigation';
 
