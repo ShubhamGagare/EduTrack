@@ -5,7 +5,7 @@ import { PrismaClient } from "../../../../../../packages/db/prisma/generated/cli
 
 const client = new PrismaClient()
 async function page() {
-    const clses: any[] = await client.cls.findMany();
+    const clses: any[] =[];
 
     const layouts: any[] = await getlayoutsIds();
 
