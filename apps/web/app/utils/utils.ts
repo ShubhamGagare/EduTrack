@@ -245,13 +245,14 @@ export async function getSeatingPlans() {
 
 }
 
-// export async function getClasses() {
-//   const response = await client.cls.findMany();
+
+export const getClasses = async () => {
+  const response = await client.cls.findMany();
 
 
-//   return response;
+  return response;
 
-// }
+}
 //get student Data
 export const getStudentData = async (id: number) => {
 

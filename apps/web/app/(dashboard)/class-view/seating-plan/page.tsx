@@ -1,11 +1,9 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 import SeatingPlanClient from '../../../../components/clients/classView/SeatingPlanClient';
-import { getlayoutsIds, getSeatingPlans } from "../../../utils/utils";
-import { PrismaClient } from "../../../../../../packages/db/prisma/generated/client";
+import { getClasses, getlayoutsIds, getSeatingPlans } from "../../../utils/utils";
 
-const client = new PrismaClient()
 async function page() {
-    const clses: any[] =[];
+    const clses: any[] = await getClasses();
 
     const layouts: any[] = await getlayoutsIds();
 
