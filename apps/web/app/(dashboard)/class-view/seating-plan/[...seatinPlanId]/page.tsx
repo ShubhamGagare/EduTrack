@@ -12,10 +12,8 @@ export default async function getSeatingPlan({ params }: { params: { seatinPlanI
     let seatingPlanName = "";
 
 
-    const clses = await getClasses();
     const layout: any = await getlayout(Number(layoutId))
     const desks: any = layout.desks
-    console.log("loading...." + layoutId + "------" + clsId)
     const data = {
         canvasType,
         desks: desks,
@@ -28,15 +26,12 @@ export default async function getSeatingPlan({ params }: { params: { seatinPlanI
     if (canvasType === "edit"||canvasType === "view") {
         const seatingPlanId = params.seatinPlanId[3]?.replace('%20', " ")
         const seatingPlan: any = await getSeatingPlanById(Number(seatingPlanId))
-        console.log("seating plan ---> " + JSON.stringify(seatingPlan))
         data.seatingPlanName = seatingPlan.name;
         data.seatingPlan = seatingPlan
     } else {
-        console.log("seating plan name---> " + params.seatinPlanId[3]?.replace('%20', " "))
         if (params.seatinPlanId[3]?.replace('%20', " ") !== undefined) {
             data.seatingPlanName = params.seatinPlanId[3]?.replace('%20', " ")
         }
-        console.log("seating plan name---> " + seatingPlanName)
 
     }
 
