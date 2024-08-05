@@ -1,14 +1,16 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 import SeatingPlanClient from '../../../../components/clients/classView/SeatingPlanClient';
-import { getClasses,  getlayoutsIds, getSeatingPlans } from "../../../utils/utils";
+import { getlayoutsIds, getSeatingPlans } from "../../../utils/utils";
+import { PrismaClient } from "../../../../../../packages/db/prisma/generated/client";
 
+const client = new PrismaClient()
 async function page() {
-    const clses:any[] = await getClasses();
+    const clses: any[] = await client.cls.findMany();
 
-    const layouts:any[] = await getlayoutsIds();
+    const layouts: any[] = await getlayoutsIds();
 
 
-    const seatingPlan:any[] = await getSeatingPlans();
+    const seatingPlan: any[] = await getSeatingPlans();
     const data = {
         clses,
         layouts,
@@ -37,7 +39,7 @@ async function page() {
                 <div className='flex space-x-4'>
                 </div>
 
-                <SeatingPlanClient data={data}/>
+                <SeatingPlanClient data={data} />
             </div>
         </div>
     )

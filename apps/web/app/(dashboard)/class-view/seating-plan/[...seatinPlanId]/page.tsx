@@ -1,6 +1,6 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button, Label } from '@repo/ui';
 import AddSeatingPlan from '../../../../../components/clients/classView/SeatingClients/AddSeatingPlan';
-import { getClasses, getlayout, getSeatingPlanById } from '../../../../utils/utils';
+import { getlayout, getSeatingPlanById } from '../../../../utils/utils';
 
 
 export default async function getSeatingPlan({ params }: { params: { seatinPlanId: string[] } }) {
