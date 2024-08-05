@@ -206,7 +206,9 @@ exports.Prisma.DeskScalarFieldEnum = {
 
 exports.Prisma.SeatingPlanScalarFieldEnum = {
   id: 'id',
+  name: 'name',
   layoutId: 'layoutId',
+  classId: 'classId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

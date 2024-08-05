@@ -19,5 +19,6 @@ export * from "./components/ui/textarea"
 export * from "./components/ui/select"
 export * from "./components/ui/avatar"
 export * from "./components/ui/sheet"
+export * from "./components/ui/skeleton"
 export * from "./src/code";
 export * from "./src/Tag";

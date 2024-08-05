@@ -4,23 +4,17 @@ import { CanvasCard } from "./clients/classView/ClassViewClient";
 import { Draggable } from "./Draggable";
 import { Avatar, AvatarFallback, AvatarImage, Button, Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input, Label, Popover, PopoverContent, PopoverTrigger } from "@repo/ui";
 import { useState } from "react";
-import { createLayout } from "app/utils/utils";
+import { createLayout, updateLayout } from "app/utils/utils";
 import Desk from "./Desk";
 import { useForm } from "react-hook-form"
+import { useRouter } from "next/navigation";
 
 
 
-export const LayoutCanvas = ({
-  cards,
-  setCards,
-  students
-}: {
-  cards: CanvasCard[];
-  setCards: (cards: CanvasCard[]) => void;
-  students?: any[]
-}) => {
+export const LayoutCanvas = ({canvasProps}:any) => {
   const form = useForm()
-
+  const [cards, setCards] = useState<CanvasCard[]>(canvasProps.cards);
+  const router = useRouter()
   const [layoutName, setLayoutName] = useState()
   const [deskCount, setDeskCount] = useState(1)
 
@@ -29,10 +23,16 @@ export const LayoutCanvas = ({
 
     const CardPosition: any = [];
     // console.log(cards)
-    cards.map(card => {
+    cards.map((card:any) => {
       CardPosition.push({ id: card.id, studentId: card.id, coordinates_X: card.coordinates.x, coordinates_y: card.coordinates.y })
     })
+    if(canvasProps.canvasType!=="edit"){
     createLayout(values?.layoutName, CardPosition)
+    }else {
+      updateLayout(canvasProps.layout,CardPosition)
+    }
+
+    router.back()
   }
 
 
@@ -86,7 +86,7 @@ export const LayoutCanvas = ({
                   <FormItem>
                     <FormLabel>Layout Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Enter the layout name" {...field} />
+                      {canvasProps.canvasType!=="edit"?<Input placeholder="Enter the layout name" {...field} /> : <div><h4>{canvasProps.layout.name}</h4></div>}
                     </FormControl>
 
                     <FormMessage />

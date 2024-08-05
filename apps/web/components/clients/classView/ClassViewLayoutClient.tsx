@@ -1,25 +1,49 @@
 "use client"
 import { Button, Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow, } from "@repo/ui"
+import { getlayout, getlayouts } from "app/utils/utils"
 import { useRouter } from 'next/navigation'
+import { useEffect, useState } from "react"
 
 
 
-const layouts = [{
-    name: "Layout 1",
-    class: "Class 1"
-}, {
-    name: "Layout 2",
-    class: "Class 1"
-},]
+export type layoutsType = {
+    id: number;
+    name: string;
+    createdAt?: Date;
+    updatedAt?: Date;
+}
 
 
-
+const emptyLayout: layoutsType = {
+    id: 0,
+    name: "NA"
+}
 
 const ClassViewLayoutClient = () => {
-
+    const [layouts, setLayouts] = useState<layoutsType[]>([emptyLayout])
     const router = useRouter();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log("hello")
+
+            const layoutList = await getlayouts()
+            console.log(layoutList)
+            setLayouts(layoutList)
+        }
+        fetchData();
+
+    }, []);
+
+
+
+
     const handleAddLayout = () => {
         router.push("/class-view/class-layout/add")
+    }
+
+    const handleEditLayout = (layout: layoutsType) => {
+        router.push(`/class-view/class-layout/edit/` + layout.id)
     }
 
 
@@ -34,15 +58,13 @@ const ClassViewLayoutClient = () => {
 
                 <TableRow>
                     <TableHead >Layout Name</TableHead>
-                    <TableHead>Class</TableHead>
                     <TableHead></TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {layouts.map((layout, index) => <TableRow key={index} className='border-gray-100 h-14'>
                     <TableCell className="font-medium">{layout.name}</TableCell>
-                    <TableCell>{layout.class}</TableCell>
-                    <TableCell className='flex justify-end'><Button className='bg-blue-600 '>Edit</Button></TableCell>
+                    <TableCell className='flex justify-end'><Button className='bg-blue-600 ' onClick={() => { handleEditLayout(layout) }} >Edit</Button></TableCell>
                 </TableRow>)}
 
             </TableBody>

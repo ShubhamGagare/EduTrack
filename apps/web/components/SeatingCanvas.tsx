@@ -3,23 +3,24 @@ import { DndContext, KeyboardSensor, MouseSensor, PointerSensor, TouchSensor, us
 import { DragEndEvent } from "@dnd-kit/core/dist/types";
 import { CanvasCard } from "./clients/classView/ClassViewClient";
 import { Draggable } from "./Draggable";
-import { Avatar, AvatarFallback, AvatarImage, Button, Card, Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input, Label, Popover, PopoverContent, PopoverTrigger, Separator } from "@repo/ui";
+import { Avatar, AvatarFallback, AvatarImage, Badge, Button, Card, Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage, Input, Label, Popover, PopoverContent, PopoverTrigger, Separator } from "@repo/ui";
 import { useEffect, useState } from "react";
 import { createLayout, getClasses } from "app/utils/utils";
 import Desk from "./Desk";
 import { useForm } from "react-hook-form"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue, } from "@repo/ui"
-import { getStudentDetails, propSeatingType, saveSeatingPlan, studentsType } from "./clients/classView/SeatingClients/AddSeatingPlan";
+import { findStudentById, getStudentDetails, propSeatingType, saveSeatingPlan, studentsType } from "./clients/classView/SeatingClients/AddSeatingPlan";
 import { Attendance, Student } from "../../../packages/db/prisma/generated/client";
 import { number } from "zod";
-
+import { useRouter } from "next/navigation";
+import { MessageSquareText } from "lucide-react";
 
 type seatingArrangementType = {
     deskId: number,
     studentId: number
 }
 
-const calculateAttendnace = (attendance: any[]) => {
+export const calculateAttendnace = (attendance: any[]) => {
     const attendanceInsight = {
         presents: 0,
         absents: 0,
@@ -41,35 +42,36 @@ const calculateAttendnace = (attendance: any[]) => {
 }
 
 export const SeatingCanvas = ({ props }: any) => {
-    console.log("Before Loading seating canvas---" + JSON.stringify(props))
-
-
-    const updatedCards: CanvasCard[] = []
-    props.desks.map((card: CanvasCard) => {
-
-        updatedCards.push({
-            id: card.id, coordinates: card.coordinates, studentCard: <Desk><Button>Assign</Button></Desk>
-
-        })
-
-    })
-
-    console.log("Loading seating canvas---" + JSON.stringify(props))
-
-    const [cards, setCards] = useState<CanvasCard[]>(updatedCards);
     const [i, setIndex] = useState(0);
     const form = useForm()
     const [deskCount, setDeskCount] = useState(1)
     const [studentDetails, setStudentDetails] = useState<any>()
-    const [seatingArrangements, setSeatingArrangements] = useState<seatingArrangementType[]>([])
+
+    const [seatingArrangements, setSeatingArrangements] = useState<seatingArrangementType[]>(props.seatingArrangements.length > 0 ? props.seatingArrangements : [])
+    const router = useRouter()
+
+    const updatedCards: CanvasCard[] = []
+    // props.desks.map((card: CanvasCard) => {
+
+    //     updatedCards.push({
+    //         id: card.id, coordinates: card.coordinates, studentCard: card.studentCard
+
+    //     })
+
+    // })
+
+
+    const [cards, setCards] = useState<CanvasCard[]>(props.desks);
+
+
+
+
     //fetch users data
     useEffect(() => {
         const fetchData = async () => {
             try {
-                console.log("student detail ID---->" +props.students[i].id)
                 const result: any = await getStudentDetails(props.students[i].id)
                 setStudentDetails(result);
-                console.log("student detail---->" + JSON.stringify(studentDetails))
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -82,32 +84,36 @@ export const SeatingCanvas = ({ props }: any) => {
 
 
 
+
+
+
     //Assign student to desk card
     const assignStudent = (cardIndex: number) => {
-        console.log("------Assigning student-----------")
         const attendanceInsight = calculateAttendnace(studentDetails?.Attendance)
-        console.log("attendanceInsight-----------" + JSON.stringify(attendanceInsight))
-
         setCards(
             cards.map((card, index) => {
                 if (index === cardIndex) {
                     return {
                         ...card,
                         studentCard: <Desk>
-                            <div className="flex-col justify-center items-center">
-                                <Avatar>
-                                    <AvatarImage src="https://github.com/shadcn.png" />
-                                    <AvatarFallback>SN</AvatarFallback>
+                            <div className="flex-col justify-between items-center w-full h-full text-center ">
+                                <Avatar className="h-25 w-full justify-center items-center">
+                                    <AvatarImage className="h-20 w-20  " src={"/avatars/0" + Math.floor((Math.random() * 4 + 1)) + ".png"} />
+                                    <AvatarFallback className="h-20 w-20  ">SN</AvatarFallback>
                                 </Avatar>
-                                <Label>{props.students[i].user.username}</Label>
+                                <Label className="content-center w-full text-center ">{props.students[i].user.username}</Label>
                                 <Separator />
-                                <div className="flex w-full justify-between gap-1 items-center">
-                                    <Button className="" variant={"ghost"}>{attendanceInsight.percentage}%</Button>
-                                    <Separator orientation="vertical" className="border bg-black" />
-                                    <Button className="w-full" variant={"ghost"}>20</Button>
-                                    <Separator orientation="vertical" className="border bg-black" />
-                                    <Button className="w-full " variant={"ghost"}>30</Button>
-                                    <Separator orientation="vertical" className="border bg-black" />
+                                <div className="flex w-full  justify-between gap-x-0.5 items-center bg-gray-200">
+                                    <Button className="bg-white rounded-none" variant={"ghost"}>{attendanceInsight.percentage}%</Button>
+                                    <Button className="w-full bg-white rounded-none" variant={"ghost"} size="icon"><MessageSquareText size={20} /></Button>
+                                    <Button className="w-full bg-white rounded-none" variant={"ghost"}>30</Button>
+
+
+                                </div>
+                                <div className="flex gap-x-2 overflow-auto">
+
+                                    {studentDetails?.Attendance[studentDetails?.Attendance.length - 1].status == "Absent" ? <Badge className="rounded-xl bg-red-200 text-gray-700">Absent</Badge> :
+                                        studentDetails?.Attendance[studentDetails?.Attendance.length - 1].status == "Late" ? <Badge className="rounded-xl bg-yellow-200 text-gray-700">Late</Badge> : ""}
 
 
                                 </div>
@@ -118,9 +124,9 @@ export const SeatingCanvas = ({ props }: any) => {
                 return card;
             })
         );
-        console.log("studentId--->"+JSON.stringify(props.students[i]))
-        setSeatingArrangements([...seatingArrangements,{ deskId: props.desks[cardIndex].id, studentId: props.students[i].id }])
+        setSeatingArrangements([...seatingArrangements, { deskId: props.desks[cardIndex].id, studentId: props.students[i].id }])
         delete props.students[i]
+        setIndex(i + 1);
     }
 
 
@@ -128,30 +134,23 @@ export const SeatingCanvas = ({ props }: any) => {
 
 
     //Save layout
-    const handleSave = (values: any) => {
+    const handleSave = () => {
 
-        console.log("layoutId----" + props.layoutId)
-        console.log("values---->" + JSON.stringify(values))
-        console.log("values---->" + JSON.stringify(seatingArrangements))
         const plan = {
-            layoutId:props.layoutId,
-            seatingArrangements
+            id: props.seatingPlanId,
+            name: props.seatingPlanName,
+            layoutId: props.layoutId,
+            classId: Number(props.clsId),
+            seatingArrangements,
+            oldSeatingArrangements: props.seatingArrangements
+
         }
+
         const response = saveSeatingPlan(plan)
+
+        router.back()
+
     }
-
-    //Add new card
-    const addCard = () => {
-
-        setDeskCount(deskCount + 1)
-        const newCard: CanvasCard = {
-            id: "id_" + deskCount, coordinates: { x: 16, y: 100 }, studentCard: <Desk><Label>New Desk</Label></Desk>
-
-        };
-        setCards([...cards, newCard]);
-    }
-
-
 
     //handle onDrag behaviour
     const updateDraggedCardPosition = ({ delta, active }: DragEndEvent) => {
@@ -189,48 +188,46 @@ export const SeatingCanvas = ({ props }: any) => {
         keyboardSensor,
         pointerSensor
     )
-
     return (
-        <div className="space-y-4">
-            <div className="flex-col space-y-4">
+        <div className=" w-full">
+            <div className="flex-col space-y-2">
                 <div className="flex justify-between w-full">
 
                     <Form {...form}>
-                        <form onSubmit={form.handleSubmit(handleSave)} className="flex space-x-8">
-                            <div className="space-y-4">
-                                <FormLabel className="flex">Seating plan name</FormLabel>
-                                <Label className="flex text-xl">{props.seatingPlanName}</Label>
-                            </div>
+                        <form onSubmit={form.handleSubmit(handleSave)} className="flex space-x-8 w-full justify-between">
+                            <div className="flex space-x-8">
+                                <div className="space-y-4">
+                                    <FormLabel className="flex">Seating plan name</FormLabel>
+                                    <Label className="flex text-xl">{props.seatingPlanName}</Label>
+                                </div>
 
-                            <div className="space-y-4">
-                                <FormLabel className="flex">Class name</FormLabel>
-                                <Label className="flex text-xl">Class {props.clsId}</Label>
+                                <div className="space-y-4">
+                                    <FormLabel className="flex">Class name</FormLabel>
+                                    <Label className="flex text-xl">Class {props.clsId}</Label>
+                                </div>
                             </div>
-                            <Button className="hover:bg-blue-700 bg-blue-600" type="submit">Submit</Button>
+                            {props.canvasType !== "view" ? <Button className="hover:bg-blue-700 bg-blue-600" type="submit">Submit</Button> : <></>}
                         </form>
                     </Form>
 
-
-
-
-
-
                 </div>
             </div>
-            <div className="flex space-x-4 ">
-                <div className=" space-y-2 ">
+
+
+            <div className="flex space-x-4 fixed ">
+                {props.canvasType !== "view" ? <div className=" space-y-2 ">
                     <Label className="text-md">Class {props.clsId} Students</Label>
-                    <div className="bg-white rounded-xl w-96 space-y-2 p-2 shadow-lg">
+                    <div className="bg-white rounded-xl w-96 space-y-2 p-2 border shadow-lg">
                         <div className="space-y-2 h-[80vh] overflow-auto p-2">
                             {props.students.map((student: any, index: any) => <Card onClick={() => { setIndex(index) }} className={`${index === i ? " border-4 border-blue-500 " : ""}p-2`} key={index}>{student.user.username}</Card>)}
                         </div>
                     </div>
-                </div>
-                <div className=" space-y-2 ">
+                </div> : ""}
+                <div className=" space-y-2 w-full ">
                     <Label className="text-md">Canvas</Label>
 
                     <div
-                        className="canvas bg-white  shadow-lg"
+                        className="canvas bg-white border rounded-xl shadow-lg "
                         style={{
                             position: "relative",
                             height: "100vh",
@@ -238,14 +235,12 @@ export const SeatingCanvas = ({ props }: any) => {
                         }}
 
                     >
-                        <div className="p-2">
-                            <Button className="hover:bg-blue-700 bg-blue-600" onClick={addCard}>Add Desk</Button>
-                        </div>
-                        <div className="bg-white">
+
+                        <div className="bg-white w-full">
                             <DndContext sensors={sensors} >
                                 {cards.map((card, index) => (
 
-                                    <Draggable onClick={() => { console.log("Clicked!!!"); assignStudent(index) }} card={card} cardStyle="border-1 hover:bg-blue-400 p-1 rounded-xl" />
+                                    <Draggable onClick={() => {  props.canvasType !== "view" ? assignStudent(index) : "" }} card={card} cardStyle="border-1 hover:bg-blue-400 p-1 rounded-xl" />
 
 
                                 ))}

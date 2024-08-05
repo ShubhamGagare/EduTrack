@@ -2110,6 +2110,7 @@ export namespace Prisma {
     register: number
     students: number
     timetable: number
+    seatingPlan: number
     ClassView: number
     layouts: number
   }
@@ -2118,6 +2119,7 @@ export namespace Prisma {
     register?: boolean | ClsCountOutputTypeCountRegisterArgs
     students?: boolean | ClsCountOutputTypeCountStudentsArgs
     timetable?: boolean | ClsCountOutputTypeCountTimetableArgs
+    seatingPlan?: boolean | ClsCountOutputTypeCountSeatingPlanArgs
     ClassView?: boolean | ClsCountOutputTypeCountClassViewArgs
     layouts?: boolean | ClsCountOutputTypeCountLayoutsArgs
   }
@@ -2152,6 +2154,13 @@ export namespace Prisma {
    */
   export type ClsCountOutputTypeCountTimetableArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TimetableWhereInput
+  }
+
+  /**
+   * ClsCountOutputType without action
+   */
+  export type ClsCountOutputTypeCountSeatingPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SeatingPlanWhereInput
   }
 
   /**
@@ -6483,6 +6492,7 @@ export namespace Prisma {
     register?: boolean | Cls$registerArgs<ExtArgs>
     students?: boolean | Cls$studentsArgs<ExtArgs>
     timetable?: boolean | Cls$timetableArgs<ExtArgs>
+    seatingPlan?: boolean | Cls$seatingPlanArgs<ExtArgs>
     ClassView?: boolean | Cls$ClassViewArgs<ExtArgs>
     layouts?: boolean | Cls$layoutsArgs<ExtArgs>
     _count?: boolean | ClsCountOutputTypeDefaultArgs<ExtArgs>
@@ -6506,6 +6516,7 @@ export namespace Prisma {
     register?: boolean | Cls$registerArgs<ExtArgs>
     students?: boolean | Cls$studentsArgs<ExtArgs>
     timetable?: boolean | Cls$timetableArgs<ExtArgs>
+    seatingPlan?: boolean | Cls$seatingPlanArgs<ExtArgs>
     ClassView?: boolean | Cls$ClassViewArgs<ExtArgs>
     layouts?: boolean | Cls$layoutsArgs<ExtArgs>
     _count?: boolean | ClsCountOutputTypeDefaultArgs<ExtArgs>
@@ -6521,6 +6532,7 @@ export namespace Prisma {
       register: Prisma.$RegisterPayload<ExtArgs>[]
       students: Prisma.$StudentPayload<ExtArgs>[]
       timetable: Prisma.$TimetablePayload<ExtArgs>[]
+      seatingPlan: Prisma.$SeatingPlanPayload<ExtArgs>[]
       ClassView: Prisma.$ClassViewPayload<ExtArgs>[]
       layouts: Prisma.$LayoutPayload<ExtArgs>[]
     }
@@ -6896,6 +6908,7 @@ export namespace Prisma {
     register<T extends Cls$registerArgs<ExtArgs> = {}>(args?: Subset<T, Cls$registerArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$RegisterPayload<ExtArgs>, T, "findMany"> | Null>
     students<T extends Cls$studentsArgs<ExtArgs> = {}>(args?: Subset<T, Cls$studentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$StudentPayload<ExtArgs>, T, "findMany"> | Null>
     timetable<T extends Cls$timetableArgs<ExtArgs> = {}>(args?: Subset<T, Cls$timetableArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TimetablePayload<ExtArgs>, T, "findMany"> | Null>
+    seatingPlan<T extends Cls$seatingPlanArgs<ExtArgs> = {}>(args?: Subset<T, Cls$seatingPlanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeatingPlanPayload<ExtArgs>, T, "findMany"> | Null>
     ClassView<T extends Cls$ClassViewArgs<ExtArgs> = {}>(args?: Subset<T, Cls$ClassViewArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClassViewPayload<ExtArgs>, T, "findMany"> | Null>
     layouts<T extends Cls$layoutsArgs<ExtArgs> = {}>(args?: Subset<T, Cls$layoutsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "findMany"> | Null>
     /**
@@ -7320,6 +7333,26 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TimetableScalarFieldEnum | TimetableScalarFieldEnum[]
+  }
+
+  /**
+   * Cls.seatingPlan
+   */
+  export type Cls$seatingPlanArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SeatingPlan
+     */
+    select?: SeatingPlanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SeatingPlanInclude<ExtArgs> | null
+    where?: SeatingPlanWhereInput
+    orderBy?: SeatingPlanOrderByWithRelationInput | SeatingPlanOrderByWithRelationInput[]
+    cursor?: SeatingPlanWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SeatingPlanScalarFieldEnum | SeatingPlanScalarFieldEnum[]
   }
 
   /**
@@ -14358,30 +14391,38 @@ export namespace Prisma {
   export type SeatingPlanAvgAggregateOutputType = {
     id: number | null
     layoutId: number | null
+    classId: number | null
   }
 
   export type SeatingPlanSumAggregateOutputType = {
     id: number | null
     layoutId: number | null
+    classId: number | null
   }
 
   export type SeatingPlanMinAggregateOutputType = {
     id: number | null
+    name: string | null
     layoutId: number | null
+    classId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type SeatingPlanMaxAggregateOutputType = {
     id: number | null
+    name: string | null
     layoutId: number | null
+    classId: number | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type SeatingPlanCountAggregateOutputType = {
     id: number
+    name: number
     layoutId: number
+    classId: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -14391,30 +14432,38 @@ export namespace Prisma {
   export type SeatingPlanAvgAggregateInputType = {
     id?: true
     layoutId?: true
+    classId?: true
   }
 
   export type SeatingPlanSumAggregateInputType = {
     id?: true
     layoutId?: true
+    classId?: true
   }
 
   export type SeatingPlanMinAggregateInputType = {
     id?: true
+    name?: true
     layoutId?: true
+    classId?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type SeatingPlanMaxAggregateInputType = {
     id?: true
+    name?: true
     layoutId?: true
+    classId?: true
     createdAt?: true
     updatedAt?: true
   }
 
   export type SeatingPlanCountAggregateInputType = {
     id?: true
+    name?: true
     layoutId?: true
+    classId?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -14508,7 +14557,9 @@ export namespace Prisma {
 
   export type SeatingPlanGroupByOutputType = {
     id: number
+    name: string
     layoutId: number
+    classId: number
     createdAt: Date
     updatedAt: Date
     _count: SeatingPlanCountAggregateOutputType | null
@@ -14534,9 +14585,12 @@ export namespace Prisma {
 
   export type SeatingPlanSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     layoutId?: boolean
+    classId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    cls?: boolean | ClsDefaultArgs<ExtArgs>
     layout?: boolean | LayoutDefaultArgs<ExtArgs>
     seatingArrangement?: boolean | SeatingPlan$seatingArrangementArgs<ExtArgs>
     _count?: boolean | SeatingPlanCountOutputTypeDefaultArgs<ExtArgs>
@@ -14544,37 +14598,47 @@ export namespace Prisma {
 
   export type SeatingPlanSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    name?: boolean
     layoutId?: boolean
+    classId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    cls?: boolean | ClsDefaultArgs<ExtArgs>
     layout?: boolean | LayoutDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["seatingPlan"]>
 
   export type SeatingPlanSelectScalar = {
     id?: boolean
+    name?: boolean
     layoutId?: boolean
+    classId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
   export type SeatingPlanInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cls?: boolean | ClsDefaultArgs<ExtArgs>
     layout?: boolean | LayoutDefaultArgs<ExtArgs>
     seatingArrangement?: boolean | SeatingPlan$seatingArrangementArgs<ExtArgs>
     _count?: boolean | SeatingPlanCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type SeatingPlanIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cls?: boolean | ClsDefaultArgs<ExtArgs>
     layout?: boolean | LayoutDefaultArgs<ExtArgs>
   }
 
   export type $SeatingPlanPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "SeatingPlan"
     objects: {
+      cls: Prisma.$ClsPayload<ExtArgs>
       layout: Prisma.$LayoutPayload<ExtArgs>
       seatingArrangement: Prisma.$SeatingArrangementPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      name: string
       layoutId: number
+      classId: number
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["seatingPlan"]>
@@ -14941,6 +15005,7 @@ export namespace Prisma {
    */
   export interface Prisma__SeatingPlanClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    cls<T extends ClsDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClsDefaultArgs<ExtArgs>>): Prisma__ClsClient<$Result.GetResult<Prisma.$ClsPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     layout<T extends LayoutDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LayoutDefaultArgs<ExtArgs>>): Prisma__LayoutClient<$Result.GetResult<Prisma.$LayoutPayload<ExtArgs>, T, "findUniqueOrThrow"> | Null, Null, ExtArgs>
     seatingArrangement<T extends SeatingPlan$seatingArrangementArgs<ExtArgs> = {}>(args?: Subset<T, SeatingPlan$seatingArrangementArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SeatingArrangementPayload<ExtArgs>, T, "findMany"> | Null>
     /**
@@ -14973,7 +15038,9 @@ export namespace Prisma {
    */ 
   interface SeatingPlanFieldRefs {
     readonly id: FieldRef<"SeatingPlan", 'Int'>
+    readonly name: FieldRef<"SeatingPlan", 'String'>
     readonly layoutId: FieldRef<"SeatingPlan", 'Int'>
+    readonly classId: FieldRef<"SeatingPlan", 'Int'>
     readonly createdAt: FieldRef<"SeatingPlan", 'DateTime'>
     readonly updatedAt: FieldRef<"SeatingPlan", 'DateTime'>
   }
@@ -16468,7 +16535,9 @@ export namespace Prisma {
 
   export const SeatingPlanScalarFieldEnum: {
     id: 'id',
+    name: 'name',
     layoutId: 'layoutId',
+    classId: 'classId',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -16796,6 +16865,7 @@ export namespace Prisma {
     register?: RegisterListRelationFilter
     students?: StudentListRelationFilter
     timetable?: TimetableListRelationFilter
+    seatingPlan?: SeatingPlanListRelationFilter
     ClassView?: ClassViewListRelationFilter
     layouts?: LayoutListRelationFilter
   }
@@ -16808,6 +16878,7 @@ export namespace Prisma {
     register?: RegisterOrderByRelationAggregateInput
     students?: StudentOrderByRelationAggregateInput
     timetable?: TimetableOrderByRelationAggregateInput
+    seatingPlan?: SeatingPlanOrderByRelationAggregateInput
     ClassView?: ClassViewOrderByRelationAggregateInput
     layouts?: LayoutOrderByRelationAggregateInput
   }
@@ -16823,6 +16894,7 @@ export namespace Prisma {
     register?: RegisterListRelationFilter
     students?: StudentListRelationFilter
     timetable?: TimetableListRelationFilter
+    seatingPlan?: SeatingPlanListRelationFilter
     ClassView?: ClassViewListRelationFilter
     layouts?: LayoutListRelationFilter
   }, "id">
@@ -17267,18 +17339,24 @@ export namespace Prisma {
     OR?: SeatingPlanWhereInput[]
     NOT?: SeatingPlanWhereInput | SeatingPlanWhereInput[]
     id?: IntFilter<"SeatingPlan"> | number
+    name?: StringFilter<"SeatingPlan"> | string
     layoutId?: IntFilter<"SeatingPlan"> | number
+    classId?: IntFilter<"SeatingPlan"> | number
     createdAt?: DateTimeFilter<"SeatingPlan"> | Date | string
     updatedAt?: DateTimeFilter<"SeatingPlan"> | Date | string
+    cls?: XOR<ClsRelationFilter, ClsWhereInput>
     layout?: XOR<LayoutRelationFilter, LayoutWhereInput>
     seatingArrangement?: SeatingArrangementListRelationFilter
   }
 
   export type SeatingPlanOrderByWithRelationInput = {
     id?: SortOrder
+    name?: SortOrder
     layoutId?: SortOrder
+    classId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    cls?: ClsOrderByWithRelationInput
     layout?: LayoutOrderByWithRelationInput
     seatingArrangement?: SeatingArrangementOrderByRelationAggregateInput
   }
@@ -17288,16 +17366,21 @@ export namespace Prisma {
     AND?: SeatingPlanWhereInput | SeatingPlanWhereInput[]
     OR?: SeatingPlanWhereInput[]
     NOT?: SeatingPlanWhereInput | SeatingPlanWhereInput[]
+    name?: StringFilter<"SeatingPlan"> | string
     layoutId?: IntFilter<"SeatingPlan"> | number
+    classId?: IntFilter<"SeatingPlan"> | number
     createdAt?: DateTimeFilter<"SeatingPlan"> | Date | string
     updatedAt?: DateTimeFilter<"SeatingPlan"> | Date | string
+    cls?: XOR<ClsRelationFilter, ClsWhereInput>
     layout?: XOR<LayoutRelationFilter, LayoutWhereInput>
     seatingArrangement?: SeatingArrangementListRelationFilter
   }, "id">
 
   export type SeatingPlanOrderByWithAggregationInput = {
     id?: SortOrder
+    name?: SortOrder
     layoutId?: SortOrder
+    classId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SeatingPlanCountOrderByAggregateInput
@@ -17312,7 +17395,9 @@ export namespace Prisma {
     OR?: SeatingPlanScalarWhereWithAggregatesInput[]
     NOT?: SeatingPlanScalarWhereWithAggregatesInput | SeatingPlanScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"SeatingPlan"> | number
+    name?: StringWithAggregatesFilter<"SeatingPlan"> | string
     layoutId?: IntWithAggregatesFilter<"SeatingPlan"> | number
+    classId?: IntWithAggregatesFilter<"SeatingPlan"> | number
     createdAt?: DateTimeWithAggregatesFilter<"SeatingPlan"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"SeatingPlan"> | Date | string
   }
@@ -17574,6 +17659,7 @@ export namespace Prisma {
     register?: RegisterCreateNestedManyWithoutClsInput
     students?: StudentCreateNestedManyWithoutClsInput
     timetable?: TimetableCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanCreateNestedManyWithoutClsInput
     ClassView?: ClassViewCreateNestedManyWithoutClsInput
     layouts?: LayoutCreateNestedManyWithoutClassesInput
   }
@@ -17585,6 +17671,7 @@ export namespace Prisma {
     register?: RegisterUncheckedCreateNestedManyWithoutClsInput
     students?: StudentUncheckedCreateNestedManyWithoutClsInput
     timetable?: TimetableUncheckedCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanUncheckedCreateNestedManyWithoutClsInput
     ClassView?: ClassViewUncheckedCreateNestedManyWithoutClsInput
     layouts?: LayoutUncheckedCreateNestedManyWithoutClassesInput
   }
@@ -17595,6 +17682,7 @@ export namespace Prisma {
     register?: RegisterUpdateManyWithoutClsNestedInput
     students?: StudentUpdateManyWithoutClsNestedInput
     timetable?: TimetableUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUpdateManyWithoutClsNestedInput
     ClassView?: ClassViewUpdateManyWithoutClsNestedInput
     layouts?: LayoutUpdateManyWithoutClassesNestedInput
   }
@@ -17606,6 +17694,7 @@ export namespace Prisma {
     register?: RegisterUncheckedUpdateManyWithoutClsNestedInput
     students?: StudentUncheckedUpdateManyWithoutClsNestedInput
     timetable?: TimetableUncheckedUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUncheckedUpdateManyWithoutClsNestedInput
     ClassView?: ClassViewUncheckedUpdateManyWithoutClsNestedInput
     layouts?: LayoutUncheckedUpdateManyWithoutClassesNestedInput
   }
@@ -18008,30 +18097,38 @@ export namespace Prisma {
   }
 
   export type SeatingPlanCreateInput = {
+    name?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    cls?: ClsCreateNestedOneWithoutSeatingPlanInput
     layout: LayoutCreateNestedOneWithoutSeatingPlansInput
     seatingArrangement?: SeatingArrangementCreateNestedManyWithoutSeatingPlanInput
   }
 
   export type SeatingPlanUncheckedCreateInput = {
     id?: number
+    name?: string
     layoutId: number
+    classId?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     seatingArrangement?: SeatingArrangementUncheckedCreateNestedManyWithoutSeatingPlanInput
   }
 
   export type SeatingPlanUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cls?: ClsUpdateOneRequiredWithoutSeatingPlanNestedInput
     layout?: LayoutUpdateOneRequiredWithoutSeatingPlansNestedInput
     seatingArrangement?: SeatingArrangementUpdateManyWithoutSeatingPlanNestedInput
   }
 
   export type SeatingPlanUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     layoutId?: IntFieldUpdateOperationsInput | number
+    classId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     seatingArrangement?: SeatingArrangementUncheckedUpdateManyWithoutSeatingPlanNestedInput
@@ -18039,19 +18136,24 @@ export namespace Prisma {
 
   export type SeatingPlanCreateManyInput = {
     id?: number
+    name?: string
     layoutId: number
+    classId?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type SeatingPlanUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SeatingPlanUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     layoutId?: IntFieldUpdateOperationsInput | number
+    classId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -18383,6 +18485,12 @@ export namespace Prisma {
     none?: TimetableWhereInput
   }
 
+  export type SeatingPlanListRelationFilter = {
+    every?: SeatingPlanWhereInput
+    some?: SeatingPlanWhereInput
+    none?: SeatingPlanWhereInput
+  }
+
   export type ClassViewListRelationFilter = {
     every?: ClassViewWhereInput
     some?: ClassViewWhereInput
@@ -18405,6 +18513,10 @@ export namespace Prisma {
   }
 
   export type TimetableOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SeatingPlanOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18760,17 +18872,7 @@ export namespace Prisma {
     none?: DeskWhereInput
   }
 
-  export type SeatingPlanListRelationFilter = {
-    every?: SeatingPlanWhereInput
-    some?: SeatingPlanWhereInput
-    none?: SeatingPlanWhereInput
-  }
-
   export type DeskOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type SeatingPlanOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -18851,7 +18953,9 @@ export namespace Prisma {
 
   export type SeatingPlanCountOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     layoutId?: SortOrder
+    classId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -18859,18 +18963,23 @@ export namespace Prisma {
   export type SeatingPlanAvgOrderByAggregateInput = {
     id?: SortOrder
     layoutId?: SortOrder
+    classId?: SortOrder
   }
 
   export type SeatingPlanMaxOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     layoutId?: SortOrder
+    classId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type SeatingPlanMinOrderByAggregateInput = {
     id?: SortOrder
+    name?: SortOrder
     layoutId?: SortOrder
+    classId?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -18878,6 +18987,7 @@ export namespace Prisma {
   export type SeatingPlanSumOrderByAggregateInput = {
     id?: SortOrder
     layoutId?: SortOrder
+    classId?: SortOrder
   }
 
   export type SeatingPlanRelationFilter = {
@@ -19306,6 +19416,13 @@ export namespace Prisma {
     connect?: TimetableWhereUniqueInput | TimetableWhereUniqueInput[]
   }
 
+  export type SeatingPlanCreateNestedManyWithoutClsInput = {
+    create?: XOR<SeatingPlanCreateWithoutClsInput, SeatingPlanUncheckedCreateWithoutClsInput> | SeatingPlanCreateWithoutClsInput[] | SeatingPlanUncheckedCreateWithoutClsInput[]
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutClsInput | SeatingPlanCreateOrConnectWithoutClsInput[]
+    createMany?: SeatingPlanCreateManyClsInputEnvelope
+    connect?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+  }
+
   export type ClassViewCreateNestedManyWithoutClsInput = {
     create?: XOR<ClassViewCreateWithoutClsInput, ClassViewUncheckedCreateWithoutClsInput> | ClassViewCreateWithoutClsInput[] | ClassViewUncheckedCreateWithoutClsInput[]
     connectOrCreate?: ClassViewCreateOrConnectWithoutClsInput | ClassViewCreateOrConnectWithoutClsInput[]
@@ -19338,6 +19455,13 @@ export namespace Prisma {
     connectOrCreate?: TimetableCreateOrConnectWithoutClsInput | TimetableCreateOrConnectWithoutClsInput[]
     createMany?: TimetableCreateManyClsInputEnvelope
     connect?: TimetableWhereUniqueInput | TimetableWhereUniqueInput[]
+  }
+
+  export type SeatingPlanUncheckedCreateNestedManyWithoutClsInput = {
+    create?: XOR<SeatingPlanCreateWithoutClsInput, SeatingPlanUncheckedCreateWithoutClsInput> | SeatingPlanCreateWithoutClsInput[] | SeatingPlanUncheckedCreateWithoutClsInput[]
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutClsInput | SeatingPlanCreateOrConnectWithoutClsInput[]
+    createMany?: SeatingPlanCreateManyClsInputEnvelope
+    connect?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
   }
 
   export type ClassViewUncheckedCreateNestedManyWithoutClsInput = {
@@ -19403,6 +19527,20 @@ export namespace Prisma {
     update?: TimetableUpdateWithWhereUniqueWithoutClsInput | TimetableUpdateWithWhereUniqueWithoutClsInput[]
     updateMany?: TimetableUpdateManyWithWhereWithoutClsInput | TimetableUpdateManyWithWhereWithoutClsInput[]
     deleteMany?: TimetableScalarWhereInput | TimetableScalarWhereInput[]
+  }
+
+  export type SeatingPlanUpdateManyWithoutClsNestedInput = {
+    create?: XOR<SeatingPlanCreateWithoutClsInput, SeatingPlanUncheckedCreateWithoutClsInput> | SeatingPlanCreateWithoutClsInput[] | SeatingPlanUncheckedCreateWithoutClsInput[]
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutClsInput | SeatingPlanCreateOrConnectWithoutClsInput[]
+    upsert?: SeatingPlanUpsertWithWhereUniqueWithoutClsInput | SeatingPlanUpsertWithWhereUniqueWithoutClsInput[]
+    createMany?: SeatingPlanCreateManyClsInputEnvelope
+    set?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    disconnect?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    delete?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    connect?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    update?: SeatingPlanUpdateWithWhereUniqueWithoutClsInput | SeatingPlanUpdateWithWhereUniqueWithoutClsInput[]
+    updateMany?: SeatingPlanUpdateManyWithWhereWithoutClsInput | SeatingPlanUpdateManyWithWhereWithoutClsInput[]
+    deleteMany?: SeatingPlanScalarWhereInput | SeatingPlanScalarWhereInput[]
   }
 
   export type ClassViewUpdateManyWithoutClsNestedInput = {
@@ -19480,6 +19618,20 @@ export namespace Prisma {
     update?: TimetableUpdateWithWhereUniqueWithoutClsInput | TimetableUpdateWithWhereUniqueWithoutClsInput[]
     updateMany?: TimetableUpdateManyWithWhereWithoutClsInput | TimetableUpdateManyWithWhereWithoutClsInput[]
     deleteMany?: TimetableScalarWhereInput | TimetableScalarWhereInput[]
+  }
+
+  export type SeatingPlanUncheckedUpdateManyWithoutClsNestedInput = {
+    create?: XOR<SeatingPlanCreateWithoutClsInput, SeatingPlanUncheckedCreateWithoutClsInput> | SeatingPlanCreateWithoutClsInput[] | SeatingPlanUncheckedCreateWithoutClsInput[]
+    connectOrCreate?: SeatingPlanCreateOrConnectWithoutClsInput | SeatingPlanCreateOrConnectWithoutClsInput[]
+    upsert?: SeatingPlanUpsertWithWhereUniqueWithoutClsInput | SeatingPlanUpsertWithWhereUniqueWithoutClsInput[]
+    createMany?: SeatingPlanCreateManyClsInputEnvelope
+    set?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    disconnect?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    delete?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    connect?: SeatingPlanWhereUniqueInput | SeatingPlanWhereUniqueInput[]
+    update?: SeatingPlanUpdateWithWhereUniqueWithoutClsInput | SeatingPlanUpdateWithWhereUniqueWithoutClsInput[]
+    updateMany?: SeatingPlanUpdateManyWithWhereWithoutClsInput | SeatingPlanUpdateManyWithWhereWithoutClsInput[]
+    deleteMany?: SeatingPlanScalarWhereInput | SeatingPlanScalarWhereInput[]
   }
 
   export type ClassViewUncheckedUpdateManyWithoutClsNestedInput = {
@@ -19885,6 +20037,12 @@ export namespace Prisma {
     deleteMany?: SeatingArrangementScalarWhereInput | SeatingArrangementScalarWhereInput[]
   }
 
+  export type ClsCreateNestedOneWithoutSeatingPlanInput = {
+    create?: XOR<ClsCreateWithoutSeatingPlanInput, ClsUncheckedCreateWithoutSeatingPlanInput>
+    connectOrCreate?: ClsCreateOrConnectWithoutSeatingPlanInput
+    connect?: ClsWhereUniqueInput
+  }
+
   export type LayoutCreateNestedOneWithoutSeatingPlansInput = {
     create?: XOR<LayoutCreateWithoutSeatingPlansInput, LayoutUncheckedCreateWithoutSeatingPlansInput>
     connectOrCreate?: LayoutCreateOrConnectWithoutSeatingPlansInput
@@ -19903,6 +20061,14 @@ export namespace Prisma {
     connectOrCreate?: SeatingArrangementCreateOrConnectWithoutSeatingPlanInput | SeatingArrangementCreateOrConnectWithoutSeatingPlanInput[]
     createMany?: SeatingArrangementCreateManySeatingPlanInputEnvelope
     connect?: SeatingArrangementWhereUniqueInput | SeatingArrangementWhereUniqueInput[]
+  }
+
+  export type ClsUpdateOneRequiredWithoutSeatingPlanNestedInput = {
+    create?: XOR<ClsCreateWithoutSeatingPlanInput, ClsUncheckedCreateWithoutSeatingPlanInput>
+    connectOrCreate?: ClsCreateOrConnectWithoutSeatingPlanInput
+    upsert?: ClsUpsertWithoutSeatingPlanInput
+    connect?: ClsWhereUniqueInput
+    update?: XOR<XOR<ClsUpdateToOneWithWhereWithoutSeatingPlanInput, ClsUpdateWithoutSeatingPlanInput>, ClsUncheckedUpdateWithoutSeatingPlanInput>
   }
 
   export type LayoutUpdateOneRequiredWithoutSeatingPlansNestedInput = {
@@ -20335,6 +20501,7 @@ export namespace Prisma {
     register?: RegisterCreateNestedManyWithoutClsInput
     students?: StudentCreateNestedManyWithoutClsInput
     timetable?: TimetableCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanCreateNestedManyWithoutClsInput
     ClassView?: ClassViewCreateNestedManyWithoutClsInput
     layouts?: LayoutCreateNestedManyWithoutClassesInput
   }
@@ -20345,6 +20512,7 @@ export namespace Prisma {
     register?: RegisterUncheckedCreateNestedManyWithoutClsInput
     students?: StudentUncheckedCreateNestedManyWithoutClsInput
     timetable?: TimetableUncheckedCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanUncheckedCreateNestedManyWithoutClsInput
     ClassView?: ClassViewUncheckedCreateNestedManyWithoutClsInput
     layouts?: LayoutUncheckedCreateNestedManyWithoutClassesInput
   }
@@ -20518,6 +20686,7 @@ export namespace Prisma {
     teacher?: TeacherCreateNestedOneWithoutClassesInput
     register?: RegisterCreateNestedManyWithoutClsInput
     timetable?: TimetableCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanCreateNestedManyWithoutClsInput
     ClassView?: ClassViewCreateNestedManyWithoutClsInput
     layouts?: LayoutCreateNestedManyWithoutClassesInput
   }
@@ -20528,6 +20697,7 @@ export namespace Prisma {
     teacherId?: number | null
     register?: RegisterUncheckedCreateNestedManyWithoutClsInput
     timetable?: TimetableUncheckedCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanUncheckedCreateNestedManyWithoutClsInput
     ClassView?: ClassViewUncheckedCreateNestedManyWithoutClsInput
     layouts?: LayoutUncheckedCreateNestedManyWithoutClassesInput
   }
@@ -20629,6 +20799,7 @@ export namespace Prisma {
     teacher?: TeacherUpdateOneWithoutClassesNestedInput
     register?: RegisterUpdateManyWithoutClsNestedInput
     timetable?: TimetableUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUpdateManyWithoutClsNestedInput
     ClassView?: ClassViewUpdateManyWithoutClsNestedInput
     layouts?: LayoutUpdateManyWithoutClassesNestedInput
   }
@@ -20639,6 +20810,7 @@ export namespace Prisma {
     teacherId?: NullableIntFieldUpdateOperationsInput | number | null
     register?: RegisterUncheckedUpdateManyWithoutClsNestedInput
     timetable?: TimetableUncheckedUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUncheckedUpdateManyWithoutClsNestedInput
     ClassView?: ClassViewUncheckedUpdateManyWithoutClsNestedInput
     layouts?: LayoutUncheckedUpdateManyWithoutClassesNestedInput
   }
@@ -20786,6 +20958,33 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SeatingPlanCreateWithoutClsInput = {
+    name?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    layout: LayoutCreateNestedOneWithoutSeatingPlansInput
+    seatingArrangement?: SeatingArrangementCreateNestedManyWithoutSeatingPlanInput
+  }
+
+  export type SeatingPlanUncheckedCreateWithoutClsInput = {
+    id?: number
+    name?: string
+    layoutId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    seatingArrangement?: SeatingArrangementUncheckedCreateNestedManyWithoutSeatingPlanInput
+  }
+
+  export type SeatingPlanCreateOrConnectWithoutClsInput = {
+    where: SeatingPlanWhereUniqueInput
+    create: XOR<SeatingPlanCreateWithoutClsInput, SeatingPlanUncheckedCreateWithoutClsInput>
+  }
+
+  export type SeatingPlanCreateManyClsInputEnvelope = {
+    data: SeatingPlanCreateManyClsInput | SeatingPlanCreateManyClsInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ClassViewCreateWithoutClsInput = {
     seat?: SeatCreateNestedManyWithoutClassViewInput
   }
@@ -20917,6 +21116,34 @@ export namespace Prisma {
     endTime?: DateTimeFilter<"Timetable"> | Date | string
   }
 
+  export type SeatingPlanUpsertWithWhereUniqueWithoutClsInput = {
+    where: SeatingPlanWhereUniqueInput
+    update: XOR<SeatingPlanUpdateWithoutClsInput, SeatingPlanUncheckedUpdateWithoutClsInput>
+    create: XOR<SeatingPlanCreateWithoutClsInput, SeatingPlanUncheckedCreateWithoutClsInput>
+  }
+
+  export type SeatingPlanUpdateWithWhereUniqueWithoutClsInput = {
+    where: SeatingPlanWhereUniqueInput
+    data: XOR<SeatingPlanUpdateWithoutClsInput, SeatingPlanUncheckedUpdateWithoutClsInput>
+  }
+
+  export type SeatingPlanUpdateManyWithWhereWithoutClsInput = {
+    where: SeatingPlanScalarWhereInput
+    data: XOR<SeatingPlanUpdateManyMutationInput, SeatingPlanUncheckedUpdateManyWithoutClsInput>
+  }
+
+  export type SeatingPlanScalarWhereInput = {
+    AND?: SeatingPlanScalarWhereInput | SeatingPlanScalarWhereInput[]
+    OR?: SeatingPlanScalarWhereInput[]
+    NOT?: SeatingPlanScalarWhereInput | SeatingPlanScalarWhereInput[]
+    id?: IntFilter<"SeatingPlan"> | number
+    name?: StringFilter<"SeatingPlan"> | string
+    layoutId?: IntFilter<"SeatingPlan"> | number
+    classId?: IntFilter<"SeatingPlan"> | number
+    createdAt?: DateTimeFilter<"SeatingPlan"> | Date | string
+    updatedAt?: DateTimeFilter<"SeatingPlan"> | Date | string
+  }
+
   export type ClassViewUpsertWithWhereUniqueWithoutClsInput = {
     where: ClassViewWhereUniqueInput
     update: XOR<ClassViewUpdateWithoutClsInput, ClassViewUncheckedUpdateWithoutClsInput>
@@ -20972,6 +21199,7 @@ export namespace Prisma {
     teacher?: TeacherCreateNestedOneWithoutClassesInput
     register?: RegisterCreateNestedManyWithoutClsInput
     students?: StudentCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanCreateNestedManyWithoutClsInput
     ClassView?: ClassViewCreateNestedManyWithoutClsInput
     layouts?: LayoutCreateNestedManyWithoutClassesInput
   }
@@ -20982,6 +21210,7 @@ export namespace Prisma {
     teacherId?: number | null
     register?: RegisterUncheckedCreateNestedManyWithoutClsInput
     students?: StudentUncheckedCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanUncheckedCreateNestedManyWithoutClsInput
     ClassView?: ClassViewUncheckedCreateNestedManyWithoutClsInput
     layouts?: LayoutUncheckedCreateNestedManyWithoutClassesInput
   }
@@ -21007,6 +21236,7 @@ export namespace Prisma {
     teacher?: TeacherUpdateOneWithoutClassesNestedInput
     register?: RegisterUpdateManyWithoutClsNestedInput
     students?: StudentUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUpdateManyWithoutClsNestedInput
     ClassView?: ClassViewUpdateManyWithoutClsNestedInput
     layouts?: LayoutUpdateManyWithoutClassesNestedInput
   }
@@ -21017,6 +21247,7 @@ export namespace Prisma {
     teacherId?: NullableIntFieldUpdateOperationsInput | number | null
     register?: RegisterUncheckedUpdateManyWithoutClsNestedInput
     students?: StudentUncheckedUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUncheckedUpdateManyWithoutClsNestedInput
     ClassView?: ClassViewUncheckedUpdateManyWithoutClsNestedInput
     layouts?: LayoutUncheckedUpdateManyWithoutClassesNestedInput
   }
@@ -21053,6 +21284,7 @@ export namespace Prisma {
     teacher?: TeacherCreateNestedOneWithoutClassesInput
     students?: StudentCreateNestedManyWithoutClsInput
     timetable?: TimetableCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanCreateNestedManyWithoutClsInput
     ClassView?: ClassViewCreateNestedManyWithoutClsInput
     layouts?: LayoutCreateNestedManyWithoutClassesInput
   }
@@ -21063,6 +21295,7 @@ export namespace Prisma {
     teacherId?: number | null
     students?: StudentUncheckedCreateNestedManyWithoutClsInput
     timetable?: TimetableUncheckedCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanUncheckedCreateNestedManyWithoutClsInput
     ClassView?: ClassViewUncheckedCreateNestedManyWithoutClsInput
     layouts?: LayoutUncheckedCreateNestedManyWithoutClassesInput
   }
@@ -21120,6 +21353,7 @@ export namespace Prisma {
     teacher?: TeacherUpdateOneWithoutClassesNestedInput
     students?: StudentUpdateManyWithoutClsNestedInput
     timetable?: TimetableUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUpdateManyWithoutClsNestedInput
     ClassView?: ClassViewUpdateManyWithoutClsNestedInput
     layouts?: LayoutUpdateManyWithoutClassesNestedInput
   }
@@ -21130,6 +21364,7 @@ export namespace Prisma {
     teacherId?: NullableIntFieldUpdateOperationsInput | number | null
     students?: StudentUncheckedUpdateManyWithoutClsNestedInput
     timetable?: TimetableUncheckedUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUncheckedUpdateManyWithoutClsNestedInput
     ClassView?: ClassViewUncheckedUpdateManyWithoutClsNestedInput
     layouts?: LayoutUncheckedUpdateManyWithoutClassesNestedInput
   }
@@ -21273,6 +21508,7 @@ export namespace Prisma {
     register?: RegisterCreateNestedManyWithoutClsInput
     students?: StudentCreateNestedManyWithoutClsInput
     timetable?: TimetableCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanCreateNestedManyWithoutClsInput
     layouts?: LayoutCreateNestedManyWithoutClassesInput
   }
 
@@ -21283,6 +21519,7 @@ export namespace Prisma {
     register?: RegisterUncheckedCreateNestedManyWithoutClsInput
     students?: StudentUncheckedCreateNestedManyWithoutClsInput
     timetable?: TimetableUncheckedCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanUncheckedCreateNestedManyWithoutClsInput
     layouts?: LayoutUncheckedCreateNestedManyWithoutClassesInput
   }
 
@@ -21335,6 +21572,7 @@ export namespace Prisma {
     register?: RegisterUpdateManyWithoutClsNestedInput
     students?: StudentUpdateManyWithoutClsNestedInput
     timetable?: TimetableUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUpdateManyWithoutClsNestedInput
     layouts?: LayoutUpdateManyWithoutClassesNestedInput
   }
 
@@ -21345,6 +21583,7 @@ export namespace Prisma {
     register?: RegisterUncheckedUpdateManyWithoutClsNestedInput
     students?: StudentUncheckedUpdateManyWithoutClsNestedInput
     timetable?: TimetableUncheckedUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUncheckedUpdateManyWithoutClsNestedInput
     layouts?: LayoutUncheckedUpdateManyWithoutClassesNestedInput
   }
 
@@ -21410,13 +21649,17 @@ export namespace Prisma {
   }
 
   export type SeatingPlanCreateWithoutLayoutInput = {
+    name?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    cls?: ClsCreateNestedOneWithoutSeatingPlanInput
     seatingArrangement?: SeatingArrangementCreateNestedManyWithoutSeatingPlanInput
   }
 
   export type SeatingPlanUncheckedCreateWithoutLayoutInput = {
     id?: number
+    name?: string
+    classId?: number
     createdAt?: Date | string
     updatedAt?: Date | string
     seatingArrangement?: SeatingArrangementUncheckedCreateNestedManyWithoutSeatingPlanInput
@@ -21438,6 +21681,7 @@ export namespace Prisma {
     register?: RegisterCreateNestedManyWithoutClsInput
     students?: StudentCreateNestedManyWithoutClsInput
     timetable?: TimetableCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanCreateNestedManyWithoutClsInput
     ClassView?: ClassViewCreateNestedManyWithoutClsInput
   }
 
@@ -21448,6 +21692,7 @@ export namespace Prisma {
     register?: RegisterUncheckedCreateNestedManyWithoutClsInput
     students?: StudentUncheckedCreateNestedManyWithoutClsInput
     timetable?: TimetableUncheckedCreateNestedManyWithoutClsInput
+    seatingPlan?: SeatingPlanUncheckedCreateNestedManyWithoutClsInput
     ClassView?: ClassViewUncheckedCreateNestedManyWithoutClsInput
   }
 
@@ -21498,16 +21743,6 @@ export namespace Prisma {
   export type SeatingPlanUpdateManyWithWhereWithoutLayoutInput = {
     where: SeatingPlanScalarWhereInput
     data: XOR<SeatingPlanUpdateManyMutationInput, SeatingPlanUncheckedUpdateManyWithoutLayoutInput>
-  }
-
-  export type SeatingPlanScalarWhereInput = {
-    AND?: SeatingPlanScalarWhereInput | SeatingPlanScalarWhereInput[]
-    OR?: SeatingPlanScalarWhereInput[]
-    NOT?: SeatingPlanScalarWhereInput | SeatingPlanScalarWhereInput[]
-    id?: IntFilter<"SeatingPlan"> | number
-    layoutId?: IntFilter<"SeatingPlan"> | number
-    createdAt?: DateTimeFilter<"SeatingPlan"> | Date | string
-    updatedAt?: DateTimeFilter<"SeatingPlan"> | Date | string
   }
 
   export type ClsUpsertWithWhereUniqueWithoutLayoutsInput = {
@@ -21617,6 +21852,32 @@ export namespace Prisma {
     data: XOR<SeatingArrangementUpdateManyMutationInput, SeatingArrangementUncheckedUpdateManyWithoutDeskInput>
   }
 
+  export type ClsCreateWithoutSeatingPlanInput = {
+    name: string
+    teacher?: TeacherCreateNestedOneWithoutClassesInput
+    register?: RegisterCreateNestedManyWithoutClsInput
+    students?: StudentCreateNestedManyWithoutClsInput
+    timetable?: TimetableCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewCreateNestedManyWithoutClsInput
+    layouts?: LayoutCreateNestedManyWithoutClassesInput
+  }
+
+  export type ClsUncheckedCreateWithoutSeatingPlanInput = {
+    id?: number
+    name: string
+    teacherId?: number | null
+    register?: RegisterUncheckedCreateNestedManyWithoutClsInput
+    students?: StudentUncheckedCreateNestedManyWithoutClsInput
+    timetable?: TimetableUncheckedCreateNestedManyWithoutClsInput
+    ClassView?: ClassViewUncheckedCreateNestedManyWithoutClsInput
+    layouts?: LayoutUncheckedCreateNestedManyWithoutClassesInput
+  }
+
+  export type ClsCreateOrConnectWithoutSeatingPlanInput = {
+    where: ClsWhereUniqueInput
+    create: XOR<ClsCreateWithoutSeatingPlanInput, ClsUncheckedCreateWithoutSeatingPlanInput>
+  }
+
   export type LayoutCreateWithoutSeatingPlansInput = {
     name: string
     createdAt?: Date | string
@@ -21664,6 +21925,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ClsUpsertWithoutSeatingPlanInput = {
+    update: XOR<ClsUpdateWithoutSeatingPlanInput, ClsUncheckedUpdateWithoutSeatingPlanInput>
+    create: XOR<ClsCreateWithoutSeatingPlanInput, ClsUncheckedCreateWithoutSeatingPlanInput>
+    where?: ClsWhereInput
+  }
+
+  export type ClsUpdateToOneWithWhereWithoutSeatingPlanInput = {
+    where?: ClsWhereInput
+    data: XOR<ClsUpdateWithoutSeatingPlanInput, ClsUncheckedUpdateWithoutSeatingPlanInput>
+  }
+
+  export type ClsUpdateWithoutSeatingPlanInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    teacher?: TeacherUpdateOneWithoutClassesNestedInput
+    register?: RegisterUpdateManyWithoutClsNestedInput
+    students?: StudentUpdateManyWithoutClsNestedInput
+    timetable?: TimetableUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUpdateManyWithoutClassesNestedInput
+  }
+
+  export type ClsUncheckedUpdateWithoutSeatingPlanInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    teacherId?: NullableIntFieldUpdateOperationsInput | number | null
+    register?: RegisterUncheckedUpdateManyWithoutClsNestedInput
+    students?: StudentUncheckedUpdateManyWithoutClsNestedInput
+    timetable?: TimetableUncheckedUpdateManyWithoutClsNestedInput
+    ClassView?: ClassViewUncheckedUpdateManyWithoutClsNestedInput
+    layouts?: LayoutUncheckedUpdateManyWithoutClassesNestedInput
+  }
+
   export type LayoutUpsertWithoutSeatingPlansInput = {
     update: XOR<LayoutUpdateWithoutSeatingPlansInput, LayoutUncheckedUpdateWithoutSeatingPlansInput>
     create: XOR<LayoutCreateWithoutSeatingPlansInput, LayoutUncheckedCreateWithoutSeatingPlansInput>
@@ -21709,14 +22002,18 @@ export namespace Prisma {
   }
 
   export type SeatingPlanCreateWithoutSeatingArrangementInput = {
+    name?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    cls?: ClsCreateNestedOneWithoutSeatingPlanInput
     layout: LayoutCreateNestedOneWithoutSeatingPlansInput
   }
 
   export type SeatingPlanUncheckedCreateWithoutSeatingArrangementInput = {
     id?: number
+    name?: string
     layoutId: number
+    classId?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -21778,14 +22075,18 @@ export namespace Prisma {
   }
 
   export type SeatingPlanUpdateWithoutSeatingArrangementInput = {
+    name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cls?: ClsUpdateOneRequiredWithoutSeatingPlanNestedInput
     layout?: LayoutUpdateOneRequiredWithoutSeatingPlansNestedInput
   }
 
   export type SeatingPlanUncheckedUpdateWithoutSeatingArrangementInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
     layoutId?: IntFieldUpdateOperationsInput | number
+    classId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -21890,6 +22191,7 @@ export namespace Prisma {
     register?: RegisterUpdateManyWithoutClsNestedInput
     students?: StudentUpdateManyWithoutClsNestedInput
     timetable?: TimetableUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUpdateManyWithoutClsNestedInput
     ClassView?: ClassViewUpdateManyWithoutClsNestedInput
     layouts?: LayoutUpdateManyWithoutClassesNestedInput
   }
@@ -21900,6 +22202,7 @@ export namespace Prisma {
     register?: RegisterUncheckedUpdateManyWithoutClsNestedInput
     students?: StudentUncheckedUpdateManyWithoutClsNestedInput
     timetable?: TimetableUncheckedUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUncheckedUpdateManyWithoutClsNestedInput
     ClassView?: ClassViewUncheckedUpdateManyWithoutClsNestedInput
     layouts?: LayoutUncheckedUpdateManyWithoutClassesNestedInput
   }
@@ -22016,6 +22319,14 @@ export namespace Prisma {
     endTime: Date | string
   }
 
+  export type SeatingPlanCreateManyClsInput = {
+    id?: number
+    name?: string
+    layoutId: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ClassViewCreateManyClsInput = {
     id?: number
   }
@@ -22078,6 +22389,31 @@ export namespace Prisma {
     day?: StringFieldUpdateOperationsInput | string
     startTime?: DateTimeFieldUpdateOperationsInput | Date | string
     endTime?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SeatingPlanUpdateWithoutClsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    layout?: LayoutUpdateOneRequiredWithoutSeatingPlansNestedInput
+    seatingArrangement?: SeatingArrangementUpdateManyWithoutSeatingPlanNestedInput
+  }
+
+  export type SeatingPlanUncheckedUpdateWithoutClsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    layoutId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    seatingArrangement?: SeatingArrangementUncheckedUpdateManyWithoutSeatingPlanNestedInput
+  }
+
+  export type SeatingPlanUncheckedUpdateManyWithoutClsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    layoutId?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ClassViewUpdateWithoutClsInput = {
@@ -22189,6 +22525,8 @@ export namespace Prisma {
 
   export type SeatingPlanCreateManyLayoutInput = {
     id?: number
+    name?: string
+    classId?: number
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -22219,13 +22557,17 @@ export namespace Prisma {
   }
 
   export type SeatingPlanUpdateWithoutLayoutInput = {
+    name?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    cls?: ClsUpdateOneRequiredWithoutSeatingPlanNestedInput
     seatingArrangement?: SeatingArrangementUpdateManyWithoutSeatingPlanNestedInput
   }
 
   export type SeatingPlanUncheckedUpdateWithoutLayoutInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    classId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     seatingArrangement?: SeatingArrangementUncheckedUpdateManyWithoutSeatingPlanNestedInput
@@ -22233,6 +22575,8 @@ export namespace Prisma {
 
   export type SeatingPlanUncheckedUpdateManyWithoutLayoutInput = {
     id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    classId?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -22243,6 +22587,7 @@ export namespace Prisma {
     register?: RegisterUpdateManyWithoutClsNestedInput
     students?: StudentUpdateManyWithoutClsNestedInput
     timetable?: TimetableUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUpdateManyWithoutClsNestedInput
     ClassView?: ClassViewUpdateManyWithoutClsNestedInput
   }
 
@@ -22253,6 +22598,7 @@ export namespace Prisma {
     register?: RegisterUncheckedUpdateManyWithoutClsNestedInput
     students?: StudentUncheckedUpdateManyWithoutClsNestedInput
     timetable?: TimetableUncheckedUpdateManyWithoutClsNestedInput
+    seatingPlan?: SeatingPlanUncheckedUpdateManyWithoutClsNestedInput
     ClassView?: ClassViewUncheckedUpdateManyWithoutClsNestedInput
   }
 

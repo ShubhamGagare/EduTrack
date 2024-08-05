@@ -53,6 +53,7 @@ model Cls {
   register  Register[]
   students  Student[]
   timetable Timetable[]
+  seatingPlan SeatingPlan[]
   ClassView ClassView[]
   layouts   Layout[]    @relation("ClassLayouts")
 }
@@ -130,7 +131,10 @@ model Desk {
 
 model SeatingPlan {
   id                 Int                  @id @default(autoincrement())
+  name               String               @default("")
   layoutId           Int
+  classId             Int                 @default(1)
+  cls     Cls    @relation(fields: [classId], references: [id]) 
   layout             Layout               @relation(fields: [layoutId], references: [id])
   seatingArrangement SeatingArrangement[] // Relation to SeatingArrangement model
   createdAt          DateTime             @default(now())

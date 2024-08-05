@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "SeatingPlan" ADD COLUMN     "classId" INTEGER NOT NULL DEFAULT 1,
+ADD COLUMN     "name" TEXT NOT NULL DEFAULT '';
+
+-- AddForeignKey
+ALTER TABLE "SeatingPlan" ADD CONSTRAINT "SeatingPlan_classId_fkey" FOREIGN KEY ("classId") REFERENCES "Cls"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

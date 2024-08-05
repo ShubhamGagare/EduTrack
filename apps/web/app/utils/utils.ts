@@ -16,31 +16,100 @@ const openai = new OpenAI({
 const client = new PrismaClient();
 const today = new Date();
 
-//add seating layout
-export const addSeatingPlan = async (plan: any) => {
-  console.log("plan------>" + JSON.stringify(plan))
+//
+export const getSeatingPlanById = async (id: number) => {
 
-  const response = await client.seatingPlan.create({
-    data: {
-      layoutId: plan.layoutId
+  const response = await client.seatingPlan.findUnique({
+    where: {
+      id: id
+    },
+    include: {
+      seatingArrangement: {
+        select: {
+          id: true,
+          deskId: true,
+          studentId: true
+        }
+      }
     }
   })
+  return response;
+}
 
-  console.log("seatingPlan---->" + JSON.stringify(response))
-  console.log("seatingArragements---->" + JSON.stringify(plan.seatingArrangements))
 
-  const seatingArragementsData = plan.seatingArrangements.map((sa: any) => ({
+
+//add seating layout
+export const addSeatingPlan = async (plan: any) => {
+  let response: any;
+  if (plan.id) {
+    response = await client.seatingPlan.update({
+      where: {
+        id: plan.id
+      },
+      data: {
+        name: plan.name,
+        layoutId: plan.layoutId,
+        classId: plan.classId
+      }
+    })
+  } else {
+    response = await client.seatingPlan.create({
+      data: {
+        name: plan.name,
+        layoutId: plan.layoutId,
+        classId: plan.classId
+      }
+    })
+  }
+
+
+
+
+
+  const seatingArragementsData: any[] = plan.seatingArrangements.map((sa: any) => ({
     seatingPlanId: response.id,
     deskId: Number(sa.deskId),
-    studentId:Number(sa.studentId)
+    studentId: Number(sa.studentId)
   }));
-  console.log("seatingArragementsData---->" + JSON.stringify(seatingArragementsData))
 
-  const seatingArragements = await client.seatingArrangement.createMany({
-    data: seatingArragementsData
-  })
-  console.log("seatingArragements---->" + JSON.stringify(seatingArragements))
+  let seatingArragements: any;
 
+
+  if (plan.id && plan.oldSeatingArrangements.length > 0) {
+
+    plan.oldSeatingArrangements.map(async (sa: any, index: number) => {
+      if (seatingArragementsData.length > index) {
+
+        seatingArragements = await client.seatingArrangement.update({
+          where: {
+            id: sa.id
+          },
+          data: {
+            deskId: seatingArragementsData[index].deskId,
+            studentId: seatingArragementsData[index].studentId
+          }
+        })
+
+
+      } else {
+        const deleteResponse = await client.seatingArrangement.delete({
+          where: {
+            id: sa.id
+          }
+        })
+
+      }
+
+
+    })
+
+  } else {
+    seatingArragements = await client.seatingArrangement.createMany({
+      data: seatingArragementsData
+    })
+  }
+
+  return seatingArragements
 }
 
 //crate layout 
@@ -66,19 +135,83 @@ export async function createLayout(layoutName: string, cards: any) {
   })
 }
 
+
+export async function updateLayout(layout: any, cards: any) {
+  let updateData: any = {};
+  let createData: any[] = [];
+
+
+  //layout.desks.map(async (desk: any, i: number) => {
+  cards.map(async (card: any, index: number) => {
+
+    if (card.id.toString().startsWith('id_')) {
+
+      createData.push({
+        layoutId: layout.id,
+        x: card.coordinates_X,
+        y: card.coordinates_y,
+      })
+
+    } else {
+
+      updateData = {
+        layoutId: layout.id,
+        x: card.coordinates_X,
+        y: card.coordinates_y,
+      };
+
+      const desks = await client.desk.update({
+        where: {
+          id: card.id
+        },
+        data: updateData
+      })
+
+
+    }
+
+
+
+  });
+  const createddesks = await client.desk.createMany({
+
+    data: createData
+  })
+
+
+  //  });
+
+
+}
+
+
+export async function getlayouts() {
+  const response = await client.layout.findMany();
+
+  return response;
+
+}
+
+
+
+
 export async function getlayout(layoutId: number) {
-  console.log("layoutId-->" + layoutId)
   const response = await client.layout.findFirst({
     where: {
       id: layoutId
     },
     include: {
-      desks: true
+      desks: {
+        select: {
+          id: true,
+          x: true,
+          y: true
+        }
+      }
 
     }
   });
 
-  console.log("Class view------>" + JSON.stringify(response))
 
   return response;
 
@@ -92,7 +225,21 @@ export async function getlayoutsIds() {
     }
   });
 
-  console.log("Class view------>" + JSON.stringify(response))
+
+  return response;
+
+}
+export async function getSeatingPlans() {
+  const response = await client.seatingPlan.findMany({
+    include: {
+      layout: {
+        select: {
+          name: true
+        }
+      }
+    }
+  });
+
 
   return response;
 
@@ -101,14 +248,12 @@ export async function getlayoutsIds() {
 export async function getClasses() {
   const response = await client.cls.findMany();
 
-  console.log("Classes------>" + JSON.stringify(response))
 
   return response;
 
 }
 //get student Data
 export const getStudentData = async (id: number) => {
-  console.log("id----->" + id)
 
   const response = await client.student.findFirst({
     where: {
@@ -118,13 +263,11 @@ export const getStudentData = async (id: number) => {
       Attendance: true
     }
   })
-  console.log("student detail--->" + JSON.stringify(response))
   return response;
 }
 
 //get all students from the class
 export async function getClassStudents(classId: any) {
-  console.log("Class id------>" + classId)
   const response = await client.cls.findFirst({
     where: {
       id: Number(classId)
@@ -132,28 +275,26 @@ export async function getClassStudents(classId: any) {
     include: {
       students: {
         select: {
+          id: true,
           user: {
             select: {
               username: true
             }
           },
-          id: true
         }
       }
     }
 
   })
-  //  console.log("Class student------>" + JSON.stringify(response?.students))
+
   return response?.students;
 
 }
 
 //get all registers for all users
 export async function getListOfALLRegisters(date: Date): Promise<any> {
-  //console.log("date---" +session.user)
   const session = await getServerSession(authOptions);
 
-  console.log("date---" + date.getDate());
   try {
     const response = await client.register.findMany({
       where: {
@@ -179,9 +320,7 @@ export async function getListOfALLRegisters(date: Date): Promise<any> {
         },
       },
     });
-    console.log("response size action--->" + response.length);
     if (response.length === 0) {
-      console.log("resonse is empty from action");
       const response = await createTodaysAllRegister();
 
       return response;
@@ -194,9 +333,7 @@ export async function getListOfALLRegisters(date: Date): Promise<any> {
 }
 
 export async function createTodaysAllRegister() {
-  console.log(
-    "----------------Creating All new register for today----------------"
-  );
+
   const classes = await client.cls.findMany();
   classes.map(async (cls: any) => {
     if (cls) {
@@ -259,15 +396,11 @@ export async function createTodaysAllRegister() {
               },
             },
           });
-          console.log(
-            "------------------returning create register---------------"
-          );
+
           if (response.length === 0) {
-            console.log("Inside resonse is empty");
           }
           return response;
         } catch (error) {
-          console.log(error);
           return [];
         }
       }
@@ -281,7 +414,6 @@ export async function createTodaysAllRegister() {
 export async function getListOfRegisters(date: Date) {
   const session = await getServerSession(authOptions);
 
-  console.log("session---" + JSON.stringify(session));
   try {
     const response = await client.register.findMany({
       where: {
@@ -311,7 +443,6 @@ export async function getListOfRegisters(date: Date) {
       },
     });
     if (response.length === 0) {
-      console.log("resonse is empty");
       const response = await createTodaysRegister(date);
 
       return response;
@@ -327,9 +458,6 @@ export async function getListOfRegisters(date: Date) {
 export async function createTodaysRegister(date: Date) {
   const session = await getServerSession(authOptions);
 
-  console.log(
-    "----------------Creating  new register for today----------------"
-  );
 
   const cls = await client.cls.findFirst({
     where: {
@@ -399,9 +527,7 @@ export async function createTodaysRegister(date: Date) {
             },
           },
         });
-        console.log(
-          "------------------returning create register---------------"
-        );
+
         if (response.length === 0) {
           console.log("Inside resonse is empty");
         }
@@ -460,7 +586,6 @@ export async function updateRegister(req: regType) {
       }
     });
 
-    console.log("Register updated:", updatedRegister);
     //res.status(200).json(updatedRegister);
   } catch (error) {
     console.error('Error updating register:', error);
@@ -481,7 +606,6 @@ export const getMonthlyMark = async (id: number) => {
     },
 
   });
-  console.log("Monthly attendance ------------->" + JSON.stringify(response))
   return response;
 }
 
@@ -496,24 +620,13 @@ export const getAttendacePattern = async (id: number) => {
   }
   const query = { "query": "Analyze the following attendance data for each student, provide a one-liner insight and 2-3 word tags indicating the attendance pattern for each student in json with parent array results:", expectedOutputFormat, allAttendance }
 
-  // const pattern = await axios.post("https://school-management-system-pagsae085-shubham-gagares-projects.vercel.app/api/chat", {
-  //   method: 'POST',
-  //   body: query,
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //   }
-  // })
   const chatCompletion: any = await openai.chat.completions.create({
     messages: [{ role: 'user', content: JSON.stringify(query) }],
     model: 'gpt-3.5-turbo',
   });
-  console.log("Pattern--------->" + JSON.stringify(chatCompletion))
 
   const insight = chatCompletion.choices[0].message.content
-  // const parsedPattern = JSON.parse(pattern.data)
-  // const pattern =  axios.post("/api/attendancePattern",message)
-  console.log("Pattern--------->" + NextResponse.json(insight))
-  //const response = NextResponse.json(insight)
+
   return insight
 
 }

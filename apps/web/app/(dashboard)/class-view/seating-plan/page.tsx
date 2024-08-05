@@ -2,7 +2,7 @@
 
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 import SeatingPlanClient from '../../../../components/clients/classView/SeatingPlanClient';
-import { getClasses,  getlayoutsIds } from "app/utils/utils";
+import { getClasses,  getlayoutsIds, getSeatingPlans } from "app/utils/utils";
 
 async function page() {
     const clses:any[] = await getClasses();
@@ -11,9 +11,13 @@ async function page() {
     const layouts:any[] = await getlayoutsIds();
     console.log("ls------->"+JSON.stringify(layouts));
 
+
+    const seatingPlan:any[] = await getSeatingPlans();
+    console.log("ls------->"+JSON.stringify(seatingPlan));
     const data = {
         clses,
-        layouts
+        layouts,
+        seatingPlan
     }
     return (
         <div>

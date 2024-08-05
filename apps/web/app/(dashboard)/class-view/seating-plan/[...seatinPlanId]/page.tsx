@@ -1,24 +1,47 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button, Label } from '@repo/ui';
 import AddSeatingPlan from 'components/clients/classView/SeatingClients/AddSeatingPlan';
-import { getClasses, getlayout } from 'app/utils/utils';
+import { getClasses, getlayout, getSeatingPlanById } from 'app/utils/utils';
 
 
 export default async function getSeatingPlan({ params }: { params: { seatinPlanId: string[] } }) {
-    const layoutId = params.seatinPlanId[0]
-    const clsId = params.seatinPlanId[1]?.replace('%20', " ")
-    const seatingPlanName = params.seatinPlanId[2]?.replace('%20', " ")
+    console.log(params.seatinPlanId)
+
+    const canvasType = params.seatinPlanId[0]||""
+    const layoutId = params.seatinPlanId[1]
+    const clsId = params.seatinPlanId[2]?.replace('%20', " ")
+    let seatingPlanName = "";
+
 
     const clses = await getClasses();
     const layout: any = await getlayout(Number(layoutId))
     const desks: any = layout.desks
     console.log("loading...." + layoutId + "------" + clsId)
-
     const data = {
+        canvasType,
         desks: desks,
         clsId: clsId,
         seatingPlanName: seatingPlanName,
-        layoutId:Number(layoutId)
+        layoutId: Number(layoutId),
+        seatingPlan: {}
     }
+
+    if (canvasType === "edit"||canvasType === "view") {
+        const seatingPlanId = params.seatinPlanId[3]?.replace('%20', " ")
+        const seatingPlan: any = await getSeatingPlanById(Number(seatingPlanId))
+        console.log("seating plan ---> " + JSON.stringify(seatingPlan))
+        data.seatingPlanName = seatingPlan.name;
+        data.seatingPlan = seatingPlan
+    } else {
+        console.log("seating plan name---> " + params.seatinPlanId[3]?.replace('%20', " "))
+        if (params.seatinPlanId[3]?.replace('%20', " ") !== undefined) {
+            data.seatingPlanName = params.seatinPlanId[3]?.replace('%20', " ")
+        }
+        console.log("seating plan name---> " + seatingPlanName)
+
+    }
+
+
+
 
     return (
         <div className="space-y-4">
@@ -37,7 +60,7 @@ export default async function getSeatingPlan({ params }: { params: { seatinPlanI
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                        <BreadcrumbPage>Add Seating Plan</BreadcrumbPage>
+                        <BreadcrumbPage>{canvasType.charAt(0).toUpperCase() + canvasType.slice(1)} Seating Plan</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>

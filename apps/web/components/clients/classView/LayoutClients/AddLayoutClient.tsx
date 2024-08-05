@@ -7,6 +7,7 @@ import Desk from "components/Desk";
 import { StudentCard } from "components/StudentCard";
 import { ReactElement, useState } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@repo/ui";
+import { layoutsType } from "../ClassViewLayoutClient";
 
 export type CanvasCard = {
   id: UniqueIdentifier;
@@ -19,12 +20,27 @@ export type seatsType = {
   coordinates_Y: number;
 };
 
-function AddLayoutClient() {
-
-  const [cards, setCards] = useState<CanvasCard[]>([]);
 
 
-  return <LayoutCanvas cards={cards} setCards={setCards} />;
+function AddLayoutClient({props}: any) {
+
+  const deskCards: CanvasCard[] = []
+  console.log("props---"+JSON.stringify(props))
+  
+  console.log("desks---"+JSON.stringify(props.desks))
+  props.desks.map((desk: any, index: number) => {
+    deskCards.push({ id: desk.id, coordinates: { x: desk.x, y: desk.y }, studentCard: <Desk><></></Desk> })
+  });
+  const [cards, setCards] = useState<CanvasCard[]>(deskCards);
+  const canvasProps = {
+    layout:props.layout,
+    cards,
+    setCards,
+    canvasType:props.canvasType
+  }
+  console.log("canvasProps---"+JSON.stringify(canvasProps.layout))
+
+  return <LayoutCanvas canvasProps={canvasProps}  />;
 }
 
 export default AddLayoutClient
