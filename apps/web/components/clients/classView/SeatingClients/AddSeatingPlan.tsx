@@ -6,7 +6,7 @@ import Desk from "components/Desk";
 import { StudentCard } from "components/StudentCard";
 import { ReactElement } from "react";
 import { Avatar, AvatarFallback, AvatarImage, Button, Label, Separator } from "@repo/ui";
-import { SeatingCanvas } from "components/SeatingCanvas";
+import { getAllComments, SeatingCanvas } from "components/SeatingCanvas";
 import { addSeatingPlan, getClassStudents, getStudentData } from "../../../../app/utils/utils";
 import SeatingPlanClient from "../SeatingPlanClient";
 import { Badge, MessageSquareText } from "lucide-react";
@@ -78,28 +78,21 @@ const calculateAttendnace = (attendance: any[]) => {
 
 
 async function getStudDetails(students: any, id: number) {
-
-
   let studentDetails: any;
   //for (var i = 0; i < students.length; i++) {
   const data = await Promise.all(students.map(async (student: any, index: number): Promise<any> => {
-
     if (student.id === id) {
-
       studentDetails = await getStudentDetails(id);
-
     }
-
   }));
-
-
   return studentDetails;
 }
 
+
+
+
+//Main 
 export default async function AddSeatingPlan({ data }: any) {
-
-
-
 
   const students: any = await getClassStudents(Number(data.clsId));
 
@@ -117,7 +110,7 @@ export default async function AddSeatingPlan({ data }: any) {
           // seatingArrangements.map((seatingArrangement: any) => {
           if (sa.deskId === desk.id) {
             //const studentDetails:any= await getStudDetails(students,sa.studentId)
-            const student: any = findStudentById(students,sa.studentId)
+            const student: any = findStudentById(students, sa.studentId)
             const studentDetails: any = await getStudentDetails(student.id)
             const attendanceInsight = calculateAttendnace(studentDetails?.Attendance)
 
@@ -131,7 +124,7 @@ export default async function AddSeatingPlan({ data }: any) {
                 <Separator />
                 <div className="flex w-full  justify-between gap-x-0.5 items-center bg-gray-200">
                   <Button className="bg-white rounded-none" variant={"ghost"}>{attendanceInsight.percentage}%</Button>
-                  <Button className="w-full bg-white rounded-none" variant={"ghost"} size="icon"><MessageSquareText size={20} /></Button>
+                  <Button className="w-full bg-white rounded-none" variant={"ghost"} size="icon" onClick={getAllComments}><MessageSquareText size={20} /></Button>
                   <Button className="w-full bg-white rounded-none" variant={"ghost"}>30</Button>
 
 
@@ -152,7 +145,7 @@ export default async function AddSeatingPlan({ data }: any) {
 
 
               //studentCard = <Desk><Label>{student.user.username}</Label></Desk>
-            deskCards.push({ id: desk.id, coordinates: { x: desk.x, y: desk.y }, studentCard: studentCard })
+              deskCards.push({ id: desk.id, coordinates: { x: desk.x, y: desk.y }, studentCard: studentCard })
             isbreak = true;
           }
         }

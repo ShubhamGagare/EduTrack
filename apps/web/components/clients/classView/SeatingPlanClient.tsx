@@ -14,7 +14,11 @@ const SeatingPlanClient = ({ data }: any) => {
 
   //Add/edit seating plan
   const handleAddSeatingPlan = (data: any) => {
-    router.push(`/class-view/seating-plan/${"add"}/${data.layoutId}/${data.classId}/${data.name}`)
+    const cls = clses.filter((cls:any) => cls.name === data.clsName)
+    const layout = layouts.filter((layout:any) => layout.name === data.layoutName)
+
+    
+    router.push(`/class-view/seating-plan/${"add"}/${layout[0].id}/${cls[0].id}/${data.name}`)
   }
 
 
@@ -63,7 +67,7 @@ const SeatingPlanClient = ({ data }: any) => {
 
                   <FormField
                     control={form.control}
-                    name="classId"
+                    name="clsName"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Class name</FormLabel>
@@ -72,7 +76,7 @@ const SeatingPlanClient = ({ data }: any) => {
 
                           defaultValue={field.value}
                           value={field.value}
-
+                        
                         >
                           <FormControl>
 
@@ -84,7 +88,7 @@ const SeatingPlanClient = ({ data }: any) => {
                           <SelectContent>
                             <SelectGroup>
                               <SelectLabel>Select a class</SelectLabel>
-                              {clses?.map((cls: any, index: number) => <SelectItem key={index} value={cls.id} defaultValue={cls.name}>{cls.name}</SelectItem>)}
+                              {clses?.map((cls: any, index: number) => <SelectItem key={index} value={cls.name} textValue={cls.name} defaultValue={cls.name}>{cls.name}</SelectItem>)}
                             </SelectGroup>
                           </SelectContent>
                         </Select>
@@ -96,7 +100,7 @@ const SeatingPlanClient = ({ data }: any) => {
                   />
                   <FormField
                     control={form.control}
-                    name="layoutId"
+                    name="layoutName"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel>Class name</FormLabel>
@@ -117,7 +121,7 @@ const SeatingPlanClient = ({ data }: any) => {
                           <SelectContent>
                             <SelectGroup>
                               <SelectLabel>Select a layout</SelectLabel>
-                              {layouts?.map((layout: any, index: number) => <SelectItem key={index} value={layout.id}>{layout.name}</SelectItem>)}
+                              {layouts?.map((layout: any, index: number) => <SelectItem key={index} value={layout.name}>{layout.name}</SelectItem>)}
                             </SelectGroup>
                           </SelectContent>
                         </Select>
@@ -129,7 +133,7 @@ const SeatingPlanClient = ({ data }: any) => {
                   />
                   <SheetFooter>
                     <SheetClose asChild>
-                      <Button className="bg-blue-600 mt-4 w-full" type="submit" onClick={handleAddSeatingPlan}>Save changes</Button>
+                      <Button className="bg-blue-600 mt-4 w-full" type="submit" onClick={handleAddSeatingPlan}>Add</Button>
                     </SheetClose>
                   </SheetFooter>
                 </form>

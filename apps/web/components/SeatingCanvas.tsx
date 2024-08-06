@@ -40,25 +40,26 @@ export const calculateAttendnace = (attendance: any[]) => {
     return attendanceInsight;
 }
 
+
+export const getAllComments = () => {
+    console.log("-----Click---------" )
+  
+    // const comments: any = [];
+    // console.log("<===student details--->" + JSON.stringify(studentData))
+    // studentData.Attendance.map((data: any, index: number) => {
+    //   comments.push({ "comment": data.comment, "date": data.createdAt })
+    // })
+  }
+  
+
 export const SeatingCanvas = ({ props }: any) => {
     const [i, setIndex] = useState(0);
     const form = useForm()
     const [deskCount, setDeskCount] = useState(1)
     const [studentDetails, setStudentDetails] = useState<any>()
 
-    const [seatingArrangements, setSeatingArrangements] = useState<seatingArrangementType[]>(props.seatingArrangements.length > 0 ? props.seatingArrangements : [])
+    const [seatingArrangements, setSeatingArrangements] = useState<seatingArrangementType[]>(props.seatingArrangements!==undefined ? props.seatingArrangements : [])
     const router = useRouter()
-
-    const updatedCards: CanvasCard[] = []
-    // props.desks.map((card: CanvasCard) => {
-
-    //     updatedCards.push({
-    //         id: card.id, coordinates: card.coordinates, studentCard: card.studentCard
-
-    //     })
-
-    // })
-
 
     const [cards, setCards] = useState<CanvasCard[]>(props.desks);
 
