@@ -39,6 +39,9 @@ export const saveSeatingPlan: any = async (plan: any) => {
 
 export const findStudentById = (students: any[], id: number) => {
   let student = {};
+  console.log("student id--->"+id)
+  
+  console.log("Array students-------->"+JSON.stringify(students))
   for (var i = 0; i < students.length; i++) {
     //const student =students.map((student: any, index: number) => {
 
@@ -55,26 +58,7 @@ export const findStudentById = (students: any[], id: number) => {
 }
 
 
-const calculateAttendnace = (attendance: any[]) => {
-  const attendanceInsight = {
-    presents: 0,
-    absents: 0,
-    percentage: 0
-  }
 
-  attendance.map((day: any, index: any) => {
-    if (day.status === "present") {
-      attendanceInsight.presents = attendanceInsight.presents + 1;
-    }
-    if (day.status === "absent") {
-      attendanceInsight.absents = attendanceInsight.absents + 1;
-    }
-  })
-
-  attendanceInsight.percentage = Number(((attendanceInsight.presents / attendance.length) * 100).toFixed(0))
-
-  return attendanceInsight;
-}
 
 
 async function getStudDetails(students: any, id: number) {
@@ -111,33 +95,11 @@ export default async function AddSeatingPlan({ data }: any) {
           if (sa.deskId === desk.id) {
             //const studentDetails:any= await getStudDetails(students,sa.studentId)
             const student: any = findStudentById(students, sa.studentId)
-            const studentDetails: any = await getStudentDetails(student.id)
-            const attendanceInsight = calculateAttendnace(studentDetails?.Attendance)
+            console.log("Passing student---->"+JSON.stringify(student))
+            //const studentDetails: any = await getStudentDetails(student.id)
+          //  const attendanceInsight = calculateAttendnace(studentDetails?.Attendance)
 
-            studentCard = <Desk>
-              <div className="flex-col justify-between items-center w-full h-full text-center ">
-                <Avatar className="h-25 w-full justify-center items-center">
-                  <AvatarImage className="h-20 w-20  " src={"/avatars/0" + Math.floor((Math.random() * 4 + 1)) + ".png"} />
-                  <AvatarFallback className="h-20 w-20  ">SN</AvatarFallback>
-                </Avatar>
-                <Label className="content-center w-full text-center ">{student.user.username}</Label>
-                <Separator />
-                <div className="flex w-full  justify-between gap-x-0.5 items-center bg-gray-200">
-                  <Button className="bg-white rounded-none" variant={"ghost"}>{attendanceInsight.percentage}%</Button>
-                  <Button className="w-full bg-white rounded-none" variant={"ghost"} size="icon" onClick={getAllComments}><MessageSquareText size={20} /></Button>
-                  <Button className="w-full bg-white rounded-none" variant={"ghost"}>30</Button>
-
-
-                </div>
-                <div className="flex gap-x-2 overflow-auto">
-
-                  {studentDetails !== undefined && studentDetails?.Attendance[studentDetails?.Attendance.length - 1].status == "Absent" ? <Badge className="rounded-xl bg-red-200 text-gray-700">Absent</Badge> :
-                    studentDetails?.Attendance[studentDetails?.Attendance.length - 1].status == "Late" ? <Badge className="rounded-xl bg-yellow-200 text-gray-700">Late</Badge> : ""}
-
-
-                </div>
-              </div>
-            </Desk>,
+            studentCard = <Desk><StudentCard student={student} /></Desk>,
 
 
 

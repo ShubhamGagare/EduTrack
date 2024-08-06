@@ -292,6 +292,30 @@ export async function getClassStudents(classId: any) {
 
 }
 
+export const calculateAttendnace = (attendance: any[]) => {
+  const attendanceInsight = {
+    presents: 0,
+    absents: 0,
+    percentage: 0
+  }
+
+  attendance.map((day: any, index: any) => {
+    if (day.status === "present") {
+      attendanceInsight.presents = attendanceInsight.presents + 1;
+    }
+    if (day.status === "absent") {
+      attendanceInsight.absents = attendanceInsight.absents + 1;
+    }
+  })
+  console.log(" count --->"+attendanceInsight.presents )
+  attendanceInsight.percentage = Number(((attendanceInsight.presents / attendance.length) * 100).toFixed(0))
+  console.log(" attendanceInsight --->"+JSON.stringify(attendanceInsight) )
+
+  return attendanceInsight;
+}
+
+
+
 //get all registers for all users
 export async function getListOfALLRegisters(date: Date): Promise<any> {
   const session = await getServerSession(authOptions);

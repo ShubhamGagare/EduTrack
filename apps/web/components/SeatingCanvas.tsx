@@ -41,14 +41,14 @@ export const calculateAttendnace = (attendance: any[]) => {
 }
 
 
-export const getAllComments = () => {
-    console.log("-----Click---------" )
+export const getAllComments = (studentData:any) => {
+    console.log("-----Clicked---------" )
   
-    // const comments: any = [];
-    // console.log("<===student details--->" + JSON.stringify(studentData))
-    // studentData.Attendance.map((data: any, index: number) => {
-    //   comments.push({ "comment": data.comment, "date": data.createdAt })
-    // })
+    const comments: any = [];
+    console.log("<===student details--->" + JSON.stringify(studentData))
+    studentData.Attendance.map((data: any, index: number) => {
+      comments.push({ "comment": data.comment, "date": data.createdAt })
+    })
   }
   
 

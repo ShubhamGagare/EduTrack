@@ -97,7 +97,7 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
   console.log("Updated data-----------"+JSON.stringify(reg))
   return (
     <div className="flex flex-col w-full space-y-2">
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-14 py-6">
+      <div className=" py-6 md:flex xxl:flex-col">
         <div className="w-full ">
           <Popover  >
             <PopoverTrigger className="w-72">
@@ -131,21 +131,21 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
           </Popover>
 
         </div>
-        <div  className="w-full  ">
+        <div  className="w-fit  justify-end">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-fit flex justify-end">
               <FormField
                 control={form.control}
                 name="dob"
                 render={({ field }) => (
-                  <FormItem className="flex flex-col w-full">
+                  <FormItem className="flex  w-full justify-end">
                     <Popover>
                       <PopoverTrigger asChild>
-                        <FormControl>
+                        <FormControl className="justify-end">
                           <Button
                             variant={"outline"}
                             className={cn(
-                              "w-[240px] pl-3 text-left font-normal w-full",
+                              "w-[240px] pl-3 text-left font-normal justify-end ",
 
                             )}
                           >
