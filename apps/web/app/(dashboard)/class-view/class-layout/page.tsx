@@ -1,9 +1,10 @@
 "use server"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 import ClassViewLayoutClient from '../../../../components/clients/classView/ClassViewLayoutClient';
-import { getlayouts } from "../../../utils/utils";
+import { getlayouts, getListOfALLRegisters } from "../../../utils/utils";
 
 const page = async () => {
+    const regData: any[] = await getListOfALLRegisters(new Date());
 
     const layoutList = await getlayouts()
     return (
