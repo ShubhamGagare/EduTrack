@@ -19,21 +19,21 @@ const emptyLayout: layoutsType = {
     name: "NA"
 }
 
-const ClassViewLayoutClient = () => {
-    const [layouts, setLayouts] = useState<layoutsType[]>([emptyLayout])
+const ClassViewLayoutClient = ({layoutList}:any) => {
+    const [layouts, setLayouts] = useState<layoutsType[]>(layoutList)
     const router = useRouter();
+  //  setLayouts(layoutList)
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         console.log("hello")
 
-    useEffect(() => {
-        const fetchData = async () => {
-            console.log("hello")
+    //         const layoutList = await getlayouts()
+    //         console.log(layoutList)
+    //         setLayouts(layoutList)
+    //     }
+    //     fetchData();
 
-            const layoutList = await getlayouts()
-            console.log(layoutList)
-            setLayouts(layoutList)
-        }
-        fetchData();
-
-    }, []);
+    // }, []);
 
 
 

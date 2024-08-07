@@ -60,9 +60,9 @@ export async function StudentCard({ student }: any) {
       </div>
       <div className="flex gap-x-2 overflow-auto">
 
-        {studentDetails !== undefined && studentDetails?.Attendance[studentDetails?.Attendance.length - 1].status == "Absent" ? <Badge className="rounded-xl bg-red-200 text-gray-700">Absent</Badge> :
-          studentDetails?.Attendance[studentDetails?.Attendance.length - 1].status == "Late" ? <Badge className="rounded-xl bg-yellow-200 text-gray-700">Late</Badge> : ""}
-
+        {studentDetails !== undefined && studentDetails?.Attendance[studentDetails?.Attendance.length - 1].status == "absent" ? <Badge className="rounded-xl bg-red-200 text-gray-700">Absent</Badge> :
+          studentDetails?.Attendance[studentDetails?.Attendance.length - 1].status == "late" ? <Badge className="rounded-xl bg-yellow-200 text-gray-700">Late</Badge> : ""}
+  
 
       </div>
     </div>

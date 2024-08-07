@@ -1,8 +1,11 @@
 "use server"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 import ClassViewLayoutClient from '../../../../components/clients/classView/ClassViewLayoutClient';
+import { getlayouts } from "../../../utils/utils";
 
-const page = () => {
+const page = async () => {
+
+    const layoutList = await getlayouts()
     return (
         <div>
             <div className="space-y-4">
@@ -26,7 +29,7 @@ const page = () => {
                 <div className='flex space-x-4'>
                 </div>
                 
-                <ClassViewLayoutClient />
+                <ClassViewLayoutClient layoutList={layoutList} />
 
             </div>
         </div>
