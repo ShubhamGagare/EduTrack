@@ -16,7 +16,7 @@ import { toast } from "@repo/ui"
 import { cn } from "@repo/ui/utils"
 import { customDateRegisters } from "../../app/utils/utils"
  
-export interface registerType {
+export interface registerType  {
 
   "id": number,
   "classId": number,
@@ -62,13 +62,13 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
   
 
   // Handle date selection
-  const handleSelectDate = async (date: any) => {
+  const handleSelectDate = async (date: Date) => {
     setDate(date);
     if (register[0]?.teacherId !== undefined) {
       console.log("binding data--"+ date)
       try {
         //test.bind(null)
-        const registers: any =  await customDateRegisters(date, register[0]?.teacherId)
+        const registers: registerType[] =  await customDateRegisters(date, register[0]?.teacherId)
         console.log("binding data---" + JSON.stringify(registers));
         setRegister(registers);
         //regData = registers
@@ -163,7 +163,7 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
                         <Calendar
                           mode="single"
                           selected={selectedDate}
-                          onSelect={handleSelectDate}
+                          onSelect={() =>{handleSelectDate(selectedDate)}}
                           disabled={(date) =>
                             date > new Date() || date < new Date("1900-01-01")
                           }

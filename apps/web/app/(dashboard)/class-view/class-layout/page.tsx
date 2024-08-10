@@ -2,9 +2,10 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 import ClassViewLayoutClient from '../../../../components/clients/classView/ClassViewLayoutClient';
 import { getlayouts, getListOfALLRegisters } from "../../../utils/utils";
+import { registerType } from "components/clients/ListRegisterClient";
 
 const page = async () => {
-    const regData: any[] = await getListOfALLRegisters(new Date());
+    const regData: registerType[] = await getListOfALLRegisters(new Date());
 
     const layoutList = await getlayouts()
     return (

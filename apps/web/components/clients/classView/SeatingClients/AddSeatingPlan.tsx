@@ -7,9 +7,11 @@ import { StudentCard } from "components/StudentCard";
 import { ReactElement } from "react";
 import { Avatar, AvatarFallback, AvatarImage, Button, Label, Separator } from "@repo/ui";
 import { getAllComments, SeatingCanvas } from "components/SeatingCanvas";
-import { addSeatingPlan, getClassStudents, getStudentData } from "../../../../app/utils/utils";
+import { addSeatingPlan, addSeatingPlanType, getClassStudents, getStudentData } from "../../../../app/utils/utils";
 import SeatingPlanClient from "../SeatingPlanClient";
 import { Badge, MessageSquareText } from "lucide-react";
+import { Prisma } from "../../../../../../packages/db/prisma/generated/client";
+import { deskType } from "app/(dashboard)/class-view/class-layout/[...layout]/page";
 
 export type CanvasCard = {
   id: UniqueIdentifier;
@@ -21,8 +23,37 @@ export type seatsType = {
   coordinates_X: number;
   coordinates_Y: number;
 };
-export type studentsType = [{ "user": { "username": string } }]
-export type propSeatingType = { canvasType: string, desks: CanvasCard[], clsId: string, seatingPlanName: string, students: studentsType, layoutId: number, seatingPlanId: number, seatingArrangements: any[] }
+
+export type studentsType = Prisma.StudentGetPayload<{
+  select: {
+    id: true,
+    user: {
+      select: {
+        username: true
+      }
+    }
+  }
+}>;
+
+type seatingArrangementType = Prisma.SeatingArrangementGetPayload<{
+  select: {
+    id: true,
+    deskId: true,
+    studentId: true
+  }
+}>
+type planType = {
+  id: number,
+  name: string,
+  layoutId: number,
+  classId: number,
+  seatingArrangements:seatingArrangementType[],
+  oldSeatingArrangements: seatingArrangementType[]
+
+}
+
+//export type studentsType = [{ "user": { "username": string } }]
+export type propSeatingType = { canvasType: string, desks: CanvasCard[], clsId: string, seatingPlanName: string, students: studentsType, layoutId: number, seatingPlanId: number, seatingArrangements: seatingArrangementType[] }
 
 export const getStudentDetails = async (id: number) => {
   const response = await getStudentData(id);
@@ -31,18 +62,18 @@ export const getStudentDetails = async (id: number) => {
 }
 
 
-export const saveSeatingPlan: any = async (plan: any) => {
+export const saveSeatingPlan: addSeatingPlanType = async (plan: planType) => {
   const response = await addSeatingPlan(plan)
   return response
 }
 
 
-export const findStudentById = (students: any[], id: number) => {
+export const findStudentById = (students: any, id: number) => {
   let student = {};
   console.log("student id--->"+id)
   
   console.log("Array students-------->"+JSON.stringify(students))
-  for (var i = 0; i < students.length; i++) {
+  for (var i:number = 0; i < students.length; i++) {
     //const student =students.map((student: any, index: number) => {
 
     if (students[i].id === id) {
@@ -61,10 +92,10 @@ export const findStudentById = (students: any[], id: number) => {
 
 
 
-async function getStudDetails(students: any, id: number) {
+async function getStudDetails(students: studentsType[], id: number) {
   let studentDetails: any;
   //for (var i = 0; i < students.length; i++) {
-  const data = await Promise.all(students.map(async (student: any, index: number): Promise<any> => {
+  const data = await Promise.all(students.map(async (student: studentsType, index: number): Promise<any> => {
     if (student.id === id) {
       studentDetails = await getStudentDetails(id);
     }
@@ -82,22 +113,17 @@ export default async function AddSeatingPlan({ data }: any) {
 
   const deskCards: CanvasCard[] = []
   const seatingArrangements = data.seatingPlan.seatingArrangement;
-  await Promise.all(data.desks.map(async (desk: any, index: number): Promise<any> => {
+  await Promise.all(data.desks.map(async (desk: deskType, index: number): Promise<any> => {
 
     let studentCard = <Desk><></></Desk>
     let isbreak = false;
     if (seatingArrangements !== undefined) {
-      await Promise.all(seatingArrangements.map(async (sa: any, j: number): Promise<any> => {
+      await Promise.all(seatingArrangements.map(async (sa: seatingArrangementType, j: number): Promise<any> => {
 
-        //for (var j = 0; j < seatingArrangements.length; j++) {
         if (!false) {
-          // seatingArrangements.map((seatingArrangement: any) => {
           if (sa.deskId === desk.id) {
-            //const studentDetails:any= await getStudDetails(students,sa.studentId)
             const student: any = findStudentById(students, sa.studentId)
             console.log("Passing student---->"+JSON.stringify(student))
-            //const studentDetails: any = await getStudentDetails(student.id)
-          //  const attendanceInsight = calculateAttendnace(studentDetails?.Attendance)
 
             studentCard = <Desk><StudentCard student={student} /></Desk>,
 

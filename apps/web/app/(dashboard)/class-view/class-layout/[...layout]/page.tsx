@@ -1,7 +1,29 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button, Label } from '@repo/ui';
 import AddLayoutClient from '../../../../../components/clients/classView/LayoutClients/AddLayoutClient';
-import { getlayout } from '../../../../utils/utils';
+import { getlayout, getLayoutType } from '../../../../utils/utils';
+import { Desk, Layout, Prisma } from '../../../../../../../packages/db/prisma/generated/client';
+//import { layoutsType } from 'components/clients/classView/ClassViewLayoutClient';
 
+export type deskType = Prisma.DeskGetPayload<{
+    select: { id: true,x:true,y:true},
+  }>
+export type layoutType = Prisma.LayoutGetPayload<{
+    include:{
+        desks:{
+            select:{
+                id:true,
+                x:true,
+                y:true
+            }
+        };
+    }
+}>
+
+export type propTypes = {
+    layout:layoutType|null,
+    desks:deskType[],
+    canvasType:string|undefined
+}
 const page = async ({ params }: { params: { layout: string[] } }) => {
     console.log("params--->")
     console.log(params)
@@ -12,12 +34,12 @@ const page = async ({ params }: { params: { layout: string[] } }) => {
     const layoutId = params.layout[1]
     console.log("layoutId--->"+layoutId)
 
-    const layout:any = await getlayout(Number(layoutId));
+    const layout:layoutType|null = await getlayout(Number(layoutId));
     console.log("layout--->"+JSON.stringify(layout))
 
-    const desks:any = layout.desks
+    const desks:deskType[] | null = layout?.desks as deskType[]
     console.log("desks--->"+JSON.stringify(desks))
-    const props = {
+    const props:propTypes = {
         layout:layout,
         desks,
         canvasType

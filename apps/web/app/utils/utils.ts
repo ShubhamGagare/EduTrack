@@ -1,13 +1,16 @@
 "use server"
-import { PrismaClient } from "../../../../packages/db/prisma/generated/client";
+import { Cls, Prisma, PrismaClient } from "../../../../packages/db/prisma/generated/client";
 import { authOptions } from "../lib/auth";
 import { getServerSession } from "next-auth";
 import axios from "axios";
 import { NextApiRequest } from "next";
+import { createOpenAI } from '@ai-sdk/openai';
+import { generateText } from 'ai';
+
 import OpenAI from 'openai';
 import { NextResponse } from "next/server";
 import { registerType } from "components/clients/ListRegisterClient";
-import { studentsType } from "components/clients/classView/SeatingClients/AddSeatingPlan";
+//import { studentsType } from "components/clients/classView/SeatingClients/AddSeatingPlan";
 
 
 const openai = new OpenAI({
@@ -15,6 +18,12 @@ const openai = new OpenAI({
 });
 const client = new PrismaClient();
 const today = new Date();
+
+
+const groq = createOpenAI({
+  baseURL: 'https://api.groq.com/openai/v1',
+  apiKey: process.env.GROQ_API_KEY,
+});
 
 //
 export const getSeatingPlanById = async (id: number) => {
@@ -37,7 +46,7 @@ export const getSeatingPlanById = async (id: number) => {
 }
 
 
-
+export type addSeatingPlanType = typeof addSeatingPlan;
 //add seating layout
 export const addSeatingPlan = async (plan: any) => {
   let response: any;
@@ -193,7 +202,7 @@ export async function getlayouts() {
 }
 
 
-
+export type getLayoutType = typeof getlayout
 
 export async function getlayout(layoutId: number) {
   const response = await client.layout.findFirst({
@@ -213,7 +222,7 @@ export async function getlayout(layoutId: number) {
   });
 
 
-  return response;
+  return response || null;
 
 }
 
@@ -229,6 +238,7 @@ export async function getlayoutsIds() {
   return response;
 
 }
+export type getSeatingPlansType = typeof getSeatingPlans
 export async function getSeatingPlans() {
   const response = await client.seatingPlan.findMany({
     include: {
@@ -267,8 +277,14 @@ export const getStudentData = async (id: number) => {
   return response;
 }
 
+
+// export type clsType = Prisma.ClsGetPayload<{
+//   include: {
+//     students: studentsType
+//   }
+// }>
 //get all students from the class
-export async function getClassStudents(classId: any) {
+export async function getClassStudents(classId: number){
   const response = await client.cls.findFirst({
     where: {
       id: Number(classId)
@@ -286,9 +302,9 @@ export async function getClassStudents(classId: any) {
       }
     }
 
-  })
-
-  return response?.students;
+  }) 
+  const students = response?.students;
+  return students  ;
 
 }
 
@@ -307,9 +323,9 @@ export const calculateAttendnace = (attendance: any[]) => {
       attendanceInsight.absents = attendanceInsight.absents + 1;
     }
   })
-  console.log(" count --->"+attendanceInsight.presents )
+  console.log(" count --->" + attendanceInsight.presents)
   attendanceInsight.percentage = Number(((attendanceInsight.presents / attendance.length) * 100).toFixed(0))
-  console.log(" attendanceInsight --->"+JSON.stringify(attendanceInsight) )
+  console.log(" attendanceInsight --->" + JSON.stringify(attendanceInsight))
 
   return attendanceInsight;
 }
@@ -653,5 +669,31 @@ export const getAttendacePattern = async (id: number) => {
   const insight = chatCompletion.choices[0].message.content
 
   return insight
+
+}
+
+;
+
+export const getAiAgentResponse = async () => {
+   const apiMapping = [
+    { 'students': '/api/students'},
+     {'academic performance report': '/api/reports/academic-performance'},
+     {'behavioral history report': '/api/reports/behavioral-history',}// Add other report types and their corresponding endpoints
+   ]
+  const query = "get students details"
+
+  const response : any= await generateText({
+    model: groq('llama3-8b-8192'),
+    prompt: `Identify the aprequired apis for qurey: "${query}" from "${apiMapping}"`
+    
+  });
+  console.log(response)
+
+  const reportType = response.choices[0].text.trim().toLowerCase();
+
+  // Map the determined report type to the correct API endpoint
+  const apiEndpoint = apiMapping[reportType];
+
+console.log(apiEndpoint)
 
 }
