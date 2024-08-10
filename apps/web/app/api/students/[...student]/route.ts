@@ -1,53 +1,27 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { PrismaClient } from '../../../../../../packages/db/prisma/generated/client';
+import { NextRequest, NextResponse } from 'next/server';
+import { PrismaClient } from "../../../../../../packages/db/prisma/generated/client";
 
-// Create a Prisma Client instance
 const prisma = new PrismaClient();
 
-// Define the Student type (optional, for better type safety)
-interface Student {
-  id: number;
-  // Add other fields that match your Prisma Student model
-}
-
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Student | { error: string }>
-) {
-  const {
-    query: { id },
-    method,
-  } = req;
-
-  if (method === 'GET') {
-    if (typeof id !== 'string') {
-      res.status(400).json({ error: 'Invalid student ID' });
-      return;
-    }
-
+export async function GET(req:NextRequest) {
     try {
-      // Fetch the student details from the database
-      const student = await prisma.student.findUnique({
-        where: { id: Number(id) },
-      });
+        const { searchParams } = new URL(req.url);
+        const id = searchParams.get('id');
 
-      if (student) {
-        // Send the student details as a JSON response
-        res.status(200).json(student);
-      } else {
-        // Handle case where the student is not found
-        res.status(404).json({ error: 'Student not found' });
-      }
+      // Fetch all students from the database
+      const students = await prisma.student.findUnique({
+        where:{
+            id:Number(id)
+        }
+      });
+  
+      // Send the list of students as a JSON response
+      return NextResponse.json(students);
     } catch (error) {
-      // Handle any errors
-      res.status(500).json({ error: 'Internal Server Error' });
+      console.error('Error fetching students:', error);
+      return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     } finally {
       // Disconnect the Prisma Client
       await prisma.$disconnect();
     }
-  } else {
-    // Handle any other HTTP methods
-    res.setHeader('Allow', ['GET']);
-    res.status(405).end(`Method ${method} Not Allowed`);
   }
-}

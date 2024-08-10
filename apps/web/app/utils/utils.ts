@@ -672,28 +672,37 @@ export const getAttendacePattern = async (id: number) => {
 
 }
 
-;
 
 export const getAiAgentResponse = async () => {
    const apiMapping = [
-    { 'students': '/api/students'},
-     {'academic performance report': '/api/reports/academic-performance'},
+    { 'getAllStudentsDetails': '/api/students'},
+     {'getStudentById': '/api/students/student?id='},
      {'behavioral history report': '/api/reports/behavioral-history',}// Add other report types and their corresponding endpoints
    ]
-  const query = "get students details"
+
+
+   
+  const query = "get student details of john"
 
   const response : any= await generateText({
-    model: groq('llama3-8b-8192'),
-    prompt: `Identify the aprequired apis for qurey: "${query}" from "${apiMapping}"`
+    model: groq('llama3-70b-8192'),
+    prompt: `chose the required apis for qurey: "${query}" from list api "${apiMapping}" and based on this create a parsable json array of list of apis which need to be called to get result of query.Give me ONLY an array ,NO extra intro/outro/explanation or example"`
     
   });
-  console.log(response)
+  //const apiEndpoint =JSON.parse(response)
+  console.log("-*******************************************************************------------")
 
-  const reportType = response.choices[0].text.trim().toLowerCase();
+  console.log(response.text)
+
+
+
+  const apiResponse = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/students/student?id=1`)
+  //const reportType = response.choices[0].text.trim().toLowerCase();
 
   // Map the determined report type to the correct API endpoint
-  const apiEndpoint = apiMapping[reportType];
+ // const apiEndpoint = apiMapping[reportType];
 
-console.log(apiEndpoint)
+ console.log("-------------------------------------------------------------")
+console.log(apiResponse)
 
 }

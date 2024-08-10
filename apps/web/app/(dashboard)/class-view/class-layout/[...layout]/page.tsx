@@ -69,7 +69,7 @@ const page = async ({ params }: { params: { layout: string[] } }) => {
 
         <div className='text-2xl font-bold tracking-tight '>Add layout</div>
         <div className='flex space-x-4'>
-          <AddLayoutClient props={props} /> 
+          <AddLayoutClient {...props} /> 
         </div>
         
 
