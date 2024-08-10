@@ -55,7 +55,7 @@ const page = async ({ params }: { params: { layout: string[] } }) => {
      
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4   ">
             <Breadcrumb>
                 <BreadcrumbList>
                     <BreadcrumbItem>

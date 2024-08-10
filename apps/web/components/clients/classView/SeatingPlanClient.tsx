@@ -33,11 +33,11 @@ const SeatingPlanClient = ({ data }: any) => {
 
   return (
     <div className="rounded-xl">
-      <div className='flex p-4 rounded-xl bg-white justify-end w-full'>
+      <div className='flex p-4 rounded-xl  justify-end w-full'>
 
         <Sheet>
           <SheetTrigger asChild>
-            <Button className='flex justify-self-end-end border-gray-700 ' variant={"outline"}>Add Seating Plan</Button>
+            <Button className='flex justify-self-end-end' variant={"outline"}>Add Seating Plan</Button>
           </SheetTrigger>
           <SheetContent >
             <SheetHeader>
@@ -133,7 +133,7 @@ const SeatingPlanClient = ({ data }: any) => {
                   />
                   <SheetFooter>
                     <SheetClose asChild>
-                      <Button className="bg-blue-600 mt-4 w-full" type="submit" onClick={handleAddSeatingPlan}>Add</Button>
+                      <Button className=" mt-4 w-full" type="submit" onClick={handleAddSeatingPlan}>Add</Button>
                     </SheetClose>
                   </SheetFooter>
                 </form>
@@ -143,12 +143,12 @@ const SeatingPlanClient = ({ data }: any) => {
           </SheetContent>
         </Sheet>
       </div>
-      <Table className=' rounded-2xl border-2 border-gray-200 bg-white w-full'>
+      <Table className=' rounded-2xl border-2 w-full '>
         <TableHeader className="w-full space-y-2 ">
 
 
 
-          <TableRow className=" border-t-8 p-2 ">
+          <TableRow className=" border p-2 ">
             <TableHead className="text-lg py-4 px-8"  >Name</TableHead>
             {/* <TableHead>Class</TableHead> */}
             <TableHead className="text-lg">Layout Name</TableHead>

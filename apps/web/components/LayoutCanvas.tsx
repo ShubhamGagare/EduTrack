@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 
 
 
-export const LayoutCanvas = ({canvasProps}:any) => {
+export const LayoutCanvas = ({ canvasProps }: any) => {
   const form = useForm()
   const [cards, setCards] = useState<CanvasCard[]>(canvasProps.cards);
   const router = useRouter()
@@ -23,13 +23,13 @@ export const LayoutCanvas = ({canvasProps}:any) => {
 
     const CardPosition: any = [];
     // console.log(cards)
-    cards.map((card:any) => {
+    cards.map((card: any) => {
       CardPosition.push({ id: card.id, studentId: card.id, coordinates_X: card.coordinates.x, coordinates_y: card.coordinates.y })
     })
-    if(canvasProps.canvasType!=="edit"){
-    createLayout(values?.layoutName, CardPosition)
-    }else {
-      updateLayout(canvasProps.layout,CardPosition)
+    if (canvasProps.canvasType !== "edit") {
+      createLayout(values?.layoutName, CardPosition)
+    } else {
+      updateLayout(canvasProps.layout, CardPosition)
     }
 
     router.back()
@@ -73,12 +73,11 @@ export const LayoutCanvas = ({canvasProps}:any) => {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="flex-col space-y-4">
+    <div className="space-y-4 w-full">
+      <div className="flex-col space-y-2">
         <div className="flex justify-between w-full">
-
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleSave)} className="space-y-8">
+            <form onSubmit={form.handleSubmit(handleSave)} className="flex space-x-8 w-full justify-between">
               <FormField
                 control={form.control}
                 name="layoutName"
@@ -86,14 +85,14 @@ export const LayoutCanvas = ({canvasProps}:any) => {
                   <FormItem>
                     <FormLabel>Layout Name</FormLabel>
                     <FormControl>
-                      {canvasProps.canvasType!=="edit"?<Input placeholder="Enter the layout name" {...field} /> : <div><h4>{canvasProps.layout.name}</h4></div>}
+                      {canvasProps.canvasType !== "edit" ? <Input placeholder="Enter the layout name" {...field} /> : <div><h4 className="text-2xl">{canvasProps.layout.name}</h4></div>}
                     </FormControl>
 
                     <FormMessage />
                   </FormItem>
                 )}
               />
-              <Button className="hover:bg-blue-700 bg-blue-600" type="submit">Submit</Button>
+              <Button className="hover: " type="submit">Submit</Button>
             </form>
           </Form>
 
@@ -101,26 +100,26 @@ export const LayoutCanvas = ({canvasProps}:any) => {
 
 
 
-          {/* <Button className="hover:bg-blue-700 bg-blue-600" type="submit" onSubmit={handleSave}>Save Layout</Button> */}
+          {/* <Button className="hover: " type="submit" onSubmit={handleSave}>Save Layout</Button> */}
 
         </div>
+
       </div>
-      <div
-        className="canvas bg-white"
-        style={{
+      <Label className=" text-violet-400">Add vacant desks according to your class seating arrangements on the canvas</Label>
+
+      <div className="canvas bg-violet-100 rounded-xl"  style={{
           position: "relative",
           height: "100vh",
-          width: "100vw"
-        }}
+          width: ""
+        }}  >
 
-      >
-        <div className="p-2">
-          <Button className="hover:bg-blue-700 bg-blue-600" onClick={addCard}>Add Desk</Button>
+        <div className="p-2 flex justify-between">
+          <Button variant={"outline"} onClick={addCard}>Add Desk</Button>
         </div>
-        <div className="bg-white">
+        <div className="w-full">
           <DndContext onDragEnd={updateDraggedCardPosition}  >
             {cards.map((card, index) => (
-              <Draggable onClick={() => {}} card={card} key={card.id}  cardStyle={index === studentIndex ? "" : ""} />
+              <Draggable onClick={() => { }} card={card} key={card.id} cardStyle={index === studentIndex ? "" : ""} />
             ))}
           </DndContext>
         </div>

@@ -18,10 +18,10 @@ const emptyLayout: layoutsType = {
     name: "NA"
 }
 
-const ClassViewLayoutClient = ({layoutList}:any) => {
+const ClassViewLayoutClient = ({ layoutList }: any) => {
     const [layouts, setLayouts] = useState<layoutsType[]>(layoutList)
     const router = useRouter();
-  //  setLayouts(layoutList)
+    //  setLayouts(layoutList)
     // useEffect(() => {
     //     const fetchData = async () => {
     //         console.log("hello")
@@ -47,28 +47,31 @@ const ClassViewLayoutClient = ({layoutList}:any) => {
 
 
     return (
+        <>
+            <div className='flex px-2 justify-end w-full'>
 
-        <Table className=' rounded-2xl border-2 border-gray-200 bg-white'>
-            <TableHeader >
-                <div className='flex p-2 justify-between'>
+                <Button className='' variant={"outline"} onClick={handleAddLayout}>Add layout</Button>
+            </div>
+            <div className=' rounded-2xl border-2 p-2 w-full bg-clip-border'>
+                <Table >
+                    <TableHeader >
 
-                    <Button className='bg-blue-600' onClick={handleAddLayout}>Add layout</Button>
-                </div>
+                        <TableRow>
+                            <TableHead >Layout Name</TableHead>
+                            <TableHead className="w-fit"></TableHead>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody className="rounded-2xl w-full">
+                        {layouts.map((layout, index) => <TableRow key={index} className='row flex-row justify-between items-center h-14'>
+                            <TableCell className=" justify-stretch font-medium w-full">{layout.name}</TableCell>
+                            <TableCell className=' w-fit justify-end'><Button className=' ' variant={"outline"} onClick={() => { handleEditLayout(layout) }} >Edit</Button></TableCell>
+                        </TableRow>)}
 
-                <TableRow>
-                    <TableHead >Layout Name</TableHead>
-                    <TableHead></TableHead>
-                </TableRow>
-            </TableHeader>
-            <TableBody>
-                {layouts.map((layout, index) => <TableRow key={index} className='border-gray-100 h-14'>
-                    <TableCell className="font-medium">{layout.name}</TableCell>
-                    <TableCell className='flex justify-end'><Button className='bg-blue-600 ' onClick={() => { handleEditLayout(layout) }} >Edit</Button></TableCell>
-                </TableRow>)}
+                    </TableBody>
+                </Table>
+            </div>
 
-            </TableBody>
-        </Table>
-
+        </>
     )
 }
 

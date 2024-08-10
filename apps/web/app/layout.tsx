@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }): JSX.Element {
   return (
-    <html lang="en">
+    <html lang="en" className="violet">
       <Providers>
       <RecoidContextProvider>
         <body >

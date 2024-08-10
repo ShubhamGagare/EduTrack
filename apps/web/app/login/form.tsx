@@ -118,7 +118,7 @@ export default function LoginForm() {
         />
         <Button
           type="submit"
-          className="hover:scale-110 bg-blue-700 hover:bg-blue-800 w-full"
+          className="hover:scale-110 bg-purple-700 hover: w-full"
           disabled={form.formState.isSubmitting}
         >
           {form.formState.isSubmitting ? "Login" : "Login"}

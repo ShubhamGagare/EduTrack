@@ -97,7 +97,7 @@ export const SeatingCanvas = ({ props }: any) => {
                         ...card,
                         studentCard: <Desk>
                             <div className="flex-col justify-between items-center w-full h-full text-center ">
-                                <Avatar className="h-25 w-full justify-center items-center">
+                                <Avatar className="h-25 w-full justify-center items-center ">
                                     <AvatarImage className="h-20 w-20  " src={"/avatars/0" + Math.floor((Math.random() * 4 + 1)) + ".png"} />
                                     <AvatarFallback className="h-20 w-20  ">SN</AvatarFallback>
                                 </Avatar>
@@ -206,7 +206,7 @@ export const SeatingCanvas = ({ props }: any) => {
                                     <Label className="flex text-xl">Class {props.clsId}</Label>
                                 </div>
                             </div>
-                            {props.canvasType !== "view" ? <Button className="hover:bg-blue-700 bg-blue-600" type="submit">Submit</Button> : <></>}
+                            {props.canvasType !== "view" ? <Button className="hover: " type="submit">Submit</Button> : <></>}
                         </form>
                     </Form>
 
@@ -224,10 +224,10 @@ export const SeatingCanvas = ({ props }: any) => {
                     </div>
                 </div> : ""}
                 <div className=" space-y-2 w-full ">
-                    <Label className="text-md">Canvas</Label>
+                    <Label className="text-md"></Label>
 
                     <div
-                        className="canvas bg-white border rounded-xl shadow-lg "
+                        className="canvas bg-violet-100 shadow-lg rounded-xl "
                         style={{
                             position: "relative",
                             height: "100vh",

@@ -48,7 +48,7 @@ export default function page() {
             <CardDescription>{mod.description}</CardDescription>
           </CardHeader>
           <CardContent >
-            <Button className='bg-blue-700 hover:bg-blue-800' onClick={() => {
+            <Button className=' hover:' onClick={() => {
               router.push(mod.href)
             }}>{mod.buttonName}</Button>
           </CardContent>

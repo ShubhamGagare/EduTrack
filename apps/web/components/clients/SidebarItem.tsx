@@ -1,5 +1,6 @@
 "use client"
 import { Card, CardTitle } from "@repo/ui";
+import { Home, Notebook, PencilRulerIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
 
 export  const  SidebarItem = ({ href, title }: { href: string; title: string; }) => {
@@ -10,9 +11,10 @@ export  const  SidebarItem = ({ href, title }: { href: string; title: string; })
 
     return <>
         <div className="flex flex-col gap-2 px-3 ">
-            <Card className={`flex ${selected ? "bg-blue-600 text-white" : "border-none"} cursor-pointer  p-3 pl-8 border-r  shadow-none `}  onClick={() => {
+            <Card className={` flex ${selected ? "bg-primary text-primary-foreground" : "border-none"} cursor-pointer m-1 p-2 pl-8 border-r  shadow-none space-x-2 items-center `}  onClick={() => {
                     router.push(href);
                 }}>
+                {title==="Take register"?<Notebook />:title==="Home"?<Home />:title==="Class View"?<PencilRulerIcon />:""   }
                 <CardTitle>{title}</CardTitle>
             </Card>
         </div>

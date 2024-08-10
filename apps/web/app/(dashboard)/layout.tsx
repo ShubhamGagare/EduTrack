@@ -9,9 +9,9 @@ export default function Layout({
   return (
     <>
     <AppbarClient />
-    <div className="flex bg-gray-100 min-h-screen ">
-      <div className="hidden lg:block w-72 border-r min-h-screen bg-white mr-2 pt-16 rounded-xl ">
-        <div className="m-2">
+    <div className="flex  min-h-screen ">
+      <div className="hidden lg:block w-72  min-h-screen border-r-2 mr-2 pt-8 ">
+        <div className="m-2 ">
           <SidebarItem href={"/dashboard"} title="Home" />
           <SidebarItem href={"/take-register"} title="Take register" />
           <SidebarItem href={"/class-view"} title="Class View" />

@@ -17,18 +17,19 @@ export const Appbar = ({
     onSignin,
     onSignout
 }: AppBarProps) => {
-    return <>    <div className="flex justify-between border-b px-4 mb-1 shadow-md">
-        <div className='flex space-x-2 items-center'>
-            <School />
-            <div className="text-2xl font-bold tracking-tight  justify-center">
-                EduTrack
-            </div>
+    return <>
+        <div className="flex justify-between w-full shadow-md px-4">
+            <div className='flex space-x-2  items-center px-4 w-72  text-primary py-2 border-primary'>
+                <School />
+                <div className="text-2xl  font-bold tracking-tight  justify-center">
+                    edutrack
+                </div>
 
+            </div>
+            <div className="flex flex-col justify-center py-2 p-30">
+                <Button variant={'outline'} size={'lg'} onClick={user ? onSignout : onSignin}>{user ? "Logout" : "Login"}</Button>
+            </div>
         </div>
-        <div className="flex flex-col justify-center py-2 p-30">
-            <Button variant={'outline'} size={'lg'} onClick={user ? onSignout : onSignin}>{user ? "Logout" : "Login"}</Button>
-        </div>
-    </div>
     </>
 
 }

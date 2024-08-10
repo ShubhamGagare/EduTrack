@@ -126,7 +126,7 @@ export default function FormPage() {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full bg-blue-700 hover:bg-blue-800">Submit</Button>
+        <Button type="submit" className="w-full bg-purple-700 hover:">Submit</Button>
       </form>
     </Form>
   );

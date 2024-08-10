@@ -38,7 +38,7 @@ const RegisterClient = ({ register }: { register: any }) => {
             if (s.status && s.status.length > 0) {
                 mark = mark + 1
                 setMarked(mark)
-                console.log("Status from inside-->" + mark + "------" + s.status.length)
+            //    console.log("Status from inside-->" + mark + "------" + s.status.length)
 
             }
         })
@@ -48,7 +48,7 @@ const RegisterClient = ({ register }: { register: any }) => {
     async function handleAttendance() {
         register.Attendance = attendance;
         // Call updateRegister function
-        console.log("Submitting Attendance --->" + JSON.stringify(attendance));
+     //   console.log("Submitting Attendance --->" + JSON.stringify(attendance));
         try {
             const updatedRegister = {
                 ...register,
@@ -165,7 +165,7 @@ const RegisterClient = ({ register }: { register: any }) => {
                     </TableHeader>
                     <TableBody className="overflow-auto scroll-m-1 bg-slate-200">
                         {attendance.map((s: { status: string, comment?: string, lateMinutes?: number, student: { user: { username: string } } }, index: number) =>
-                            <TableRow onClick={() => { setIndex(index) }} className={`${index === i ? " border-4 border-blue-500 " : ""} bg-white`}>
+                            <TableRow onClick={() => { setIndex(index) }} className={`${index === i ? " border-4 border-primary " : ""} bg-white`}>
                                 <TableCell className="px-4 pr-4 w-4 ">
                                     <Checkbox onClick={(e) => { e.stopPropagation(); handleSelect(index) }} checked={isChecked[index]}></Checkbox>
                                 </TableCell>
@@ -181,7 +181,7 @@ const RegisterClient = ({ register }: { register: any }) => {
                                 <TableCell className="px-[-2]">
                                     <Accordion type="single" collapsible className="w-full ">
                                         <AccordionItem value="item-1">
-                                            <AccordionTrigger className="hover:bg-blue-100 px-2 space-x-2" onClick={() => { callAI(index) }}>
+                                            <AccordionTrigger className="hover:bg-violet-100 px-2 space-x-2" onClick={() => { callAI(index) }}>
                                                 {/* <UserCircle2 className="w-fit " size={32} color="gray" ></UserCircle2> */}
                                                 <Label className="w-full text-left">{s.student.user.username}</Label>
                                             </AccordionTrigger>
@@ -239,7 +239,7 @@ const RegisterClient = ({ register }: { register: any }) => {
 
                 <Dialog>
                     <DialogTrigger asChild>
-                        <Button className="bg-blue-500 hover:bg-blue-600" >{"Submit the register"}</Button>
+                        <Button className=" hover:" >{"Submit the register"}</Button>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-[425px]">
                         <DialogHeader>
@@ -278,7 +278,7 @@ const RegisterClient = ({ register }: { register: any }) => {
                                 </div>
                                 <div className="flex justify-between">
                                     <Button className="bg-gray-500 hover:bg-gray-600" onClick={handleAttendance}>Cancel</Button>
-                                    <Button className="bg-blue-700 hover:bg-blue-800" onClick={handleAttendance}>Submit the register</Button>
+                                    <Button className=" hover:" onClick={handleAttendance}>Submit the register</Button>
 
                                 </div>
 
