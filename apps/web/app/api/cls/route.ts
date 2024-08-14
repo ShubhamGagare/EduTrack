@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 export async function GET() {
     try {
+        
       // Fetch all cls from the database
       const cls = await prisma.cls.findMany();
   
