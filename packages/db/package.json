@@ -2,13 +2,13 @@
   "name": "@repo/db",
   "version": "0.0.0",
   "dependencies": {
-    "@prisma/client": "^5.11.0",
+    "@prisma/client": "^5.19.0-dev.8",
     "@vercel/postgres": "^0.9.0",
     "bcrypt": "^5.1.1"
   },
   "prisma": {
     "seed": "node ../../packages/db/seed.js",
-    "schema":"../../packages/db/prisma/schema.prisma"
+    "schema": "../../packages/db/prisma/schema.prisma"
   },
   "scripts": {
     "vercel-build": "prisma generate  && prisma migrate deploy && next build",
@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
-    "prisma": "^5.16.2"
+    "prisma": "^5.19.0-dev.8"
   },
   "exports": {
     "./client": "./index.ts"

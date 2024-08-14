@@ -9,7 +9,7 @@ import Desk from "./Desk";
 import { useForm } from "react-hook-form"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue, } from "@repo/ui"
 import { findStudentById, getStudentDetails, propSeatingType, saveSeatingPlan, studentsType } from "./clients/classView/SeatingClients/AddSeatingPlan";
-import { Attendance, Student } from "../../../packages/db/prisma/generated/client";
+//import { Attendance, Student } from "../../../packages/db/prisma/generated/client";
 import { number } from "zod";
 import { useRouter } from "next/navigation";
 import { MessageSquareText } from "lucide-react";
