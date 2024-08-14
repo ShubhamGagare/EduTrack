@@ -1,7 +1,8 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "./generated/client"
-  seed     = "node seed.js"
+  provider   = "prisma-client-js"
+  output     = "./generated/client"
+  seed       = "node seed.js"
+  engineType = "binary"
   binaryTargets = ["native", "linux-arm64-openssl-1.0.x"]
 }
 
@@ -47,16 +48,16 @@ model Student {
 }
 
 model Cls {
-  id        Int         @id @default(autoincrement())
-  name      String
-  teacherId Int?
-  teacher   Teacher?    @relation(fields: [teacherId], references: [id])
-  register  Register[]
-  students  Student[]
-  timetable Timetable[]
+  id          Int           @id @default(autoincrement())
+  name        String
+  teacherId   Int?
+  teacher     Teacher?      @relation(fields: [teacherId], references: [id])
+  register    Register[]
+  students    Student[]
+  timetable   Timetable[]
   seatingPlan SeatingPlan[]
-  ClassView ClassView[]
-  layouts   Layout[]    @relation("ClassLayouts")
+  ClassView   ClassView[]
+  layouts     Layout[]      @relation("ClassLayouts")
 }
 
 model Timetable {
@@ -134,8 +135,8 @@ model SeatingPlan {
   id                 Int                  @id @default(autoincrement())
   name               String               @default("")
   layoutId           Int
-  classId             Int                 @default(1)
-  cls     Cls    @relation(fields: [classId], references: [id]) 
+  classId            Int                  @default(1)
+  cls                Cls                  @relation(fields: [classId], references: [id])
   layout             Layout               @relation(fields: [layoutId], references: [id])
   seatingArrangement SeatingArrangement[] // Relation to SeatingArrangement model
   createdAt          DateTime             @default(now())
