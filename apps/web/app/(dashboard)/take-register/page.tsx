@@ -3,6 +3,7 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import { authOptions } from "../../lib/auth";
 import  { getListOfALLRegisters }  from "../../utils/utils";
 import { getServerSession } from "next-auth";
+import { ListOfClasses } from "components/ListOfClasses";
 
 
 
@@ -36,7 +37,7 @@ export default async function page() {
       <div className='flex space-x-4'>
 
         <ListRegisterClient regData={regData} register={usersRegister} />
-
+        <ListOfClasses />
       </div>
 
     </div>
