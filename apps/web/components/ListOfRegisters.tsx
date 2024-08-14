@@ -1,5 +1,6 @@
 import { Badge, Table, Card, CardContent, CardDescription, CardHeader, CardTitle, Label, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@repo/ui";
 import React from "react";
+import { ListOfClasses } from "./ListOfClasses";
 
 export async function ListOfRegisters({ array }: any) {
 
@@ -31,6 +32,7 @@ export async function ListOfRegisters({ array }: any) {
                     </TableBody>
                 </Table>
             </Card>
+            <ListOfClasses/>
         </div>
     );
 
