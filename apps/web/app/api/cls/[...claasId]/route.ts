@@ -8,8 +8,8 @@ export async function GET(req:NextRequest) {
         const { searchParams } = new URL(req.url);
         const id = searchParams.get('id');
 
-      // Fetch all students from the database
-      const students = await prisma.student.findUnique({
+      // Fetch all cls from the database
+      const cls = await prisma.student.findUnique({
         where:{
             id:Number(id)
         },
@@ -22,10 +22,10 @@ export async function GET(req:NextRequest) {
         }
       });
   
-      // Send the list of students as a JSON response
-      return NextResponse.json(students);
+      // Send the list of cls as a JSON response
+      return NextResponse.json(cls);
     } catch (error) {
-      console.error('Error fetching students:', error);
+      console.error('Error fetching cls:', error);
       return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
     } finally {
       // Disconnect the Prisma Client

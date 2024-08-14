@@ -21,6 +21,6 @@
     "tailwind.config.js",
     "postcss.config.js",
     "index.d.ts"
-  ],
+, "app/api/chat/route.js"  ],
   "exclude": ["node_modules"]
 }

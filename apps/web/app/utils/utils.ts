@@ -284,7 +284,7 @@ export const getStudentData = async (id: number) => {
 //   }
 // }>
 //get all students from the class
-export async function getClassStudents(classId: number){
+export async function getClassStudents(classId: number) {
   const response = await client.cls.findFirst({
     where: {
       id: Number(classId)
@@ -302,9 +302,9 @@ export async function getClassStudents(classId: number){
       }
     }
 
-  }) 
+  })
   const students = response?.students;
-  return students  ;
+  return students;
 
 }
 
@@ -312,7 +312,9 @@ export const calculateAttendnace = (attendance: any[]) => {
   const attendanceInsight = {
     presents: 0,
     absents: 0,
-    percentage: 0
+    percentage: 0,
+    lates:0,
+    total:attendance.length
   }
 
   attendance.map((day: any, index: any) => {
@@ -322,9 +324,12 @@ export const calculateAttendnace = (attendance: any[]) => {
     if (day.status === "absent") {
       attendanceInsight.absents = attendanceInsight.absents + 1;
     }
+    if (day.status === "late") {
+      attendanceInsight.lates = attendanceInsight.absents + 1;
+    }
   })
   console.log(" count --->" + attendanceInsight.presents)
-  attendanceInsight.percentage = Number(((attendanceInsight.presents / attendance.length) * 100).toFixed(0))
+  attendanceInsight.percentage = Number(((attendanceInsight.presents + attendanceInsight.lates/ attendance.length) * 100).toFixed(0))
   console.log(" attendanceInsight --->" + JSON.stringify(attendanceInsight))
 
   return attendanceInsight;
@@ -673,36 +678,194 @@ export const getAttendacePattern = async (id: number) => {
 }
 
 
+
+
+
+
 export const getAiAgentResponse = async () => {
-   const apiMapping = [
-    { 'getAllStudentsDetails': '/api/students'},
-     {'getStudentById': '/api/students/student?id='},
-     {'behavioral history report': '/api/reports/behavioral-history',}// Add other report types and their corresponding endpoints
-   ]
+  const apiMapping = [
+    { 'getAllStudentsDetails': '/api/students' },
+    { 'getStudentById': '/api/students/student?id=' },
+    { 'behavioral history report': '/api/reports/behavioral-history', }// Add other report types and their corresponding endpoints
+  ]
 
 
-   
-  const query = "get student details of john"
 
-  const response : any= await generateText({
-    model: groq('llama3-70b-8192'),
-    prompt: `chose the required apis for qurey: "${query}" from list api "${apiMapping}" and based on this create a parsable json array of list of apis which need to be called to get result of query.Give me ONLY an array ,NO extra intro/outro/explanation or example"`
+  const query = "Give me list of only students from class-3 not all students"
+
+//   const response: any = await generateText({
+//     model: groq('llama3-70b-8192'),
+//     prompt: `
+//     Assistant is a expert JSON builder designed to assist the users of a school management system.
+//     Assistant is able to trigger actions for User by responding with JSON strings that contain "api" and "api_input" parameters.
+//     Apis available to Assistant are:
+//     "get all students data" :Useful for when Assistant is asked to provides only list of all students ids.
+//     {"api":"/api/students","api_input":{}}
+//     "get all class data" :Useful for when Assistant is asked to provides only list of all class ids.
+//     {"api":"/api/cls","api_input":{}}
+//     "get details of students from class 4" :Useful for when Assistant is asked to provides only list of all class ids.
+//     {"api":"/api/students/student?","api_input":{"userId":"11"}}
+//     "get all student 1" :Useful for when Assistant is asked to provide info of sepcific student about name or attendance,which can be filetered by id .
+//     {"api":"/api/students/student?","api_input":{"id":"1"}}    
+//     in case of apis for class or classes use cls
+  
+//     chose the required apis for qurey: "${query}" and based on this create a parsable json array of list of apis which need to be called to get result of query.Give me ONLY an array ,NO extra intro/outro/explanation or example"
+//     additional details:
     
-  });
-  //const apiEndpoint =JSON.parse(response)
-  console.log("-*******************************************************************------------")
+// model User {
+//   id       Int      @id @default(autoincrement())
+//   username String
+//   email    String   @unique
+//   password String
+//   roleId   Int
+//   Student  Student?
+//   Teacher  Teacher?
+//   role     Role     @relation(fields: [roleId], references: [id])
+// }
 
-  console.log(response.text)
+// model Role {
+//   id   Int    @id @default(autoincrement())
+//   name String @unique @default("User")
+//   User User[]
+// }
+
+// model Teacher {
+//   id       Int        @id @default(autoincrement())
+//   userId   Int        @unique
+//   classes  Cls[]
+//   Register Register[]
+//   user     User       @relation(fields: [userId], references: [id])
+// }
+
+// model Student {
+//   id                 Int                  @id @default(autoincrement())
+//   userId             Int                  @unique
+//   classId            Int
+//   Attendance         Attendance[]
+//   cls                Cls                  @relation(fields: [classId], references: [id])
+//   user               User                 @relation(fields: [userId], references: [id])
+//   SeatingArrangement SeatingArrangement[]
+// }
+
+// model Cls {
+//   id        Int         @id @default(autoincrement())
+//   name      String
+//   teacherId Int?
+//   teacher   Teacher?    @relation(fields: [teacherId], references: [id])
+//   register  Register[]
+//   students  Student[]
+//   timetable Timetable[]
+//   seatingPlan SeatingPlan[]
+//   ClassView ClassView[]
+//   layouts   Layout[]    @relation("ClassLayouts")
+// }
+
+// model Timetable {
+//   id        Int      @id @default(autoincrement())
+//   classId   Int
+//   day       String
+//   startTime DateTime
+//   endTime   DateTime
+//   cls       Cls      @relation(fields: [classId], references: [id])
+// }
+
+// model Register {
+//   id         Int          @id @default(autoincrement())
+//   classId    Int
+//   teacherId  Int
+//   date       DateTime
+//   status     String       @default("")
+//   Attendance Attendance[]
+//   cls        Cls          @relation(fields: [classId], references: [id])
+//   teacher    Teacher      @relation(fields: [teacherId], references: [id])
+// }
+
+// model Attendance {
+//   id          Int      @id @default(autoincrement())
+//   studentId   Int
+//   registerId  Int
+//   status      String
+//   comment     String?
+//   lateMinutes Int?
+//   date        DateTime @default(now())
+//   register    Register @relation(fields: [registerId], references: [id])
+//   student     Student  @relation(fields: [studentId], references: [id])
+// }
+
+    
+    
+//     `
+
+//   });
+//   //const apiEndpoint =JSON.parse(response)
+//   console.log("-*******************************************************************------------")
+
+//   const jsonRespose = JSON.parse(response.text)
+//   console.log(jsonRespose)
+//   if (jsonRespose.length > 0) {
+
+//   }
+//   let apiResponseArray = [];
+//   let needToGetMoreApis = false
+//   jsonRespose.map(async (jsonApi: any, index: number) => {
+//     if (!needToGetMoreApis) {
+//       let inputs = ""
+
+//       for (const [key, value] of Object.entries(jsonApi.api_input)) {
+//         console.log(`${key}: ${value}`);
+//         inputs = `${key}=${value}`
+//       }
+
+//       const apiResponse = await axios(`${process.env.NEXT_PUBLIC_API_URL + jsonApi.api + inputs}`)
+//       //const reportType = response.choices[0].text.trim().toLowerCase();
+//       apiResponseArray.push(apiResponse.data)
+//       console.log(apiResponse.data)
+
+//       if (index + 1 < jsonRespose.length) {
+//         needToGetMoreApis = true
+//         console.log("Creating a nested apis---------------")
+
+//         const sortApis: any = await generateText({
+//           model: groq('llama3-70b-8192'),
+//           prompt: `
+//         Assistant is a expert JSON builder designed to assist the users of a school management system.
+//         Assistant is able to trigger actions for User by responding with JSON strings that contain "api" and "api_input" parameters.
+//         Apis available to Assistant are:
+//         "get all students data" :Useful for when Assistant is asked to provides only list of all students ids.
+//         {"api":"/api/students","api_input":{}}
+//           "get all class data" :Useful for when Assistant is asked to provides only list of all class ids.
+//         {"api":"/api/cls","api_input":{}}
+//         "get details of student 1" :Useful for when Assistant is asked to provide info of sepcific student about name or attendance,which can be filetered by id .
+//         {"api":"/api/students/student?","api_input":{"id":"1"}}  
+//         "get all in detail of every student " :Useful for when Assistant is asked to provide info of sepcific student about name or attendance,which can be filetered by id .
+//         [{"api":"/api/students/student?","api_input":{"id":"1"}},
+//         {"api":"/api/students/student?","api_input":{"id":"2"}}]        
+        
+//         Need to create needful apis so that user can have ${query}.till now we have this data ${apiResponseArray} from ${jsonApi.api}.Map in the api inputs from this data to the next api and give me complete json/json array dont use ...
+//         use provided data like from all students data get the ids,then create indiviaual api from each student id so that in detail info can be retrived
+//         in case of apis for class or classes use cls
+//         based on this create a parsable json array of list of apis which need to be called to get result of query.Give me ONLY an array ,NO extra intro/outro/explanation or example dont give me text like "Here is the JSON array of APIs to retrieve the list of students from class-3:"
+//         `
+
+//         });
+//         console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+
+//         console.log(sortApis.text)
+//         const sortApisRespose = JSON.parse(sortApis.text)
+//         console.log("Wooooo!!!-------->" + JSON.stringify(sortApisRespose))
+
+//       }
+//     }
+//   })
 
 
-
-  const apiResponse = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/students/student?id=1`)
+  //const apiResponse = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/students/student?id=1`)
   //const reportType = response.choices[0].text.trim().toLowerCase();
 
   // Map the determined report type to the correct API endpoint
- // const apiEndpoint = apiMapping[reportType];
+  // const apiEndpoint = apiMapping[reportType];
 
- console.log("-------------------------------------------------------------")
-console.log(apiResponse)
+  // console.log("-------------------------------------------------------------")
+  // console.log(apiResponse)
 
 }

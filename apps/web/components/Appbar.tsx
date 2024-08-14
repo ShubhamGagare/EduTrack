@@ -21,7 +21,7 @@ export const Appbar = ({
         <div className="flex justify-between w-full shadow-md px-4">
             <div className='flex space-x-2  items-center px-4 w-72  text-primary py-2 border-primary'>
                 <School />
-                <div className="text-2xl  font-bold tracking-tight  justify-center">
+                <div className="text-2xl  font-bold tracking-tight  justify-center  font-semibold bg-gradient-to-r from-primary to-red-500 inline-block text-transparent bg-clip-text">
                     edutrack
                 </div>
 
