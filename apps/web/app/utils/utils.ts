@@ -25,6 +25,25 @@ const groq = createOpenAI({
   apiKey: process.env.GROQ_API_KEY,
 });
 
+
+export const getStudentByName = async(studentName:string)=>{
+
+  const response: any = await client.user.findFirst({
+    where: {
+
+        username: studentName
+
+    },
+    select: {
+        id: true,
+        username:true,
+        email:true
+    }
+
+})
+  return response
+}
+
 //
 export const getSeatingPlanById = async (id: number) => {
 

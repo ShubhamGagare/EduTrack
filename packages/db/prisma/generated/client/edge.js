@@ -253,7 +253,7 @@ const config = {
   },
   "relativeEnvPaths": {
     "rootEnvPath": null,
-    "schemaEnvPath": "../../../../../.env"
+    "schemaEnvPath": "../../../../../apps/web/.env"
   },
   "relativePath": "../..",
   "clientVersion": "5.16.2",

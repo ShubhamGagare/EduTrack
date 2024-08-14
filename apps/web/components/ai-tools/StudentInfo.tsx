@@ -1,27 +1,28 @@
 
-import { PrismaClient } from "../../../../packages/db/prisma/generated/client";
-import { getStudentData } from "../../app/utils/utils";
+//import { PrismaClient } from "../../../../packages/db/prisma/generated/client";
+import { getStudentByName, getStudentData } from "../../app/utils/utils";
 import { StudentAttendance } from "../StudentAttendance";
 
 
-const client = new PrismaClient()
+//const client = new PrismaClient()
 export async function StudentInfo({ studentName }: any) {
     console.log("Fetching StudentInfo-----------")
 
     console.log("student name"+studentName)
-    const response: any = await client.user.findFirst({
-        where: {
+    const response = await getStudentByName(studentName)
+    // const response: any = await client.user.findFirst({
+    //     where: {
 
-            username: studentName
+    //         username: studentName
 
-        },
-        select: {
-            id: true,
-            username:true,
-            email:true
-        }
+    //     },
+    //     select: {
+    //         id: true,
+    //         username:true,
+    //         email:true
+    //     }
 
-    })
+    // })
 
 
     //const data = response.data
