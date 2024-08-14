@@ -6,6 +6,8 @@ import { StudentAttendance } from "../StudentAttendance";
 
 const client = new PrismaClient()
 export async function StudentInfo({ studentName }: any) {
+    console.log("Fetching StudentInfo-----------")
+
     console.log("student name"+studentName)
     const response: any = await client.user.findFirst({
         where: {

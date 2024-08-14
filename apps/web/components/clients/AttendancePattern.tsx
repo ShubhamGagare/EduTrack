@@ -1,8 +1,5 @@
 'use client'
 import { Badge, Calendar, Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle, Label } from "@repo/ui";
-import { TrendingUp } from "lucide-react"
-import { ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent } from "@repo/ui"
-import { useMemo } from "react";
 import * as React from "react"
 
 export function AttendancePattern({ attendancePattern }: any) {
