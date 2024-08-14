@@ -1,9 +1,8 @@
 generator client {
-  provider = "prisma-client-js"
-  output   = "./generated/client"
-  seed     = "node seed.js"
+  provider      = "prisma-client-js"
+  output        = "./generated/client"
+  seed          = "node seed.js"
   binaryTargets = ["native", "linux-arm64-openssl-1.0.x"]
-
 }
 
 datasource db {
