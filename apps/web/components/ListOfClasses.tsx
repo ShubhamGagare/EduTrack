@@ -1,7 +1,7 @@
 "use server"
 import { ListOfRegisters } from "./ListOfRegisters";
 import { createTodaysAllRegister, getListOfALLRegisters } from "../app/utils/utils";
-import { PrismaClient } from "../../../packages/db/prisma/generated/client";
+import { PrismaClient } from "@prisma/client";
 
 const client = new PrismaClient();
 
