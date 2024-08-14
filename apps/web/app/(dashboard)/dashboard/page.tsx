@@ -55,7 +55,6 @@ export default function page() {
         </Card>)}
 
 
-            <Button onClick={()=>{getAiAgentResponse()}}>Run</Button>
       </div>
 
     </>
