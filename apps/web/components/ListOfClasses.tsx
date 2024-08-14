@@ -1,3 +1,4 @@
+"use server"
 import { ListOfRegisters } from "./ListOfRegisters";
 import { getListOfALLRegisters } from "../app/utils/utils";
 
