@@ -15,6 +15,7 @@ import { z } from "zod"
 import { toast } from "@repo/ui"
 import { cn } from "@repo/ui/utils"
 import { customDateRegisters } from "../../app/utils/utils"
+import { ListOfClasses } from "components/ListOfClasses"
  
 export interface registerType  {
 
@@ -200,6 +201,8 @@ const ListRegisterClient = ({ regData, register }: { regData: registerType[], re
           <div>No register data available.</div>
         )}
       </div>
+      <ListOfClasses />
+
     </div>
 
   )

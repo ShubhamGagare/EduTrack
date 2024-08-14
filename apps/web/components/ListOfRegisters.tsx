@@ -32,7 +32,6 @@ export async function ListOfRegisters({ array }: any) {
                     </TableBody>
                 </Table>
             </Card>
-            <ListOfClasses/>
         </div>
     );
 
