@@ -37,7 +37,6 @@ export default async function page() {
       <div className='flex space-x-4'>
 
         <ListRegisterClient regData={regData} register={usersRegister} />
-        <ListOfClasses />
       </div>
 
     </div>
