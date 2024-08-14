@@ -14,11 +14,11 @@ export default function Home() {
   const [input, setInput] = useState<string>('');
 
   return (
-    <div className='flex-col  justify-between h-full w-full px-48 py-8 '>
-      <div className='flex-col   justify-start h-[90%] flex-grow min-h-2 space-y-6 overflow-clip'>
-        {conversation.length===0 && <div className='flex-col'>
+    <div className='flex-col  justify-between h-[99%] w-full px-48 space-y-8'>
+      <div className='flex-col   justify-start h-[80%] max-h-[700px] flex-grow min-h-2 space-y-6 scroll-smooth overflow-y-scroll'>
+        {conversation.length === 0 && <div className='flex-col'>
           <Label className='flex text-6xl font-semibold bg-gradient-to-r from-primary to-red-500 inline-block text-transparent bg-clip-text '>Hi there,</Label>
-        
+
           <Label className='flex  text-6xl font-semibold text-slate-500'>How can I help you?</Label>
         </div>}
         {conversation.map((message: ClientMessage, index: number) => (
@@ -46,9 +46,9 @@ export default function Home() {
           </>))}
       </div>
 
-      <div className='flex space-x-4 h-fit mt-auto'>
+      <div className='flex space-x-4 h-fit w-full  mt-auto bottom-full '>
         <Input
-          className='rounded-lg bg-gray-100 '
+          className='rounded-lg bg-gray-100 w-[99%]'
           type="text"
           value={input}
           onChange={event => {
@@ -61,7 +61,7 @@ export default function Home() {
               ...currentConversation,
               { id: generateId(), role: 'user', display: input },
             ]);
-         
+
             const message = await continueConversation(input);
 
             setConversation((currentConversation: ClientMessage[]) => [

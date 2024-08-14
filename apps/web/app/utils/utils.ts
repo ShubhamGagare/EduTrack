@@ -398,7 +398,7 @@ export async function getListOfALLRegisters(date: Date): Promise<any> {
 }
 
 export async function createTodaysAllRegister() {
-
+console.log("fetching data---")
   const classes = await client.cls.findMany();
   classes.map(async (cls: any) => {
     if (cls) {
