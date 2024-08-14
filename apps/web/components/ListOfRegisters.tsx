@@ -1,5 +1,4 @@
 import { Badge, Table, Card, CardContent, CardDescription, CardHeader, CardTitle, Label, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@repo/ui";
-import { document } from "postcss";
 import React from "react";
 
 export async function ListOfRegisters({ array }: any) {

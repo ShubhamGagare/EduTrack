@@ -4,7 +4,7 @@ import { Card, CardHeader, CardTitle, CardContent, CardDescription } from '@repo
 import { useRouter } from 'next/navigation'
 import React from 'react'
 import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
-import { getAiAgentResponse } from 'app/utils/utils'
+
 
 export default function page() {
 

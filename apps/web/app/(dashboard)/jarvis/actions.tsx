@@ -1,14 +1,11 @@
 'use server';
 
-//import { Weather } from 'components/Weathe';
-import { generateText } from 'ai';
-import { createOpenAI, openai } from '@ai-sdk/openai';
-import { createAI, createStreamableUI, getMutableAIState, streamUI } from 'ai/rsc';
+
+import { createOpenAI } from '@ai-sdk/openai';
+import { createAI, getMutableAIState, streamUI } from 'ai/rsc';
 import { ReactNode } from 'react';
 import { z } from 'zod';
-import { Weather } from '../../../components/weather';
 import { ListOfClasses } from '../../../components/ListOfClasses';
-import { ProcessorCard } from '../../../components/ProcessorCard';
 import { StudentInfo } from '../../../components/ai-tools/StudentInfo';
 import { generateId } from 'ai';
 

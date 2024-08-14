@@ -1,6 +1,4 @@
 import { Avatar, AvatarFallback, AvatarImage, Badge, Button, Card, Form, FormControl, FormField, FormItem, FormLabel, Label, Separator } from "@repo/ui";
-import { calculateAttendnace, getStudentData } from "../../app/utils/utils";
-import { MessageSquareText } from "lucide-react";
 //import { getAllComments } from "./SeatingCanvas";
 import {
     Popover,

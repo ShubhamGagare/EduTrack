@@ -1,5 +1,4 @@
-import { Card } from "@repo/ui";
-import { document } from "postcss";
+
 import React from "react";
 
 export async function ProcessorCard({steps}: any) {

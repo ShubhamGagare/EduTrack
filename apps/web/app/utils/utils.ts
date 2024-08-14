@@ -682,16 +682,16 @@ export const getAttendacePattern = async (id: number) => {
 
 
 
-export const getAiAgentResponse = async () => {
-  const apiMapping = [
-    { 'getAllStudentsDetails': '/api/students' },
-    { 'getStudentById': '/api/students/student?id=' },
-    { 'behavioral history report': '/api/reports/behavioral-history', }// Add other report types and their corresponding endpoints
-  ]
+// export const getAiAgentResponse = async () => {
+//   const apiMapping = [
+//     { 'getAllStudentsDetails': '/api/students' },
+//     { 'getStudentById': '/api/students/student?id=' },
+//     { 'behavioral history report': '/api/reports/behavioral-history', }// Add other report types and their corresponding endpoints
+//   ]
 
 
 
-  const query = "Give me list of only students from class-3 not all students"
+//   const query = "Give me list of only students from class-3 not all students"
 
 //   const response: any = await generateText({
 //     model: groq('llama3-70b-8192'),
@@ -868,4 +868,4 @@ export const getAiAgentResponse = async () => {
   // console.log("-------------------------------------------------------------")
   // console.log(apiResponse)
 
-}
+//}
