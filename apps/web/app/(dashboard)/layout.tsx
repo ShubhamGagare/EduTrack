@@ -6,7 +6,7 @@ import { AI } from "./jarvis/actions";
 import { Open_Sans } from "next/font/google"
 
 
-const roboto = Open_Sans({
+const openSans = Open_Sans({
   subsets:['latin'],
   weight:'400'
 })
@@ -16,7 +16,7 @@ export default function Layout({
   children: React.ReactNode;
 }): JSX.Element {
   return (
-   <main className={roboto.className}>
+   <main className={openSans.className}>
     <AppbarClient />
     <div className="flex  min-h-screen ">
       <div className="hidden lg:block w-72  min-h-screen border-r-2 mr-2 pt-8 ">
