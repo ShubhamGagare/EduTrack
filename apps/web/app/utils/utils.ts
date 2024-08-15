@@ -37,7 +37,16 @@ export const getStudentByName = async(studentName:string)=>{
     select: {
         id: true,
         username:true,
-        email:true
+        email:true,
+        Student:{
+          select:{
+            cls:{
+              select:{
+                name:true
+              }
+            }
+          }
+        }
     }
 
 })

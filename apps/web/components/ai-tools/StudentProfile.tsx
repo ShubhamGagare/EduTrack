@@ -19,7 +19,10 @@ export async function StudentProfile({ student }: any) {
             </Avatar>
             <div className="flex-col justify-between  h-25 w-fit">
                 <Label className="flex text-2xl">{student.username}</Label>
-                <Label className="flex  ">{student.email}</Label>
+                <div className="flex space-x-4">
+                <Label className="flex text-lg text-gray-500">{student.Student.cls.name}</Label>
+                <Label className="flex   text-lg text-gray-500" >{student.email}</Label>
+                </div>
             </div>
         </Card>
         </>
