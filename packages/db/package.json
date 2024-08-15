@@ -5,8 +5,7 @@
     "@prisma/client": "^5.19.0-dev.8",
     "@vercel/postgres": "^0.9.0",
     "bcrypt": "^5.1.1",
-    "openssl": "^2.0.0",
-     "database": "workspace:*"
+    "openssl": "^2.0.0"
   },
   "prisma": {
     "seed": "node ../../packages/db/seed.js",
