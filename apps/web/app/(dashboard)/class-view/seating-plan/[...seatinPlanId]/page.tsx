@@ -1,7 +1,7 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button, Label } from '@repo/ui';
 import AddSeatingPlan from '../../../../../components/clients/classView/SeatingClients/AddSeatingPlan';
 import { getlayout, getSeatingPlanById } from '../../../../utils/utils';
-import { deskType, layoutType } from '../../class-layout/[...layout]/page';
+//import { deskType, layoutType } from '../../class-layout/[...layout]/page';
 
 
 export default async function getSeatingPlan({ params }: { params: { seatinPlanId: string[] } }) {
@@ -13,8 +13,8 @@ export default async function getSeatingPlan({ params }: { params: { seatinPlanI
     let seatingPlanName = "";
 
 
-    const layout: layoutType|null = await getlayout(Number(layoutId))
-    const desks: deskType[] = layout?.desks as deskType[]
+    const layout: any|null = await getlayout(Number(layoutId))
+    const desks: any = layout?.desks as any
     const data = {
         canvasType,
         desks: desks,

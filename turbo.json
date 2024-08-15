@@ -5,11 +5,27 @@
     "JWT_SECRET"
   ],
   "globalDependencies": [
-   "**/.env.*local", "**/.env", ".env", ".env.local", "tsconfig.json"
+    "**/.env.*local",
+    "**/.env",
+    ".env",
+    ".env.local",
+    "tsconfig.json"
   ],
   "tasks": {
+    "dev": {
+      "dependsOn": ["^db:generate"],
+      "cache": false,
+      "persistent": true
+    },
+    "db:generate": {
+      "cache": false
+    },
+    "db:push": {
+      "cache": false
+    },
     "build": {
       "dependsOn": [
+        "^db:generate",
         "^build"
       ],
       "outputs": [
@@ -21,10 +37,7 @@
       "dependsOn": [
         "^lint"
       ]
-    },
-    "dev": {
-      "cache": false,
-      "persistent": true
     }
+
   }
 }

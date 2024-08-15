@@ -2,34 +2,35 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbP
 import SeatingPlanClient from '../../../../components/clients/classView/SeatingPlanClient';
 import { getClasses, getlayoutsIds, getListOfALLRegisters, getSeatingPlans, getSeatingPlansType } from "../../../utils/utils";
 import { registerType } from "components/clients/ListRegisterClient";
-import { Cls, Prisma } from "../../../../../../packages/db/prisma/generated/client";
+//import { Prisma, PrismaClient } from "@repo/db";
 
-type layoutIdOnlyType = Prisma.LayoutGetPayload<{
-    select:{
-        id:true,
-        name:true
-    }
-}>
+// //const Prisma = new PrismaClient()
+// type layoutIdOnlyType = Prisma.LayoutGetPayload<{
+//     select:{
+//         id:true,
+//         name:true
+//     }
+// }>
 
-type seatingPlanType = Prisma.SeatingPlanGetPayload<{
-    include: {
-        layout: {
-          select: {
-            name: true
-          }
-        }
-      }
-}>
+// type seatingPlanType = Prisma.SeatingPlanGetPayload<{
+//     include: {
+//         layout: {
+//           select: {
+//             name: true
+//           }
+//         }
+//       }
+// }>
 
 async function page() {
     const regData: registerType[] = await getListOfALLRegisters(new Date());
 
-    const clses: Cls[] = await getClasses();
+    const clses: any = await getClasses();
 
-    const layouts: layoutIdOnlyType[] = await getlayoutsIds();
+    const layouts: any = await getlayoutsIds();
 
 
-    const seatingPlan: seatingPlanType[] = await getSeatingPlans();
+    const seatingPlan: any = await getSeatingPlans();
     const data = {
         clses,
         layouts,

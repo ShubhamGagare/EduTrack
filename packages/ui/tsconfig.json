@@ -3,8 +3,9 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "./",
+    "moduleResolution": "NodeNext",
   },
-  
+ 
   "include": ["."],
   "exclude": ["node_modules", "dist"]
 }

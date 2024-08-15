@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { hash } from "bcryptjs";
 import { sql } from "@vercel/postgres";
-import { PrismaClient } from "../../../../../../packages/db/prisma/generated/client";
+import { PrismaClient } from "@repo/db";
 
 export async function POST(request: Request) {
     const client = new PrismaClient();
@@ -17,7 +17,7 @@ export async function POST(request: Request) {
 
     const hashedPassword = await hash(password, 10);
   
-    const roleId=roles?.find(r => r.name === role)?.id ||0
+    const roleId=roles?.find((r:any) => r.name === role)?.id ||0
     
     const response = await client.user.create({
         data:{

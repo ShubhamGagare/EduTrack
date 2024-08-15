@@ -11,7 +11,7 @@ import { addSeatingPlan, addSeatingPlanType, getClassStudents, getStudentData } 
 import SeatingPlanClient from "../SeatingPlanClient";
 import { Badge, MessageSquareText } from "lucide-react";
 import { Prisma } from "../../../../../../packages/db/prisma/generated/client";
-import { deskType } from "app/(dashboard)/class-view/class-layout/[...layout]/page";
+//import { deskType } from "app/(dashboard)/class-view/class-layout/[...layout]/page";
 
 export type CanvasCard = {
   id: UniqueIdentifier;
@@ -113,7 +113,7 @@ export default async function AddSeatingPlan({ data }: any) {
 
   const deskCards: CanvasCard[] = []
   const seatingArrangements = data.seatingPlan.seatingArrangement;
-  await Promise.all(data.desks.map(async (desk: deskType, index: number): Promise<any> => {
+  await Promise.all(data.desks.map(async (desk: any, index: number): Promise<any> => {
 
     let studentCard = <Desk><></></Desk>
     let isbreak = false;

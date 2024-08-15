@@ -2,13 +2,10 @@
   "name": "SchoolManagementSystem",
   "private": true,
   "scripts": {
-    "build": "npx prisma generate --schema=packages/db/prisma/schema.prisma && turbo build",
-    "dev": "npx prisma generate --schema=packages/db/prisma/schema.prisma && turbo dev",
+    "build": "turbo build",
+    "dev": "turbo dev",
     "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "vercel-build": "prisma generate  --schema=packages/db/prisma/schema.prisma && next build",
-    "prisma:generate": "prisma generate  --schema=packages/db/prisma/schema.prisma",
-    "postinstall": "npx prisma generate  --schema=packages/db/prisma/schema.prisma"
+    "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
     "@repo/eslint-config": "*",
@@ -32,6 +29,7 @@
   "dependencies": {
     "@material-tailwind/react": "^2.1.9",
     "@prisma/client": "^5.19.0-dev.8",
+    "@repo/ui":"*",
     "axios": "^1.7.2",
     "bcrypt": "^5.1.1",
     "faker": "^6.6.6",

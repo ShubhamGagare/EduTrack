@@ -4,7 +4,7 @@ import { Coordinates } from "@dnd-kit/core/dist/types";
 import { LayoutCanvas } from "components/LayoutCanvas";
 import Desk from "components/Desk";
 import { ReactElement, useState } from "react";
-import { deskType, propTypes } from "app/(dashboard)/class-view/class-layout/[...layout]/page";
+import {  propTypes } from "app/(dashboard)/class-view/class-layout/[...layout]/page";
 
 export type CanvasCard = {
   id: UniqueIdentifier;
@@ -25,7 +25,7 @@ function AddLayoutClient(props: propTypes) {
   console.log("props---"+JSON.stringify(props))
   
   console.log("desks---"+JSON.stringify(props.desks))
-  props.desks.map((desk: deskType, index: number) => {
+  props.desks.map((desk: any, index: number) => {
     deskCards.push({ id: desk.id, coordinates: { x: desk.x, y: desk.y }, studentCard: <Desk><></></Desk> })
   });
   const [cards, setCards] = useState<CanvasCard[]>(deskCards);

@@ -1,27 +1,27 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button, Label } from '@repo/ui';
 import AddLayoutClient from '../../../../../components/clients/classView/LayoutClients/AddLayoutClient';
 import { getlayout, getLayoutType } from '../../../../utils/utils';
-import { Desk, Layout, Prisma } from '../../../../../../../packages/db/prisma/generated/client';
+//import { Desk, Layout, Prisma } from '../../../../../../../packages/db/prisma/generated/client';
 //import { layoutsType } from 'components/clients/classView/ClassViewLayoutClient';
 
-export type deskType = Prisma.DeskGetPayload<{
-    select: { id: true, x: true, y: true },
-}>
-export type layoutType = Prisma.LayoutGetPayload<{
-    include: {
-        desks: {
-            select: {
-                id: true,
-                x: true,
-                y: true
-            }
-        };
-    }
-}>
+// export type deskType = Prisma.DeskGetPayload<{
+//     select: { id: true, x: true, y: true },
+// }>
+// export type layoutType = Prisma.LayoutGetPayload<{
+//     include: {
+//         desks: {
+//             select: {
+//                 id: true,
+//                 x: true,
+//                 y: true
+//             }
+//         };
+//     }
+// }>
 
 export type propTypes = {
-    layout?: layoutType | null,
-    desks: deskType[],
+    layout?: any| null,
+    desks: any,
     canvasType: string | undefined
 }
 const page = async ({ params }: { params: { layout: string[] } }) => {
@@ -40,10 +40,10 @@ const page = async ({ params }: { params: { layout: string[] } }) => {
     }
 
     if (canvasType !== "add") {
-        const layout: layoutType | null = await getlayout(Number(layoutId));
+        const layout: any | null = await getlayout(Number(layoutId));
         console.log("layout--->" + JSON.stringify(layout))
 
-        const desks: deskType[] | null = layout?.desks as deskType[]
+        const desks: any[] | null = layout?.desks as any[]
         console.log("desks--->" + JSON.stringify(desks))
         props = {
             layout: layout,

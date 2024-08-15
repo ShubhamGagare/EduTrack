@@ -1,5 +1,5 @@
 "use server"
-import { Cls, Prisma, PrismaClient } from "../../../../packages/db/prisma/generated/client";
+import { PrismaClient } from "@repo/db";
 import { authOptions } from "../lib/auth";
 import { getServerSession } from "next-auth";
 import axios from "axios";

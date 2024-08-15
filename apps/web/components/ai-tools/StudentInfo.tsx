@@ -1,5 +1,4 @@
 
-//import { PrismaClient } from "../../../../packages/db/prisma/generated/client";
 import { getStudentByName, getStudentData } from "../../app/utils/utils";
 import { StudentAttendance } from "../StudentAttendance";
 

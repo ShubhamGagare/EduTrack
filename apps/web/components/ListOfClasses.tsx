@@ -1,10 +1,10 @@
 "use server"
 import { ListOfRegisters } from "./ListOfRegisters";
 import { createTodaysAllRegister, getListOfALLRegisters } from "../app/utils/utils";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@repo/db"
+
 
 const client = new PrismaClient();
-
 export async function ListOfClasses() {
     console.log("Fetching registers-----------")
     //const response: any = await getListOfALLRegisters(new Date())

@@ -6,17 +6,18 @@
     "seed": "node ../../packages/db/seed.js"
   },
   "scripts": {
-    "dev": "npx prisma generate  --schema=../../packages/db/prisma/schema.prisma && next dev --turbo",
-    "build": "npx prisma generate  --schema=../../packages/db/prisma/schema.prisma && set NODE_ENV=production && next build",
-    "start": "prisma generate  --schema=../../packages/db/prisma/schema.prisma && next start",
-    "lint": "next lint"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint . --max-warnings 0"
   },
   "dependencies": {
+    "@repo/db": "*",
     "@ai-sdk/openai": "^0.0.34",
     "@dnd-kit/core": "^6.1.0",
+    "@prisma/client": "^5.19.0-dev.8",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-slot": "^1.1.0",
-    "@repo/db": "*",
     "@repo/ui": "*",
     "ai": "^3.2.16",
     "autoprefixer": "^10.4.19",
@@ -43,6 +44,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@prisma/nextjs-monorepo-workaround-plugin": "^5.18.0",
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
     "@types/bcrypt": "^5.0.2",
