@@ -4,7 +4,23 @@ import RegisterClient from "../../../../../components/clients/RegisterClient"
 import { PrismaClient } from "@repo/db"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@repo/ui";
 const client = new PrismaClient()
+export type reisterPropType = {
+  Attendance: {
+    id: number,
+    student: {
+      user: {
+        username: string | null
+      },
+    },
+    status: string | null,
+    comment: string | null,
+    lateMinutes: number | null
+  }[],
+  cls: {
+    name: string | null
+  }
 
+}
 
 export default async function getRegister({ params }: { params: { registerIds: number[] } }) {
   try {
@@ -40,7 +56,9 @@ export default async function getRegister({ params }: { params: { registerIds: n
 
       }
     })
+    if (!response || response === null) throw new Error("Registers not found")
 
+    const register = response
     return (
       <div className="space-y-4">
         <Breadcrumb>
@@ -58,7 +76,7 @@ export default async function getRegister({ params }: { params: { registerIds: n
             </BreadcrumbItem>
           </BreadcrumbList>
         </Breadcrumb>
-        <RegisterClient register={response} />
+        <RegisterClient register={register} />
 
       </div>
     )

@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation"
 import { Check, Clock, User2,  X } from "lucide-react"
 import { registerType } from "./ListRegisterClient"
 import { Register as RegisterType,Attendance as AttendanceType, Prisma } from "@repo/db"
+import { reisterPropType } from "app/(dashboard)/take-register/register/[...registerIds]/page"
 
 // type attendancePropType =  Prisma.AttendanceGetPayload<{
 //     include:{
@@ -32,7 +33,7 @@ import { Register as RegisterType,Attendance as AttendanceType, Prisma } from "@
 
 
 
-const RegisterClient = ({ register }: { register: registerType }) => {
+const RegisterClient = ({ register }: { register: reisterPropType }) => {
 
     const buttons = [{ name: "late" }, { name: "present" }, { name: "absent" }]
     const router = useRouter();
