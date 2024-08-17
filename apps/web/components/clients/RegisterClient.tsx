@@ -5,13 +5,34 @@ import { useEffect, useState } from "react"
 import { getAttendacePattern, updateRegister } from "../../app/utils/utils"
 import { useRouter } from "next/navigation"
 import { Check, Clock, User2,  X } from "lucide-react"
+import { registerType } from "./ListRegisterClient"
+import { Register as RegisterType,Attendance as AttendanceType, Prisma } from "@repo/db"
 
+// type attendancePropType =  Prisma.AttendanceGetPayload<{
+//     include:{
+//         id: true,
+//         student: {
+//           select: {
+//             user: {
+//               select: {
+//                 username: true 
+//               }
+//             },
+
+//           }
+//         },
+//         status: true,
+//         comment: true,
+//         lateMinutes: true
+//     }
+// }>
+// type registerType = RegisterType & { Attendance: attendancePropType[]}
 
 //import { useSearchParams } from "next/navigation";
 
 
 
-const RegisterClient = ({ register }: { register: any }) => {
+const RegisterClient = ({ register }: { register: registerType }) => {
 
     const buttons = [{ name: "late" }, { name: "present" }, { name: "absent" }]
     const router = useRouter();
@@ -34,7 +55,7 @@ const RegisterClient = ({ register }: { register: any }) => {
 
     const getMarkedStudentNo = () => {
         let mark = 0
-        attendance.map((s: { status: string }) => {
+        attendance.map((s:any) => {
             if (s.status && s.status.length > 0) {
                 mark = mark + 1
                 setMarked(mark)
@@ -50,7 +71,7 @@ const RegisterClient = ({ register }: { register: any }) => {
         // Call updateRegister function
      //   console.log("Submitting Attendance --->" + JSON.stringify(attendance));
         try {
-            const updatedRegister = {
+            const updatedRegister:any = {
                 ...register,
                 Attendance: attendance
             };
@@ -92,6 +113,7 @@ const RegisterClient = ({ register }: { register: any }) => {
             updatedAttendance.map((student) => student.status = newStatus)
             handleSelectAll()
         } else {
+            if(!updatedAttendance[index]) throw new Error("Attendance not found")
             updatedAttendance[index].status = newStatus;  // Update the status of the specific item
         }
         setAttendance(updatedAttendance);  // Update the state with the new array
@@ -101,7 +123,7 @@ const RegisterClient = ({ register }: { register: any }) => {
 
     const getNumberByStatus = (mark: string) => {
         let markCount = 0;
-        attendance.map((s: { status: string }) => {
+        attendance.map((s: any) => {
             if (s.status === mark) {
                 markCount = markCount + 1
             }
@@ -164,7 +186,7 @@ const RegisterClient = ({ register }: { register: any }) => {
                         </TableRow>
                     </TableHeader>
                     <TableBody className="overflow-auto scroll-m-1 bg-slate-200">
-                        {attendance.map((s: { status: string, comment?: string, lateMinutes?: number, student: { user: { username: string } } }, index: number) =>
+                        {attendance.map((s: any, index: number) =>
                             <TableRow onClick={() => { setIndex(index) }} className={`${index === i ? " border-4 border-primary " : ""} bg-white`}>
                                 <TableCell className="px-4 pr-4 w-4 ">
                                     <Checkbox onClick={(e) => { e.stopPropagation(); handleSelect(index) }} checked={isChecked[index]}></Checkbox>

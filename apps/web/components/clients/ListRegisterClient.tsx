@@ -42,7 +42,7 @@ export interface registerType  {
   "Attendance": {
     "studentId"?: number,
     "status"?: string
-  }
+  }[]
 
 
 }
