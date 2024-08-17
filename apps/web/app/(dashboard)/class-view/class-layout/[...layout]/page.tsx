@@ -1,51 +1,47 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button, Label } from '@repo/ui';
 import AddLayoutClient from '../../../../../components/clients/classView/LayoutClients/AddLayoutClient';
 import { getlayout, getLayoutType } from '../../../../utils/utils';
-//import { Desk, Layout, Prisma } from '../../../../../../../packages/db/prisma/generated/client';
-//import { layoutsType } from 'components/clients/classView/ClassViewLayoutClient';
+import { Desk, Layout, Prisma } from '../../../../../../../packages/db/prisma/generated/client';
+import { layoutsType } from 'components/clients/classView/ClassViewLayoutClient';
+import { error } from 'console';
 
-// export type deskType = Prisma.DeskGetPayload<{
-//     select: { id: true, x: true, y: true },
-// }>
-// export type layoutType = Prisma.LayoutGetPayload<{
-//     include: {
-//         desks: {
-//             select: {
-//                 id: true,
-//                 x: true,
-//                 y: true
-//             }
-//         };
-//     }
-// }>
+export type deskType = Prisma.DeskGetPayload<{
+    select: { id: true, x: true, y: true },
+}>
+export type layoutType = Prisma.LayoutGetPayload<{
+    include: {
+        desks: {
+            select: {
+                id: true,
+                x: true,
+                y: true
+            }
+        };
+    }
+}>
 
 export type propTypes = {
-    layout?: any| null,
-    desks: any,
+    layout?: layoutType| null,
+    desks?: deskType[],
     canvasType: string | undefined
 }
 const page = async ({ params }: { params: { layout: string[] } }) => {
-    console.log("params--->")
-    console.log(params)
 
     const canvasType = params.layout[0]
-    console.log("canvasType--->" + canvasType)
-
+    
     const layoutId = params.layout[1]
-    console.log("layoutId--->" + layoutId)
-
+    
     let props: propTypes = {
-        desks:[],
         canvasType
     }
 
     if (canvasType !== "add") {
-        const layout: any | null = await getlayout(Number(layoutId));
-        console.log("layout--->" + JSON.stringify(layout))
+        const layout: layoutType | null = await getlayout(Number(layoutId));
 
-        const desks: any[] | null = layout?.desks as any[]
-        console.log("desks--->" + JSON.stringify(desks))
-        props = {
+        const desks: deskType[] = layout?.desks as deskType[]
+        if(!desks) {
+            throw new Error ("Desks not found");
+        }else props = {
             layout: layout,
             desks,
             canvasType

@@ -25,13 +25,13 @@ function ClassViewClient({ students, seats }: { students: any, seats: any }) {
   if (seats !== undefined && seats.length > 0) {
     console.log("setting up seats from db" + JSON.stringify((students)))
 
-    students.map((student: any, index: number) =>
+    students.map(( index: number) =>
       StudentsCards = [...StudentsCards, { id: seats[index].studentId, coordinates: { x: seats[index].coordinates_X, y: seats[index].coordinates_y }, studentCard: <StudentCard title={students[index].user.username} /> }]
 
     );
   } else {
     console.log("-------------Default seats------------------")
-    students.map((student: any, index: number) =>
+    students.map(( index: number) =>
       StudentsCards = [...StudentsCards, { id: index, coordinates: { x: 0, y: 120 * index + 120 }, studentCard: <StudentCard title={students[index].user.username} /> }]
 
     );

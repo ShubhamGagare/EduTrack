@@ -26,7 +26,7 @@ export function AttendancePattern({ attendancePattern }: any) {
                     </div>
                     <div className="space-y-2">
                         <div className="flex p-1 space-x-2 ">
-                        {patternResult.tags.map((tag: any, index: number) => {
+                        {patternResult.tags.map((tag: string, index: number) => {
                            return <Badge className="bg-violet-100 text-primary">{tag}</Badge>
                         })}
                         </div>

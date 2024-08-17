@@ -52,7 +52,7 @@ export const getStudentByName = async(studentName:string)=>{
 })
   return response
 }
-
+export type GetSeatingPlanByIdType = ReturnType<typeof getSeatingPlanById>;
 //
 export const getSeatingPlanById = async (id: number) => {
 

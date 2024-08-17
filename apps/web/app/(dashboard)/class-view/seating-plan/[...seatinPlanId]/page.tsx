@@ -1,8 +1,8 @@
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator, Button, Label } from '@repo/ui';
 import AddSeatingPlan from '../../../../../components/clients/classView/SeatingClients/AddSeatingPlan';
 import { getlayout, getSeatingPlanById } from '../../../../utils/utils';
-//import { deskType, layoutType } from '../../class-layout/[...layout]/page';
-
+import { deskType, layoutType } from '../../class-layout/[...layout]/page';
+import { SeatingArrangement,SeatingPlan } from '@repo/db';
 
 export default async function getSeatingPlan({ params }: { params: { seatinPlanId: string[] } }) {
     console.log(params.seatinPlanId)
@@ -13,8 +13,8 @@ export default async function getSeatingPlan({ params }: { params: { seatinPlanI
     let seatingPlanName = "";
 
 
-    const layout: any|null = await getlayout(Number(layoutId))
-    const desks: any = layout?.desks as any
+    const layout: layoutType|null = await getlayout(Number(layoutId))
+    const desks: deskType[] = layout?.desks as deskType[]
     const data = {
         canvasType,
         desks: desks,
@@ -26,9 +26,15 @@ export default async function getSeatingPlan({ params }: { params: { seatinPlanI
 
     if (canvasType === "edit"||canvasType === "view") {
         const seatingPlanId = params.seatinPlanId[3]?.replace('%20', " ")
-        const seatingPlan: any = await getSeatingPlanById(Number(seatingPlanId))
-        data.seatingPlanName = seatingPlan.name;
-        data.seatingPlan = seatingPlan
+        if (!seatingPlanId) {
+            throw new Error("Seating plan ID is missing or invalid");
+          }
+
+          const seatingPlan: SeatingPlan | null = await getSeatingPlanById(Number(seatingPlanId));
+          if (seatingPlan) {
+            data.seatingPlanName = seatingPlan.name ?? '';  // Ensure name is set or default to empty
+            data.seatingPlan = seatingPlan;
+          } 
     } else {
         if (params.seatinPlanId[3]?.replace('%20', " ") !== undefined) {
             data.seatingPlanName = params.seatinPlanId[3]?.replace('%20', " ")
