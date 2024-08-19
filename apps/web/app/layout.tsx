@@ -5,6 +5,7 @@ import { Providers } from "../providers";
 import AppbarClient from "../components/clients/AppbarClient";
 import RecoidContextProvider from "./recoilContextProvider";
 import { Open_Sans } from "next/font/google"
+import { Analytics } from "@vercel/analytics/react";
 //const inter = Inter({  subsets: ['latin'], display: 'swap', adjustFontFallback: false });
 const openSans = Open_Sans({
   subsets:['latin'],
@@ -28,6 +29,7 @@ export default function RootLayout({
     
 
           {children}</body>
+          <Analytics />
         </RecoidContextProvider>
       </Providers>
     </html>
